@@ -13,4 +13,11 @@
     <color name="bg_black">#191A25</color>
     <color name="red">#E1172F</color>
     <color name="purple">#6C63FF</color>
+
+    <color name="dark_blue_disabled">#E6232636</color>
+    <color name="gray_disabled">#66656D8A</color>
+
+    <color name="orange_dark">#b2371b</color>
+    <color name="light_dark">#d0d5e6</color>
+
 </resources>

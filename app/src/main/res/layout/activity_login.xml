@@ -56,12 +56,12 @@
     </LinearLayout>
 
     <Button
+        style="@style/Button.Actionable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="16dp"
-        android:text="@string/title_sign_in"
-        android:textAllCaps="false"
-        android:textSize="@dimen/text_size_regular" />
+        android:enabled="false"
+        android:text="@string/title_sign_in" />
 
 </FrameLayout>
