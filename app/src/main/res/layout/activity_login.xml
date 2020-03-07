@@ -16,18 +16,19 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="11dp"
             android:text="@string/title_welcome"
-            android:textSize="@dimen/text_size_title" />
+        />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_big"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/light"
             android:text="@string/title_login_hint"
             android:textSize="@dimen/text_size_regular" />
 
