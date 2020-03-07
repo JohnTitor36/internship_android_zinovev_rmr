@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="android:windowBackground">@color/bg_black</item>
+        <item name="android:navigationBarColor">@color/primary</item>
     </style>
 
     <style name="Button" parent="Widget.AppCompat.Button">
@@ -42,7 +43,6 @@
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>
     </style>
-
 
     <style name="Title" >
         <item name="fontFamily">@font/roboto_medium</item>
