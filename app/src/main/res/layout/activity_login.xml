@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="11dp"
-            android:text="Hello World!"
+            android:text="@string/title_welcome"
             android:textSize="32sp" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
-            android:text="Hello World!"
+            android:text="@string/title_login_hint"
             android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -37,7 +37,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint"
+                android:hint="@string/title_input_hint_login"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +49,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint"
+                android:hint="@string/title_input_hint_password"
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="16dp"
-        android:text="Hello World!"
+        android:text="@string/title_sign_in"
         android:textAllCaps="false"
         android:textSize="16sp" />
 
