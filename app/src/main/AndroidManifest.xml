@@ -14,8 +14,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <!-- Заменить на MainActivity, в которой и определит истечении сессии -> Запустит LoginActivity -->
-        <activity android:name=".LoginActivity">
+<!--        <activity android:name=".MainActivity">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+        <!-- Переместить LAUNCHER/MAIN/VIEW на MainActivity, в которой и определит истечении сессии -> Запустит LoginActivity -->
+        <activity android:name=".LoginActivity" android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
