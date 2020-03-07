@@ -48,6 +48,7 @@
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">@dimen/text_size_title</item>
         <item name="android:textColor">@color/light</item>
+        <item name="android:layout_marginTop">11dp</item>
     </style>
 
 </resources>
