@@ -12,7 +12,7 @@
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/text_size_regular</item>
         <item name="android:textColor">@color/gray</item>
-        <item name="android:padding">@dimen/margin_regular</item>
+        <item name="android:padding">19dp</item>
         <item name="background">@drawable/btn_background</item>
         <item name="textAllCaps">false</item>
     </style>
@@ -23,8 +23,10 @@
         <item name="android:textColor">@drawable/btn_text_color_actionable</item>
     </style>
 
-    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="colorControlNormal">@color/accent</item>
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColor">@color/light</item>
+        <item name="hintTextColor">@color/gray</item>
+        <item name="boxStrokeColor">@color/purple</item>
         <item name="boxCornerRadiusTopStart">@dimen/button_corner_radius</item>
         <item name="boxCornerRadiusTopEnd">@dimen/button_corner_radius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/button_corner_radius</item>
