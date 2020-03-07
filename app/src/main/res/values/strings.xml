@@ -5,4 +5,6 @@
     <string name="title_input_hint_login">Логин</string>
     <string name="title_input_hint_password">Пароль</string>
     <string name="title_sign_in">Войти</string>
+    <string name="title_invalid_login_or_password_error">Неверный логин или пароль</string>
+    <string name="title_some_error">Что-то пошло не так,\n попробуйте войти позже</string>
 </resources>
