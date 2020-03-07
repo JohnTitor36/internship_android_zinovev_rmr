@@ -20,4 +20,6 @@
     <color name="orange_dark">#b2371b</color>
     <color name="light_dark">#d0d5e6</color>
 
+    <color name="mtrl_textinput_default_box_stroke_color">@color/dark_blue</color>
+
 </resources>
