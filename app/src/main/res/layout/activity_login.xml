@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
+    android:layout_marginStart="@dimen/default_content_margin"
+    android:layout_marginEnd="@dimen/default_content_margin"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="11dp"
             android:text="@string/title_welcome"
-            android:textSize="32sp" />
+            android:textSize="@dimen/text_size_title" />
 
         <TextView
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
             android:text="@string/title_login_hint"
-            android:textSize="16sp" />
+            android:textSize="@dimen/text_size_regular" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title_input_hint_login"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_size_regular" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title_input_hint_password"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_size_regular" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -62,6 +62,6 @@
         android:layout_marginBottom="16dp"
         android:text="@string/title_sign_in"
         android:textAllCaps="false"
-        android:textSize="16sp" />
+        android:textSize="@dimen/text_size_regular" />
 
 </FrameLayout>
