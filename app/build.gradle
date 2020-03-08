@@ -47,7 +47,12 @@ dependencies {
     implementation deps.android.appcompat
     implementation deps.material.material
 
+    implementation deps.mobius.core
+    implementation deps.mobius.extras
+    implementation deps.mobius.android
+
     testImplementation deps.test.junit
+    testImplementation deps.test.mobius
     androidTestImplementation deps.androidTest.junit
     androidTestImplementation deps.androidTest.espresso
 }
