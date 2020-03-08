@@ -1,6 +1,7 @@
 package com.lockwood.themoviedb.login.view
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -13,6 +14,7 @@ import com.spotify.mobius.Connection
 import com.spotify.mobius.functions.Consumer
 
 class LoginViews(
+    private val inflater: LayoutInflater,
     private val container: ViewGroup,
     private val loginEditText: EditText,
     private val passwordEditText: EditText,
