@@ -27,7 +27,11 @@ dependencies {
     implementation deps.android.appcompat
     implementation deps.material.material
 
+    implementation deps.rxJava.rx2
+    implementation deps.rxJava.rxAndroid
+
     implementation deps.mobius.core
     implementation deps.mobius.extras
+    implementation deps.mobius.rx2
     implementation deps.mobius.android
 }

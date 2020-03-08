@@ -49,6 +49,7 @@ dependencies {
 
     implementation deps.mobius.core
     implementation deps.mobius.extras
+    implementation deps.mobius.rx2
     implementation deps.mobius.android
 
     testImplementation deps.test.junit
