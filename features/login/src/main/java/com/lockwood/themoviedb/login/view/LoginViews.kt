@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import com.lockwood.core.toaster.DefaultToaster
 import com.lockwood.themoviedb.login.domain.LoginEvent
 import com.lockwood.themoviedb.login.domain.LoginRequested
 import com.spotify.mobius.Connectable
@@ -15,22 +17,26 @@ class LoginViews(
     private val container: ViewGroup,
     private val loginEditText: EditText,
     private val passwordEditText: EditText,
+    private val errorView: TextView,
     private val signInButton: Button
 ) : LoginViewActions, Connectable<LoginViewData, LoginEvent> {
 
     private val context: Context
         get() = container.context
 
+    private val toaster = DefaultToaster(context)
+
     private fun render(viewData: LoginViewData) {
         signInButton.isEnabled = viewData.isValidInput
     }
 
     override fun showLoginInvalidInfo() {
-        Toast.makeText(context, "LoginInvalidInfo", Toast.LENGTH_SHORT).show()
+
     }
 
+    // TODO: Заменить на переход в MainActivity
     override fun showLoginComplete() {
-        Toast.makeText(context, "LoginComplete", Toast.LENGTH_SHORT).show()
+        toaster.toast("Валидация пройдена")
     }
 
     override fun connect(output: Consumer<LoginEvent>): Connection<LoginViewData> {
