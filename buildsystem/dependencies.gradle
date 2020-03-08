@@ -11,6 +11,8 @@ versions.preference = "1.1.0"
 versions.security = "1.0.0-alpha02"
 versions.glide = "4.11.0"
 versions.mobius = "1.4.0-beta3"
+versions.rx2 = "2.2.18"
+versions.rxAndroid = "2.1.1"
 
 def testVersions = [:]
 testVersions.junit = "4.12"
@@ -34,10 +36,16 @@ kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 kotlin.coreKtx = "androidx.core:core-ktx:$versions.coreKtx"
 deps.kotlin = kotlin
 
+def rxJava = [:]
+rxJava.rx2 = "io.reactivex.rxjava2:rxjava::$versions.rx2"
+rxJava.rxAndroid = "io.reactivex.rxjava2:rxjava::$versions.rxAndroid"
+deps.rxJava = rxJava
+
 def mobius = [:]
 mobius.core = "com.spotify.mobius:mobius-core:$versions.mobius"
 mobius.extras = "com.spotify.mobius:mobius-extras:$versions.mobius"
 mobius.android = "com.spotify.mobius:mobius-android:$versions.mobius"
+mobius.rx2 = "com.spotify.mobius:mobius-rx2:$versions.mobius"
 deps.mobius = mobius
 
 def glide = [:]
