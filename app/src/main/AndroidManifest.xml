@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <activity android:name="com.lockwood.themoviedb.MainActivity">
+        <activity android:name="com.lockwood.themoviedb.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name="com.lockwood.themoviedb.login.LoginActivity"
+            android:name="com.lockwood.themoviedb.login.ui.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
 
     </application>

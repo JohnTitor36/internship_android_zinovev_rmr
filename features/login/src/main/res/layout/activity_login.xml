@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginStart="@dimen/default_content_margin"
     android:layout_marginEnd="@dimen/default_content_margin"
-    tools:context="com.lockwood.themoviedb.login.LoginActivity">
+    tools:context="com.lockwood.themoviedb.login.ui.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
