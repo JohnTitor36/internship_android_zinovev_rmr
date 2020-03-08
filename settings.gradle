@@ -1,4 +1,3 @@
-rootProject.name='The Movie DB'
-include ':app'
-include ':features:login',':features:glide'
-include ':core'
+rootProject.name = 'The Movie DB'
+include ':app', ':core'
+include ':features:login', ':features:glide'
