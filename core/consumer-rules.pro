@@ -1,0 +1,9 @@
+-android
+-optimizationpasses 5
+-repackageclasses ''
+-allowaccessmodification
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+-verbose
+-dontpreverify

@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.glide
+package com.lockwood.glide
 
 import android.content.Context
 import com.bumptech.glide.GlideBuilder

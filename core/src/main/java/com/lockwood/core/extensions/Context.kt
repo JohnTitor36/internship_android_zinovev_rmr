@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.extensions
+package com.lockwood.core.extensions
 
 import android.app.Activity
 import android.content.Context

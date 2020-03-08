@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -20,6 +19,7 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
+            versionNameSuffix '-DEBUG'
             minifyEnabled true
             shrinkResources true
             debuggable true
@@ -36,19 +36,18 @@ android {
 }
 
 dependencies {
+    implementation project(":core")
+    implementation project(":features:login")
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.preference:preference:1.1.0'
-    implementation 'androidx.security:security-crypto:1.0.0-alpha02'
+    implementation "androidx.appcompat:appcompat:1.1.0"
     implementation 'com.google.android.material:material:1.2.0-alpha05'
+//    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+//    implementation 'androidx.cardview:cardview:1.0.0'
+//    implementation 'androidx.preference:preference:1.1.0'
+//    implementation 'androidx.security:security-crypto:1.0.0-alpha02'
 
-    implementation 'androidx.core:core-ktx:1.2.0'
-
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+//    implementation 'androidx.core:core-ktx:1.2.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lockwood.themoviedb">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Allows Glide to monitor connectivity status and restart failed requests -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- To use ExternalPreferredCacheDiskCacheFactory to store Glide’s cache on the public sdcard -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-sdk tools:overrideLibrary="androidx.security" />
 
     <application
@@ -32,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
 
     </application>
