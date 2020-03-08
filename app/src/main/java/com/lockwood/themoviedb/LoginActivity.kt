@@ -2,6 +2,7 @@ package com.lockwood.themoviedb
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.lockwood.themoviedb.glide.GlideApp
 
 class LoginActivity : AppCompatActivity() {
 
