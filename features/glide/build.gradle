@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply from: rootProject.file('buildsystem/versions.gradle')
+apply from: rootProject.file('buildsystem/dependencies.gradle')
 
 android {
     compileSdkVersion versions.compileSdk
@@ -20,6 +21,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation deps.glide.glide
+    kapt deps.glide.glideCompiler
 }
