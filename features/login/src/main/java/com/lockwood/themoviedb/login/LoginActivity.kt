@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.login.ui
+package com.lockwood.themoviedb.login
 
 import androidx.appcompat.app.AppCompatActivity
 import com.lockwood.themoviedb.login.R

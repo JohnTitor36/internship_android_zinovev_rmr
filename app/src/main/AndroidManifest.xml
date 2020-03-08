@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name="com.lockwood.themoviedb.login.ui.LoginActivity"
+            android:name="com.lockwood.themoviedb.login.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
 
     </application>
