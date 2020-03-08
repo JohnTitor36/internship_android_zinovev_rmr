@@ -31,8 +31,7 @@
 <!--            </intent-filter>-->
 <!--        </activity>-->
 
-        <!-- Переместить LAUNCHER/MAIN/VIEW на MainActivity, в которой и определит истечении сессии -> Запустит LoginActivity -->
-        <activity android:name=".LoginActivity" android:windowSoftInputMode="adjustResize">
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
