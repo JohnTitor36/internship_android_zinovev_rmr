@@ -7,8 +7,8 @@ interface Toaster {
 
     companion object {
 
-        private val DEFAULT_BACKGROUND_TINT = R.color.primary
-        private val DEFAULT_TEXT_COLOR = R.color.primary
+        private val DEFAULT_BACKGROUND_TINT = R.color.accent
+        private val DEFAULT_TEXT_COLOR = R.color.light
     }
 
     var currentToast: Toast?
