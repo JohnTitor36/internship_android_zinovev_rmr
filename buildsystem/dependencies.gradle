@@ -32,7 +32,7 @@ material.material = "com.google.android.material:material:$versions.material"
 deps.material = material
 
 def kotlin = [:]
-kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
 kotlin.coreKtx = "androidx.core:core-ktx:$versions.coreKtx"
 deps.kotlin = kotlin
 
