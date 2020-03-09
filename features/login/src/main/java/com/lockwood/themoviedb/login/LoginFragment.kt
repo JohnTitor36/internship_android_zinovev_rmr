@@ -44,7 +44,7 @@ class LoginFragment : BaseMobiusFragment<LoginModel, LoginEvent, LoginEffect>() 
     }
 
     // TODO: add onSaveInstanceState for login and password
-    private fun resolveDefaultModel(savedInstanceState: Bundle?): LoginModel {
+    override fun resolveDefaultModel(savedInstanceState: Bundle?): LoginModel {
         return LoginModel("", "")
     }
 
