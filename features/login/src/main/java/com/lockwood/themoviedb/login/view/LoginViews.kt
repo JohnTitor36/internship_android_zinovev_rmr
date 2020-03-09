@@ -2,11 +2,13 @@ package com.lockwood.themoviedb.login.view
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.lockwood.core.toaster.DefaultToaster
+import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.domain.LoginEvent
 import com.lockwood.themoviedb.login.domain.LoginRequested
 import com.spotify.mobius.Connectable
@@ -14,22 +16,21 @@ import com.spotify.mobius.Connection
 import com.spotify.mobius.functions.Consumer
 
 class LoginViews(
-    private val inflater: LayoutInflater,
-    private val container: ViewGroup,
-    private val loginEditText: EditText,
-    private val passwordEditText: EditText,
-    private val errorView: TextView,
-    private val signInButton: Button
+    inflater: LayoutInflater,
+    container: ViewGroup
 ) : LoginViewActions, Connectable<LoginViewData, LoginEvent> {
 
-    private val context: Context
-        get() = container.context
+    var rootView: View = inflater.inflate(R.layout.fragment_login, container, false)
 
-    private val toaster = DefaultToaster(context)
+    private val loginEditText: EditText = rootView.findViewById(R.id.loginEditText)
+    private val passwordEditText: EditText = rootView.findViewById(R.id.passwordEditText)
+    private val errorView: TextView = rootView.findViewById(R.id.errorView)
+    private val signInButton: Button = rootView.findViewById(R.id.signInButton)
 
-    private fun render(viewData: LoginViewData) {
-        signInButton.isEnabled = viewData.isValidInput
-    }
+    private val ctx: Context
+        get() = rootView.context
+
+    private val toaster = DefaultToaster(ctx)
 
     override fun showLoginInvalidInfo() {
 
@@ -53,5 +54,10 @@ class LoginViews(
             }
         }
     }
+
+    private fun render(viewData: LoginViewData) {
+        signInButton.isEnabled = viewData.isValidInput
+    }
+
 
 }

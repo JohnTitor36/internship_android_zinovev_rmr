@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lockwood.core.extensions.newFragment
-import com.lockwood.core.ui.BaseFragment
+import com.lockwood.core.ui.BaseMobiusFragment
+import com.lockwood.themoviedb.login.data.LoginModel
+import com.lockwood.themoviedb.login.domain.LoginEffect
+import com.lockwood.themoviedb.login.domain.LoginEvent
+import com.lockwood.themoviedb.login.view.LoginViews
 
-class LoginFragment : BaseFragment() {
+class LoginFragment : BaseMobiusFragment<LoginModel, LoginEvent, LoginEffect>() {
 
     companion object {
 
@@ -20,6 +24,9 @@ class LoginFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_login, container, false)
+    ): View? {
+        val view = LoginViews(inflater, container!!)
+        return view.rootView
+    }
 
 }
