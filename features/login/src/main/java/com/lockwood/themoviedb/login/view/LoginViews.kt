@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.lockwood.core.extensions.hideKeyboard
 import com.lockwood.core.extensions.simpleTextWatcher
 import com.lockwood.core.toaster.DefaultToaster
 import com.lockwood.themoviedb.login.R
@@ -58,7 +59,7 @@ class LoginViews(
 
     // TODO: Заменить на переход в MainActivity
     override fun showLoginComplete() {
-
+        rootView.hideKeyboard()
         errorView.visibility = View.GONE
         toaster.toast("Валидация пройдена")
     }
