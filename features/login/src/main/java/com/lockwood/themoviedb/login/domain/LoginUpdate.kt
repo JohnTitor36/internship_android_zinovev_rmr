@@ -18,11 +18,11 @@ class LoginUpdate : Update<LoginModel, LoginEvent, LoginEffect> {
         event: LoginEvent
     ): Next<LoginModel, LoginEffect> = when (event) {
         is LoginLoginTextChanged -> {
-            val nextModel = model.copy(login = model.login)
+            val nextModel = model.copy(login = event.login)
             next(nextModel)
         }
         is LoginPasswordTextChanged -> {
-            val nextModel = model.copy(password = model.password)
+            val nextModel = model.copy(password = event.password)
             next(nextModel)
         }
         is LoginRequested -> {
