@@ -21,7 +21,7 @@ class LoginFragment : BaseMobiusFragment<LoginInfo, LoginEvent, LoginEffect>() {
 
     companion object {
 
-        private val ARGUMENT_LOGIN_INFO = "ARGUMENT_LOGIN_INFO"
+        private const val ARGUMENT_LOGIN_INFO = "ARGUMENT_LOGIN_INFO"
 
         fun newInstance() = newFragment<LoginFragment>()
     }
