@@ -1,13 +1,13 @@
 package com.lockwood.themoviedb.login.view
 
-import com.lockwood.themoviedb.login.data.LoginModel
+import com.lockwood.themoviedb.login.data.LoginInfo
 
 object LoginViewDataMapper {
 
     private const val MIN_PASSWORD_LENGTH = 4
     private const val MIN_LOGIN_LENGTH = 4
 
-    fun loginToLoginViewData(model: LoginModel): LoginViewData {
+    fun loginToLoginViewData(model: LoginInfo): LoginViewData {
         val login = model.login
         val password = model.password
         val isValidateCredentials = validateCredentials(login, password)

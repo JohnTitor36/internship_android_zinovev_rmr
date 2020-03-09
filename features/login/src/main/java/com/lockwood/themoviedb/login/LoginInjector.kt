@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.login
 
-import com.lockwood.themoviedb.login.data.LoginModel
+import com.lockwood.themoviedb.login.data.LoginInfo
 import com.lockwood.themoviedb.login.domain.LoginEffect
 import com.lockwood.themoviedb.login.domain.LoginEvent
 import com.lockwood.themoviedb.login.domain.LoginUpdate
@@ -16,14 +16,14 @@ object LoginInjector {
     private const val TAG = "Login"
 
     fun createController(
-        effectHandlers: ObservableTransformer<LoginEffect, LoginEvent>, defaultModel: LoginModel
-    ): Controller<LoginModel, LoginEvent> {
+        effectHandlers: ObservableTransformer<LoginEffect, LoginEvent>, defaultModel: LoginInfo
+    ): Controller<LoginInfo, LoginEvent> {
         return MobiusAndroid.controller(createLoop(effectHandlers), defaultModel)
     }
 
     private fun createLoop(
         effectHandlers: ObservableTransformer<LoginEffect, LoginEvent>
-    ): MobiusLoop.Factory<LoginModel, LoginEvent, LoginEffect> {
+    ): MobiusLoop.Factory<LoginInfo, LoginEvent, LoginEffect> {
         return RxMobius
             .loop(LoginUpdate(), effectHandlers)
             .logger(AndroidLogger.tag(TAG))

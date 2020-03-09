@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.lockwood.core.extensions.newFragment
 import com.lockwood.core.ui.BaseMobiusFragment
-import com.lockwood.themoviedb.login.data.LoginModel
+import com.lockwood.themoviedb.login.data.LoginInfo
 import com.lockwood.themoviedb.login.domain.LoginEffect
 import com.lockwood.themoviedb.login.domain.LoginEvent
 import com.lockwood.themoviedb.login.effecthandlers.LoginEffectHandlers
@@ -16,7 +16,7 @@ import com.lockwood.themoviedb.login.view.LoginViews
 import com.spotify.mobius.extras.Connectables.contramap
 import com.spotify.mobius.functions.Function
 
-class LoginFragment : BaseMobiusFragment<LoginModel, LoginEvent, LoginEffect>() {
+class LoginFragment : BaseMobiusFragment<LoginInfo, LoginEvent, LoginEffect>() {
 
     companion object {
 
@@ -25,7 +25,7 @@ class LoginFragment : BaseMobiusFragment<LoginModel, LoginEvent, LoginEffect>() 
 
     override val hasOptionMenu = false
 
-    private val mapper: Function<LoginModel, LoginViewData>
+    private val mapper: Function<LoginInfo, LoginViewData>
         get() = Function { LoginViewDataMapper.loginToLoginViewData(it) }
 
     override fun onCreateView(
@@ -43,8 +43,8 @@ class LoginFragment : BaseMobiusFragment<LoginModel, LoginEvent, LoginEffect>() 
     }
 
     // TODO: add onSaveInstanceState for login and password
-    override fun resolveDefaultModel(savedInstanceState: Bundle?): LoginModel {
-        return LoginModel("", "")
+    override fun resolveDefaultModel(savedInstanceState: Bundle?): LoginInfo {
+        return LoginInfo("", "")
     }
 
 }
