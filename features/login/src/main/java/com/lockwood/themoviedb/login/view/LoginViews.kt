@@ -40,6 +40,7 @@ class LoginViews(
         val passwordWatcher = simpleTextWatcher { output.accept(LoginPasswordTextChanged(it)) }
         loginEditText.addTextChangedListener(loginWatcher)
         passwordEditText.addTextChangedListener(passwordWatcher)
+
         signInButton.setOnClickListener { output.accept(LoginRequested) }
 
         return object : Connection<LoginViewData> {
@@ -57,14 +58,14 @@ class LoginViews(
 
     // TODO: Заменить на переход в MainActivity
     override fun showLoginComplete() {
+        // TODO: hide keyboard
+        // TODO: remove focus
         errorView.visibility = View.GONE
         toaster.toast("Валидация пройдена")
     }
 
     override fun showLoginInvalidInfo() = with(errorView) {
         visibility = View.VISIBLE
-        // TODO: hide keyboard
-        // TODO: remove focus
         text = ctx.getString(R.string.title_invalid_login_or_password_error)
     }
 

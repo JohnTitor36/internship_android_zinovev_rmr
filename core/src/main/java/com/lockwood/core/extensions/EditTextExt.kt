@@ -3,7 +3,6 @@ package com.lockwood.core.extensions
 import android.text.Editable
 import android.text.TextWatcher
 
-
 fun simpleTextWatcher(
     textChanged: (String) -> Unit
 ) = object :TextWatcher {

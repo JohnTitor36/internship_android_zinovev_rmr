@@ -23,7 +23,7 @@ inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
     try {
         beginTransaction().apply {
             action()
-        }.commitAllowingStateLoss()
+        }.commit()
     } catch (e: IllegalStateException) {
         Log.e("FragmentExt.transact:", e.toString())
     }

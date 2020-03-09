@@ -9,9 +9,9 @@ object LoginInfoBundlePacker {
         const val PASSWORD = "login_info_password"
     }
 
-    fun loginInfoToBundle(loginInfo: LoginInfo) = Bundle().apply {
-        putString(LoginInfoIdentifiers.LOGIN, loginInfo.login)
-        putString(LoginInfoIdentifiers.PASSWORD, loginInfo.password)
+    fun loginInfoToBundle(loginInfo: LoginInfo) = Bundle().also {
+        it.putString(LoginInfoIdentifiers.LOGIN, loginInfo.login)
+        it.putString(LoginInfoIdentifiers.PASSWORD, loginInfo.password)
     }
 
     fun loginInfoFromBundle(bundle: Bundle) = LoginInfo(
