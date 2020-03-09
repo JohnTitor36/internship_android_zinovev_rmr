@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.lockwood.core.extensions.ctx
 import com.lockwood.core.extensions.newFragment
 import com.lockwood.core.ui.BaseMobiusFragment
 import com.lockwood.themoviedb.login.data.LoginModel
@@ -27,7 +26,7 @@ class LoginFragment : BaseMobiusFragment<LoginModel, LoginEvent, LoginEffect>() 
     override val hasOptionMenu = false
 
     private val mapper: Function<LoginModel, LoginViewData>
-        get() = Function { model -> LoginViewDataMapper.loginToLoginViewData(model) }
+        get() = Function { LoginViewDataMapper.loginToLoginViewData(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +35,7 @@ class LoginFragment : BaseMobiusFragment<LoginModel, LoginEvent, LoginEffect>() 
     ): View? {
         val view = LoginViews(inflater, container!!)
         controller = LoginInjector.createController(
-            LoginEffectHandlers.createEffectHandlers(view, ctx),
+            LoginEffectHandlers.createEffectHandlers(view),
             resolveDefaultModel(savedInstanceState)
         )
         controller.connect(contramap(mapper, view))
