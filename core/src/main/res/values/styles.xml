@@ -19,7 +19,7 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="Title" >
+    <style name="Title">
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">@dimen/text_size_title</item>
         <item name="android:textColor">@color/light</item>

@@ -17,7 +17,7 @@
         <item name="boxCornerRadiusBottomEnd">@dimen/button_corner_radius</item>
     </style>
 
-    <style name="TextInputEditText"  parent="Widget.AppCompat.EditText">
+    <style name="TextInputEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/roboto</item>
         <item name="android:padding">18dp</item>
         <item name="android:maxLines">1</item>
