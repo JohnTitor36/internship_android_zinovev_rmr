@@ -9,6 +9,10 @@ import androidx.annotation.FontRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 
+fun Context.color(@ColorRes res: Int): Int = ContextCompat.getColor(this, res)
+
+fun Context.font(@FontRes res: Int): Typeface? = ResourcesCompat.getFont(this, res)
+
 inline fun <reified T : Activity> Context.launchActivity(
     init: Intent.() -> Unit = {}
 ) {
@@ -18,7 +22,3 @@ inline fun <reified T : Activity> Context.launchActivity(
 }
 
 inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)
-
-fun Context.color(@ColorRes res: Int): Int = ContextCompat.getColor(this, res)
-
-fun Context.font(@FontRes res: Int): Typeface? = ResourcesCompat.getFont(this, res)
