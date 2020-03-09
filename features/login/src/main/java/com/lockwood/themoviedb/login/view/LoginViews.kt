@@ -58,8 +58,7 @@ class LoginViews(
 
     // TODO: Заменить на переход в MainActivity
     override fun showLoginComplete() {
-        // TODO: hide keyboard
-        // TODO: remove focus
+
         errorView.visibility = View.GONE
         toaster.toast("Валидация пройдена")
     }
