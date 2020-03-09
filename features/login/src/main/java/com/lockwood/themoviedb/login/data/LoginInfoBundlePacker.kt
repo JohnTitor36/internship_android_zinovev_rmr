@@ -15,8 +15,8 @@ object LoginInfoBundlePacker {
     }
 
     fun loginInfoFromBundle(bundle: Bundle) = LoginInfo(
-        login = bundle.getString(LoginInfoIdentifiers.LOGIN) ?: "",
-        password = bundle.getString(LoginInfoIdentifiers.PASSWORD) ?: ""
+        login = bundle.getString(LoginInfoIdentifiers.LOGIN) ?: LoginInfo.DEFAULT.login,
+        password = bundle.getString(LoginInfoIdentifiers.PASSWORD) ?: LoginInfo.DEFAULT.password
     )
 
 }
