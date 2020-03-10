@@ -8,14 +8,14 @@ import com.lockwood.core.di.component.DaggerCoreComponent
 
 class MovieApplication : Application() {
 
-    private val coreComponent: CoreComponent by lazy { DaggerCoreComponent.create() }
-
     companion object {
 
         @JvmStatic
         fun coreComponent(context: Context) =
             (context.applicationContext as MovieApplication).coreComponent
     }
+
+    private val coreComponent: CoreComponent by lazy { DaggerCoreComponent.create() }
 
 }
 

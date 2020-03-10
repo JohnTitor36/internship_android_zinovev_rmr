@@ -8,6 +8,12 @@ interface CredentialsValidator {
 
 class DefaultCredentialsValidator : CredentialsValidator {
 
+    companion object {
+
+        private const val MIN_PASSWORD_LENGTH = 4
+        private const val MIN_LOGIN_LENGTH = 4
+    }
+
     override fun validateCredentials(login: String, password: String): Boolean {
         val isValidLogin = validateLogin(login)
         val isValidPassword = validatePassword(password)
@@ -18,10 +24,6 @@ class DefaultCredentialsValidator : CredentialsValidator {
 
     private fun validatePassword(pass: CharSequence) = pass.length > MIN_PASSWORD_LENGTH
 
-    companion object {
 
-        private const val MIN_PASSWORD_LENGTH = 4
-        private const val MIN_LOGIN_LENGTH = 4
-    }
 
 }
