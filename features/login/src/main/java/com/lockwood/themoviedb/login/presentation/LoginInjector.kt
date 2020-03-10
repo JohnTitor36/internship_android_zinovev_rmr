@@ -18,11 +18,7 @@ object LoginInjector {
     fun createController(
         effectHandlers: ObservableTransformer<LoginEffect, LoginEvent>, defaultModel: LoginInfo
     ): Controller<LoginInfo, LoginEvent> {
-        return MobiusAndroid.controller(
-            createLoop(
-                effectHandlers
-            ), defaultModel
-        )
+        return MobiusAndroid.controller(createLoop(effectHandlers), defaultModel)
     }
 
     private fun createLoop(

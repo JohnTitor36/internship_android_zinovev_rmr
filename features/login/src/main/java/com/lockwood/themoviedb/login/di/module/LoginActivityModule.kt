@@ -8,9 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class LoginActivityModule(
-    private val activity: LoginActivity
-) {
+class LoginActivityModule(private val activity: LoginActivity) {
 
     @Provides
     fun provideContext(): LoginActivity = activity

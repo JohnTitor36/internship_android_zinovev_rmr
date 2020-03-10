@@ -1,31 +1,28 @@
 package com.lockwood.themoviedb.login.presentation.view
 
 import com.lockwood.themoviedb.login.data.LoginInfo
+import com.lockwood.themoviedb.login.domain.CredentialsValidator
+import javax.inject.Inject
 
-object LoginViewDataMapper {
+interface LoginViewDataMapper {
 
-    private const val MIN_PASSWORD_LENGTH = 4
-    private const val MIN_LOGIN_LENGTH = 4
+    fun loginToLoginViewData(model: LoginInfo): LoginViewData
 
-    fun loginToLoginViewData(model: LoginInfo): LoginViewData {
+}
+
+class DefaultLoginViewDataMapper @Inject constructor(
+    private val validator: CredentialsValidator
+) : LoginViewDataMapper {
+
+    override fun loginToLoginViewData(model: LoginInfo): LoginViewData {
         val login = model.login
         val password = model.password
-        val isValidateCredentials = validateCredentials(login, password)
+        val isValidateCredentials = validator.validateCredentials(login, password)
         return LoginViewData(
             login = login,
             password = password,
             isValidInput = isValidateCredentials
         )
     }
-
-    private fun validateCredentials(login: CharSequence, password: String): Boolean {
-        val isValidLogin = validateLogin(login)
-        val isValidPassword = validatePassword(password)
-        return isValidLogin && isValidPassword
-    }
-
-    private fun validateLogin(login: CharSequence) = login.length > MIN_LOGIN_LENGTH
-
-    private fun validatePassword(pass: CharSequence) = pass.length > MIN_PASSWORD_LENGTH
 
 }

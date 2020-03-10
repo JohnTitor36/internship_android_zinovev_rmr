@@ -20,7 +20,9 @@ import com.spotify.mobius.functions.Function
 import javax.inject.Inject
 
 class LoginFragment @Inject constructor(
-    @FeatureScope private val toaster: Toaster
+    @FeatureScope private val toaster: Toaster,
+    private val loginViewDataMapper: LoginViewDataMapper,
+    private val loginEffectHandlers: LoginEffectHandlers
 ) : BaseMobiusFragment<LoginInfo, LoginEvent, LoginEffect>() {
 
     companion object {
@@ -32,7 +34,7 @@ class LoginFragment @Inject constructor(
     override val hasOptionMenu = false
 
     private val mapper: Function<LoginInfo, LoginViewData>
-        get() = Function { LoginViewDataMapper.loginToLoginViewData(it) }
+        get() = Function { loginViewDataMapper.loginToLoginViewData(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +43,7 @@ class LoginFragment @Inject constructor(
     ): View? {
         val view = LoginViews(inflater, container!!, toaster)
         controller = LoginInjector.createController(
-            LoginEffectHandlers.createEffectHandlers(view),
+            loginEffectHandlers.createEffectHandlers(view),
             resolveDefaultModel(savedInstanceState)
         )
         controller.connect(contramap(mapper, view))
