@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.lockwood.core.extensions.hideKeyboard
-import com.lockwood.core.extensions.simpleTextWatcher
+import com.lockwood.core.extensions.buildSimpleTextWatcher
 import com.lockwood.core.toaster.Toaster
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.domain.LoginEvent
@@ -36,8 +36,8 @@ class LoginViews(
         get() = rootView.context
 
     override fun connect(output: Consumer<LoginEvent>): Connection<LoginViewData> {
-        val loginWatcher = simpleTextWatcher { output.accept(LoginLoginTextChanged(it)) }
-        val passwordWatcher = simpleTextWatcher { output.accept(LoginPasswordTextChanged(it)) }
+        val loginWatcher = buildSimpleTextWatcher { output.accept(LoginLoginTextChanged(it)) }
+        val passwordWatcher = buildSimpleTextWatcher { output.accept(LoginPasswordTextChanged(it)) }
         loginEditText.addTextChangedListener(loginWatcher)
         passwordEditText.addTextChangedListener(passwordWatcher)
 
