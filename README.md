@@ -21,7 +21,7 @@
 * Mobius
 * Glide
 
-**Вдохновлён**:
+**Подсмотрено**:
 * [mobius-android-sample](https://github.com/spotify/mobius-android-sample)
 * [plaid](https://github.com/android/plaid)
 * [Notepad](https://github.com/DEcSENT/Notepad)
