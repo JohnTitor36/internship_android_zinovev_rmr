@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 apply from: rootProject.file('buildsystem/versions.gradle')
 apply from: rootProject.file('buildsystem/dependencies.gradle')
@@ -33,6 +34,12 @@ dependencies {
 
     implementation deps.android.appcompat
     implementation deps.material.material
+
+    implementation deps.dagger.dagger
+    kapt deps.dagger.compiler
+
+    implementation deps.rxJava.rx2
+    implementation deps.rxJava.rxAndroid
 
     implementation deps.mobius.core
     implementation deps.mobius.extras
