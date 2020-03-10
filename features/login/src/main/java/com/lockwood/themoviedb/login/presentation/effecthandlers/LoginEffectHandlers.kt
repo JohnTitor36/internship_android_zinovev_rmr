@@ -1,10 +1,10 @@
-package com.lockwood.themoviedb.login.effecthandlers
+package com.lockwood.themoviedb.login.presentation.effecthandlers
 
 import com.lockwood.themoviedb.login.domain.LoginEffect
 import com.lockwood.themoviedb.login.domain.LoginEvent
 import com.lockwood.themoviedb.login.domain.NotifyLoginComplete
 import com.lockwood.themoviedb.login.domain.NotifyLoginInvalidInfo
-import com.lockwood.themoviedb.login.view.LoginViewActions
+import com.lockwood.themoviedb.login.presentation.view.LoginViewActions
 
 import com.spotify.mobius.rx2.RxMobius
 import io.reactivex.ObservableTransformer

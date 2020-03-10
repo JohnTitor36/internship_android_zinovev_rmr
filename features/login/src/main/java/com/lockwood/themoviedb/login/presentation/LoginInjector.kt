@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.login
+package com.lockwood.themoviedb.login.presentation
 
 import com.lockwood.themoviedb.login.data.LoginInfo
 import com.lockwood.themoviedb.login.domain.LoginEffect
@@ -18,7 +18,10 @@ object LoginInjector {
     fun createController(
         effectHandlers: ObservableTransformer<LoginEffect, LoginEvent>, defaultModel: LoginInfo
     ): Controller<LoginInfo, LoginEvent> {
-        return MobiusAndroid.controller(createLoop(effectHandlers), defaultModel)
+        return MobiusAndroid.controller(
+            createLoop(
+                effectHandlers
+            ), defaultModel)
     }
 
     private fun createLoop(

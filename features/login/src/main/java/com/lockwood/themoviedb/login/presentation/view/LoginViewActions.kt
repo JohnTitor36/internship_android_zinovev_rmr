@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.login.view
+package com.lockwood.themoviedb.login.presentation.view
 
 interface LoginViewActions {
 

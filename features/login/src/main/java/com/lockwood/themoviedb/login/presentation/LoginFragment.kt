@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.login
+package com.lockwood.themoviedb.login.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import com.lockwood.themoviedb.login.data.LoginInfo
 import com.lockwood.themoviedb.login.data.LoginInfoBundlePacker
 import com.lockwood.themoviedb.login.domain.LoginEffect
 import com.lockwood.themoviedb.login.domain.LoginEvent
-import com.lockwood.themoviedb.login.effecthandlers.LoginEffectHandlers
-import com.lockwood.themoviedb.login.view.LoginViewData
-import com.lockwood.themoviedb.login.view.LoginViewDataMapper
-import com.lockwood.themoviedb.login.view.LoginViews
+import com.lockwood.themoviedb.login.presentation.effecthandlers.LoginEffectHandlers
+import com.lockwood.themoviedb.login.presentation.view.LoginViewData
+import com.lockwood.themoviedb.login.presentation.view.LoginViewDataMapper
+import com.lockwood.themoviedb.login.presentation.view.LoginViews
 import com.spotify.mobius.extras.Connectables.contramap
 import com.spotify.mobius.functions.Function
 

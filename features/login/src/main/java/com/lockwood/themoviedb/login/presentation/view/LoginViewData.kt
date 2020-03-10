@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.login.view
+package com.lockwood.themoviedb.login.presentation.view
 
 data class LoginViewData(
     val login: String = "",

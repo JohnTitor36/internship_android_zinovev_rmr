@@ -1,8 +1,9 @@
-package com.lockwood.themoviedb.login
+package com.lockwood.themoviedb.login.presentation
 
 import android.os.Bundle
 import com.lockwood.core.extensions.addFragmentIfNotExist
 import com.lockwood.core.ui.BaseFragmentActivity
+import com.lockwood.themoviedb.login.R
 
 class LoginActivity : BaseFragmentActivity() {
 
