@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import com.lockwood.core.extensions.hideKeyboard
 import com.lockwood.core.extensions.simpleTextWatcher
-import com.lockwood.core.toaster.DefaultToaster
+import com.lockwood.core.toaster.Toaster
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.domain.LoginEvent
 import com.lockwood.themoviedb.login.domain.LoginLoginTextChanged
@@ -21,7 +21,8 @@ import com.spotify.mobius.functions.Consumer
 
 class LoginViews(
     inflater: LayoutInflater,
-    container: ViewGroup
+    container: ViewGroup,
+    private val toaster: Toaster
 ) : LoginViewActions, Connectable<LoginViewData, LoginEvent> {
 
     var rootView: View = inflater.inflate(R.layout.fragment_login, container, false)
@@ -33,8 +34,6 @@ class LoginViews(
 
     private val ctx: Context
         get() = rootView.context
-
-    private val toaster = DefaultToaster(ctx)
 
     override fun connect(output: Consumer<LoginEvent>): Connection<LoginViewData> {
         val loginWatcher = simpleTextWatcher { output.accept(LoginLoginTextChanged(it)) }

@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     tools:context="com.lockwood.themoviedb.login.presentation.LoginActivity">
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
+        android:name="com.lockwood.themoviedb.login.presentation.LoginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/default_content_margin"
         android:layout_marginTop="?android:attr/actionBarSize"
-        android:layout_marginEnd="@dimen/default_content_margin" />
+        android:layout_marginEnd="@dimen/default_content_margin"
+        tools:layout="@layout/fragment_login" />
 
 </FrameLayout>

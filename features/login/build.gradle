@@ -34,6 +34,7 @@ dependencies {
     implementation deps.kotlin.stdlib
 
     implementation deps.android.appcompat
+    implementation deps.android.fragment
     implementation deps.material.material
 
     implementation deps.dagger.dagger

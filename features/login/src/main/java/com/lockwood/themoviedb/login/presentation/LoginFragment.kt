@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.lockwood.core.extensions.newFragment
+import com.lockwood.core.di.scope.FeatureScope
+import com.lockwood.core.toaster.Toaster
 import com.lockwood.core.ui.BaseMobiusFragment
 import com.lockwood.themoviedb.login.data.LoginInfo
 import com.lockwood.themoviedb.login.data.LoginInfoBundlePacker
@@ -16,14 +17,16 @@ import com.lockwood.themoviedb.login.presentation.view.LoginViewDataMapper
 import com.lockwood.themoviedb.login.presentation.view.LoginViews
 import com.spotify.mobius.extras.Connectables.contramap
 import com.spotify.mobius.functions.Function
+import javax.inject.Inject
 
-class LoginFragment : BaseMobiusFragment<LoginInfo, LoginEvent, LoginEffect>() {
+class LoginFragment @Inject constructor(
+    @FeatureScope private val toaster: Toaster
+) : BaseMobiusFragment<LoginInfo, LoginEvent, LoginEffect>() {
 
     companion object {
 
         private const val ARGUMENT_LOGIN_INFO = "ARGUMENT_LOGIN_INFO"
 
-        fun newInstance() = newFragment<LoginFragment>()
     }
 
     override val hasOptionMenu = false
@@ -36,7 +39,7 @@ class LoginFragment : BaseMobiusFragment<LoginInfo, LoginEvent, LoginEffect>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = LoginViews(inflater, container!!)
+        val view = LoginViews(inflater, container!!, toaster)
         controller = LoginInjector.createController(
             LoginEffectHandlers.createEffectHandlers(view),
             resolveDefaultModel(savedInstanceState)

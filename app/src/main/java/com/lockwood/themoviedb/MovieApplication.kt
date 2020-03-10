@@ -3,8 +3,8 @@ package com.lockwood.themoviedb
 import android.app.Activity
 import android.app.Application
 import android.content.Context
-import com.lockwood.core.di.CoreComponent
-import com.lockwood.core.di.DaggerCoreComponent
+import com.lockwood.core.di.component.CoreComponent
+import com.lockwood.core.di.component.DaggerCoreComponent
 
 class MovieApplication : Application() {
 

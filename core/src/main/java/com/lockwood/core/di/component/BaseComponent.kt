@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lockwood.core.di
+package com.lockwood.core.di.component
 
 import android.app.Activity
 

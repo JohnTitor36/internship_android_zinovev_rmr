@@ -11,8 +11,8 @@ import com.lockwood.themoviedb.login.presentation.LoginActivity
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         inject()
+        super.onCreate(savedInstanceState)
 
         launchActivity<LoginActivity> {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

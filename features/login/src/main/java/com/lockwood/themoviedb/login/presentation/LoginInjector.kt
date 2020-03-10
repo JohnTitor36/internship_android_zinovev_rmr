@@ -21,7 +21,8 @@ object LoginInjector {
         return MobiusAndroid.controller(
             createLoop(
                 effectHandlers
-            ), defaultModel)
+            ), defaultModel
+        )
     }
 
     private fun createLoop(

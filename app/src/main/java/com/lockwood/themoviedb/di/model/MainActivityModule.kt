@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.di
+package com.lockwood.themoviedb.di.model
 
 import com.lockwood.themoviedb.ui.MainActivity
 import dagger.Module

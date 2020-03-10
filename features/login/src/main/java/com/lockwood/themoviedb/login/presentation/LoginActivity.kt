@@ -1,24 +1,22 @@
 package com.lockwood.themoviedb.login.presentation
 
 import android.os.Bundle
-import com.lockwood.core.extensions.addFragmentIfNotExist
-import com.lockwood.core.ui.BaseFragmentActivity
+import androidx.fragment.app.FragmentFactory
+import com.lockwood.core.ui.BaseActivity
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.inject
+import javax.inject.Inject
 
-class LoginActivity : BaseFragmentActivity() {
+class LoginActivity : BaseActivity() {
 
-    override val layoutId = R.layout.activity_login
-
-    override val containerId = R.id.container
+    @Inject
+    lateinit var fragmentFactory: FragmentFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         inject()
-
-        if (savedInstanceState == null) {
-            addFragmentIfNotExist(containerId) { LoginFragment.newInstance() }
-        }
+        supportFragmentManager.fragmentFactory = fragmentFactory
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
     }
 
 }

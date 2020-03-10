@@ -1,7 +1,8 @@
-package com.lockwood.themoviedb.di
+package com.lockwood.themoviedb.di.component
 
-import com.lockwood.core.di.BaseActivityComponent
+import com.lockwood.core.di.component.BaseActivityComponent
 import com.lockwood.core.di.scope.FeatureScope
+import com.lockwood.themoviedb.di.model.MainActivityModule
 import com.lockwood.themoviedb.ui.MainActivity
 import dagger.BindsInstance
 import dagger.Component
