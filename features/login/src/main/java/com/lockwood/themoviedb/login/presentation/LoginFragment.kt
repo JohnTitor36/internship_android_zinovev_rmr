@@ -8,9 +8,9 @@ import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.core.toaster.Toaster
 import com.lockwood.core.ui.BaseMobiusFragment
 import com.lockwood.themoviedb.login.data.LoginInfo
-import com.lockwood.themoviedb.login.data.LoginInfoBundlePacker
 import com.lockwood.themoviedb.login.domain.LoginEffect
 import com.lockwood.themoviedb.login.domain.LoginEvent
+import com.lockwood.themoviedb.login.domain.LoginInfoBundlePacker
 import com.lockwood.themoviedb.login.presentation.effecthandlers.LoginEffectHandlers
 import com.lockwood.themoviedb.login.presentation.view.LoginViewData
 import com.lockwood.themoviedb.login.presentation.view.LoginViewDataMapper

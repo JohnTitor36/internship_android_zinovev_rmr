@@ -1,6 +1,7 @@
-package com.lockwood.themoviedb.login.data
+package com.lockwood.themoviedb.login.domain
 
 import android.os.Bundle
+import com.lockwood.themoviedb.login.data.LoginInfo
 
 object LoginInfoBundlePacker {
 
@@ -14,9 +15,10 @@ object LoginInfoBundlePacker {
         it.putString(LoginInfoIdentifiers.PASSWORD, loginInfo.password)
     }
 
-    fun loginInfoFromBundle(bundle: Bundle) = LoginInfo(
-        login = bundle.getString(LoginInfoIdentifiers.LOGIN) ?: LoginInfo.DEFAULT.login,
-        password = bundle.getString(LoginInfoIdentifiers.PASSWORD) ?: LoginInfo.DEFAULT.password
-    )
+    fun loginInfoFromBundle(bundle: Bundle) =
+        LoginInfo(
+            login = bundle.getString(LoginInfoIdentifiers.LOGIN) ?: LoginInfo.DEFAULT.login,
+            password = bundle.getString(LoginInfoIdentifiers.PASSWORD) ?: LoginInfo.DEFAULT.password
+        )
 
 }
