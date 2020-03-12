@@ -1,6 +1,5 @@
 package com.lockwood.themoviedb
 
-import android.app.Activity
 import android.app.Application
 import android.content.Context
 import com.lockwood.core.di.component.CoreComponent
@@ -18,6 +17,3 @@ class MovieApplication : Application() {
     private val coreComponent: CoreComponent by lazy { DaggerCoreComponent.create() }
 
 }
-
-val Activity.coreComponent
-    get() = MovieApplication.coreComponent(this)
