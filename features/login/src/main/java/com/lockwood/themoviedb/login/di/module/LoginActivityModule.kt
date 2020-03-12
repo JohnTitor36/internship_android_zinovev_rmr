@@ -13,25 +13,19 @@ import dagger.Provides
 class LoginActivityModule(private val activity: LoginActivity) {
 
     @Provides
-    fun provideContext(): LoginActivity = activity
+    @FeatureScope
+    fun provideToaster() = Toaster(activity)
 
     @Provides
     @FeatureScope
-    fun provideToaster(): Toaster = Toaster(activity)
+    fun provideCredentialsValidator() = CredentialsValidator()
 
     @Provides
     @FeatureScope
-    fun provideCredentialsValidator(): CredentialsValidator =
-        CredentialsValidator()
+    fun provideLoginEffectHandlers() = LoginEffectHandlers()
 
     @Provides
     @FeatureScope
-    fun provideLoginEffectHandlers(): LoginEffectHandlers =
-        LoginEffectHandlers()
-
-    @Provides
-    @FeatureScope
-    fun provideLoginViewDataMapper(validator: CredentialsValidator): LoginViewDataMapper =
-        LoginViewDataMapper(validator)
+    fun provideLoginViewDataMapper(validator: CredentialsValidator) = LoginViewDataMapper(validator)
 
 }

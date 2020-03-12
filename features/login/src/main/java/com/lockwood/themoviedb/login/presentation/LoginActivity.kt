@@ -21,7 +21,6 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
     private fun inject() {
         DaggerLoginComponent.builder()
-            .activity(this)
             .loginActivityModule(LoginActivityModule(this))
             .build()
             .inject(this)
