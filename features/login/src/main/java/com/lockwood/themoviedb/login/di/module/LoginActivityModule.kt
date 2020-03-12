@@ -1,7 +1,6 @@
 package com.lockwood.themoviedb.login.di.module
 
 import com.lockwood.core.di.scope.FeatureScope
-import com.lockwood.core.toaster.DefaultToaster
 import com.lockwood.core.toaster.Toaster
 import com.lockwood.themoviedb.login.presentation.LoginActivity
 import dagger.Module
@@ -15,6 +14,6 @@ class LoginActivityModule(private val activity: LoginActivity) {
 
     @Provides
     @FeatureScope
-    fun provideToaster(): Toaster = DefaultToaster(activity)
+    fun provideToaster(): Toaster = Toaster(activity)
 
 }
