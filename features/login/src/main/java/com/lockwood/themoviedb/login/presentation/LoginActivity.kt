@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentFactory
 import com.lockwood.core.ui.BaseActivity
 import com.lockwood.themoviedb.login.R
-import com.lockwood.themoviedb.login.di.inject
+import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
+import com.lockwood.themoviedb.login.di.module.LoginActivityModule
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity(R.layout.activity_login) {
@@ -16,6 +17,14 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
         inject()
         supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
-0    }
+    }
+
+    private fun inject() {
+        DaggerLoginComponent.builder()
+            .activity(this)
+            .loginActivityModule(LoginActivityModule(this))
+            .build()
+            .inject(this)
+    }
 
 }
