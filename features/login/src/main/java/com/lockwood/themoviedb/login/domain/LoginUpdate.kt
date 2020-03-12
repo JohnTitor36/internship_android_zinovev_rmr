@@ -26,7 +26,7 @@ class LoginUpdate : Update<LoginInfo, LoginEvent, LoginEffect> {
             next(nextModel)
         }
         is LoginRequested -> {
-            val isCorrectCredentials = checkCredentials(model.login, model.password)
+            val isCorrectCredentials = checkIsCorrectCredentials(model.login, model.password)
             if (isCorrectCredentials) {
                 dispatch<LoginInfo, LoginEffect>(effects(NotifyLoginComplete))
             } else {
@@ -38,7 +38,7 @@ class LoginUpdate : Update<LoginInfo, LoginEvent, LoginEffect> {
         }
     }
 
-    private fun checkCredentials(login: CharSequence, password: String): Boolean {
+    private fun checkIsCorrectCredentials(login: CharSequence, password: String): Boolean {
         val isCorrectLogin = checkLogin(login)
         val isCorrectPassword = checkPassword(password)
         return isCorrectLogin && isCorrectPassword
