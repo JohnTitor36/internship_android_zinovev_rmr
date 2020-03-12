@@ -37,9 +37,11 @@ constructor(
         val view = sourceToast.view
         view.backgroundTintList = ColorStateList.valueOf(ctx.color(backgroundTint))
         val toastTextView = view.findViewById(android.R.id.message) as TextView
-        toastTextView.text = str
-        toastTextView.setTextColor(ctx.color(textColor))
-        toastTextView.typeface = ctx.font(R.font.roboto)
+        with(toastTextView){
+            text = str
+            setTextColor(ctx.color(textColor))
+            typeface = ctx.font(R.font.roboto)
+        }
         currentToast = sourceToast
         return sourceToast
     }
