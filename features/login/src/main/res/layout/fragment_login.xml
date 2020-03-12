@@ -33,7 +33,7 @@
             android:layout_marginTop="@dimen/margin_extra_big">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginEditText"
+                android:id="@+id/login_login_edit_text"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             app:passwordToggleTint="@color/gray_light">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordEditText"
+                android:id="@+id/login_password_edit_text"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/errorView"
+            android:id="@+id/login_error_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_regular"
@@ -75,7 +75,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/signInButton"
+        android:id="@+id/login_sign_in_button"
         style="@style/Button.Actionable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
