@@ -14,6 +14,10 @@ class MovieApplication : Application() {
             (context.applicationContext as MovieApplication).coreComponent
     }
 
-    private val coreComponent: CoreComponent by lazy { DaggerCoreComponent.create() }
+    private val coreComponent: CoreComponent by lazy {
+        DaggerCoreComponent.builder()
+            .application(this)
+            .build()
+    }
 
 }
