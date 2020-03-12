@@ -17,7 +17,7 @@ class DefaultLoginViewDataMapper @Inject constructor(
     override fun loginToLoginViewData(model: LoginInfo): LoginViewData {
         val login = model.login
         val password = model.password
-        val isValidateCredentials = validator.validateCredentials(login, password)
+        val isValidateCredentials = validator.validateCredentialsLength(login, password)
         return LoginViewData(
             login = login,
             password = password,

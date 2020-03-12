@@ -1,12 +1,6 @@
 package com.lockwood.themoviedb.login.domain
 
-interface CredentialsValidator {
-
-    fun validateCredentials(login: String, password: String): Boolean
-
-}
-
-class DefaultCredentialsValidator : CredentialsValidator {
+class CredentialsValidator {
 
     companion object {
 
@@ -14,7 +8,7 @@ class DefaultCredentialsValidator : CredentialsValidator {
         private const val MIN_LOGIN_LENGTH = 4
     }
 
-    override fun validateCredentials(login: String, password: String): Boolean {
+    fun validateCredentialsLength(login: String, password: String): Boolean {
         val isValidLogin = validateLogin(login)
         val isValidPassword = validatePassword(password)
         return isValidLogin && isValidPassword
@@ -23,7 +17,6 @@ class DefaultCredentialsValidator : CredentialsValidator {
     private fun validateLogin(login: CharSequence) = login.length > MIN_LOGIN_LENGTH
 
     private fun validatePassword(pass: CharSequence) = pass.length > MIN_PASSWORD_LENGTH
-
 
 
 }
