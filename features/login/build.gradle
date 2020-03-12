@@ -31,20 +31,21 @@ android {
 dependencies {
     implementation project(":core")
 
-    implementation deps.kotlin.stdlib
+    implementation (
+            deps.kotlin.stdlib,
+            deps.kotlin.coreKtx,
+            deps.android.appcompat,
+            deps.android.fragment,
+            deps.material.material,
+            deps.rxJava.rx2,
+            deps.rxJava.rxAndroid,
+            deps.dagger.dagger,
+            deps.mobius.core,
+            deps.mobius.extras,
+            deps.mobius.rx2,
+            deps.mobius.android
+    )
 
-    implementation deps.android.appcompat
-    implementation deps.android.fragment
-    implementation deps.material.material
+    kapt (deps.dagger.compiler)
 
-    implementation deps.dagger.dagger
-    kapt deps.dagger.compiler
-
-    implementation deps.rxJava.rx2
-    implementation deps.rxJava.rxAndroid
-
-    implementation deps.mobius.core
-    implementation deps.mobius.extras
-    implementation deps.mobius.rx2
-    implementation deps.mobius.android
 }
