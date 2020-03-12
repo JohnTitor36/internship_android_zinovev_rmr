@@ -2,13 +2,13 @@ package com.lockwood.themoviedb.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.lockwood.core.extensions.launchActivity
+import com.lockwood.core.ui.BaseActivity
 import com.lockwood.themoviedb.R
 import com.lockwood.themoviedb.di.inject
 import com.lockwood.themoviedb.login.presentation.LoginActivity
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()

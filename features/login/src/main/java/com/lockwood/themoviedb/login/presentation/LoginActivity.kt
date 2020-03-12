@@ -7,7 +7,7 @@ import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.inject
 import javax.inject.Inject
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity(R.layout.activity_login) {
 
     @Inject
     lateinit var fragmentFactory: FragmentFactory
@@ -16,7 +16,6 @@ class LoginActivity : BaseActivity() {
         inject()
         supportFragmentManager.fragmentFactory = fragmentFactory
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-    }
+0    }
 
 }
