@@ -9,6 +9,8 @@ versions.recyclerview = "1.1.0"
 versions.fragment = "1.3.0-alpha01"
 versions.cardview = "1.0.0"
 versions.constraint = "2.0.0-beta4"
+versions.lifecycle = "2.2.0"
+versions.arch = "2.1.0"
 versions.preference = "1.1.0"
 versions.security = "1.0.0-alpha02"
 versions.glide = "4.11.0"
@@ -31,6 +33,13 @@ android.preference = "androidx.appcompat:appcompat:$versions.appcompat"
 android.security = "androidx.appcompat:appcompat:$versions.appcompat"
 android.ktx = "androidx.core:core-ktx:$versions.ktx"
 deps.android = android
+
+def lifecycle = [:]
+lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+lifecycle.savedstate = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycle"
+lifecycle.common = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+deps.lifecycle = lifecycle
 
 def material = [:]
 material.material = "com.google.android.material:material:$versions.material"
