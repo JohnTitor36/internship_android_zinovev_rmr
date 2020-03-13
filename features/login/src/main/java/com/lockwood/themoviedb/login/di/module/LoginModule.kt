@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class LoginActivityModule {
+class LoginModule {
 
     @Provides
     @FeatureScope
