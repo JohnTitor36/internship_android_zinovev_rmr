@@ -74,7 +74,7 @@
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/login_sign_in_button"
         style="@style/Button.Actionable"
         android:layout_width="match_parent"

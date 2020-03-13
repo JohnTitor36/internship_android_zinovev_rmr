@@ -9,10 +9,7 @@ import androidx.annotation.ColorRes
 import com.lockwood.core.R
 import com.lockwood.core.extensions.color
 
-
-class Toaster(
-    private val context: Context
-) {
+class Toaster(private val context: Context) {
 
     companion object {
 
@@ -24,7 +21,7 @@ class Toaster(
         private const val DEFAULT_TOAST_LENGTH = Toast.LENGTH_SHORT
     }
 
-    var currentToast: Toast? = null
+    private var currentToast: Toast? = null
 
     fun toast(
         str: String,

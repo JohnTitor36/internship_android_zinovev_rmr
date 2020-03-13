@@ -1,12 +1,17 @@
 package com.lockwood.themoviedb.login.presentation
 
 import android.os.Bundle
+import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.toaster.Toaster
 import com.lockwood.core.ui.BaseActivity
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
-import com.lockwood.themoviedb.login.di.module.LoginActivityModule
+import javax.inject.Inject
 
 class LoginActivity : BaseActivity(R.layout.activity_login) {
+
+    @Inject
+    lateinit var toaster: Toaster
 
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
@@ -15,9 +20,9 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
     private fun inject() {
         DaggerLoginComponent.builder()
-                .loginActivityModule(LoginActivityModule(this))
-                .build()
-                .inject(this)
+            .applicationProvider(appToolsProvider)
+            .build()
+            .inject(this)
     }
 
 }
