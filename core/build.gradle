@@ -36,8 +36,8 @@ dependencies {
             deps.android.ktx,
             deps.material.material,
             deps.lifecycle.viewmodel,
-            deps.lifecycle.savedstate,
             deps.lifecycle.common,
+            deps.rxJava.rx2,
             deps.dagger.dagger
     )
 
