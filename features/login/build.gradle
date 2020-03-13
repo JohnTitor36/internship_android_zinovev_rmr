@@ -35,7 +35,6 @@ dependencies {
             deps.kotlin.stdlib,
             deps.kotlin.coreKtx,
             deps.android.appcompat,
-            deps.android.fragment,
             deps.material.material,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
