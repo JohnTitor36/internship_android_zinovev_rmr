@@ -52,13 +52,12 @@ dependencies {
 
     implementation(
             deps.kotlin.stdlib,
-            deps.kotlin.coreKtx,
             deps.android.appcompat,
-            deps.android.fragment,
+            deps.android.ktx,
             deps.material.material,
+            deps.dagger.dagger,
             deps.rxJava.rx2,
-            deps.rxJava.rxAndroid,
-            deps.dagger.dagger
+            deps.rxJava.rxAndroid
     )
 
     kapt(deps.dagger.compiler)

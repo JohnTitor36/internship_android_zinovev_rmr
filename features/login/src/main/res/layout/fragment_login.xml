@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_big"
-            android:fontFamily="@font/roboto"
             android:text="@string/title_login_hint"
+            android:textAppearance="@style/Regular"
             android:textColor="@color/light"
             android:textSize="@dimen/text_size_regular" />
 
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_regular"
-            android:fontFamily="@font/roboto"
+            android:textAppearance="@style/Regular"
             android:textColor="@color/red"
             android:textSize="@dimen/text_size_regular"
             android:visibility="gone"

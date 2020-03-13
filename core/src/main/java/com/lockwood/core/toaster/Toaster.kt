@@ -8,11 +8,10 @@ import android.widget.Toast
 import androidx.annotation.ColorRes
 import com.lockwood.core.R
 import com.lockwood.core.extensions.color
-import com.lockwood.core.extensions.font
 
 
 class Toaster(
-    private val ctx: Context
+    private val context: Context
 ) {
 
     companion object {
@@ -52,15 +51,16 @@ class Toaster(
         textColor: Int = DEFAULT_TEXT_COLOR,
         length: Int = DEFAULT_TOAST_LENGTH
     ): Toast {
-        val sourceToast = Toast.makeText(ctx, "", length)
+        val sourceToast = Toast.makeText(context, "", length)
         val view = sourceToast.view
-        view.backgroundTintList = ColorStateList.valueOf(ctx.color(backgroundTint))
+        view.backgroundTintList = ColorStateList.valueOf(context.color(backgroundTint))
+
         val toastTextView = view.findViewById(android.R.id.message) as TextView
         with(toastTextView) {
             text = str
-            setTextColor(ctx.color(textColor))
-            typeface = ctx.font(R.font.roboto)
+            setTextColor(context.color(textColor))
         }
+
         currentToast = sourceToast
         return sourceToast
     }
