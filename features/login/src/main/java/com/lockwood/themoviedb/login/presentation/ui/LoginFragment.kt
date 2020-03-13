@@ -42,13 +42,14 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun observeLiveDataChanges() = with(viewModel) {
+        val lifecycleOwner = viewLifecycleOwner
         val validLengthObserver = Observer<String> { checkIsValidCredentialsLength() }
-        loginLiveData.observe(viewLifecycleOwner, validLengthObserver)
-        passwordLiveData.observe(viewLifecycleOwner, validLengthObserver)
-        isCredentialsLengthValid.observe(viewLifecycleOwner, Observer { isValidLength ->
+        loginLiveData.observe(lifecycleOwner, validLengthObserver)
+        passwordLiveData.observe(lifecycleOwner, validLengthObserver)
+        isCredentialsLengthValid.observe(lifecycleOwner, Observer { isValidLength ->
             sign_in_button.isEnabled = isValidLength
         })
-        errorMessageLiveData.observe(viewLifecycleOwner, Observer { message ->
+        errorMessageLiveData.observe(lifecycleOwner, Observer { message ->
             login_error_text_view.text = message
             login_error_text_view.isVisible = !message.isNullOrEmpty()
         })
