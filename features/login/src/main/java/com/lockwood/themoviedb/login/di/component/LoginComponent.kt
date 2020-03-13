@@ -4,7 +4,7 @@ import com.lockwood.core.di.component.BaseFragmentComponent
 import com.lockwood.core.di.provider.ApplicationProvider
 import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.themoviedb.login.di.module.LoginModule
-import com.lockwood.themoviedb.login.presentation.LoginFragment
+import com.lockwood.themoviedb.login.presentation.ui.LoginFragment
 import dagger.Component
 
 @Component(

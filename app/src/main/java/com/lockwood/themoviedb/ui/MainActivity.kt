@@ -6,7 +6,7 @@ import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.ui.BaseActivity
 import com.lockwood.themoviedb.R
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
-import com.lockwood.themoviedb.login.presentation.LoginActivity
+import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
 

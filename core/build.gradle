@@ -38,6 +38,7 @@ dependencies {
             deps.lifecycle.viewmodel,
             deps.lifecycle.common,
             deps.rxJava.rx2,
+            deps.rxJava.rxAndroid,
             deps.dagger.dagger
     )
 

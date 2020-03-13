@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lockwood.themoviedb.login.presentation.LoginActivity">
+    tools:context="com.lockwood.themoviedb.login.presentation.ui.LoginActivity">
 
     <fragment
         android:id="@+id/container"
-        android:name="com.lockwood.themoviedb.login.presentation.LoginFragment"
+        android:name="com.lockwood.themoviedb.login.presentation.ui.LoginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/default_content_margin"

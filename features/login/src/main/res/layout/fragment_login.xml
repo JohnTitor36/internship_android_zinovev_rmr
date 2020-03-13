@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context="com.lockwood.themoviedb.login.presentation.LoginActivity">
+    tools:context="com.lockwood.themoviedb.login.presentation.ui.LoginActivity">
 
     <TextView
         android:id="@+id/login_title_text_view"
@@ -74,6 +74,21 @@
             android:textSize="@dimen/text_size_regular" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/login_error_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_regular"
+        android:textAppearance="@style/Regular"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_regular"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_input_layout"
+        tools:text="@string/title_invalid_login_or_password_error"
+        tools:visibility="visible" />
+
     <Button
         android:id="@+id/sign_in_button"
         style="@style/Button.Actionable"
@@ -84,7 +99,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="1.0"
         tools:enabled="true" />
 

@@ -1,6 +1,10 @@
-package com.lockwood.themoviedb.login.domain
+package com.lockwood.themoviedb.login.common
 
-class CredentialsValidator {
+import com.lockwood.core.di.scope.FeatureScope
+import javax.inject.Inject
+
+@FeatureScope
+class CredentialsLengthValidator @Inject constructor() {
 
     companion object {
 
@@ -8,7 +12,7 @@ class CredentialsValidator {
         private const val MIN_LOGIN_LENGTH = 4
     }
 
-    fun validateCredentialsLength(login: String, password: String): Boolean {
+    fun validateLength(login: String, password: String): Boolean {
         val isValidLogin = validateLogin(login)
         val isValidPassword = validatePassword(password)
         return isValidLogin && isValidPassword
@@ -17,6 +21,5 @@ class CredentialsValidator {
     private fun validateLogin(login: CharSequence) = login.length > MIN_LOGIN_LENGTH
 
     private fun validatePassword(pass: CharSequence) = pass.length > MIN_PASSWORD_LENGTH
-
 
 }
