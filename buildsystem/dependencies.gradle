@@ -11,7 +11,6 @@ versions.cardview = "1.0.0"
 versions.preference = "1.1.0"
 versions.security = "1.0.0-alpha02"
 versions.glide = "4.11.0"
-versions.mobius = "1.4.0-beta3"
 versions.rx2 = "2.2.18"
 versions.rxAndroid = "2.1.1"
 versions.dagger = "2.26"
@@ -44,13 +43,6 @@ rxJava.rx2 = "io.reactivex.rxjava2:rxjava:$versions.rx2"
 rxJava.rxAndroid = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
 deps.rxJava = rxJava
 
-def mobius = [:]
-mobius.core = "com.spotify.mobius:mobius-core:$versions.mobius"
-mobius.extras = "com.spotify.mobius:mobius-extras:$versions.mobius"
-mobius.android = "com.spotify.mobius:mobius-android:$versions.mobius"
-mobius.rx2 = "com.spotify.mobius:mobius-rx2:$versions.mobius"
-deps.mobius = mobius
-
 def dagger = [:]
 dagger.dagger = "com.google.dagger:dagger:$versions.dagger"
 dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
@@ -63,7 +55,6 @@ deps.glide = glide
 
 def test = [:]
 test.junit = "junit:junit:$testVersions.junit"
-test.mobius = "com.spotify.mobius:mobius-test:$versions.mobius"
 deps.test = test
 
 def androidTest = [:]

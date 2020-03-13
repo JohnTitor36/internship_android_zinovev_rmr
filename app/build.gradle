@@ -50,7 +50,7 @@ dependencies {
     implementation project(":core")
     implementation project(":features:login")
 
-    implementation (
+    implementation(
             deps.kotlin.stdlib,
             deps.kotlin.coreKtx,
             deps.android.appcompat,
@@ -58,15 +58,11 @@ dependencies {
             deps.material.material,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
-            deps.dagger.dagger,
-            deps.mobius.core,
-            deps.mobius.extras,
-            deps.mobius.rx2,
-            deps.mobius.android
+            deps.dagger.dagger
     )
 
-    kapt (deps.dagger.compiler)
+    kapt(deps.dagger.compiler)
 
-    testImplementation (deps.test.junit,deps.test.mobius)
-    androidTestImplementation (deps.androidTest.junit,deps.androidTest.espresso)
+    testImplementation(deps.test.junit)
+    androidTestImplementation(deps.androidTest.junit, deps.androidTest.espresso)
 }

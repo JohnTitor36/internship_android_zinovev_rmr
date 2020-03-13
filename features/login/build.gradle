@@ -38,11 +38,7 @@ dependencies {
             deps.material.material,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
-            deps.dagger.dagger,
-            deps.mobius.core,
-            deps.mobius.extras,
-            deps.mobius.rx2,
-            deps.mobius.android
+            deps.dagger.dagger
     )
 
     kapt (deps.dagger.compiler)
