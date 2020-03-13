@@ -1,5 +1,4 @@
 <resources>
-
     <style name="Regular" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">normal</item>
