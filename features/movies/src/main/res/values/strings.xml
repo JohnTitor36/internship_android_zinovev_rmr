@@ -1,0 +1,5 @@
+<resources>
+    <string name="title_movies_search">Поиск фильмов</string>
+    <string name="title_time">Время</string>
+    <string name="title_rating">Рейтинг фильма</string>
+</resources>

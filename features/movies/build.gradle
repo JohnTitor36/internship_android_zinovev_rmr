@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: rootProject.file('buildsystem/versions.gradle')
+apply from: rootProject.file('buildsystem/dependencies.gradle')
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+}
+
+dependencies {
+    implementation project(":core")
+
+    implementation(
+            deps.kotlin.stdlib,
+            deps.android.appcompat,
+            deps.android.constraint,
+            deps.android.ktx,
+            deps.material.material,
+            deps.dagger.dagger,
+            deps.rxJava.rx2,
+            deps.rxJava.rxAndroid
+    )
+
+    kapt(deps.dagger.compiler)
+
+}
