@@ -13,6 +13,7 @@
         android:layout_marginStart="@dimen/default_content_margin"
         android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_marginEnd="@dimen/default_content_margin"
+        android:layout_marginBottom="@dimen/margin_regular"
         tools:layout="@layout/fragment_login" />
 
 </merge>
