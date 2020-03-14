@@ -60,7 +60,10 @@ dependencies {
             deps.kotlin.stdlib,
             deps.android.appcompat,
             deps.android.ktx,
+            deps.android.fragment,
             deps.material.material,
+            deps.navigation.fragment,
+            deps.navigation.ui,
             deps.dagger.dagger,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid

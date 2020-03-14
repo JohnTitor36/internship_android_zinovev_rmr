@@ -39,10 +39,10 @@ android.ktx = "androidx.core:core-ktx:$versions.ktx"
 deps.android = android
 
 def navigation = [:]
-android.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
-android.ui = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
-android.testing = "androidx.navigation:navigation-testing:$versions.navigation"
-deps.android = android
+navigation.fragment = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+navigation.testing = "androidx.navigation:navigation-testing:$versions.navigation"
+deps.navigation = navigation
 
 def lifecycle = [:]
 lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
