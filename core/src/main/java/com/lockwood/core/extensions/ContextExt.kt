@@ -16,4 +16,22 @@ inline fun <reified T : Activity> Context.launchActivity(
     startActivity(Intent(intent).apply(init))
 }
 
+inline fun newIntent(
+    context: Context,
+    className: String,
+    init: Intent.() -> Unit = {}
+): Intent {
+    val intent = Intent()
+
+    val packageName = context.packageName
+    val packageNameWithoutSuffix = packageName.removeSuffix(DEBUG_SUFFIX)
+    val resultClassName = "$packageNameWithoutSuffix$className"
+    intent.setClassName(packageName, resultClassName)
+
+    intent.init()
+    return intent
+}
+
 inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)
+
+const val DEBUG_SUFFIX = ".debug"
