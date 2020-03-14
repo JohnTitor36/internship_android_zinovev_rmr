@@ -1,12 +1,11 @@
 package com.lockwood.themoviedb.ui
 
-import android.content.Intent
 import android.os.Bundle
-import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.ui.BaseActivity
 import com.lockwood.themoviedb.R
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
-import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
+import kotlinx.android.synthetic.main.include_app_bar.*
+import kotlinx.android.synthetic.main.include_app_bar.view.*
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
@@ -14,22 +13,21 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         inject()
         super.onCreate(savedInstanceState)
 
-        launchActivity<LoginActivity> {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
+        setSupportActionBar(appbar.toolbar)
+        disableAppBarTitle()
+        setDisplayHomeAsUpEnabled(false)
+//        launchActivity<LoginActivity> {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        }
     }
 
-//    fun setupActionBar() {
-//        appBarLayout.apply {
-//            elevation = resources.getDimension(R.dimen.appbar_elevation_default)
-//            outlineProvider = null
-//        }
-//        setSupportActionBar(appBarLayout.findViewById(R.id.toolbar))
-//        supportActionBar?.run {
-//            setDisplayShowTitleEnabled(false)
-//            action()
-//        }
-//    }
+    fun setDisplayHomeAsUpEnabled(isEnabled: Boolean) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(isEnabled)
+    }
+
+   private fun disableAppBarTitle() {
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
 
     private fun inject() {
         DaggerMainComponent.builder()
