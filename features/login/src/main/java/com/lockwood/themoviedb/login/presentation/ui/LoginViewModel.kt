@@ -2,6 +2,7 @@ package com.lockwood.themoviedb.login.presentation.ui
 
 import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.domain.AndroidSchedulersProvider
+import com.lockwood.core.event.Event
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.toaster.Toaster
 import com.lockwood.core.ui.BaseViewModel
@@ -33,6 +34,8 @@ constructor(
         MutableLiveData<Boolean>()
     }
 
+    val openNextActivityEvent = MutableLiveData<Event<Unit>>()
+
     private val login: String
         get() = loginLiveData.value.orEmpty().trim()
 
@@ -59,7 +62,7 @@ constructor(
             .subscribe({
                 setIsLoading(false)
                 errorMessageLiveData.value = null
-                toaster.toast("Вы успешно вошли")
+                openNextActivityEvent.value = Event(Unit)
             }, {
                 setIsLoading(false)
                 errorMessageLiveData.value = it.message

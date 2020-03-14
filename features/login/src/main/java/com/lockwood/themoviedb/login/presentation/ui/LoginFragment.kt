@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.extensions.newIntent
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
@@ -53,6 +54,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             login_error_text_view.text = message
             login_error_text_view.isVisible = !message.isNullOrEmpty()
         })
+        // TODO: Заменить на пин код
+        openNextActivityEvent.observe(lifecycleOwner, Observer {
+            val intent = newIntent(requireContext(), MAIN_ACTIVITY_CLASS_NAME)
+            startActivity(intent)
+        })
     }
 
     private fun inject() {
@@ -60,6 +66,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             .applicationProvider(appToolsProvider)
             .build()
             .inject(this)
+    }
+
+    companion object {
+
+        private const val MAIN_ACTIVITY_CLASS_NAME = ".ui.MainActivity"
     }
 
 }
