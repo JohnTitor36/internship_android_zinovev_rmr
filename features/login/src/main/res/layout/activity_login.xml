@@ -6,7 +6,7 @@
     tools:context="com.lockwood.themoviedb.login.presentation.ui.LoginActivity">
 
     <fragment
-        android:id="@+id/container"
+        android:id="@+id/login_container"
         android:name="com.lockwood.themoviedb.login.presentation.ui.LoginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
