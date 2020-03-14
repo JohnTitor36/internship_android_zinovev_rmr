@@ -18,6 +18,7 @@ versions.rx2 = "2.2.18"
 versions.rxAndroid = "2.1.1"
 versions.dagger = "2.26"
 versions.assistedInject = "0.5.2"
+versions.retrofit2 = "2.7.2"
 
 def testVersions = [:]
 testVersions.junit = "4.12"
@@ -49,6 +50,10 @@ deps.material = material
 def kotlin = [:]
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
 deps.kotlin = kotlin
+
+def network = [:]
+network.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+deps.network = network
 
 def rxJava = [:]
 rxJava.rx2 = "io.reactivex.rxjava2:rxjava:$versions.rx2"
