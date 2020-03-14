@@ -62,6 +62,7 @@ constructor(
             .subscribe({
                 setIsLoading(false)
                 errorMessageLiveData.value = null
+                // TODO: Поставить флаг, что пользователь вошел
                 openNextActivityEvent.value = Event(Unit)
             }, {
                 setIsLoading(false)
