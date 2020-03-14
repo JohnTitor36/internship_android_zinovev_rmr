@@ -16,6 +16,18 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 //        }
     }
 
+//    fun setupActionBar() {
+//        appBarLayout.apply {
+//            elevation = resources.getDimension(R.dimen.appbar_elevation_default)
+//            outlineProvider = null
+//        }
+//        setSupportActionBar(appBarLayout.findViewById(R.id.toolbar))
+//        supportActionBar?.run {
+//            setDisplayShowTitleEnabled(false)
+//            action()
+//        }
+//    }
+
     private fun inject() {
         DaggerMainComponent.builder()
             .build()
