@@ -24,6 +24,7 @@ android {
         versionName versions.name
 
         consumerProguardFiles 'consumer-rules.pro'
+        buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3\"")
         buildConfigField("String", "MOVIES_API_KEY", "${secretProperties['movies_api_key']}")
     }
 
