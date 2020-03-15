@@ -5,6 +5,7 @@ import android.content.Context
 import com.lockwood.core.di.DaggerApplication
 import com.lockwood.core.di.component.DaggerCoreComponent
 import com.lockwood.core.di.provider.AppToolsProvider
+import timber.log.Timber
 
 class MovieApplication : Application(), DaggerApplication {
 
@@ -19,6 +20,15 @@ class MovieApplication : Application(), DaggerApplication {
         DaggerCoreComponent.builder()
             .application(this)
             .build()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+
     }
 
     override fun getAppToolsProvider(): AppToolsProvider = coreComponent(this)
