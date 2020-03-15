@@ -21,15 +21,14 @@ inline fun newIntent(
     className: String,
     init: Intent.() -> Unit = {}
 ): Intent {
-    val intent = Intent()
-
     val packageName = context.packageName
     val packageNameWithoutSuffix = packageName.removeSuffix(DEBUG_SUFFIX)
     val resultClassName = "$packageNameWithoutSuffix$className"
-    intent.setClassName(packageName, resultClassName)
 
-    intent.init()
-    return intent
+    return Intent().apply {
+        setClassName(packageName, resultClassName)
+        init()
+    }
 }
 
 inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)
