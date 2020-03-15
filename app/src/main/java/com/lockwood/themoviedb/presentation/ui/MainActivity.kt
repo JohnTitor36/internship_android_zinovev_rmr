@@ -23,7 +23,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
 
-
     private fun inject() {
         DaggerMainComponent.builder()
             .build()

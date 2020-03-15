@@ -7,22 +7,22 @@ import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel : ViewModel() {
 
-        val isLoading by lazy { MutableLiveData<Boolean>() }
+    val isLoading by lazy { MutableLiveData<Boolean>() }
 
-        private val compositeDisposable by lazy { CompositeDisposable() }
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
-        override fun onCleared() {
-            super.onCleared()
-            compositeDisposable.clear()
-        }
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
+    }
 
-        protected fun setIsLoading(value: Boolean) {
-            isLoading.value = value
-        }
+    protected fun setIsLoading(value: Boolean) {
+        isLoading.value = value
+    }
 
-        protected fun Disposable.autoDispose(): Disposable {
-            compositeDisposable.add(this)
-            return this
-        }
+    protected fun Disposable.autoDispose(): Disposable {
+        compositeDisposable.add(this)
+        return this
+    }
 
 }
