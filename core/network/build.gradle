@@ -45,6 +45,8 @@ dependencies {
             deps.android.appcompat,
             deps.network.retrofit2,
             deps.network.moshi,
+            deps.rxJava.rx2,
+            deps.rxJava.rxAndroid,
             deps.dagger.dagger
     )
 

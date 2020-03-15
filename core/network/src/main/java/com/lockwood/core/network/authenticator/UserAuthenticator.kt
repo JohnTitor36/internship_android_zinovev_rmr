@@ -2,7 +2,7 @@ package com.lockwood.core.network.authenticator
 
 import com.lockwood.core.network.common.Constants.AUTH_HEADER
 import com.lockwood.core.network.common.Constants.AUTH_HEADER_VALUE_PREFIX
-import com.lockwood.core.network.repository.TokensRepository
+import com.lockwood.core.network.TokensRepository
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
