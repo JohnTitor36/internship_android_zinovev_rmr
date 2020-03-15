@@ -39,9 +39,10 @@ dependencies {
             deps.material.material,
             deps.dagger.dagger,
             deps.rxJava.rx2,
-            deps.rxJava.rxAndroid
+            deps.rxJava.rxAndroid,
+            deps.network.retrofit2,
+            deps.network.moshi
     )
 
-    kapt(deps.dagger.compiler)
-
+    kapt(deps.dagger.compiler, deps.network.moshicodegen)
 }
