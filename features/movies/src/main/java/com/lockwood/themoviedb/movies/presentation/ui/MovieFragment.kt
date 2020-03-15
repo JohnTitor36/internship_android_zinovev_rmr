@@ -1,21 +1,20 @@
 package com.lockwood.themoviedb.movies.presentation.ui
 
 import android.content.Context
-import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.themoviedb.movies.R
-import com.lockwood.themoviedb.movies.di.component.DaggerSearchComponent
+import com.lockwood.themoviedb.movies.di.component.DaggerMovieComponent
 import javax.inject.Inject
 import javax.inject.Provider
 
-class SearchFragment : BaseFragment(R.layout.fragment_search) {
+class MovieFragment : BaseFragment(R.layout.fragment_movie) {
 
     @Inject
-    lateinit var viewModelFactory: Provider<SearchViewModel>
+    lateinit var viewModelFactory: Provider<MovieViewModel>
 
-    private lateinit var viewModel: SearchViewModel
+    private lateinit var viewModel: MovieViewModel
 
-    override val hasOptionMenu: Boolean = false
+    override val hasOptionMenu: Boolean = true
 
     override fun onAttach(context: Context) {
         inject()
@@ -24,8 +23,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
     }
 
     private fun inject() {
-        DaggerSearchComponent.builder()
-            .appToolsProvider(appToolsProvider)
+        DaggerMovieComponent.builder()
             .build()
             .inject(this)
     }

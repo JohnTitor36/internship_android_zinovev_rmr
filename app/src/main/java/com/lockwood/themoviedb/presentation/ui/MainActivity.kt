@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.lockwood.core.ui.BaseActivity
 import com.lockwood.themoviedb.R
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
+import com.lockwood.themoviedb.movies.presentation.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.include_app_bar.*
 import kotlinx.android.synthetic.main.include_app_bar.view.*
 

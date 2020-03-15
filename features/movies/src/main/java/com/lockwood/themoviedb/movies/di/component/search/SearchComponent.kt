@@ -1,21 +1,16 @@
-package com.lockwood.themoviedb.movies.di.component
+package com.lockwood.themoviedb.movies.di.component.search
 
 import com.lockwood.core.di.component.BaseFragmentComponent
-import com.lockwood.core.di.provider.AppToolsProvider
 import com.lockwood.core.di.scope.FeatureScope
-import com.lockwood.themoviedb.movies.presentation.ui.SearchFragment
+import com.lockwood.themoviedb.movies.presentation.ui.search.SearchFragment
 import dagger.Component
 
-@Component(
-    dependencies = [AppToolsProvider::class]
-)
+@Component
 @FeatureScope
 interface SearchComponent : BaseFragmentComponent<SearchFragment> {
 
     @Component.Builder
     interface Builder {
-
-        fun appToolsProvider(appToolsProvider: AppToolsProvider): Builder
 
         fun build(): SearchComponent
 

@@ -63,6 +63,7 @@ dependencies {
             deps.android.appcompat,
             deps.android.ktx,
             deps.android.fragment,
+            deps.android.constraint,
             deps.material.material,
             deps.navigation.fragment,
             deps.navigation.ui,
