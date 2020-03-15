@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.ui
+package com.lockwood.themoviedb.presentation.ui
 
 import android.os.Bundle
 import com.lockwood.core.ui.BaseActivity

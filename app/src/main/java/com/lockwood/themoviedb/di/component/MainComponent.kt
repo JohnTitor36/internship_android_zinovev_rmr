@@ -2,7 +2,7 @@ package com.lockwood.themoviedb.di.component
 
 import com.lockwood.core.di.component.BaseActivityComponent
 import com.lockwood.core.di.scope.FeatureScope
-import com.lockwood.themoviedb.ui.MainActivity
+import com.lockwood.themoviedb.presentation.ui.MainActivity
 import dagger.Component
 
 @Component

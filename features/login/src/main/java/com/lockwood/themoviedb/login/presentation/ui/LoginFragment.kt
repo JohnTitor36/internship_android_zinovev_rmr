@@ -70,7 +70,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     companion object {
 
-        private const val MAIN_ACTIVITY_CLASS_NAME = ".ui.MainActivity"
+        private const val MAIN_ACTIVITY_CLASS_NAME = ".presentation.ui.MainActivity"
     }
 
 }

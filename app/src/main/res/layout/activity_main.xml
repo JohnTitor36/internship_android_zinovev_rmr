@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.lockwood.themoviedb.ui.MainActivity">
+    tools:context=".presentation.ui.MainActivity">
 
     <include layout="@layout/include_app_bar" />
 
