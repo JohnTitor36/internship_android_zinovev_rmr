@@ -31,6 +31,7 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
 
     private val networkComponent: NetworkToolsProvider by lazy {
         DaggerNetworkComponent.builder()
+            .application(this)
             .build()
     }
 

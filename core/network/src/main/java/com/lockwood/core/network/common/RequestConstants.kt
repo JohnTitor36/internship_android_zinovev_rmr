@@ -1,6 +1,6 @@
 package com.lockwood.core.network.common
 
-object Constants {
+object RequestConstants {
 
     const val AUTH_HEADER = ""
 
