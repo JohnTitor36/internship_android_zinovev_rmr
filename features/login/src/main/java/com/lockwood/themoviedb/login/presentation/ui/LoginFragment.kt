@@ -20,7 +20,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     @Inject
     lateinit var viewModelFactory: Provider<LoginViewModel>
 
-    lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: LoginViewModel
 
     override val hasOptionMenu: Boolean = false
 

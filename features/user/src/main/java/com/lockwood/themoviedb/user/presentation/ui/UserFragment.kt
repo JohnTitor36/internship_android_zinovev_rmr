@@ -12,7 +12,7 @@ class UserFragment : BaseFragment(R.layout.fragment_user) {
     @Inject
     lateinit var viewModelFactory: Provider<UserViewModel>
 
-    lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: UserViewModel
 
     override val hasOptionMenu: Boolean = false
 

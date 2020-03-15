@@ -13,7 +13,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search) {
     @Inject
     lateinit var viewModelFactory: Provider<SearchViewModel>
 
-    lateinit var viewModel: SearchViewModel
+    private lateinit var viewModel: SearchViewModel
 
     override val hasOptionMenu: Boolean = false
 
