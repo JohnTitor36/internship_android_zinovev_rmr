@@ -16,18 +16,13 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         setSupportActionBar(appbar.toolbar)
         disableAppBarTitle()
         setDisplayHomeAsUpEnabled(false)
+
 //        launchActivity<LoginActivity> {
 //            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 //        }
     }
 
-    fun setDisplayHomeAsUpEnabled(isEnabled: Boolean) {
-        supportActionBar?.setDisplayHomeAsUpEnabled(isEnabled)
-    }
 
-   private fun disableAppBarTitle() {
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-    }
 
     private fun inject() {
         DaggerMainComponent.builder()
