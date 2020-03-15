@@ -21,6 +21,7 @@ versions.dagger = "2.27"
 versions.assistedInject = "0.5.2"
 versions.retrofit2 = "2.7.2"
 versions.room = "2.2.4"
+versions.timber = "4.7.1"
 
 def testVersions = [:]
 testVersions.junit = "4.12"
@@ -89,6 +90,10 @@ def glide = [:]
 glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
 glide.glideCompiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
+
+def tools = [:]
+tools.timber = "com.jakewharton.timber:timber:$versions.timber"
+deps.tools = tools
 
 def test = [:]
 test.junit = "junit:junit:$testVersions.junit"
