@@ -1,8 +1,7 @@
-package com.lockwood.core.network
+package com.lockwood.core.network.service
 
 import com.lockwood.core.network.common.JsonConstants
 import com.lockwood.core.network.model.body.CreateSessionBody
-import com.lockwood.core.network.model.body.DeleteSessionBody
 import com.lockwood.core.network.model.body.ValidateWithLoginBody
 import com.lockwood.core.network.model.response.CreateRequestTokenResponse
 import com.lockwood.core.network.model.response.CreateSessionResponse

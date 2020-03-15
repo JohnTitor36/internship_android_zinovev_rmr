@@ -1,6 +1,6 @@
 package com.lockwood.core.network.authenticator
 
-import com.lockwood.core.network.TokensRepository
+import com.lockwood.core.network.repository.TokensRepository
 import com.lockwood.core.network.common.RequestConstants.AUTH_HEADER
 import com.lockwood.core.network.common.RequestConstants.AUTH_HEADER_VALUE_PREFIX
 import okhttp3.Authenticator
@@ -21,7 +21,7 @@ class UserAuthenticator(
         val requestToken = response.getAccessToken()
 
         return when {
-            // Пропускаеи обновление токена если нет токена ¯\_(ツ)_/¯
+            // Пропускаем обновление токена если нет токена ¯\_(ツ)_/¯
             currentToken.isEmpty() -> {
                 null
             }

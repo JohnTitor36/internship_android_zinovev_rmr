@@ -1,4 +1,4 @@
-package com.lockwood.core.network
+package com.lockwood.core.network.repository
 
 interface TokensRepository {
 
