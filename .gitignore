@@ -128,3 +128,4 @@ hs_err_pid*
 .nfs*
 
 !/gradle/wrapper/gradle-wrapper.jar
+/secrets.properties

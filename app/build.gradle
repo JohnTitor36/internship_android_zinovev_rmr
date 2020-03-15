@@ -54,6 +54,7 @@ scabbard {
 
 dependencies {
     implementation project(":core")
+    implementation project(":core:network")
     implementation project(":features:login")
     implementation project(":features:movies")
     implementation project(":features:user")

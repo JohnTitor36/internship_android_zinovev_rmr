@@ -4,5 +4,6 @@ import android.content.Context
 
 interface ApplicationProvider {
 
-    fun provideAppContext(): Context
+    fun provideApplicationContext(): Context
+
 }

@@ -6,6 +6,14 @@ apply plugin: 'kotlin-kapt'
 apply from: rootProject.file('buildsystem/versions.gradle')
 apply from: rootProject.file('buildsystem/dependencies.gradle')
 
+def secretsPropertiesFile = rootProject.file("secrets.properties")
+def secretProperties = new Properties()
+
+// Try reading secrets from a file
+if (secretsPropertiesFile.exists()) {
+    secretProperties.load(new FileInputStream(secretsPropertiesFile))
+}
+
 android {
     compileSdkVersion versions.compileSdk
 
@@ -16,6 +24,7 @@ android {
         versionName versions.name
 
         consumerProguardFiles 'consumer-rules.pro'
+        buildConfigField("String", "MOVIES_API_KEY", "${secretProperties['movies_api_key']}")
     }
 
     compileOptions {
@@ -33,13 +42,10 @@ dependencies {
     implementation(
             deps.kotlin.stdlib,
             deps.android.appcompat,
-            deps.material.material,
-            deps.lifecycle.viewmodel,
-            deps.lifecycle.common,
-            deps.rxJava.rx2,
-            deps.rxJava.rxAndroid,
+            deps.network.retrofit2,
+            deps.network.moshi,
             deps.dagger.dagger
     )
 
-    kapt(deps.dagger.compiler)
+    kapt(deps.dagger.compiler, deps.network.moshicodegen)
 }

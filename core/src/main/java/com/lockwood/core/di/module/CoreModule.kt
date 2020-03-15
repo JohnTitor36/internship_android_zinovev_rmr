@@ -1,4 +1,4 @@
-package com.lockwood.core.di.modules
+package com.lockwood.core.di.module
 
 import android.content.Context
 import com.lockwood.core.di.DaggerApplication

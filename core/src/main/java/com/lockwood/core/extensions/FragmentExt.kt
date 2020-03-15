@@ -1,7 +1,7 @@
 package com.lockwood.core.extensions
 
 import androidx.fragment.app.Fragment
-import com.lockwood.core.di.provider.AppToolsProvider
+import com.lockwood.core.di.provider.ApplicationProvider
 
-val Fragment.appToolsProvider: AppToolsProvider
-    get() = requireActivity().appToolsProvider
+val Fragment.applicationProvider: ApplicationProvider
+    get() = requireActivity().applicationProvider
