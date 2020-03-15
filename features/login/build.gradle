@@ -30,6 +30,7 @@ android {
 
 dependencies {
     implementation project(":core")
+    implementation project(":core:network")
 
     implementation(
             deps.kotlin.stdlib,
@@ -37,11 +38,11 @@ dependencies {
             deps.android.constraint,
             deps.android.ktx,
             deps.material.material,
-            deps.dagger.dagger,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
-            deps.network.moshi
+            deps.network.moshi,
+            deps.dagger.dagger
     )
 
     kapt(deps.dagger.compiler, deps.network.moshicodegen)

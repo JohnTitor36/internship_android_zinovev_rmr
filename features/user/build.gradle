@@ -37,11 +37,8 @@ dependencies {
             deps.android.constraint,
             deps.android.ktx,
             deps.material.material,
-            deps.dagger.dagger,
-            deps.rxJava.rx2,
-            deps.rxJava.rxAndroid
+            deps.dagger.dagger
     )
 
     kapt(deps.dagger.compiler)
-
 }

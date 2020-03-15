@@ -68,10 +68,8 @@ dependencies {
             deps.material.material,
             deps.navigation.fragment,
             deps.navigation.ui,
-            deps.dagger.dagger,
-            deps.rxJava.rx2,
-            deps.rxJava.rxAndroid,
-            deps.tools.timber
+            deps.tools.timber,
+            deps.dagger.dagger
     )
 
     kapt(deps.dagger.compiler)
