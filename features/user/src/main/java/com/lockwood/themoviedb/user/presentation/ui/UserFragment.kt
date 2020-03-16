@@ -3,7 +3,7 @@ package com.lockwood.themoviedb.user.presentation.ui
 import android.content.Context
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.themoviedb.user.R
-import com.lockwood.themoviedb.user.di.component.DaggerUserComponent
+import com.lockwood.themoviedb.user.di.DaggerUserComponent
 import javax.inject.Inject
 import javax.inject.Provider
 

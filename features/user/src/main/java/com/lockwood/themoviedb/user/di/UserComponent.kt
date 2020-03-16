@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.user.di.component
+package com.lockwood.themoviedb.user.di
 
 import com.lockwood.core.di.component.BaseFragmentComponent
 import com.lockwood.core.di.scope.FeatureScope

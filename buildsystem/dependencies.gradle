@@ -36,7 +36,7 @@ android.recyclerview = "androidx.appcompat:appcompat:$versions.appcompat"
 android.cardview = "androidx.appcompat:appcompat:$versions.appcompat"
 android.constraint = "androidx.constraintlayout:constraintlayout:$versions.constraint"
 android.preference = "androidx.appcompat:appcompat:$versions.appcompat"
-android.security = "androidx.appcompat:appcompat:$versions.appcompat"
+android.security = "androidx.security:security-crypto:$versions.security"
 android.ktx = "androidx.core:core-ktx:$versions.ktx"
 deps.android = android
 
