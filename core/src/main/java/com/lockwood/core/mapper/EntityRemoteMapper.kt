@@ -1,6 +1,6 @@
 package com.lockwood.core.mapper
 
-interface EntityMapper<M, E> {
+interface EntityRemoteMapper<M, E> {
 
     fun mapFromRemote(type: M): E
 

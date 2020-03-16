@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ApiModule {
+class NetworkApiModule {
 
     @Provides
     @BaseUrl
@@ -20,15 +20,5 @@ class ApiModule {
     fun provideApiKey(): String {
         return BuildConfig.MOVIES_API_KEY
     }
-
-//    @Provides
-//    @RequestToken
-//    fun provideRequestToken(sharedPreferences: SharedPreferences): String {
-//    }
-//
-//    @Provides
-//    @SessionId
-//    fun provideSessionId(sharedPreferences: SharedPreferences): String {
-//    }
 
 }

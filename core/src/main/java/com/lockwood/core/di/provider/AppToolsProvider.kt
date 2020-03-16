@@ -1,3 +1,3 @@
 package com.lockwood.core.di.provider
 
-interface AppToolsProvider : ApplicationProvider, PreferencesProvider
+interface AppToolsProvider : ApplicationProvider

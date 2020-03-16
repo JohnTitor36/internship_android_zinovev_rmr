@@ -1,10 +1,7 @@
-package com.lockwood.core.extensions
+package com.lockwood.core.cache.extensions
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
-import com.lockwood.core.cache.preferences.Preference
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
+import com.lockwood.core.cache.preference.Preference
 
 object DelegatesExt {
 
@@ -13,5 +10,6 @@ object DelegatesExt {
         name: String,
         default: T
     ) = Preference(prefs, name, default)
+
 }
 

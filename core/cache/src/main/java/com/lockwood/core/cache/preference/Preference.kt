@@ -1,4 +1,4 @@
-package com.lockwood.core.cache.preferences
+package com.lockwood.core.cache.preference
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
@@ -15,7 +15,6 @@ class Preference<T>(
         thisRef: Any?,
         property: KProperty<*>
     ): T = prefs.findPreference(name, default)
-
 
     override fun setValue(
         thisRef: Any?,

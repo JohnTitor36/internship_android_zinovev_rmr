@@ -1,8 +1,8 @@
-package com.lockwood.core.di.provider
+package com.lockwood.core.cache.di.provider
 
 import android.content.SharedPreferences
-import com.lockwood.core.di.qualifier.EncryptedPreferences
-import com.lockwood.core.di.qualifier.Preferences
+import com.lockwood.core.cache.di.qualifier.EncryptedPreferences
+import com.lockwood.core.cache.di.qualifier.Preferences
 
 interface PreferencesProvider {
 
