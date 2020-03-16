@@ -1,4 +1,4 @@
-package com.lockwood.core.data
+package com.lockwood.core.mapper
 
 interface Mapper<T, R> {
 

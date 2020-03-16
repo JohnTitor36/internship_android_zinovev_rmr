@@ -1,6 +1,6 @@
 package com.lockwood.core.extensions
 
-import com.lockwood.core.domain.SchedulersProvider
+import com.lockwood.core.schedulers.SchedulersProvider
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single

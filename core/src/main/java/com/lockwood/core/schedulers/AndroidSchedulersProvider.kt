@@ -1,4 +1,4 @@
-package com.lockwood.core.domain
+package com.lockwood.core.schedulers
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
