@@ -2,11 +2,9 @@ package com.lockwood.core.network.di.module
 
 import android.content.Context
 import com.lockwood.core.network.BuildConfig
+import com.lockwood.core.network.authenticator.StatusMessageAuthenticator
 import com.lockwood.core.network.authenticator.UserToLoginAuthenticator
-import com.lockwood.core.network.di.qualifier.BaseUrl
-import com.lockwood.core.network.di.qualifier.ErrorInterceptor
-import com.lockwood.core.network.di.qualifier.HeaderInterceptor
-import com.lockwood.core.network.di.qualifier.LoggingInterceptor
+import com.lockwood.core.network.di.qualifier.*
 import com.lockwood.core.network.interceptor.OkHttpErrorInterceptor
 import com.lockwood.core.network.interceptor.OkHttpHeaderInterceptor
 import com.lockwood.core.preferences.authentication.AuthenticationPreferences
@@ -38,7 +36,18 @@ class NetworkModule {
     // Ловим 401 через Authenticator
     @Provides
     @Singleton
-    fun provideTokenAuthenticator(
+    fun provideAuthenticator(
+        context: Context,
+        moshi: Moshi
+    ): Authenticator {
+        return StatusMessageAuthenticator(context, moshi)
+    }
+
+    // Ловим 401 через Authenticator и идем в LoginActivity
+    @Provides
+    @Singleton
+    @ToLoginAuthenticator
+    fun provideUserToLoginAuthenticator(
         context: Context,
         authenticationPreferences: AuthenticationPreferences,
         userPreferences: UserPreferences,
@@ -107,6 +116,22 @@ class NetworkModule {
         @LoggingInterceptor loggingInterceptor: Interceptor,
         @ErrorInterceptor errorInterceptor: Interceptor,
         authenticator: Authenticator
+    ): OkHttpClient {
+        return okHttpClient.authenticator(authenticator)
+            .addNetworkInterceptor(headerInterceptor)
+            .addNetworkInterceptor(loggingInterceptor)
+            .addNetworkInterceptor(errorInterceptor).build()
+    }
+
+    @Provides
+    @Singleton
+    @AuthHttpClient
+    fun provideAuthHttpClient(
+        okHttpClient: OkHttpClient.Builder,
+        @HeaderInterceptor headerInterceptor: Interceptor,
+        @LoggingInterceptor loggingInterceptor: Interceptor,
+        @ErrorInterceptor errorInterceptor: Interceptor,
+        @ToLoginAuthenticator authenticator: Authenticator
     ): OkHttpClient {
         return okHttpClient.authenticator(authenticator)
             .addNetworkInterceptor(headerInterceptor)

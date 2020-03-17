@@ -11,11 +11,11 @@ interface AuthenticationRepository {
 
     fun fetchCurrentRequestToken(): String
 
-    fun fetchCurrentSessionId(): Int
+    fun fetchCurrentSessionId(): String
 
     fun saveCurrentRequestToken(requestToken: String)
 
-    fun saveCurrentSessionId(sessionId: Int)
+    fun saveCurrentSessionId(sessionId: String)
 
     fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponse>
 

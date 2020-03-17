@@ -11,17 +11,17 @@ interface AuthenticationDataStore {
 
     fun fetchCurrentRequestToken(): String
 
-    fun fetchCurrentSessionId(): Int
+    fun fetchCurrentSessionId(): String
 
     fun saveCurrentRequestToken(requestToken: String)
 
-    fun saveCurrentSessionId(sessionId: Int)
+    fun saveCurrentSessionId(sessionId: String)
 
     fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity>
 
     fun validateTokenWithLogin(
-        apiKey: String, loginBody:
-        ValidateWithLoginBodyEntity
+        apiKey: String,
+        loginBody: ValidateWithLoginBodyEntity
     ): Completable
 
     fun createSession(

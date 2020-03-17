@@ -25,23 +25,23 @@ class UserToLoginAuthenticator(
             "com.lockwood.themoviedb.login.presentation.ui.LoginActivity"
     }
 
-    private val isTokenEmpty: Boolean
+    private val isValidToken: Boolean
         get() {
             val token = authenticationPreferences.fetchCurrentRequestToken()
-            return token.isEmpty()
+            return token.isNotEmpty()
         }
 
     private val isValidSessionId: Boolean
         get() {
             val sessionId = authenticationPreferences.fetchCurrentSessionId()
-            return sessionId > 0
+            return sessionId.isNotEmpty()
         }
 
     // В случае истечения срока request_token или session_id, необходимо открыть экран
     // авторизации для повторного получения токена
     @Synchronized
     override fun authenticate(route: Route?, response: Response): Request? {
-        if (!isTokenEmpty && isValidSessionId) {
+        if (isValidToken && isValidSessionId) {
             authenticationPreferences.resetCurrentRequestToken()
             authenticationPreferences.resetSessionId()
             userPreferences.setUserLoggedIn(false)
@@ -52,7 +52,6 @@ class UserToLoginAuthenticator(
         return null
     }
 
-    @Synchronized
     private fun openLoginActivity() {
         val intent = Intent().apply {
             setClassName(context.packageName, LOGIN_ACTIVITY_CLASS_NAME)

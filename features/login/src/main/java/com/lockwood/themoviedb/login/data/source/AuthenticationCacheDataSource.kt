@@ -23,7 +23,7 @@ class AuthenticationCacheDataSource @Inject constructor(
     override fun saveCurrentRequestToken(requestToken: String) =
         authenticationPreferences.saveCurrentRequestToken(requestToken)
 
-    override fun saveCurrentSessionId(sessionId: Int) =
+    override fun saveCurrentSessionId(sessionId: String) =
         authenticationPreferences.saveCurrentSessionId(sessionId)
 
     override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> =

@@ -36,7 +36,7 @@ class PreferencesApiModule {
 
     @Provides
     @SessionId
-    fun provideSessionId(authentication: AuthenticationPreferences): Int {
+    fun provideSessionId(authentication: AuthenticationPreferences): String {
         return authentication.fetchCurrentSessionId()
     }
 

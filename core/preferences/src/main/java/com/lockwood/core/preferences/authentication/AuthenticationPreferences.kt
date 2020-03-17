@@ -4,11 +4,11 @@ interface AuthenticationPreferences {
 
     fun fetchCurrentRequestToken(): String
 
-    fun fetchCurrentSessionId(): Int
+    fun fetchCurrentSessionId(): String
 
     fun saveCurrentRequestToken(value: String)
 
-    fun saveCurrentSessionId(value: Int)
+    fun saveCurrentSessionId(value: String)
 
     fun resetCurrentRequestToken()
 

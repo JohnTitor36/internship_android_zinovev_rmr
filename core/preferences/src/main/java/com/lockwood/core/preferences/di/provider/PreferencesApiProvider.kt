@@ -10,7 +10,7 @@ interface PreferencesApiProvider {
     fun provideRequestToken(): String
 
     @SessionId
-    fun provideSessionId(): Int
+    fun provideSessionId(): String
 
     fun provideAuthenticationPreferences(): AuthenticationPreferences
 

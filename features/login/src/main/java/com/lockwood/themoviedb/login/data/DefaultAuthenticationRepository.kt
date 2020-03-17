@@ -30,7 +30,7 @@ class DefaultAuthenticationRepository @Inject constructor(
         return authenticationCacheDataSource.fetchCurrentRequestToken()
     }
 
-    override fun fetchCurrentSessionId(): Int {
+    override fun fetchCurrentSessionId(): String {
         return authenticationCacheDataSource.fetchCurrentSessionId()
     }
 
@@ -38,7 +38,7 @@ class DefaultAuthenticationRepository @Inject constructor(
         return authenticationCacheDataSource.saveCurrentRequestToken(requestToken)
     }
 
-    override fun saveCurrentSessionId(sessionId: Int) {
+    override fun saveCurrentSessionId(sessionId: String) {
         return authenticationCacheDataSource.saveCurrentSessionId(sessionId)
     }
 

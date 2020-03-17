@@ -23,7 +23,7 @@ class AuthenticationRemoteDataSource @Inject constructor(
     override fun saveCurrentRequestToken(requestToken: String) =
         throw UnsupportedOperationException()
 
-    override fun saveCurrentSessionId(sessionId: Int) =
+    override fun saveCurrentSessionId(sessionId: String) =
         throw UnsupportedOperationException()
 
     override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> =

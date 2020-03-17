@@ -12,9 +12,13 @@ import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.schedulers.AndroidSchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
 import com.lockwood.themoviedb.login.R
+import com.lockwood.themoviedb.login.domain.model.CreateRequestTokenResponse
+import com.lockwood.themoviedb.login.domain.model.CreateSessionBody
+import com.lockwood.themoviedb.login.domain.model.CreateSessionResponse
 import com.lockwood.themoviedb.login.domain.model.ValidateWithLoginBody
 import com.lockwood.themoviedb.login.domain.repository.AuthenticationRepository
 import com.lockwood.themoviedb.login.utils.CredentialsLengthValidator
+import io.reactivex.Completable
 import javax.inject.Inject
 
 class LoginViewModel @Inject
@@ -51,6 +55,12 @@ constructor(
     private val password: String
         get() = passwordLiveData.value.orEmpty().trim()
 
+    private var requestToken: String
+        get() = authenticationRepository.fetchCurrentRequestToken()
+        set(value) {
+            authenticationRepository.saveCurrentRequestToken(value)
+        }
+
     fun setLogin(login: String) {
         loginLiveData.value = login
     }
@@ -65,10 +75,11 @@ constructor(
     }
 
     fun login() {
+        setIsLoading(true)
         if (context.isHasInternetConnection) {
-            setIsLoading(true)
-            val loginBody = ValidateWithLoginBody(login, password, "")
-            authenticationRepository.validateTokenWithLogin(apiKey, loginBody)
+            createRequestToken()
+                .andThen(validateRequestToken())
+                .andThen(createSession())
                 .schedulersIoToMain(schedulers)
                 .subscribe({
                     setIsLoading(false)
@@ -96,6 +107,30 @@ constructor(
         } else {
             noInternetConnectionEvent.invoke()
         }
+    }
+
+    private fun createRequestToken(): Completable {
+        return Completable.fromSingle(
+            authenticationRepository.createRequestToken(apiKey)
+                .doOnSuccess { response: CreateRequestTokenResponse ->
+                    requestToken = response.requestToken
+                }
+        )
+    }
+
+    private fun validateRequestToken(): Completable {
+        val loginBody = ValidateWithLoginBody(login, password, requestToken)
+        return authenticationRepository.validateTokenWithLogin(apiKey, loginBody)
+    }
+
+    private fun createSession(): Completable {
+        val createSessionBody = CreateSessionBody(requestToken)
+        return Completable.fromSingle(
+            authenticationRepository.createSession(apiKey, createSessionBody)
+                .doOnSuccess { response: CreateSessionResponse ->
+                    authenticationRepository.saveCurrentSessionId(response.sessionId)
+                }
+        )
     }
 
 }
