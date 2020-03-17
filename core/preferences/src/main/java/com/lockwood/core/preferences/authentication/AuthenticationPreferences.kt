@@ -1,13 +1,13 @@
 package com.lockwood.core.preferences.authentication
 
-interface AuthenticationCache {
+interface AuthenticationPreferences {
 
     fun fetchCurrentRequestToken(): String
 
     fun fetchCurrentSessionId(): Int
 
-    fun saveCurrentRequestToken(requestToken: String)
+    fun saveCurrentRequestToken(value: String)
 
-    fun saveCurrentSessionId(sessionId: Int)
+    fun saveCurrentSessionId(value: Int)
 
 }

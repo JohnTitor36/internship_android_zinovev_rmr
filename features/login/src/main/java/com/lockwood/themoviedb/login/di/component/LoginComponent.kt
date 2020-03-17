@@ -2,11 +2,9 @@ package com.lockwood.themoviedb.login.di.component
 
 import com.lockwood.core.di.component.BaseFragmentComponent
 import com.lockwood.core.di.provider.AppToolsProvider
-import com.lockwood.core.di.provider.ApplicationProvider
-import com.lockwood.core.di.provider.UiToolsProvider
 import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.core.network.di.provider.NetworkToolsProvider
-import com.lockwood.core.preferences.di.provider.PreferencesApiProvider
+import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import com.lockwood.themoviedb.login.di.module.LoginModule
 import com.lockwood.themoviedb.login.presentation.ui.LoginFragment
 import dagger.Component
@@ -15,7 +13,7 @@ import dagger.Component
     dependencies = [
         AppToolsProvider::class,
         NetworkToolsProvider::class,
-        PreferencesApiProvider::class
+        PreferencesToolsProvider::class
     ],
     modules = [
         LoginModule::class
@@ -31,7 +29,7 @@ interface LoginComponent : BaseFragmentComponent<LoginFragment> {
 
         fun networkToolsProvider(networkToolsProvider: NetworkToolsProvider): Builder
 
-        fun preferencesApiProvider(preferencesApiProvider: PreferencesApiProvider): Builder
+        fun preferencesToolsProvider(preferencesToolsProvider: PreferencesToolsProvider): Builder
 
         fun build(): LoginComponent
 

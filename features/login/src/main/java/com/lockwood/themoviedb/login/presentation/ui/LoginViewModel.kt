@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.Event
 import com.lockwood.core.extensions.invoke
 import com.lockwood.core.network.extensions.isHasInternetConnection
+import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.schedulers.AndroidSchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
 import com.lockwood.themoviedb.login.utils.CredentialsLengthValidator
@@ -13,6 +14,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject
 constructor(
     private val context: Context,
+    private val userPreferences: UserPreferences,
     private val schedulers: AndroidSchedulersProvider
 ) : BaseViewModel() {
 
@@ -60,7 +62,7 @@ constructor(
 //            .subscribe({
 //                setIsLoading(false)
 //                errorMessageLiveData.value = null
-//                // TODO: Поставить флаг, что пользователь вошел
+//                userPreferences.setUserLoggedIn(true)
 //                openNextActivityEvent.invoke()
 //            }, {
 //                setIsLoading(false)

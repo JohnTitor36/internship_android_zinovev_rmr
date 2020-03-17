@@ -65,7 +65,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             login_error_text_view.text = message
             login_error_text_view.isVisible = !message.isNullOrEmpty()
         })
-        // TODO: Заменить на пин код
+        // TODO: Заменить на переход к пин коду
         openNextActivityEvent.observe(lifecycleOwner, Observer {
             val intent = newIntent(requireContext(), MAIN_ACTIVITY_CLASS_NAME)
             startActivity(intent)
@@ -79,7 +79,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         DaggerLoginComponent.builder()
             .appToolsProvider(appToolsProvider)
             .networkToolsProvider(networkToolsProvider)
-            .preferencesApiProvider(preferencesToolsProvider)
+            .preferencesToolsProvider(preferencesToolsProvider)
             .build()
             .inject(this)
     }

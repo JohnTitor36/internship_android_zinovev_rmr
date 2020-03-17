@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.login.data.source
 
-import com.lockwood.core.preferences.authentication.AuthenticationCache
+import com.lockwood.core.preferences.authentication.AuthenticationPreferences
 import com.lockwood.themoviedb.login.data.model.CreateRequestTokenResponseEntity
 import com.lockwood.themoviedb.login.data.model.CreateSessionBodyEntity
 import com.lockwood.themoviedb.login.data.model.CreateSessionResponseEntity
@@ -11,20 +11,20 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class AuthenticationCacheDataSource @Inject constructor(
-    private val authenticationCache: AuthenticationCache
+    private val authenticationPreferences: AuthenticationPreferences
 ) : AuthenticationDataStore {
 
     override fun fetchCurrentRequestToken() =
-        authenticationCache.fetchCurrentRequestToken()
+        authenticationPreferences.fetchCurrentRequestToken()
 
     override fun fetchCurrentSessionId() =
-        authenticationCache.fetchCurrentSessionId()
+        authenticationPreferences.fetchCurrentSessionId()
 
     override fun saveCurrentRequestToken(requestToken: String) =
-        authenticationCache.saveCurrentRequestToken(requestToken)
+        authenticationPreferences.saveCurrentRequestToken(requestToken)
 
     override fun saveCurrentSessionId(sessionId: Int) =
-        authenticationCache.saveCurrentSessionId(sessionId)
+        authenticationPreferences.saveCurrentSessionId(sessionId)
 
     override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> =
         throw UnsupportedOperationException()
