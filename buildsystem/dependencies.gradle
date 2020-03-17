@@ -20,6 +20,7 @@ versions.rxAndroid = "2.1.1"
 versions.dagger = "2.27"
 versions.assistedInject = "0.5.2"
 versions.retrofit2 = "2.7.2"
+versions.loggingInterceptor = "4.4.0"
 versions.room = "2.2.4"
 versions.timber = "4.7.1"
 versions.moshi = "1.9.2"
@@ -63,6 +64,7 @@ deps.kotlin = kotlin
 
 def network = [:]
 network.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+network.logging = "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor"
 network.moshi = "com.squareup.moshi:moshi:$versions.moshi"
 network.moshicodegen = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
 deps.network = network
