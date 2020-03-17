@@ -11,6 +11,7 @@ import com.lockwood.core.network.extensions.isHasInternetConnection
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.schedulers.AndroidSchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
+import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.domain.model.ValidateWithLoginBody
 import com.lockwood.themoviedb.login.domain.repository.AuthenticationRepository
 import com.lockwood.themoviedb.login.utils.CredentialsLengthValidator
@@ -79,7 +80,17 @@ constructor(
                     if (throwable is NoInternetConnectionException) {
                         noInternetConnectionEvent.invoke()
                     } else {
-                        errorMessageLiveData.value = throwable.message
+                        val message = throwable.message!!
+                        val engInvalidCredentials =
+                            context.getString(R.string.title_eng_invalid_username_or_password)
+                        val ruInvalidCredentials =
+                            context.getString(R.string.title_invalid_username_or_password)
+                        errorMessageLiveData.value =
+                            if (message.contains(Regex(engInvalidCredentials))) {
+                                ruInvalidCredentials
+                            } else {
+                                message
+                            }
                     }
                 }).autoDispose()
         } else {

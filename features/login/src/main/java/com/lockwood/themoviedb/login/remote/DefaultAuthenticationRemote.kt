@@ -10,6 +10,7 @@ import com.lockwood.themoviedb.login.remote.mapper.CreateRequestTokenResponseEnt
 import com.lockwood.themoviedb.login.remote.mapper.CreateSessionBodyEntityMapper
 import com.lockwood.themoviedb.login.remote.mapper.CreateSessionResponseEntityMapper
 import com.lockwood.themoviedb.login.remote.mapper.ValidateWithLoginBodyEntityMapper
+import com.squareup.moshi.Moshi
 import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.Retrofit
@@ -17,6 +18,7 @@ import javax.inject.Inject
 
 @FeatureScope
 class DefaultAuthenticationRemote @Inject constructor(
+    private val moshi: Moshi,
     private val retrofit: Retrofit,
     private val createRequestTokenResponseEntityMapper: CreateRequestTokenResponseEntityMapper,
     private val createSessionResponseEntityMapper: CreateSessionResponseEntityMapper,

@@ -32,7 +32,7 @@ class NetworkModule {
 
         private const val LOG_TAG_OK_HTTP = "OkHttp"
 
-        private const val DEF_TIMEOUT_SECONDS = 40L
+        private const val DEF_TIMEOUT_SECONDS = 30L
     }
 
     // Ловим 401 через Authenticator
@@ -41,17 +41,18 @@ class NetworkModule {
     fun provideTokenAuthenticator(
         context: Context,
         authenticationPreferences: AuthenticationPreferences,
-        userPreferences: UserPreferences
+        userPreferences: UserPreferences,
+        moshi: Moshi
     ): Authenticator {
-        return UserToLoginAuthenticator(context, authenticationPreferences, userPreferences)
+        return UserToLoginAuthenticator(context, authenticationPreferences, userPreferences, moshi)
     }
 
     // Ловим остальные сетевые ошибки через отдельный Interceptor
     @Provides
     @Singleton
     @ErrorInterceptor
-    fun provideErrorInterceptor(context: Context): Interceptor {
-        return OkHttpErrorInterceptor(context)
+    fun provideErrorInterceptor(context: Context, moshi: Moshi): Interceptor {
+        return OkHttpErrorInterceptor(context, moshi)
     }
 
     @Provides
