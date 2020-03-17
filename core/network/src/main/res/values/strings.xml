@@ -1,3 +1,4 @@
 <resources>
+    <string name="title_no_network">Нет подключение к интернету</string>
     <string name="title_check_network_connection">Проверьте подключение к интернету</string>
 </resources>
