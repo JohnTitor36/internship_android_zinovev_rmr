@@ -10,6 +10,7 @@ import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.extensions.newIntent
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
+import com.lockwood.core.snackbar.SnackbarMaker
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
@@ -19,8 +20,16 @@ import javax.inject.Provider
 
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
+    companion object {
+
+        private const val MAIN_ACTIVITY_CLASS_NAME = ".presentation.ui.MainActivity"
+    }
+
     @Inject
     lateinit var viewModelFactory: Provider<LoginViewModel>
+
+    @Inject
+    lateinit var snackbarMaker: SnackbarMaker
 
     private lateinit var viewModel: LoginViewModel
 
@@ -61,20 +70,18 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             val intent = newIntent(requireContext(), MAIN_ACTIVITY_CLASS_NAME)
             startActivity(intent)
         })
+        noInternetConnectionEvent.observe(lifecycleOwner, Observer {
+            snackbarMaker.snackbar(sign_in_button, getString(R.string.title_check_network_connection))
+        })
     }
 
     private fun inject() {
         DaggerLoginComponent.builder()
-            .applicationProvider(appToolsProvider)
+            .appToolsProvider(appToolsProvider)
             .networkToolsProvider(networkToolsProvider)
             .preferencesApiProvider(preferencesToolsProvider)
             .build()
             .inject(this)
-    }
-
-    companion object {
-
-        private const val MAIN_ACTIVITY_CLASS_NAME = ".presentation.ui.MainActivity"
     }
 
 }

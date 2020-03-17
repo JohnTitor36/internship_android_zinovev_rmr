@@ -1,5 +1,6 @@
 package com.lockwood.themoviedb.login.remote
 
+import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.themoviedb.login.data.model.CreateRequestTokenResponseEntity
 import com.lockwood.themoviedb.login.data.model.CreateSessionBodyEntity
 import com.lockwood.themoviedb.login.data.model.CreateSessionResponseEntity
@@ -13,6 +14,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
+@FeatureScope
 class DefaultAuthenticationRemote @Inject constructor(
     private val authenticationService: AuthenticationService,
     private val createRequestTokenResponseEntityMapper: CreateRequestTokenResponseEntityMapper,

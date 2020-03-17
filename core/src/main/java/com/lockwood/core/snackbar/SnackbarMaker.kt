@@ -15,8 +15,6 @@ constructor(
     private val context: Context
 ) {
 
-    private var currentSnackbar: Snackbar? = null
-
     fun snackbar(
         view: View,
         text: String,

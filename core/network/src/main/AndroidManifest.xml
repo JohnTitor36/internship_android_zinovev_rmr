@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lockwood.themoviedb.core.network">
+    package="com.lockwood.core.network">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

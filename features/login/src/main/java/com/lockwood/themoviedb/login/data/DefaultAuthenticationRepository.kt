@@ -1,5 +1,6 @@
 package com.lockwood.themoviedb.login.data
 
+import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.themoviedb.login.data.mapper.CreateRequestTokenResponseMapper
 import com.lockwood.themoviedb.login.data.mapper.CreateSessionBodyMapper
 import com.lockwood.themoviedb.login.data.mapper.CreateSessionResponseMapper
@@ -15,6 +16,7 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
+@FeatureScope
 class DefaultAuthenticationRepository @Inject constructor(
     private val authenticationCacheDataSource: AuthenticationCacheDataSource,
     private val authenticationRemoteDataSource: AuthenticationRemoteDataSource,
