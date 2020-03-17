@@ -44,9 +44,11 @@ dependencies {
             deps.kotlin.stdlib,
             deps.android.appcompat,
             deps.network.retrofit2,
+            deps.network.logging,
             deps.network.moshi,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
+            deps.tools.timber,
             deps.dagger.dagger
     )
 
