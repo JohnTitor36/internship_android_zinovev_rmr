@@ -1,8 +1,8 @@
 package com.lockwood.core.preferences.di.component
 
 import com.lockwood.core.preferences.di.DaggerPreferencesApplication
-import com.lockwood.core.preferences.di.module.PreferencesApiModule
 import com.lockwood.core.preferences.di.module.ContextModule
+import com.lockwood.core.preferences.di.module.PreferencesApiModule
 import com.lockwood.core.preferences.di.module.PreferencesModule
 import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import dagger.BindsInstance

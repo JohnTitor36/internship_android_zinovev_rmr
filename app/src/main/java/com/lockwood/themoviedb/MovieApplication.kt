@@ -2,15 +2,15 @@ package com.lockwood.themoviedb
 
 import android.app.Application
 import android.content.Context
-import com.lockwood.core.preferences.di.DaggerPreferencesApplication
-import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import com.lockwood.core.di.DaggerApplication
 import com.lockwood.core.di.component.DaggerCoreComponent
 import com.lockwood.core.di.provider.AppToolsProvider
 import com.lockwood.core.network.di.DaggerNetworkApplication
 import com.lockwood.core.network.di.component.DaggerNetworkComponent
 import com.lockwood.core.network.di.provider.NetworkToolsProvider
+import com.lockwood.core.preferences.di.DaggerPreferencesApplication
 import com.lockwood.core.preferences.di.component.DaggerPreferencesComponent
+import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import timber.log.Timber
 
 class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplication,

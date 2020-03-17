@@ -84,11 +84,10 @@ constructor(
         setIsLoading(true)
         if (context.isHasInternetConnection) {
             createRequestToken().schedulersIoToMain(schedulers)
-                .subscribe({
-                    createSessionWithToken()
-                }, {
-                    handleFailedLogin(it)
-                })
+                .subscribe(
+                    { createSessionWithToken() },
+                    { handleFailedLogin(it) }
+                )
                 .autoDispose()
         } else {
             noInternetConnectionEvent.invoke()
