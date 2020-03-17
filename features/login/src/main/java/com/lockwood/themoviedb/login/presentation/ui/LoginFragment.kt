@@ -6,10 +6,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import com.lockwood.core.cache.extensions.cacheToolsProvider
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.extensions.newIntent
 import com.lockwood.core.network.extensions.networkToolsProvider
+import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
@@ -67,7 +67,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         DaggerLoginComponent.builder()
             .applicationProvider(appToolsProvider)
             .networkToolsProvider(networkToolsProvider)
-            .cacheToolsProvider(cacheToolsProvider)
+            .preferencesApiProvider(preferencesToolsProvider)
             .build()
             .inject(this)
     }

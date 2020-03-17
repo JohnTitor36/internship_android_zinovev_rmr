@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.login.data.source
 
-import com.lockwood.core.cache.authentication.AuthenticationCache
+import com.lockwood.core.preferences.authentication.AuthenticationCache
 import com.lockwood.themoviedb.login.data.model.CreateRequestTokenResponseEntity
 import com.lockwood.themoviedb.login.data.model.CreateSessionBodyEntity
 import com.lockwood.themoviedb.login.data.model.CreateSessionResponseEntity

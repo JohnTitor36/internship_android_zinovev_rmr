@@ -1,7 +1,0 @@
-package com.lockwood.core.cache.di.qualifier
-
-import javax.inject.Qualifier
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class Preferences

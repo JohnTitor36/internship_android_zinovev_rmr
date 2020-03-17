@@ -2,19 +2,19 @@ package com.lockwood.themoviedb
 
 import android.app.Application
 import android.content.Context
-import com.lockwood.core.cache.di.DaggerCacheApplication
-import com.lockwood.core.cache.di.component.DaggerCacheComponent
-import com.lockwood.core.cache.di.provider.CacheToolsProvider
+import com.lockwood.core.preferences.di.DaggerPreferencesApplication
+import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import com.lockwood.core.di.DaggerApplication
 import com.lockwood.core.di.component.DaggerCoreComponent
 import com.lockwood.core.di.provider.AppToolsProvider
 import com.lockwood.core.network.di.DaggerNetworkApplication
 import com.lockwood.core.network.di.component.DaggerNetworkComponent
 import com.lockwood.core.network.di.provider.NetworkToolsProvider
+import com.lockwood.core.preferences.di.component.DaggerPreferencesComponent
 import timber.log.Timber
 
 class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplication,
-    DaggerCacheApplication {
+    DaggerPreferencesApplication {
 
     companion object {
 
@@ -27,8 +27,8 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
             (context.applicationContext as MovieApplication).networkComponent
 
         @JvmStatic
-        fun cacheComponent(context: Context) =
-            (context.applicationContext as MovieApplication).cacheComponent
+        fun preferencesComponent(context: Context) =
+            (context.applicationContext as MovieApplication).preferencesComponent
 
     }
 
@@ -44,8 +44,8 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
             .build()
     }
 
-    private val cacheComponent: CacheToolsProvider by lazy {
-        DaggerCacheComponent.builder()
+    private val preferencesComponent: PreferencesToolsProvider by lazy {
+        DaggerPreferencesComponent.builder()
             .application(this)
             .build()
     }
@@ -67,8 +67,8 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
         return networkComponent(this)
     }
 
-    override fun getCacheToolsProvider(): CacheToolsProvider {
-        return cacheComponent(this)
+    override fun getPreferencesToolsProvider(): PreferencesToolsProvider {
+        return preferencesComponent(this)
     }
 
 }
