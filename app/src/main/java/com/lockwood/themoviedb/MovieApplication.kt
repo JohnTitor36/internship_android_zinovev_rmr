@@ -23,12 +23,12 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
             (context.applicationContext as MovieApplication).coreComponent
 
         @JvmStatic
-        fun networkComponent(context: Context) =
-            (context.applicationContext as MovieApplication).networkComponent
-
-        @JvmStatic
         fun preferencesComponent(context: Context) =
             (context.applicationContext as MovieApplication).preferencesComponent
+
+        @JvmStatic
+        fun networkComponent(context: Context) =
+            (context.applicationContext as MovieApplication).networkComponent
 
     }
 
@@ -38,15 +38,16 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
             .build()
     }
 
-    private val networkComponent: NetworkToolsProvider by lazy {
-        DaggerNetworkComponent.builder()
+    private val preferencesComponent: PreferencesToolsProvider by lazy {
+        DaggerPreferencesComponent.builder()
             .application(this)
             .build()
     }
 
-    private val preferencesComponent: PreferencesToolsProvider by lazy {
-        DaggerPreferencesComponent.builder()
+    private val networkComponent: NetworkToolsProvider by lazy {
+        DaggerNetworkComponent.builder()
             .application(this)
+            .preferencesToolsProvider(preferencesComponent)
             .build()
     }
 

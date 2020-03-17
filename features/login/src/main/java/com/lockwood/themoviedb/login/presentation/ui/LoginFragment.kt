@@ -50,36 +50,60 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private fun addViewListeners() {
         login_edit_text.addTextChangedListener { viewModel.setLogin(it.toString()) }
         password_edit_text.addTextChangedListener { viewModel.setPassword(it.toString()) }
-        sign_in_button.setOnClickListener { viewModel.login() }
+        sign_in_button.setOnClickListener {
+            hideKeyboard()
+            viewModel.login()
+        }
     }
 
     private fun observeLiveDataChanges() = with(viewModel) {
         val lifecycleOwner = viewLifecycleOwner
+
         val validLengthObserver = Observer<String> { checkIsValidCredentialsLength() }
         loginLiveData.observe(lifecycleOwner, validLengthObserver)
         passwordLiveData.observe(lifecycleOwner, validLengthObserver)
         isCredentialsLengthValid.observe(lifecycleOwner, Observer { isValidLength ->
             sign_in_button.isEnabled = isValidLength
         })
+
+        isLoadingLiveData.observe(lifecycleOwner, Observer { isLoading ->
+            val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
+            if (isLoading) {
+                loginProgressBar.isVisible = true
+                rootView.isVisible = false
+            } else {
+                loginProgressBar.isVisible = false
+                rootView.isVisible = true
+            }
+        })
+
         errorMessageLiveData.observe(lifecycleOwner, Observer { message ->
             login_error_text_view.text = message
             login_error_text_view.isVisible = !message.isNullOrEmpty()
         })
+
         // TODO: Заменить на переход к пин коду
         openNextActivityEvent.observe(lifecycleOwner, Observer {
-            val intent = newIntent(requireContext(), MAIN_ACTIVITY_CLASS_NAME)
+            val intent = newIntent(
+                requireContext(),
+                MAIN_ACTIVITY_CLASS_NAME
+            )
             startActivity(intent)
         })
+
         noInternetConnectionEvent.observe(lifecycleOwner, Observer {
-            snackbarMaker.snackbar(sign_in_button, getString(R.string.title_check_network_connection))
+            snackbarMaker.snackbar(
+                sign_in_button,
+                getString(R.string.title_check_network_connection)
+            )
         })
     }
 
     private fun inject() {
         DaggerLoginComponent.builder()
             .appToolsProvider(appToolsProvider)
-            .networkToolsProvider(networkToolsProvider)
             .preferencesToolsProvider(preferencesToolsProvider)
+            .networkToolsProvider(networkToolsProvider)
             .build()
             .inject(this)
     }

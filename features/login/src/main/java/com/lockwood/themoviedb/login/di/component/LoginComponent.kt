@@ -27,9 +27,9 @@ interface LoginComponent : BaseFragmentComponent<LoginFragment> {
 
         fun appToolsProvider(appToolsProvider: AppToolsProvider): Builder
 
-        fun networkToolsProvider(networkToolsProvider: NetworkToolsProvider): Builder
-
         fun preferencesToolsProvider(preferencesToolsProvider: PreferencesToolsProvider): Builder
+
+        fun networkToolsProvider(networkToolsProvider: NetworkToolsProvider): Builder
 
         fun build(): LoginComponent
 

@@ -9,6 +9,8 @@ import com.lockwood.core.network.di.qualifier.HeaderInterceptor
 import com.lockwood.core.network.di.qualifier.LoggingInterceptor
 import com.lockwood.core.network.interceptor.OkHttpErrorInterceptor
 import com.lockwood.core.network.interceptor.OkHttpHeaderInterceptor
+import com.lockwood.core.preferences.authentication.AuthenticationPreferences
+import com.lockwood.core.preferences.user.UserPreferences
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -36,8 +38,12 @@ class NetworkModule {
     // Ловим 401 через Authenticator
     @Provides
     @Singleton
-    fun provideTokenAuthenticator(context: Context): Authenticator {
-        return UserToLoginAuthenticator(context)
+    fun provideTokenAuthenticator(
+        context: Context,
+        authenticationPreferences: AuthenticationPreferences,
+        userPreferences: UserPreferences
+    ): Authenticator {
+        return UserToLoginAuthenticator(context, authenticationPreferences, userPreferences)
     }
 
     // Ловим остальные сетевые ошибки через отдельный Interceptor

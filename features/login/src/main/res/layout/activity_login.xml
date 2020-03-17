@@ -17,4 +17,13 @@
         android:layout_marginBottom="@dimen/margin_regular"
         tools:layout="@layout/fragment_login" />
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/login_progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:theme="@style/AppTheme"
+        android:visibility="gone" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

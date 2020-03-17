@@ -2,13 +2,17 @@ package com.lockwood.core.network.authenticator
 
 import android.content.Context
 import android.content.Intent
+import com.lockwood.core.preferences.authentication.AuthenticationPreferences
+import com.lockwood.core.preferences.user.UserPreferences
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
 
 class UserToLoginAuthenticator(
-    private val context: Context
+    private val context: Context,
+    private val authenticationPreferences: AuthenticationPreferences,
+    private val userPreferences: UserPreferences
 ) : Authenticator {
 
     companion object {
@@ -17,11 +21,20 @@ class UserToLoginAuthenticator(
             "com.lockwood.themoviedb.login.presentation.ui.LoginActivity"
     }
 
+    private val isTokenEmpty: Boolean
+        get() {
+            val token = authenticationPreferences.fetchCurrentRequestToken()
+            return token.isEmpty()
+        }
+
     // В случае истечения срока request_token или session_id, необходимо открыть экран
     // авторизации для повторного получения токена
     @Synchronized
     override fun authenticate(route: Route?, response: Response): Request? {
-        openLoginActivity()
+        if (!isTokenEmpty) {
+            userPreferences.setUserLoggedIn(false)
+            openLoginActivity()
+        }
         return null
     }
 

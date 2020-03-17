@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
-    private lateinit var rootView: View
+    protected lateinit var rootView: View
 
     abstract val hasOptionMenu: Boolean
 

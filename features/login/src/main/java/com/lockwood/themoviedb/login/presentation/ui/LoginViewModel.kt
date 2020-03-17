@@ -4,16 +4,23 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.Event
 import com.lockwood.core.extensions.invoke
+import com.lockwood.core.extensions.schedulersIoToMain
+import com.lockwood.core.network.di.qualifier.ApiKey
+import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.extensions.isHasInternetConnection
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.schedulers.AndroidSchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
+import com.lockwood.themoviedb.login.domain.model.ValidateWithLoginBody
+import com.lockwood.themoviedb.login.domain.repository.AuthenticationRepository
 import com.lockwood.themoviedb.login.utils.CredentialsLengthValidator
 import javax.inject.Inject
 
 class LoginViewModel @Inject
 constructor(
+    @ApiKey private val apiKey: String,
     private val context: Context,
+    private val authenticationRepository: AuthenticationRepository,
     private val userPreferences: UserPreferences,
     private val schedulers: AndroidSchedulersProvider
 ) : BaseViewModel() {
@@ -56,25 +63,28 @@ constructor(
         isCredentialsLengthValid.value = isValidLength
     }
 
-    fun login() = if (context.isHasInternetConnection) {
-//        authRepository.authUser(CredentialsUi(login, password))
-//            .schedulersIoToMain(schedulers)
-//            .subscribe({
-//                setIsLoading(false)
-//                errorMessageLiveData.value = null
-//                userPreferences.setUserLoggedIn(true)
-//                openNextActivityEvent.invoke()
-//            }, {
-//        setIsLoading(false)
-//        if (this is NoNetworkExpceotion) {
-//                 noInternetConnectionEvent.invoke()
-//    } else {
-//
-//                errorMessageLiveData.value = it.message
-//    }
-//            }).autoDispose()
-    } else {
-        noInternetConnectionEvent.invoke()
+    fun login() {
+        if (context.isHasInternetConnection) {
+            setIsLoading(true)
+            val loginBody = ValidateWithLoginBody(login, password, "")
+            authenticationRepository.validateTokenWithLogin(apiKey, loginBody)
+                .schedulersIoToMain(schedulers)
+                .subscribe({
+                    setIsLoading(false)
+                    errorMessageLiveData.value = null
+                    userPreferences.setUserLoggedIn(true)
+                    openNextActivityEvent.invoke()
+                }, { throwable ->
+                    setIsLoading(false)
+                    if (throwable is NoInternetConnectionException) {
+                        noInternetConnectionEvent.invoke()
+                    } else {
+                        errorMessageLiveData.value = throwable.message
+                    }
+                }).autoDispose()
+        } else {
+            noInternetConnectionEvent.invoke()
+        }
     }
 
 }
