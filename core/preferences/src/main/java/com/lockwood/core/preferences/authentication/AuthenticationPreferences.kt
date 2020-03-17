@@ -10,4 +10,8 @@ interface AuthenticationPreferences {
 
     fun saveCurrentSessionId(value: Int)
 
+    fun resetCurrentRequestToken()
+
+    fun resetSessionId()
+
 }

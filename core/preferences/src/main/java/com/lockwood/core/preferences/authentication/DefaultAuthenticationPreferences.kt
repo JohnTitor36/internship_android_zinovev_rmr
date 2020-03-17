@@ -3,7 +3,8 @@ package com.lockwood.core.preferences.authentication
 import android.content.SharedPreferences
 import com.lockwood.core.preferences.extensions.DelegatesExt
 
-class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) : AuthenticationPreferences {
+class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) :
+    AuthenticationPreferences {
 
     companion object {
 
@@ -41,5 +42,9 @@ class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) : A
     override fun saveCurrentSessionId(value: Int) {
         sessionId = value
     }
+
+    override fun resetCurrentRequestToken() = saveCurrentRequestToken(DEF_REQUEST_TOKEN)
+
+    override fun resetSessionId() = saveCurrentSessionId(DEF_SESSION_ID)
 
 }

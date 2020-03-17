@@ -31,11 +31,19 @@ class UserToLoginAuthenticator(
             return token.isEmpty()
         }
 
+    private val isValidSessionId: Boolean
+        get() {
+            val sessionId = authenticationPreferences.fetchCurrentSessionId()
+            return sessionId > 0
+        }
+
     // В случае истечения срока request_token или session_id, необходимо открыть экран
     // авторизации для повторного получения токена
     @Synchronized
     override fun authenticate(route: Route?, response: Response): Request? {
-        if (!isTokenEmpty) {
+        if (!isTokenEmpty && isValidSessionId) {
+            authenticationPreferences.resetCurrentRequestToken()
+            authenticationPreferences.resetSessionId()
             userPreferences.setUserLoggedIn(false)
             openLoginActivity()
         } else {
