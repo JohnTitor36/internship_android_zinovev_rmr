@@ -75,7 +75,8 @@ class NetworkModule {
         })
         // Чтобы быть уверенными, что утечки чувствительных данных не будет
         if (BuildConfig.DEBUG) {
-            logging.level = HttpLoggingInterceptor.Level.BASIC
+//            logging.level = HttpLoggingInterceptor.Level.BASIC
+            logging.level = HttpLoggingInterceptor.Level.BODY
         }
         return logging
     }
@@ -118,9 +119,9 @@ class NetworkModule {
         authenticator: Authenticator
     ): OkHttpClient {
         return okHttpClient.authenticator(authenticator)
-            .addNetworkInterceptor(headerInterceptor)
-            .addNetworkInterceptor(loggingInterceptor)
-            .addNetworkInterceptor(errorInterceptor).build()
+            .addInterceptor(headerInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(errorInterceptor).build()
     }
 
     @Provides
@@ -134,9 +135,9 @@ class NetworkModule {
         @ToLoginAuthenticator authenticator: Authenticator
     ): OkHttpClient {
         return okHttpClient.authenticator(authenticator)
-            .addNetworkInterceptor(headerInterceptor)
-            .addNetworkInterceptor(loggingInterceptor)
-            .addNetworkInterceptor(errorInterceptor).build()
+            .addInterceptor(headerInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(errorInterceptor).build()
     }
 
     @Provides

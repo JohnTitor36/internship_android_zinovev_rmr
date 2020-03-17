@@ -61,6 +61,12 @@ constructor(
             authenticationRepository.saveCurrentRequestToken(value)
         }
 
+    private var sessionId: String
+        get() = authenticationRepository.fetchCurrentSessionId()
+        set(value) {
+            authenticationRepository.saveCurrentSessionId(value)
+        }
+
     fun setLogin(login: String) {
         loginLiveData.value = login
     }
@@ -77,36 +83,27 @@ constructor(
     fun login() {
         setIsLoading(true)
         if (context.isHasInternetConnection) {
-            createRequestToken()
-                .andThen(validateRequestToken())
-                .andThen(createSession())
-                .schedulersIoToMain(schedulers)
+            createRequestToken().schedulersIoToMain(schedulers)
                 .subscribe({
-                    setIsLoading(false)
-                    errorMessageLiveData.value = null
-                    userPreferences.setUserLoggedIn(true)
-                    openNextActivityEvent.invoke()
-                }, { throwable ->
-                    setIsLoading(false)
-                    if (throwable is NoInternetConnectionException) {
-                        noInternetConnectionEvent.invoke()
-                    } else {
-                        val message = throwable.message!!
-                        val engInvalidCredentials =
-                            context.getString(R.string.title_eng_invalid_username_or_password)
-                        val ruInvalidCredentials =
-                            context.getString(R.string.title_invalid_username_or_password)
-                        errorMessageLiveData.value =
-                            if (message.contains(Regex(engInvalidCredentials))) {
-                                ruInvalidCredentials
-                            } else {
-                                message
-                            }
-                    }
-                }).autoDispose()
+                    createSessionWithToken()
+                }, {
+                    handleFailedLogin(it)
+                })
+                .autoDispose()
         } else {
             noInternetConnectionEvent.invoke()
         }
+    }
+
+    private fun createSessionWithToken() {
+        validateRequestToken()
+            .andThen(createSession())
+            .schedulersIoToMain(schedulers)
+            .subscribe(
+                { handleSuccessLogin() },
+                { handleFailedLogin(it) }
+            )
+            .autoDispose()
     }
 
     private fun createRequestToken(): Completable {
@@ -128,9 +125,35 @@ constructor(
         return Completable.fromSingle(
             authenticationRepository.createSession(apiKey, createSessionBody)
                 .doOnSuccess { response: CreateSessionResponse ->
-                    authenticationRepository.saveCurrentSessionId(response.sessionId)
+                    sessionId = response.sessionId
                 }
         )
+    }
+
+    private fun handleSuccessLogin() {
+        setIsLoading(false)
+        errorMessageLiveData.value = null
+        userPreferences.setUserLoggedIn(true)
+        openNextActivityEvent.invoke()
+    }
+
+    private fun handleFailedLogin(throwable: Throwable) {
+        setIsLoading(false)
+        if (throwable is NoInternetConnectionException) {
+            noInternetConnectionEvent.invoke()
+        } else {
+            val message = throwable.message!!
+            val engInvalidCredentials =
+                context.getString(R.string.title_eng_invalid_username_or_password)
+            val ruInvalidCredentials =
+                context.getString(R.string.title_invalid_username_or_password)
+            errorMessageLiveData.value =
+                if (message.contains(Regex(engInvalidCredentials))) {
+                    ruInvalidCredentials
+                } else {
+                    message
+                }
+        }
     }
 
 }
