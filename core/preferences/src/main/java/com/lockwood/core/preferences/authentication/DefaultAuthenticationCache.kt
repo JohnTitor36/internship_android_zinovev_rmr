@@ -9,6 +9,12 @@ class DefaultAuthenticationCache @Inject constructor(
     @EncryptedPreferences sharedPreferences: SharedPreferences
 ) : AuthenticationCache {
 
+    companion object {
+
+        private const val REQUEST_TOKEN_PREF_NAME = "com.lockwood.themoviedb.login.requestToken"
+        private const val SESSION_ID_PREF_NAME = "com.lockwood.themoviedb.login.sessionId"
+    }
+
     private var requestToken by DelegatesExt.preference(
         sharedPreferences,
         REQUEST_TOKEN_PREF_NAME,
@@ -35,12 +41,6 @@ class DefaultAuthenticationCache @Inject constructor(
 
     override fun saveCurrentSessionId(sessionId: Int) {
         this.sessionId = sessionId
-    }
-
-    companion object {
-
-        private const val REQUEST_TOKEN_PREF_NAME = "com.lockwood.themoviedb.login.requestToken"
-        private const val SESSION_ID_PREF_NAME = "com.lockwood.themoviedb.login.sessionId"
     }
 
 }

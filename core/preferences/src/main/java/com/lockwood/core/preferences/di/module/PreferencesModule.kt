@@ -14,6 +14,11 @@ import javax.inject.Singleton
 @Module
 class PreferencesModule {
 
+    companion object {
+
+        private const val PREF_FILE_NAME = "com.lockwood.themoviedb.Preferences"
+    }
+
     @Provides
     @Singleton
     @Preferences
@@ -43,11 +48,6 @@ class PreferencesModule {
             // API < 23
             context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE)
         }
-    }
-
-    companion object {
-
-        private const val PREF_FILE_NAME = "com.lockwood.themoviedb.Preferences"
     }
 
 }
