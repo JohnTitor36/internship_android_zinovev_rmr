@@ -65,8 +65,13 @@ constructor(
 //                userPreferences.setUserLoggedIn(true)
 //                openNextActivityEvent.invoke()
 //            }, {
-//                setIsLoading(false)
+//        setIsLoading(false)
+//        if (this is NoNetworkExpceotion) {
+//                 noInternetConnectionEvent.invoke()
+//    } else {
+//
 //                errorMessageLiveData.value = it.message
+//    }
 //            }).autoDispose()
     } else {
         noInternetConnectionEvent.invoke()

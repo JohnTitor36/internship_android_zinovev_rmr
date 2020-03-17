@@ -24,6 +24,8 @@ versions.loggingInterceptor = "4.4.0"
 versions.room = "2.2.4"
 versions.timber = "4.7.1"
 versions.moshi = "1.9.2"
+versions.moshiConverter = "2.4.0"
+versions.rxConverter = "2.7.2"
 
 def testVersions = [:]
 testVersions.junit = "4.12"
@@ -64,9 +66,11 @@ deps.kotlin = kotlin
 
 def network = [:]
 network.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
+network.rxconverter = "com.squareup.retrofit2:adapter-rxjava2:$versions.rxConverter"
 network.logging = "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor"
 network.moshi = "com.squareup.moshi:moshi:$versions.moshi"
 network.moshicodegen = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
+network.moshiconverter = "com.squareup.retrofit2:converter-moshi:$versions.moshiConverter"
 deps.network = network
 
 def room = [:]

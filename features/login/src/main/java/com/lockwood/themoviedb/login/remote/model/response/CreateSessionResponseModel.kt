@@ -2,8 +2,10 @@ package com.lockwood.themoviedb.login.remote.model.response
 
 import com.squareup.moshi.Json
 import androidx.annotation.Keep
+import com.squareup.moshi.JsonClass
 
 @Keep
+@JsonClass(generateAdapter = true)
 data class CreateSessionResponseModel(
     @Json(name = "success")
     val success: Boolean, // true

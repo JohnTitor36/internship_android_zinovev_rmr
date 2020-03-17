@@ -46,6 +46,8 @@ dependencies {
             deps.network.retrofit2,
             deps.network.logging,
             deps.network.moshi,
+            deps.network.moshiconverter,
+            deps.network.rxconverter,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.tools.timber,

@@ -3,8 +3,10 @@ package com.lockwood.themoviedb.login.remote.model.body
 import androidx.annotation.Keep
 import com.lockwood.core.network.common.JsonConstants
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 @Keep
+@JsonClass(generateAdapter = true)
 data class ValidateWithLoginBodyModel(
     @Json(name = "username")
     val username: String, // johnny_appleseed
