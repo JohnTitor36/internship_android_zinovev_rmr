@@ -72,20 +72,20 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideBaseMoshi(): Moshi.Builder {
+    fun provideMoshiBuilder(): Moshi.Builder {
         return Moshi.Builder()
     }
 
     @Provides
     @Singleton
-    fun provideBaseMoshi(
+    fun provideMoshi(
         moshi: Moshi.Builder
     ): Moshi {
         return moshi.build()
     }
 
     @Provides
-    fun provideBaseOkHttpClient(): OkHttpClient.Builder {
+    fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
         return OkHttpClient().newBuilder()
             .connectTimeout(DEF_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(DEF_TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -94,7 +94,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideBaseOkHttpClient(
+    fun provideOkHttpClient(
         okHttpClient: OkHttpClient.Builder,
         @HeaderInterceptor headerInterceptor: Interceptor,
         @LoggingInterceptor loggingInterceptor: Interceptor,
@@ -108,7 +108,7 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideBaseRetrofit(
+    fun provideRetrofit(
         @BaseUrl baseUrl: String,
         okHttpClient: OkHttpClient,
         moshi: Moshi
