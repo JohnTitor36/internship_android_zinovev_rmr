@@ -9,9 +9,9 @@ class StatusMessageException(
 ) : Exception() {
 
     override val cause: Throwable
-        get() = Throwable(context.getString(R.string.title_no_network))
+        get() = Throwable(context.getString(R.string.title_status_exception_cause))
 
     override val message: String
-        get() = context.getString(R.string.title_check_network_connection)
+        get() = statusMessage
 
 }

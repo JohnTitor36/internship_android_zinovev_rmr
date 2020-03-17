@@ -14,7 +14,7 @@ class OkHttpErrorInterceptor(
 
     private val Response.statusMessage: String
         get() {
-            return "statusMessage"
+            return message
         }
 
     override fun intercept(chain: Interceptor.Chain): Response {
