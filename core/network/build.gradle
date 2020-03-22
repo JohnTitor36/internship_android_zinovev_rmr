@@ -1,10 +1,4 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
-apply from: rootProject.file('buildsystem/versions.gradle')
-apply from: rootProject.file('buildsystem/dependencies.gradle')
+apply from: rootProject.file('buildsystem/android-library.gradle')
 
 def secretsPropertiesFile = rootProject.file("secrets.properties")
 def secretProperties = new Properties()
@@ -19,27 +13,11 @@ if (!secretProperties.containsKey('movies_api_key')) {
 }
 
 android {
-    compileSdkVersion versions.compileSdk
 
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
-        versionCode versions.code
-        versionName versions.name
-
-        consumerProguardFiles 'consumer-rules.pro'
         buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
         buildConfigField("String", "MOVIES_API_KEY", "${secretProperties['movies_api_key']}")
     }
-
-    compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
 }
 
 dependencies {
