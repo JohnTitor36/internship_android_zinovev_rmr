@@ -45,6 +45,10 @@ constructor(
         MutableLiveData<Boolean>()
     }
 
+    val keyboardOpened: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
+
     val openNextActivityEvent = MutableLiveData<Event<Unit>>()
 
     val noInternetConnectionEvent = MutableLiveData<Event<Unit>>()

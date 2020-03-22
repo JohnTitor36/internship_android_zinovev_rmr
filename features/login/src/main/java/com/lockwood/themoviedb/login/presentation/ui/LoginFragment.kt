@@ -6,7 +6,9 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import com.lockwood.core.extensions.afterMeasured
 import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.extensions.dimenInPx
 import com.lockwood.core.extensions.newIntent
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -50,9 +52,22 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private fun addViewListeners() {
         login_edit_text.addTextChangedListener { viewModel.setLogin(it.toString()) }
         password_edit_text.addTextChangedListener { viewModel.setPassword(it.toString()) }
+
+        password_edit_text.addTextChangedListener { viewModel.setPassword(it.toString()) }
         sign_in_button.setOnClickListener {
             hideKeyboard()
             viewModel.login()
+        }
+
+        checkKeyboardVisibility()
+    }
+
+    private fun checkKeyboardVisibility(){
+        val rootActivityView = requireActivity().window.decorView.findViewById<View>(android.R.id.content)
+        rootActivityView.afterMeasured {
+            val heightDifference = rootActivityView.rootView.height - rootActivityView.height
+            val isKeyboardOpened = heightDifference > requireContext().dimenInPx(R.dimen.keyboard_probably_height)
+            viewModel.keyboardOpened.value = isKeyboardOpened
         }
     }
 
@@ -96,6 +111,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 sign_in_button,
                 getString(R.string.title_check_network_connection)
             )
+        })
+
+        keyboardOpened.observe(lifecycleOwner, Observer { keyboardOpened ->
+            login_title_text_view.isVisible = !keyboardOpened
+            login_hint_text_view.isVisible = !keyboardOpened
         })
     }
 
