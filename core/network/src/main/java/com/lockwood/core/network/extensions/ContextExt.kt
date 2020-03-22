@@ -6,11 +6,12 @@ import android.net.ConnectivityManager
 @Suppress("deprecation", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 val Context.hasInternetConnection: Boolean
     get() {
-        val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         var isWifiConn = false
         var isMobileConn = false
-        connMgr.allNetworks.forEach { network ->
-            connMgr.getNetworkInfo(network).apply {
+        connectivityManager.allNetworks.forEach { network ->
+            connectivityManager.getNetworkInfo(network).apply {
                 if (type == ConnectivityManager.TYPE_WIFI) {
                     isWifiConn = isWifiConn || isConnected
                 }

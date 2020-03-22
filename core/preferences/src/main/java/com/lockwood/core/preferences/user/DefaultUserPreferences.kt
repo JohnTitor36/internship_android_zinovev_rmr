@@ -9,13 +9,13 @@ class DefaultUserPreferences(sharedPreferences: SharedPreferences) : UserPrefere
 
         private const val IS_LOGGED_IN_PREF_NAME = "com.lockwood.themoviedb.login.isLoggedIn"
 
-        private const val DEF_IS_LOGGED_IN = false
+        private const val DEFAULT_IS_LOGGED_IN = false
     }
 
     private var isLoggedIn by DelegatesExt.preference(
         sharedPreferences,
         IS_LOGGED_IN_PREF_NAME,
-        DEF_IS_LOGGED_IN
+        DEFAULT_IS_LOGGED_IN
     )
 
     override fun fetchUserLoggedIn(): Boolean {

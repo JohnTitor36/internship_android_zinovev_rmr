@@ -11,20 +11,20 @@ class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) :
         private const val REQUEST_TOKEN_PREF_NAME = "com.lockwood.themoviedb.login.requestToken"
         private const val SESSION_ID_PREF_NAME = "com.lockwood.themoviedb.login.sessionId"
 
-        private const val DEF_REQUEST_TOKEN = ""
-        private const val DEF_SESSION_ID = ""
+        private const val DEFAULT_REQUEST_TOKEN = ""
+        private const val DEFAULT_SESSION_ID = ""
     }
 
     private var requestToken by DelegatesExt.preference(
         sharedPreferences,
         REQUEST_TOKEN_PREF_NAME,
-        DEF_REQUEST_TOKEN
+        DEFAULT_REQUEST_TOKEN
     )
 
     private var sessionId by DelegatesExt.preference(
         sharedPreferences,
         SESSION_ID_PREF_NAME,
-        DEF_SESSION_ID
+        DEFAULT_SESSION_ID
     )
 
     override fun fetchCurrentRequestToken(): String {
@@ -43,8 +43,8 @@ class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) :
         sessionId = value
     }
 
-    override fun resetCurrentRequestToken() = saveCurrentRequestToken(DEF_REQUEST_TOKEN)
+    override fun resetCurrentRequestToken() = saveCurrentRequestToken(DEFAULT_REQUEST_TOKEN)
 
-    override fun resetSessionId() = saveCurrentSessionId(DEF_SESSION_ID)
+    override fun resetSessionId() = saveCurrentSessionId(DEFAULT_SESSION_ID)
 
 }

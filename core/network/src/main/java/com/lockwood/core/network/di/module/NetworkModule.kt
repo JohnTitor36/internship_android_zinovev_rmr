@@ -30,14 +30,14 @@ class NetworkModule {
 
         private const val LOG_TAG_OK_HTTP = "OkHttp"
 
-        private const val DEF_TIMEOUT_SECONDS = 30L
+        private const val DEFAULT_TIMEOUT_SECONDS = 30L
     }
 
     // Ловим 401 через Authenticator
     @Provides
     @Singleton
     fun provideAuthenticator(moshi: Moshi): Authenticator {
-        return StatusMessageAuthenticator( moshi)
+        return StatusMessageAuthenticator(moshi)
     }
 
     // Ловим 401 через Authenticator и идем в LoginActivity
@@ -101,9 +101,9 @@ class NetworkModule {
     @Provides
     fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
         return OkHttpClient().newBuilder()
-            .connectTimeout(DEF_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .readTimeout(DEF_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .writeTimeout(DEF_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .connectTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
     }
 
     @Provides
