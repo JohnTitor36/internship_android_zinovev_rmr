@@ -86,13 +86,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         isLoadingLiveData.observe(lifecycleOwner, Observer { isLoading ->
             val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
-            if (isLoading) {
-                loginProgressBar.isVisible = true
-                rootView.isVisible = false
-            } else {
-                loginProgressBar.isVisible = false
-                rootView.isVisible = true
-            }
+            loginProgressBar.isVisible = isLoading
         })
 
         errorMessageLiveData.observe(lifecycleOwner, Observer { message ->

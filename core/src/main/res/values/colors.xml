@@ -15,5 +15,6 @@
     <color name="bg_black">#191A25</color>
     <color name="red">#E1172F</color>
     <color name="purple">#6C63FF</color>
+    <color name="gray_transparent">#AA000000</color>
 
 </resources>
