@@ -2,11 +2,8 @@ package com.lockwood.core.network.authenticator
 
 import android.content.Context
 import android.content.Intent
-import com.lockwood.core.network.exception.StatusMessageException
-import com.lockwood.core.network.extensions.parseStatusMessage
 import com.lockwood.core.preferences.authentication.AuthenticationPreferences
 import com.lockwood.core.preferences.user.UserPreferences
-import com.squareup.moshi.Moshi
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
@@ -15,8 +12,7 @@ import okhttp3.Route
 class UserToLoginAuthenticator(
     private val context: Context,
     private val authenticationPreferences: AuthenticationPreferences,
-    private val userPreferences: UserPreferences,
-    private val moshi: Moshi
+    private val userPreferences: UserPreferences
 ) : Authenticator {
 
     companion object {
@@ -43,11 +39,9 @@ class UserToLoginAuthenticator(
     override fun authenticate(route: Route?, response: Response): Request? {
         if (isValidToken && isValidSessionId) {
             authenticationPreferences.resetCurrentRequestToken()
-            authenticationPreferences.resetSessionId()
+            authenticationPreferences.resetCurrentSessionId()
             userPreferences.setUserLoggedIn(false)
             openLoginActivity()
-        } else {
-            throw StatusMessageException(moshi.parseStatusMessage(response))
         }
         return null
     }

@@ -43,6 +43,6 @@ class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) :
 
     override fun resetCurrentRequestToken() = saveCurrentRequestToken(DEFAULT_REQUEST_TOKEN)
 
-    override fun resetSessionId() = saveCurrentSessionId(DEFAULT_SESSION_ID)
+    override fun resetCurrentSessionId() = saveCurrentSessionId(DEFAULT_SESSION_ID)
 
 }

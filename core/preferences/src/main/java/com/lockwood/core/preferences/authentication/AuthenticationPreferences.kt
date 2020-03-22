@@ -12,6 +12,6 @@ interface AuthenticationPreferences {
 
     fun resetCurrentRequestToken()
 
-    fun resetSessionId()
+    fun resetCurrentSessionId()
 
 }

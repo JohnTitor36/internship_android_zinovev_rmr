@@ -32,27 +32,16 @@ class NetworkModule {
         private const val DEFAULT_TIMEOUT_SECONDS = 30L
     }
 
-    // Ловим 401 через Authenticator
     @Provides
     @Singleton
-    fun provideAuthenticator(moshi: Moshi): Authenticator {
-        return StatusMessageAuthenticator(moshi)
-    }
-
-    // Ловим 401 через Authenticator и идем в LoginActivity
-    @Provides
-    @Singleton
-    @ToLoginAuthenticator
     fun provideUserToLoginAuthenticator(
         context: Context,
         authenticationPreferences: AuthenticationPreferences,
-        userPreferences: UserPreferences,
-        moshi: Moshi
+        userPreferences: UserPreferences
     ): Authenticator {
-        return UserToLoginAuthenticator(context, authenticationPreferences, userPreferences, moshi)
+        return UserToLoginAuthenticator(context, authenticationPreferences, userPreferences)
     }
 
-    // Ловим остальные сетевые ошибки через отдельный Interceptor
     @Provides
     @Singleton
     @ErrorInterceptor
@@ -115,11 +104,9 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        okHttpClient: OkHttpClient.Builder,
-        authenticator: Authenticator
+        okHttpClient: OkHttpClient.Builder
     ): OkHttpClient {
-        return okHttpClient.authenticator(authenticator)
-            .build()
+        return okHttpClient.build()
     }
 
     @Provides
@@ -127,10 +114,9 @@ class NetworkModule {
     @AuthHttpClient
     fun provideAuthHttpClient(
         okHttpClient: OkHttpClient.Builder,
-        @ToLoginAuthenticator authenticator: Authenticator
+        authenticator: Authenticator
     ): OkHttpClient {
-        return okHttpClient.authenticator(authenticator)
-            .build()
+        return okHttpClient.authenticator(authenticator).build()
     }
 
     @Provides

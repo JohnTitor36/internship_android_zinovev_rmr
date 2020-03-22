@@ -17,7 +17,3 @@ annotation class HeaderInterceptor
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class LoggingInterceptor
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ToLoginAuthenticator
