@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import com.lockwood.core.event.Event
 import com.lockwood.core.extensions.*
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -47,6 +48,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         rootView.buildSnackbar(message).show()
     }
 
+    override fun showError(error: String) {
+        login_error_text_view.text = error
+        login_error_text_view.isVisible = error.isNotEmpty()
+    }
+
     private fun addViewListeners() {
         login_edit_text.addTextChangedListener { viewModel.setLogin(it.toString()) }
         password_edit_text.addTextChangedListener { viewModel.setPassword(it.toString()) }
@@ -74,39 +80,50 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private fun observeLiveDataChanges() = with(viewModel) {
         val lifecycleOwner = viewLifecycleOwner
 
-        val validLengthObserver = Observer<String> { checkIsValidCredentialsLength() }
-        loginLiveData.observe(lifecycleOwner, validLengthObserver)
-        passwordLiveData.observe(lifecycleOwner, validLengthObserver)
-        isCredentialsLengthValid.observe(lifecycleOwner, Observer { isValidLength ->
-            sign_in_button.isEnabled = isValidLength
-        })
+        val validLengthObserver = Observer<String> { viewModel.checkIsValidCredentialsLength() }
+        val loginButtonObserver = Observer<Boolean> { sign_in_button.isEnabled = it }
 
-        isLoadingLiveData.observe(lifecycleOwner, Observer { isLoading ->
+        val progressBarObserver = Observer<Boolean> {
             val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
-            loginProgressBar.isVisible = isLoading
-        })
+            loginProgressBar.isVisible = it
+        }
 
-        errorMessageLiveData.observe(lifecycleOwner, Observer { message ->
-            login_error_text_view.text = message
-            login_error_text_view.isVisible = !message.isNullOrEmpty()
-        })
+        val errorMessageObserver = Observer<String> { message ->
+            if (message != null) {
+                showError(message)
+            }
+        }
 
         // TODO: Заменить на переход к пин коду
-        openNextActivityEvent.observe(lifecycleOwner, Observer {
+        val openNextActivityObserver = Observer<Event<Unit>> {
             requireContext().launchActivity(MAIN_ACTIVITY_CLASS_NAME) {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
-        })
+        }
 
-        noInternetConnectionEvent.observe(lifecycleOwner, Observer {
+        val noInternetObserver = Observer<Event<Unit>> {
             val checkNetworkMessage = getString(R.string.title_check_network_connection)
             showMessage(checkNetworkMessage)
-        })
+        }
 
-        keyboardOpened.observe(lifecycleOwner, Observer { keyboardOpened ->
+        val keyboardOpenedObserver = Observer<Boolean> { keyboardOpened ->
             login_title_text_view.isVisible = !keyboardOpened
             login_hint_text_view.isVisible = !keyboardOpened
-        })
+        }
+
+        loginLiveData.observe(lifecycleOwner, validLengthObserver)
+        passwordLiveData.observe(lifecycleOwner, validLengthObserver)
+        isCredentialsLengthValid.observe(lifecycleOwner, loginButtonObserver)
+
+        isLoadingLiveData.observe(lifecycleOwner, progressBarObserver)
+
+        errorMessageLiveData.observe(lifecycleOwner, errorMessageObserver)
+
+        openNextActivityEvent.observe(lifecycleOwner, openNextActivityObserver)
+
+        noInternetConnectionEvent.observe(lifecycleOwner, noInternetObserver)
+
+        keyboardOpened.observe(lifecycleOwner, keyboardOpenedObserver)
     }
 
     private fun inject() {
