@@ -1,10 +1,9 @@
 package com.lockwood.core.network.response
 
-import androidx.annotation.Keep
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@Keep
+
 @JsonClass(generateAdapter = true)
 data class ErrorResponse(
     @Json(name = "status_message")

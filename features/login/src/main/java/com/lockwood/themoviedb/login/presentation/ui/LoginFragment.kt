@@ -62,11 +62,13 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         checkKeyboardVisibility()
     }
 
-    private fun checkKeyboardVisibility(){
-        val rootActivityView = requireActivity().window.decorView.findViewById<View>(android.R.id.content)
+    private fun checkKeyboardVisibility() {
+        val rootActivityView =
+            requireActivity().window.decorView.findViewById<View>(android.R.id.content)
         rootActivityView.afterMeasured {
             val heightDifference = rootActivityView.rootView.height - rootActivityView.height
-            val isKeyboardOpened = heightDifference > requireContext().dimenInPx(R.dimen.keyboard_probably_height)
+            val isKeyboardOpened =
+                heightDifference > requireContext().dimenInPx(R.dimen.keyboard_probably_height)
             viewModel.keyboardOpened.value = isKeyboardOpened
         }
     }
