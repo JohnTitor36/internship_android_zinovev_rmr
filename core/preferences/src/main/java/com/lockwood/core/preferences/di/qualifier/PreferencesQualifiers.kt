@@ -4,4 +4,8 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class SessionId
+annotation class EncryptedPreferences
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Preferences

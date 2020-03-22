@@ -4,4 +4,8 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
-annotation class HeaderInterceptor
+annotation class ApiKey
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class BaseUrl
