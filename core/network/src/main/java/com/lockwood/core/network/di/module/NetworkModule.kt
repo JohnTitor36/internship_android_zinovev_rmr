@@ -99,26 +99,28 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
+    fun provideOkHttpClientBuilder(
+        @HeaderInterceptor headerInterceptor: Interceptor,
+        @LoggingInterceptor loggingInterceptor: Interceptor,
+        @ErrorInterceptor errorInterceptor: Interceptor
+    ): OkHttpClient.Builder {
         return OkHttpClient().newBuilder()
             .connectTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .addInterceptor(headerInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(errorInterceptor)
     }
 
     @Provides
     @Singleton
     fun provideOkHttpClient(
         okHttpClient: OkHttpClient.Builder,
-        @HeaderInterceptor headerInterceptor: Interceptor,
-        @LoggingInterceptor loggingInterceptor: Interceptor,
-        @ErrorInterceptor errorInterceptor: Interceptor,
         authenticator: Authenticator
     ): OkHttpClient {
         return okHttpClient.authenticator(authenticator)
-            .addInterceptor(headerInterceptor)
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(errorInterceptor).build()
+            .build()
     }
 
     @Provides
@@ -126,15 +128,10 @@ class NetworkModule {
     @AuthHttpClient
     fun provideAuthHttpClient(
         okHttpClient: OkHttpClient.Builder,
-        @HeaderInterceptor headerInterceptor: Interceptor,
-        @LoggingInterceptor loggingInterceptor: Interceptor,
-        @ErrorInterceptor errorInterceptor: Interceptor,
         @ToLoginAuthenticator authenticator: Authenticator
     ): OkHttpClient {
         return okHttpClient.authenticator(authenticator)
-            .addInterceptor(headerInterceptor)
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(errorInterceptor).build()
+            .build()
     }
 
     @Provides
