@@ -77,10 +77,26 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
     }
 
-    private fun observeLiveDataChanges() = with(viewModel) {
-        //region Init Observers
-        val validLengthObserver = Observer<String> { viewModel.checkIsValidCredentialsLength() }
+    private fun observeLiveDataChanges() {
+        observeCredentialsChanges()
+        observeRequestChanges()
+        observeEventsChanges()
+        observeKeyboardAppearanceChanges()
+    }
+
+    private fun observeCredentialsChanges() = with(viewModel) {
+        val lifecycleOwner = viewLifecycleOwner
+
+        val validLengthObserver = Observer<String> { checkIsValidCredentialsLength() }
         val loginButtonObserver = Observer<Boolean> { sign_in_button.isEnabled = it }
+
+        loginLiveData.observe(lifecycleOwner, validLengthObserver)
+        passwordLiveData.observe(lifecycleOwner, validLengthObserver)
+        isCredentialsLengthValid.observe(lifecycleOwner, loginButtonObserver)
+    }
+
+    private fun observeRequestChanges() = with(viewModel) {
+        val lifecycleOwner = viewLifecycleOwner
 
         val progressBarObserver = Observer<Boolean> {
             val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
@@ -92,6 +108,13 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 showError(message)
             }
         }
+
+        isLoadingLiveData.observe(lifecycleOwner, progressBarObserver)
+        errorMessageLiveData.observe(lifecycleOwner, errorMessageObserver)
+    }
+
+    private fun observeEventsChanges() = with(viewModel) {
+        val lifecycleOwner = viewLifecycleOwner
 
         // TODO: Заменить на переход к пин коду
         val openNextActivityObserver = Observer<Event<Unit>> {
@@ -105,29 +128,19 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             showMessage(checkNetworkMessage)
         }
 
+        openNextActivityEvent.observe(lifecycleOwner, openNextActivityObserver)
+        noInternetConnectionEvent.observe(lifecycleOwner, noInternetObserver)
+    }
+
+    private fun observeKeyboardAppearanceChanges() = with(viewModel) {
+        val lifecycleOwner = viewLifecycleOwner
+
         val keyboardOpenedObserver = Observer<Boolean> { keyboardOpened ->
             login_title_text_view.isVisible = !keyboardOpened
             login_hint_text_view.isVisible = !keyboardOpened
         }
-        //endregion
-
-        //region Observe changes
-        val lifecycleOwner = viewLifecycleOwner
-
-        loginLiveData.observe(lifecycleOwner, validLengthObserver)
-        passwordLiveData.observe(lifecycleOwner, validLengthObserver)
-        isCredentialsLengthValid.observe(lifecycleOwner, loginButtonObserver)
-
-        isLoadingLiveData.observe(lifecycleOwner, progressBarObserver)
-
-        errorMessageLiveData.observe(lifecycleOwner, errorMessageObserver)
-
-        openNextActivityEvent.observe(lifecycleOwner, openNextActivityObserver)
-
-        noInternetConnectionEvent.observe(lifecycleOwner, noInternetObserver)
 
         keyboardOpened.observe(lifecycleOwner, keyboardOpenedObserver)
-        //endregion
     }
 
     private fun inject() {
