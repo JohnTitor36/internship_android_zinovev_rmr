@@ -85,9 +85,9 @@ constructor(
     }
 
     fun login() {
-        setIsLoading(true)
         if (context.hasInternetConnection) {
             createRequestToken().schedulersIoToMain(schedulers)
+                .doOnSubscribe { setIsLoading(true) }
                 .subscribe(
                     { createSessionWithToken() },
                     { handleFailedLogin(it) }
