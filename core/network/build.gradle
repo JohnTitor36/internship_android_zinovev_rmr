@@ -14,6 +14,10 @@ if (secretsPropertiesFile.exists()) {
     secretProperties.load(new FileInputStream(secretsPropertiesFile))
 }
 
+if (!secretProperties.containsKey('movies_api_key')) {
+    throw new GradleScriptException("movies_api_key is null", new Throwable("Не найден movies_api_key в файле secrets.properties"))
+}
+
 android {
     compileSdkVersion versions.compileSdk
 
