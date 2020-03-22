@@ -12,20 +12,16 @@ import com.lockwood.themoviedb.login.remote.mapper.CreateSessionResponseEntityMa
 import com.lockwood.themoviedb.login.remote.mapper.ValidateWithLoginBodyEntityMapper
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.Retrofit
 import javax.inject.Inject
 
 @FeatureScope
 class DefaultAuthenticationRemote @Inject constructor(
-    private val retrofit: Retrofit,
+    private val authenticationService: AuthenticationService,
     private val createRequestTokenResponseEntityMapper: CreateRequestTokenResponseEntityMapper,
     private val createSessionResponseEntityMapper: CreateSessionResponseEntityMapper,
     private val createSessionBodyEntityMapper: CreateSessionBodyEntityMapper,
     private val validateWithLoginBodyEntityMapper: ValidateWithLoginBodyEntityMapper
 ) : AuthenticationRemote {
-
-    private val authenticationService: AuthenticationService
-        get() = retrofit.create(AuthenticationService::class.java)
 
     override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> {
         return authenticationService.createRequestToken(apiKey)
