@@ -1,7 +1,7 @@
 package com.lockwood.core.preferences.authentication
 
 import android.content.SharedPreferences
-import com.lockwood.core.preferences.extensions.DelegatesExt
+import com.lockwood.core.preferences.preference.delegate
 
 class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) :
     AuthenticationPreferences {
@@ -15,14 +15,12 @@ class DefaultAuthenticationPreferences(sharedPreferences: SharedPreferences) :
         private const val DEFAULT_SESSION_ID = ""
     }
 
-    private var requestToken by DelegatesExt.preference(
-        sharedPreferences,
+    private var requestToken by sharedPreferences.delegate(
         REQUEST_TOKEN_PREF_NAME,
         DEFAULT_REQUEST_TOKEN
     )
 
-    private var sessionId by DelegatesExt.preference(
-        sharedPreferences,
+    private var sessionId by sharedPreferences.delegate(
         SESSION_ID_PREF_NAME,
         DEFAULT_SESSION_ID
     )

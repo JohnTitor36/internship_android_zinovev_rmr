@@ -1,7 +1,7 @@
 package com.lockwood.core.preferences.user
 
 import android.content.SharedPreferences
-import com.lockwood.core.preferences.extensions.DelegatesExt
+import com.lockwood.core.preferences.preference.delegate
 
 class DefaultUserPreferences(sharedPreferences: SharedPreferences) : UserPreferences {
 
@@ -12,8 +12,7 @@ class DefaultUserPreferences(sharedPreferences: SharedPreferences) : UserPrefere
         private const val DEFAULT_IS_LOGGED_IN = false
     }
 
-    private var isLoggedIn by DelegatesExt.preference(
-        sharedPreferences,
+    private var isLoggedIn by sharedPreferences.delegate(
         IS_LOGGED_IN_PREF_NAME,
         DEFAULT_IS_LOGGED_IN
     )

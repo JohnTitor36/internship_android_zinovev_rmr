@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class Preference<T>(
+class PreferencesDelegate<T>(
     private val prefs: SharedPreferences,
     private val name: String,
     private val default: T
@@ -56,3 +56,8 @@ class Preference<T>(
     }
 
 }
+
+fun <T> SharedPreferences.delegate(
+    name: String,
+    default: T
+) = PreferencesDelegate(this, name, default)
