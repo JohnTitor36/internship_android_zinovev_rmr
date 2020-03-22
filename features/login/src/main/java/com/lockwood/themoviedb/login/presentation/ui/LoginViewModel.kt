@@ -17,7 +17,7 @@ import com.lockwood.themoviedb.login.domain.model.CreateSessionBody
 import com.lockwood.themoviedb.login.domain.model.CreateSessionResponse
 import com.lockwood.themoviedb.login.domain.model.ValidateWithLoginBody
 import com.lockwood.themoviedb.login.domain.repository.AuthenticationRepository
-import com.lockwood.themoviedb.login.utils.CredentialsLengthValidator
+import com.lockwood.themoviedb.login.utils.CredentialsValidator
 import io.reactivex.Completable
 import javax.inject.Inject
 
@@ -76,7 +76,7 @@ constructor(
     }
 
     fun checkIsValidCredentialsLength() {
-        val isValidLength = CredentialsLengthValidator.validateLength(login, password)
+        val isValidLength = CredentialsValidator.isValidLength(login, password)
         isCredentialsLengthValid.value = isValidLength
     }
 
