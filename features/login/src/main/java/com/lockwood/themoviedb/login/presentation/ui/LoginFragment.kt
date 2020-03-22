@@ -1,6 +1,7 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -9,7 +10,7 @@ import androidx.lifecycle.Observer
 import com.lockwood.core.extensions.afterMeasured
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.extensions.dimenInPx
-import com.lockwood.core.extensions.newIntent
+import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.snackbar.SnackbarMaker
@@ -101,11 +102,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         // TODO: Заменить на переход к пин коду
         openNextActivityEvent.observe(lifecycleOwner, Observer {
-            val intent = newIntent(
-                requireContext(),
-                MAIN_ACTIVITY_CLASS_NAME
-            )
-            startActivity(intent)
+            requireContext().launchActivity(MAIN_ACTIVITY_CLASS_NAME) {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
         })
 
         noInternetConnectionEvent.observe(lifecycleOwner, Observer {

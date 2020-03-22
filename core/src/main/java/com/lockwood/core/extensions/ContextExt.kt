@@ -7,6 +7,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.core.content.ContextCompat
 
+const val DEBUG_SUFFIX = ".debug"
+
 fun Context.color(@ColorRes res: Int): Int = ContextCompat.getColor(this, res)
 
 fun Context.dimenInPx(@DimenRes dimenRes: Int) = resources.getDimensionPixelSize(dimenRes)
@@ -14,26 +16,28 @@ fun Context.dimenInPx(@DimenRes dimenRes: Int) = resources.getDimensionPixelSize
 inline fun <reified T : Activity> Context.launchActivity(
     init: Intent.() -> Unit = {}
 ) {
-    val intent = newIntent<T>(this)
+    val intent = newIntent<T>()
     intent.init()
     startActivity(Intent(intent).apply(init))
 }
 
-inline fun newIntent(
-    context: Context,
+inline fun Context.launchActivity(
     className: String,
     init: Intent.() -> Unit = {}
+) {
+    val intent = newIntent(className)
+    intent.init()
+    startActivity(Intent(intent).apply(init))
+}
+
+fun Context.newIntent(
+    className: String
 ): Intent {
-    val packageName = context.packageName
     val packageNameWithoutSuffix = packageName.removeSuffix(DEBUG_SUFFIX)
     val resultClassName = "$packageNameWithoutSuffix$className"
-
     return Intent().apply {
         setClassName(packageName, resultClassName)
-        init()
     }
 }
 
-inline fun <reified T : Any> newIntent(context: Context): Intent = Intent(context, T::class.java)
-
-const val DEBUG_SUFFIX = ".debug"
+inline fun <reified T : Any> Context.newIntent(): Intent = Intent(this, T::class.java)
