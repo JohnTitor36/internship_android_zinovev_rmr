@@ -5,11 +5,10 @@ import com.squareup.moshi.Moshi
 import okhttp3.Response
 
 fun Moshi.parseStatusMessage(response: Response): String {
-    return if (response.body != null) {
-        val json = response.body!!.source()
+    response.body?.let {
+        val json = it.source()
         val errorResponse = adapter(ErrorResponse::class.java).fromJson(json)
-        errorResponse?.statusMessage ?: response.message
-    } else {
-        response.message
+        return errorResponse?.statusMessage ?: response.message
     }
+    return response.message
 }
