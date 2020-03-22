@@ -1,16 +1,9 @@
 package com.lockwood.core.network.exception
 
-import android.content.Context
-import com.lockwood.core.network.R
+import java.io.IOException
 
-class NoInternetConnectionException(
-    private val context: Context
-) : Exception() {
+class NoInternetConnectionException : IOException() {
 
-    override val cause: Throwable
-        get() = Throwable(context.getString(R.string.title_no_network))
-
-    override val message: String
-        get() = context.getString(R.string.title_check_network_connection)
+    override val message = "Нет подключения к интернету"
 
 }

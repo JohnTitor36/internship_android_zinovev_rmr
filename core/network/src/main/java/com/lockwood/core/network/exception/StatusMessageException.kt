@@ -1,17 +1,9 @@
 package com.lockwood.core.network.exception
 
-import android.content.Context
-import com.lockwood.core.network.R
+import java.io.IOException
 
-class StatusMessageException(
-    private val context: Context,
-    private val statusMessage: String
-) : Exception() {
+class StatusMessageException(statusMessage: String) : IOException() {
 
-    override val cause: Throwable
-        get() = Throwable(context.getString(R.string.title_status_exception_cause))
-
-    override val message: String
-        get() = statusMessage
+    override val message = statusMessage
 
 }

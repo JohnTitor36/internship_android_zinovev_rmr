@@ -17,7 +17,7 @@ class OkHttpErrorInterceptor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!context.hasInternetConnection) {
-            throw NoInternetConnectionException(context)
+            throw NoInternetConnectionException()
         }
         val request = chain.request()
         val response = chain.proceed(request)
@@ -26,7 +26,7 @@ class OkHttpErrorInterceptor(
         // 401 ловим в Authenticator
         // Из 404 ловим status_message
         if (code != HttpsURLConnection.HTTP_UNAUTHORIZED && code == HttpsURLConnection.HTTP_NOT_FOUND) {
-            throw StatusMessageException(context, moshi.parseStatusMessage(response))
+            throw StatusMessageException(moshi.parseStatusMessage(response))
         }
         return response
     }
