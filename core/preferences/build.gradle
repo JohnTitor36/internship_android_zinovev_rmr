@@ -32,6 +32,7 @@ dependencies {
             deps.android.appcompat,
             deps.android.preference,
             deps.android.security,
+            deps.android.ktx,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.dagger.dagger
