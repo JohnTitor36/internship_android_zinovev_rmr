@@ -7,7 +7,7 @@ import com.lockwood.core.extensions.invoke
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.exception.NoInternetConnectionException
-import com.lockwood.core.network.extensions.isHasInternetConnection
+import com.lockwood.core.network.extensions.hasInternetConnection
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.schedulers.AndroidSchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
@@ -86,7 +86,7 @@ constructor(
 
     fun login() {
         setIsLoading(true)
-        if (context.isHasInternetConnection) {
+        if (context.hasInternetConnection) {
             createRequestToken().schedulersIoToMain(schedulers)
                 .subscribe(
                     { createSessionWithToken() },

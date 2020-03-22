@@ -3,7 +3,7 @@ package com.lockwood.core.network.interceptor
 import android.content.Context
 import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.exception.StatusMessageException
-import com.lockwood.core.network.extensions.isHasInternetConnection
+import com.lockwood.core.network.extensions.hasInternetConnection
 import com.lockwood.core.network.extensions.parseStatusMessage
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
@@ -16,7 +16,7 @@ class OkHttpErrorInterceptor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (!context.isHasInternetConnection) {
+        if (!context.hasInternetConnection) {
             throw NoInternetConnectionException(context)
         }
         val request = chain.request()

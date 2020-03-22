@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 
 @Suppress("deprecation", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-val Context.isHasInternetConnection: Boolean
+val Context.hasInternetConnection: Boolean
     get() {
         val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         var isWifiConn = false
