@@ -47,7 +47,7 @@ class UserToLoginAuthenticator(
             userPreferences.setUserLoggedIn(false)
             openLoginActivity()
         } else {
-            throw StatusMessageException(context, moshi.parseStatusMessage(response))
+            throw StatusMessageException(moshi.parseStatusMessage(response))
         }
         return null
     }

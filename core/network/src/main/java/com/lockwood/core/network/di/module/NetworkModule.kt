@@ -36,11 +36,8 @@ class NetworkModule {
     // Ловим 401 через Authenticator
     @Provides
     @Singleton
-    fun provideAuthenticator(
-        context: Context,
-        moshi: Moshi
-    ): Authenticator {
-        return StatusMessageAuthenticator(context, moshi)
+    fun provideAuthenticator(moshi: Moshi): Authenticator {
+        return StatusMessageAuthenticator( moshi)
     }
 
     // Ловим 401 через Authenticator и идем в LoginActivity
