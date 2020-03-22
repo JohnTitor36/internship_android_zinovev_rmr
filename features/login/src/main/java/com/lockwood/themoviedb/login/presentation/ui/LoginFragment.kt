@@ -78,8 +78,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun observeLiveDataChanges() = with(viewModel) {
-        val lifecycleOwner = viewLifecycleOwner
-
+        //region Init Observers
         val validLengthObserver = Observer<String> { viewModel.checkIsValidCredentialsLength() }
         val loginButtonObserver = Observer<Boolean> { sign_in_button.isEnabled = it }
 
@@ -110,6 +109,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             login_title_text_view.isVisible = !keyboardOpened
             login_hint_text_view.isVisible = !keyboardOpened
         }
+        //endregion
+
+        //region Observe changes
+        val lifecycleOwner = viewLifecycleOwner
 
         loginLiveData.observe(lifecycleOwner, validLengthObserver)
         passwordLiveData.observe(lifecycleOwner, validLengthObserver)
@@ -124,6 +127,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         noInternetConnectionEvent.observe(lifecycleOwner, noInternetObserver)
 
         keyboardOpened.observe(lifecycleOwner, keyboardOpenedObserver)
+        //endregion
     }
 
     private fun inject() {

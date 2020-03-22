@@ -43,6 +43,7 @@ dependencies {
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
             deps.network.moshi,
+            deps.tools.timber,
             deps.dagger.dagger
     )
 

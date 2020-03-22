@@ -5,4 +5,5 @@ interface MessageView {
     fun showMessage(message: String)
 
     fun showError(error: String)
+
 }

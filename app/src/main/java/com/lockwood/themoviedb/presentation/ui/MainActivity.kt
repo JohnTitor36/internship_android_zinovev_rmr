@@ -22,10 +22,17 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         inject()
         super.onCreate(savedInstanceState)
 
+        setupAppBar()
+        checkIsUserLoggedIn()
+    }
+
+    private fun setupAppBar() {
         setSupportActionBar(appbar.toolbar)
         disableAppBarTitle()
         setDisplayHomeAsUpEnabled(false)
+    }
 
+    private fun checkIsUserLoggedIn() {
         val userLoggedIn = userPreferences.fetchUserLoggedIn()
         if (!userLoggedIn) {
             launchActivity<LoginActivity> {

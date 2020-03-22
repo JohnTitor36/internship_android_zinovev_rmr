@@ -35,6 +35,7 @@ dependencies {
             deps.android.ktx,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
+            deps.tools.timber,
             deps.dagger.dagger
     )
 
