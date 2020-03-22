@@ -7,7 +7,7 @@ import com.lockwood.core.extensions.invoke
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.exception.NoInternetConnectionException
-import com.lockwood.core.network.extensions.hasInternetConnection
+import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.schedulers.AndroidSchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
@@ -21,10 +21,12 @@ import com.lockwood.themoviedb.login.utils.CredentialsValidator
 import io.reactivex.Completable
 import javax.inject.Inject
 
+// TODO: add res manager
 class LoginViewModel @Inject
 constructor(
     @ApiKey private val apiKey: String,
     private val context: Context,
+    private val connectivityManager: NetworkConnectivityManager,
     private val authenticationRepository: AuthenticationRepository,
     private val userPreferences: UserPreferences,
     private val schedulers: AndroidSchedulersProvider
@@ -85,7 +87,7 @@ constructor(
     }
 
     fun login() {
-        if (context.hasInternetConnection) {
+        if (connectivityManager.hasInternetConnection) {
             createRequestToken().schedulersIoToMain(schedulers)
                 .doOnSubscribe { setIsLoading(true) }
                 .subscribe(

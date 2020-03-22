@@ -40,13 +40,13 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
 
     private val preferencesComponent: PreferencesToolsProvider by lazy {
         DaggerPreferencesComponent.builder()
-            .application(this)
+            .applicationProvider(coreComponent)
             .build()
     }
 
     private val networkComponent: NetworkToolsProvider by lazy {
         DaggerNetworkComponent.builder()
-            .application(this)
+            .applicationProvider(coreComponent)
             .preferencesToolsProvider(preferencesComponent)
             .build()
     }

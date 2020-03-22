@@ -6,6 +6,7 @@ import com.lockwood.core.network.authenticator.UserToLoginAuthenticator
 import com.lockwood.core.network.di.qualifier.*
 import com.lockwood.core.network.interceptor.OkHttpErrorInterceptor
 import com.lockwood.core.network.interceptor.OkHttpHeaderInterceptor
+import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.preferences.authentication.AuthenticationPreferences
 import com.lockwood.core.preferences.user.UserPreferences
 import com.squareup.moshi.Moshi
@@ -45,8 +46,11 @@ class NetworkModule {
     @Provides
     @Singleton
     @ErrorInterceptor
-    fun provideErrorInterceptor(context: Context, moshi: Moshi): Interceptor {
-        return OkHttpErrorInterceptor(context, moshi)
+    fun provideErrorInterceptor(
+        connectivityManager: NetworkConnectivityManager,
+        moshi: Moshi
+    ): Interceptor {
+        return OkHttpErrorInterceptor(connectivityManager, moshi)
     }
 
     @Provides
