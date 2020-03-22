@@ -12,12 +12,12 @@ val Context.hasInternetConnection: Boolean
         connMgr.allNetworks.forEach { network ->
             connMgr.getNetworkInfo(network).apply {
                 if (type == ConnectivityManager.TYPE_WIFI) {
-                    isWifiConn = isWifiConn or isConnected
+                    isWifiConn = isWifiConn || isConnected
                 }
                 if (type == ConnectivityManager.TYPE_MOBILE) {
-                    isMobileConn = isMobileConn or isConnected
+                    isMobileConn = isMobileConn || isConnected
                 }
             }
         }
-        return isWifiConn or isMobileConn
+        return isWifiConn || isMobileConn
     }
