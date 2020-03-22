@@ -7,13 +7,9 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import com.lockwood.core.extensions.afterMeasured
-import com.lockwood.core.extensions.appToolsProvider
-import com.lockwood.core.extensions.dimenInPx
-import com.lockwood.core.extensions.launchActivity
+import com.lockwood.core.extensions.*
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
-import com.lockwood.core.snackbar.SnackbarMaker
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
@@ -31,9 +27,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     @Inject
     lateinit var viewModelFactory: Provider<LoginViewModel>
 
-    @Inject
-    lateinit var snackbarMaker: SnackbarMaker
-
     private lateinit var viewModel: LoginViewModel
 
     override val hasOptionMenu: Boolean = false
@@ -48,6 +41,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         observeLiveDataChanges()
         addViewListeners()
+    }
+
+    override fun showMessage(message: String) {
+        rootView.buildSnackbar(message).show()
     }
 
     private fun addViewListeners() {
@@ -102,10 +99,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         })
 
         noInternetConnectionEvent.observe(lifecycleOwner, Observer {
-            snackbarMaker.snackbar(
-                sign_in_button,
-                getString(R.string.title_check_network_connection)
-            )
+            val checkNetworkMessage = getString(R.string.title_check_network_connection)
+            showMessage(checkNetworkMessage)
         })
 
         keyboardOpened.observe(lifecycleOwner, Observer { keyboardOpened ->

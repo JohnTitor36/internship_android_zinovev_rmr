@@ -6,8 +6,9 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.lockwood.core.message.MessageView
 
-abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
+abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId), MessageView {
 
     protected lateinit var rootView: View
 
@@ -29,5 +30,9 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         imm.hideSoftInputFromWindow(rootView.windowToken, 0)
         rootView.clearFocus()
     }
+
+    override fun showMessage(message: String) = Unit
+
+    override fun showError(error: String) = Unit
 
 }
