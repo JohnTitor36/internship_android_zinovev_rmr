@@ -2,7 +2,6 @@ package com.lockwood.core.network.di.module
 
 import android.content.Context
 import com.lockwood.core.network.BuildConfig
-import com.lockwood.core.network.authenticator.StatusMessageAuthenticator
 import com.lockwood.core.network.authenticator.UserToLoginAuthenticator
 import com.lockwood.core.network.di.qualifier.*
 import com.lockwood.core.network.interceptor.OkHttpErrorInterceptor

@@ -8,7 +8,6 @@ import com.lockwood.core.network.extensions.parseStatusMessage
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.Response
-import javax.net.ssl.HttpsURLConnection
 
 class OkHttpErrorInterceptor(
     private val context: Context,
@@ -19,14 +18,15 @@ class OkHttpErrorInterceptor(
         if (!context.hasInternetConnection) {
             throw NoInternetConnectionException()
         }
-        val request = chain.request()
-        val response = chain.proceed(request)
-        val code = response.code
+        val response = chain.proceed(chain.request())
 
-        // 401 ловим в Authenticator
-        // Из 404 ловим status_message
-        if (code != HttpsURLConnection.HTTP_UNAUTHORIZED && code == HttpsURLConnection.HTTP_NOT_FOUND) {
-            throw StatusMessageException(moshi.parseStatusMessage(response))
+        if (!response.isSuccessful) {
+            val statusMessage = moshi.parseStatusMessage(response)
+            if (statusMessage != null) {
+                throw StatusMessageException(statusMessage)
+            } else {
+                return response
+            }
         }
         return response
     }
