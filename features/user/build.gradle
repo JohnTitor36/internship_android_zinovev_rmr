@@ -2,6 +2,8 @@ apply from: rootProject.file('buildsystem/android-library.gradle')
 
 dependencies {
     implementation project(":core")
+    implementation project(":core:network")
+    implementation project(":core:preferences")
 
     implementation(
             deps.kotlin.stdlib,
@@ -9,9 +11,13 @@ dependencies {
             deps.android.constraint,
             deps.android.ktx,
             deps.material.material,
+            deps.rxJava.rx2,
+            deps.rxJava.rxAndroid,
+            deps.network.retrofit2,
+            deps.network.moshi,
             deps.tools.timber,
             deps.dagger.dagger
     )
 
-    kapt(deps.dagger.compiler)
+    kapt(deps.dagger.compiler, deps.network.moshicodegen)
 }

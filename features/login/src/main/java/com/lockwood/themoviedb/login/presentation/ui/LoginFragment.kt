@@ -22,7 +22,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     companion object {
 
-        private const val MAIN_ACTIVITY_CLASS_NAME = ".presentation.ui.MainActivity"
+        private const val MAIN_ACTIVITY_CLASS_NAME = "com.lockwood.themoviedb.presentation.ui.MainActivity"
     }
 
     @Inject

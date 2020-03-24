@@ -10,7 +10,7 @@ class OkHttpHeaderInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
             .newBuilder()
-            .addHeader(HEADER_CONTENT_TYPE, CONTENT_TYPE_JSON).build()
+            .header(HEADER_CONTENT_TYPE, CONTENT_TYPE_JSON).build()
         return chain.proceed(request)
     }
 

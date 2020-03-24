@@ -8,6 +8,10 @@ annotation class AuthHttpClient
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
+annotation class AuthRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
 annotation class ErrorInterceptor
 
 @Qualifier

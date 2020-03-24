@@ -1,4 +1,4 @@
-package com.lockwood.core.network.validator
+package com.lockwood.core.preferences.validator
 
 import com.lockwood.core.preferences.authentication.AuthenticationPreferences
 import javax.inject.Inject

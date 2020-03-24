@@ -1,14 +1,11 @@
 package com.lockwood.core.network.di.module
 
-import android.content.Context
 import com.lockwood.core.network.BuildConfig
 import com.lockwood.core.network.authenticator.UserToLoginAuthenticator
 import com.lockwood.core.network.di.qualifier.*
 import com.lockwood.core.network.interceptor.OkHttpErrorInterceptor
 import com.lockwood.core.network.interceptor.OkHttpHeaderInterceptor
 import com.lockwood.core.network.manager.NetworkConnectivityManager
-import com.lockwood.core.preferences.authentication.AuthenticationPreferences
-import com.lockwood.core.preferences.user.UserPreferences
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -35,6 +32,14 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideAuthenticator(
+        authenticator: UserToLoginAuthenticator
+    ): Authenticator {
+        return authenticator
+    }
+
+    @Provides
+    @Singleton
     @ErrorInterceptor
     fun provideErrorInterceptor(
         connectivityManager: NetworkConnectivityManager,
@@ -54,8 +59,8 @@ class NetworkModule {
         })
         // Чтобы быть уверенными, что утечки чувствительных данных не будет
         if (BuildConfig.DEBUG) {
-//            logging.level = HttpLoggingInterceptor.Level.BASIC
-            logging.level = HttpLoggingInterceptor.Level.BODY
+            logging.level = HttpLoggingInterceptor.Level.BASIC
+//            logging.level = HttpLoggingInterceptor.Level.BODY
         }
         return logging
     }
@@ -114,17 +119,33 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideRetrofit(
+    fun provideRetrofitBuilder(
         @BaseUrl baseUrl: String,
-        okHttpClient: OkHttpClient,
         moshi: Moshi
-    ): Retrofit {
+    ): Retrofit.Builder {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        retrofit: Retrofit.Builder,
+        okHttpClient: OkHttpClient
+    ): Retrofit {
+        return retrofit.client(okHttpClient).build()
+    }
+
+    @Provides
+    @Singleton
+    @AuthRetrofit
+    fun provideAuthRetrofit(
+        retrofit: Retrofit.Builder,
+        @AuthHttpClient okHttpClient: OkHttpClient
+    ): Retrofit {
+        return retrofit.client(okHttpClient).build()
     }
 
 }

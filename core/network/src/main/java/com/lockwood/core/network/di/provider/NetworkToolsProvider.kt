@@ -1,5 +1,6 @@
 package com.lockwood.core.network.di.provider
 
+import com.lockwood.core.network.di.qualifier.AuthRetrofit
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -10,6 +11,9 @@ interface NetworkToolsProvider : NetworkApiProvider {
     fun provideMoshi(): Moshi
 
     fun provideRetrofit(): Retrofit
+
+    @AuthRetrofit
+    fun provideAuthRetrofit(): Retrofit
 
     fun provideOkHttpClient(): OkHttpClient
 

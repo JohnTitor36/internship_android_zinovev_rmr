@@ -1,7 +1,7 @@
 package com.lockwood.core.network.authenticator
 
-import com.lockwood.core.network.router.LoginActivityRouter
-import com.lockwood.core.network.validator.ApiValuesValidator
+import com.lockwood.core.router.LoginActivityRouter
+import com.lockwood.core.preferences.validator.ApiValuesValidator
 import com.lockwood.core.preferences.user.UserPreferences
 import okhttp3.Authenticator
 import okhttp3.Request

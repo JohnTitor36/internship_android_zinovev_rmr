@@ -1,4 +1,4 @@
-package com.lockwood.core.network.router
+package com.lockwood.core.router
 
 import android.content.Context
 import android.content.Intent
@@ -11,8 +11,7 @@ class LoginActivityRouter @Inject constructor(private val context: Context) {
 
     companion object {
 
-        private const val LOGIN_ACTIVITY_CLASS_NAME =
-            "com.lockwood.themoviedb.login.presentation.ui.LoginActivity"
+        private const val LOGIN_ACTIVITY_CLASS_NAME = "com.lockwood.themoviedb.login.presentation.ui.LoginActivity"
     }
 
     fun openLoginActivity() = context.launchActivity(LOGIN_ACTIVITY_CLASS_NAME) {
