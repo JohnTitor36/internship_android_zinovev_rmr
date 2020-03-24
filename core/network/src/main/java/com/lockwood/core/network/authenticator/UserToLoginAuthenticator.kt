@@ -1,57 +1,36 @@
 package com.lockwood.core.network.authenticator
 
-import android.content.Context
-import android.content.Intent
-import com.lockwood.core.preferences.authentication.AuthenticationPreferences
+import com.lockwood.core.network.router.LoginActivityRouter
+import com.lockwood.core.network.validator.ApiValuesValidator
 import com.lockwood.core.preferences.user.UserPreferences
 import okhttp3.Authenticator
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
+import javax.inject.Inject
 
-class UserToLoginAuthenticator(
-    private val context: Context,
-    private val authenticationPreferences: AuthenticationPreferences,
-    private val userPreferences: UserPreferences
+class UserToLoginAuthenticator @Inject constructor(
+    private val userPreferences: UserPreferences,
+    private val apiValuesValidator: ApiValuesValidator,
+    private val loginActivityRouter: LoginActivityRouter
 ) : Authenticator {
 
-    companion object {
-
-        private const val LOGIN_ACTIVITY_CLASS_NAME =
-            "com.lockwood.themoviedb.login.presentation.ui.LoginActivity"
-    }
-
     private val isValidToken: Boolean
-        get() {
-            val token = authenticationPreferences.fetchCurrentRequestToken()
-            return token.isNotEmpty()
-        }
+        get() = apiValuesValidator.isValidToken
 
     private val isValidSessionId: Boolean
-        get() {
-            val sessionId = authenticationPreferences.fetchCurrentSessionId()
-            return sessionId.isNotEmpty()
-        }
+        get() = apiValuesValidator.isValidSessionId
 
     // В случае истечения срока request_token или session_id, необходимо открыть экран
     // авторизации для повторного получения токена
     @Synchronized
     override fun authenticate(route: Route?, response: Response): Request? {
         if (isValidToken && isValidSessionId) {
-            authenticationPreferences.resetCurrentRequestToken()
-            authenticationPreferences.resetCurrentSessionId()
+            apiValuesValidator.resetApiValues()
             userPreferences.setUserLoggedIn(false)
-            openLoginActivity()
+            loginActivityRouter.openLoginActivity()
         }
         return null
-    }
-
-    private fun openLoginActivity() {
-        val intent = Intent().apply {
-            setClassName(context.packageName, LOGIN_ACTIVITY_CLASS_NAME)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        context.startActivity(intent)
     }
 
 }

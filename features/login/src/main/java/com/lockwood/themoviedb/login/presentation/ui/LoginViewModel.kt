@@ -1,6 +1,5 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.Event
 import com.lockwood.core.extensions.invoke
@@ -9,6 +8,7 @@ import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.preferences.user.UserPreferences
+import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.AndroidSchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
 import com.lockwood.themoviedb.login.R
@@ -21,11 +21,10 @@ import com.lockwood.themoviedb.login.utils.CredentialsValidator
 import io.reactivex.Completable
 import javax.inject.Inject
 
-// TODO: add res manager
 class LoginViewModel @Inject
 constructor(
     @ApiKey private val apiKey: String,
-    private val context: Context,
+    private val resourceReader: ResourceReader,
     private val connectivityManager: NetworkConnectivityManager,
     private val authenticationRepository: AuthenticationRepository,
     private val userPreferences: UserPreferences,
@@ -149,9 +148,9 @@ constructor(
         } else {
             val message = throwable.message!!
             val engInvalidCredentials =
-                context.getString(R.string.title_eng_invalid_username_or_password)
+                resourceReader.string(R.string.title_eng_invalid_username_or_password)
             val ruInvalidCredentials =
-                context.getString(R.string.title_invalid_username_or_password)
+                resourceReader.string(R.string.title_invalid_username_or_password)
             errorMessageLiveData.value =
                 if (message.contains(Regex(engInvalidCredentials))) {
                     ruInvalidCredentials

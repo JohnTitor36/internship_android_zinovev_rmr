@@ -33,7 +33,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     private fun checkIsUserLoggedIn() {
-        val userLoggedIn = userPreferences.fetchUserLoggedIn()
+        val userLoggedIn = userPreferences.isUserLoggedIn()
         if (!userLoggedIn) {
             launchActivity<LoginActivity> {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

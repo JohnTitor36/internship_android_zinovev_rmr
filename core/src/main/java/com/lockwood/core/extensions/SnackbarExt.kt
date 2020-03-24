@@ -6,14 +6,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.lockwood.core.R
 
 fun View.buildSnackbar(
-    text: String,
-    actionText: String? = null,
-    action: (() -> Unit)? = null,
-    length: Int = BaseTransientBottomBar.LENGTH_SHORT
-) = Snackbar.make(this, text, length).apply {
-    if (action != null) {
-        setAction(actionText) { action.invoke() }
-    }
+    text: String
+) = Snackbar.make(this, text, BaseTransientBottomBar.LENGTH_SHORT).apply {
     setTextColor(context.color(R.color.gray_light))
     view.setBackgroundColor(context.color(R.color.dark_blue))
 }

@@ -1,3 +1,9 @@
 package com.lockwood.core.di.provider
 
-interface AppToolsProvider : ApplicationProvider
+import com.lockwood.core.reader.ResourceReader
+
+interface AppToolsProvider : ApplicationProvider {
+
+    fun provideResourceReader(): ResourceReader
+
+}

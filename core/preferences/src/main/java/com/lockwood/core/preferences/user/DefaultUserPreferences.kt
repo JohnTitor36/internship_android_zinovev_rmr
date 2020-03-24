@@ -17,7 +17,7 @@ class DefaultUserPreferences(sharedPreferences: SharedPreferences) : UserPrefere
         DEFAULT_IS_LOGGED_IN
     )
 
-    override fun fetchUserLoggedIn(): Boolean {
+    override fun isUserLoggedIn(): Boolean {
         return isLoggedIn
     }
 

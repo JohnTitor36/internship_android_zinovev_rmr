@@ -35,16 +35,6 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideUserToLoginAuthenticator(
-        context: Context,
-        authenticationPreferences: AuthenticationPreferences,
-        userPreferences: UserPreferences
-    ): Authenticator {
-        return UserToLoginAuthenticator(context, authenticationPreferences, userPreferences)
-    }
-
-    @Provides
-    @Singleton
     @ErrorInterceptor
     fun provideErrorInterceptor(
         connectivityManager: NetworkConnectivityManager,

@@ -5,7 +5,7 @@ interface UserPreferences {
     // TODO: добавить username
     // TODO: добавить email
 
-    fun fetchUserLoggedIn(): Boolean
+    fun isUserLoggedIn(): Boolean
 
     fun setUserLoggedIn(value: Boolean)
 
