@@ -14,29 +14,38 @@ class AuthenticationCacheDataSource @Inject constructor(
     private val authenticationPreferences: AuthenticationPreferences
 ) : AuthenticationDataStore {
 
-    override fun fetchCurrentRequestToken() =
-        authenticationPreferences.fetchCurrentRequestToken()
+    override fun fetchCurrentRequestToken(): String {
+        return authenticationPreferences.fetchCurrentRequestToken()
+    }
 
-    override fun fetchCurrentSessionId() =
-        authenticationPreferences.fetchCurrentSessionId()
+    override fun fetchCurrentSessionId(): String {
+        return authenticationPreferences.fetchCurrentSessionId()
+    }
 
-    override fun saveCurrentRequestToken(requestToken: String) =
+    override fun saveCurrentRequestToken(requestToken: String) {
         authenticationPreferences.saveCurrentRequestToken(requestToken)
+    }
 
-    override fun saveCurrentSessionId(sessionId: String) =
+    override fun saveCurrentSessionId(sessionId: String) {
         authenticationPreferences.saveCurrentSessionId(sessionId)
+    }
 
-    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> =
+    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> {
         throw UnsupportedOperationException()
+    }
 
     override fun validateTokenWithLogin(
         apiKey: String,
         loginBody: ValidateWithLoginBodyEntity
-    ): Completable = throw UnsupportedOperationException()
+    ): Completable {
+        throw UnsupportedOperationException()
+    }
 
     override fun createSession(
         apiKey: String,
         sessionBody: CreateSessionBodyEntity
-    ): Single<CreateSessionResponseEntity> = throw UnsupportedOperationException()
+    ): Single<CreateSessionResponseEntity> {
+        throw UnsupportedOperationException()
+    }
 
 }
