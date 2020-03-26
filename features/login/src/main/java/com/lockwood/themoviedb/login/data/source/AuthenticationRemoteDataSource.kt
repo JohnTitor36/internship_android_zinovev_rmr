@@ -14,29 +14,38 @@ class AuthenticationRemoteDataSource @Inject constructor(
     private val authenticationRemote: AuthenticationRemote
 ) : AuthenticationDataStore {
 
-    override fun fetchCurrentRequestToken() =
+    override fun fetchCurrentRequestToken(): String {
         throw UnsupportedOperationException()
+    }
 
-    override fun fetchCurrentSessionId() =
+    override fun fetchCurrentSessionId(): String {
         throw UnsupportedOperationException()
+    }
 
-    override fun saveCurrentRequestToken(requestToken: String) =
+    override fun saveCurrentRequestToken(requestToken: String) {
         throw UnsupportedOperationException()
+    }
 
-    override fun saveCurrentSessionId(sessionId: String) =
+    override fun saveCurrentSessionId(sessionId: String) {
         throw UnsupportedOperationException()
+    }
 
-    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> =
-        authenticationRemote.createRequestToken(apiKey)
+    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> {
+        return authenticationRemote.createRequestToken(apiKey)
+    }
 
     override fun validateTokenWithLogin(
         apiKey: String,
         loginBody: ValidateWithLoginBodyEntity
-    ): Completable = authenticationRemote.validateTokenWithLogin(apiKey, loginBody)
+    ): Completable {
+        return authenticationRemote.validateTokenWithLogin(apiKey, loginBody)
+    }
 
     override fun createSession(
         apiKey: String,
         sessionBody: CreateSessionBodyEntity
-    ): Single<CreateSessionResponseEntity> = authenticationRemote.createSession(apiKey, sessionBody)
+    ): Single<CreateSessionResponseEntity> {
+        return authenticationRemote.createSession(apiKey, sessionBody)
+    }
 
 }
