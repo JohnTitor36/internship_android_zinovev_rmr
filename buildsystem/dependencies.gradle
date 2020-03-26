@@ -28,7 +28,10 @@ versions.moshiConverter = "2.4.0"
 versions.rxConverter = "2.7.2"
 versions.jupiter = "5.6.0"
 versions.runner = "1.2.0"
+versions.mockito = "3.3.6"
+versions.mockitokotlin = "3.3.6"
 versions.mockwebserver = "4.4.0"
+versions.assertj = "3.15.0"
 
 def android = [:]
 android.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
@@ -109,8 +112,14 @@ jupiter.params = "org.junit.jupiter:junit-jupiter-params:$versions.jupiter"
 deps.jupiter = jupiter
 
 def mock = [:]
+mock.core = "org.mockito:mockito-core:$versions.mockito"
+mock.kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitokotlin"
 mock.webserver = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
 deps.mock = mock
+
+def test = [:]
+test.assertj = "org.assertj:assertj-core:$versions.assertj"
+deps.test = test
 
 def androidTest = [:]
 androidTest.runner = "androidx.test:runner:$versions.runner"
