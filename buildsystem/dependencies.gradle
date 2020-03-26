@@ -113,6 +113,7 @@ deps.jupiter = jupiter
 
 def mock = [:]
 mock.core = "org.mockito:mockito-core:$versions.mockito"
+mock.inline = "org.mockito:mockito-inline:$versions.mockito"
 mock.kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockitokotlin"
 mock.webserver = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
 deps.mock = mock
