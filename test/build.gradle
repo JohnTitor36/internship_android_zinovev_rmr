@@ -5,6 +5,9 @@ apply from: rootProject.file('buildsystem/instrumentation-test-android.gradle')
 dependencies {
     implementation project(":core")
 
-    implementation(deps.rxJava.rx2)
+    implementation(
+            deps.rxJava.rx2,
+            deps.mock.webserver
+    )
 
 }
