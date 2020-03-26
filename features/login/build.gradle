@@ -1,9 +1,11 @@
 apply from: rootProject.file('buildsystem/android-library.gradle')
+apply from: rootProject.file('buildsystem/test-android.gradle')
 
 dependencies {
     implementation project(":core")
     implementation project(":core:network")
     implementation project(":core:preferences")
+    implementation project(":test")
 
     implementation(
             deps.kotlin.stdlib,

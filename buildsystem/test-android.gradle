@@ -1,6 +1,11 @@
 apply plugin: "de.mannodermaus.android-junit5"
+apply from: rootProject.file('buildsystem/dependencies.gradle')
 
 android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
+    }
     testOptions {
         junitPlatform {
             filters {
@@ -19,4 +24,23 @@ android {
             testLogging.events = ["passed", "skipped", "failed"]
         }
     }
+}
+
+dependencies {
+
+    testImplementation(
+            deps.kotlin.stdlib,
+            deps.kotlin.reflect,
+            deps.test.assertj,
+            deps.jupiter.api,
+            deps.jupiter.params,
+            deps.spek.dsl,
+            deps.spek.runner,
+            deps.mock.core,
+            deps.mock.inline,
+            deps.mock.kotlin,
+            deps.mock.webserver
+    )
+
+    androidTestRuntimeOnly(deps.junit5.runner)
 }
