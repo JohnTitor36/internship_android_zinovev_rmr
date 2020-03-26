@@ -28,10 +28,11 @@ versions.moshiConverter = "2.4.0"
 versions.rxConverter = "2.7.2"
 versions.jupiter = "5.6.0"
 versions.runner = "1.2.0"
-versions.mockito = "3.3.6"
-versions.mockitokotlin = "3.3.6"
+versions.mockito = "3.3.3"
+versions.mockitokotlin = "2.2.0"
 versions.mockwebserver = "4.4.0"
 versions.assertj = "3.15.0"
+versions.spek = "2.0.10"
 
 def android = [:]
 android.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
@@ -63,6 +64,7 @@ deps.material = material
 
 def kotlin = [:]
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+kotlin.reflect = "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 deps.kotlin = kotlin
 
 def network = [:]
@@ -105,11 +107,21 @@ def tools = [:]
 tools.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.tools = tools
 
+def spek = [:]
+spek.dsl = "org.spekframework.spek2:spek-dsl-jvm:$versions.spek"
+spek.runner = "org.spekframework.spek2:spek-runner-junit5:$versions.spek"
+deps.spek = spek
+
 def jupiter = [:]
 jupiter.api = "org.junit.jupiter:junit-jupiter-api:$versions.jupiter"
 jupiter.engine = "org.junit.jupiter:junit-jupiter-engine:$versions.jupiter"
 jupiter.params = "org.junit.jupiter:junit-jupiter-params:$versions.jupiter"
 deps.jupiter = jupiter
+
+def junit5 = [:]
+junit5.core = "de.mannodermaus.junit5:android-test-core:$versions.runner"
+junit5.runner = "de.mannodermaus.junit5:android-test-runner:$versions.runner"
+deps.junit5 = junit5
 
 def mock = [:]
 mock.core = "org.mockito:mockito-core:$versions.mockito"
@@ -119,11 +131,6 @@ mock.webserver = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
 deps.mock = mock
 
 def test = [:]
+test.runner = "androidx.test:runner:$versions.runner"
 test.assertj = "org.assertj:assertj-core:$versions.assertj"
 deps.test = test
-
-def androidTest = [:]
-androidTest.runner = "androidx.test:runner:$versions.runner"
-androidTest.junitcore = "de.mannodermaus.junit5:android-test-core:$versions.runner"
-androidTest.junitrunner = "de.mannodermaus.junit5:android-test-runner:$versions.runner"
-deps.androidTest = androidTest

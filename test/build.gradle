@@ -1,0 +1,29 @@
+apply from: rootProject.file('buildsystem/android-library.gradle')
+apply from: rootProject.file('buildsystem/test-android.gradle')
+apply from: rootProject.file('buildsystem/instrumentation-test-android.gradle')
+
+dependencies {
+
+    testImplementation(
+            deps.kotlin.stdlib,
+            deps.kotlin.reflect,
+            deps.test.assertj,
+            deps.jupiter.api,
+            deps.jupiter.params,
+            deps.spek.dsl,
+            deps.spek.runner,
+            deps.mock.core,
+            deps.mock.inline,
+            deps.mock.kotlin,
+            deps.mock.webserver
+    )
+
+    androidTestImplementation(
+            deps.test.runner,
+            deps.jupiter.api,
+            deps.junit5.core
+    )
+
+    testRuntimeOnly(deps.jupiter.engine)
+    androidTestRuntimeOnly(deps.junit5.runner)
+}

@@ -1,18 +1,14 @@
 android {
     defaultConfig {
-        // 1) Make sure to use the AndroidJUnitRunner, of a subclass of it. This requires a dependency on androidx.test:runner, too!
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        // 2) Connect JUnit 5 to the runner
         testInstrumentationRunnerArgument "runnerBuilder", "de.mannodermaus.junit5.AndroidJUnit5Builder"
     }
 
-    // 3) Java 8 is required
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    // 4) JUnit 5 will bundle in files with identical paths; exclude them
     packagingOptions {
         exclude "META-INF/LICENSE*"
     }
