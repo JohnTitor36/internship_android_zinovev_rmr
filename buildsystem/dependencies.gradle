@@ -26,11 +26,8 @@ versions.timber = "4.7.1"
 versions.moshi = "1.9.2"
 versions.moshiConverter = "2.4.0"
 versions.rxConverter = "2.7.2"
-
-def testVersions = [:]
-testVersions.junit = "4.12"
-testVersions.junitExt = "1.1.1"
-testVersions.espressoCore = "3.2.0"
+versions.jupiter = "5.6.0"
+versions.runner = "1.2.0"
 
 def android = [:]
 android.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
@@ -104,11 +101,14 @@ def tools = [:]
 tools.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.tools = tools
 
-def test = [:]
-test.junit = "junit:junit:$testVersions.junit"
-deps.test = test
+def jupiter = [:]
+jupiter.api = "org.junit.jupiter:junit-jupiter-api:$versions.jupiter"
+jupiter.engine = "org.junit.jupiter:junit-jupiter-engine:$versions.jupiter"
+jupiter.params = "org.junit.jupiter:junit-jupiter-params:$versions.jupiter"
+deps.jupiter = jupiter
 
 def androidTest = [:]
-androidTest.junit = "androidx.test.ext:junit:$testVersions.junitExt"
-androidTest.espresso = "androidx.test.espresso:espresso-core:$testVersions.espressoCore"
+androidTest.runner = "androidx.test:runner:$versions.runner"
+androidTest.junitcore = "de.mannodermaus.junit5:android-test-core:$versions.runner"
+androidTest.junitrunner = "de.mannodermaus.junit5:android-test-runner:$versions.runner"
 deps.androidTest = androidTest
