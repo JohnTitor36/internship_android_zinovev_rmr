@@ -9,7 +9,7 @@ import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.reader.ResourceReader
-import com.lockwood.core.schedulers.AndroidSchedulersProvider
+import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.domain.model.CreateRequestTokenResponse
@@ -28,7 +28,7 @@ constructor(
     private val connectivityManager: NetworkConnectivityManager,
     private val authenticationRepository: AuthenticationRepository,
     private val userPreferences: UserPreferences,
-    private val schedulers: AndroidSchedulersProvider
+    private val schedulers: SchedulersProvider
 ) : BaseViewModel() {
 
     val loginLiveData: MutableLiveData<String> by lazy {
@@ -50,9 +50,13 @@ constructor(
         MutableLiveData<Boolean>()
     }
 
-    val openNextActivityEvent = MutableLiveData<Event<Unit>>()
+    val openNextActivityEvent by lazy {
+        MutableLiveData<Event<Unit>>()
+    }
 
-    val noInternetConnectionEvent = MutableLiveData<Event<Unit>>()
+    val noInternetConnectionEvent by lazy {
+        MutableLiveData<Event<Unit>>()
+    }
 
     private val login: String
         get() = loginLiveData.value.orEmpty().trim()

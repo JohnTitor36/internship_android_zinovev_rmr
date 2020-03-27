@@ -5,12 +5,12 @@ object CredentialsValidator {
     private const val MIN_PASSWORD_LENGTH = 4
     private const val MIN_LOGIN_LENGTH = 4
 
-    private const val REGEX_LOGIN = "^[a-z0-9_]{$MIN_LOGIN_LENGTH,}"
-    private const val REGEX_PASSWORD = "^[a-z0-9_@%+/\'!#^?:.(){}~]{$MIN_PASSWORD_LENGTH,}"
+    private const val REGEX_LOGIN = "^[a-zA-Z0-9_]{4,}"
+    private const val REGEX_PASSWORD = "^[a-zA-Z0-9_@%+/\'!#^?:.(){}~]{4,}"
 
     fun isValidLength(login: String, password: String): Boolean {
-        val isValidLogin = isValidLogin(login)
-        val isValidPassword = isValidPassword(password)
+        val isValidLogin = isValidLoginLength(login)
+        val isValidPassword = isValidPasswordLength(password)
         return isValidLogin && isValidPassword
     }
 
