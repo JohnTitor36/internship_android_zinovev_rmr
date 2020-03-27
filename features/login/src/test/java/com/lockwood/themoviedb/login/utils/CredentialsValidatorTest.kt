@@ -27,8 +27,10 @@ object CredentialsValidatorTest : Spek({
             var result = false
             //endregion
 
-            Given("login with special characters and simple password") {
+            Given("login with special characters") {
                 mock<ValidateWithLoginBody> { on { loginBody.username } doReturn "ajj@%+/'!#^?:.(){}~" }
+            }
+            And("simple password") {
                 mock<ValidateWithLoginBody> { on { loginBody.password } doReturn simplePassword }
             }
 
@@ -46,8 +48,10 @@ object CredentialsValidatorTest : Spek({
             var result = false
             //endregion
 
-            Given("simple login and password with forbidden special characters") {
+            Given("simple login") {
                 mock<ValidateWithLoginBody> { on { loginBody.username } doReturn simpleLogin }
+            }
+            And("password with forbidden special characters") {
                 mock<ValidateWithLoginBody> { on { loginBody.password } doReturn "123456*#$%@#@$" }
             }
 
@@ -65,8 +69,10 @@ object CredentialsValidatorTest : Spek({
             var result = false
             //endregion
 
-            Given("simple login and simple password") {
+            Given("simple login") {
                 mock<ValidateWithLoginBody> { on { loginBody.username } doReturn simpleLogin }
+            }
+            And("simple password") {
                 mock<ValidateWithLoginBody> { on { loginBody.password } doReturn simplePassword }
             }
 
@@ -84,8 +90,10 @@ object CredentialsValidatorTest : Spek({
             var result = false
             //endregion
 
-            Given("simple login and password with approved special characters") {
+            Given("simple login") {
                 mock<ValidateWithLoginBody> { on { loginBody.username } doReturn simpleLogin }
+            }
+            And("password with approved special characters") {
                 mock<ValidateWithLoginBody> { on { loginBody.password } doReturn "123456_@%+/'!#^?:.(){}~" }
             }
 
@@ -116,8 +124,10 @@ object CredentialsValidatorTest : Spek({
             //endregion
 
             //region Short login check
-            Given("short login and long enough password") {
+            Given("short login") {
                 mock<ValidateWithLoginBody> { on { loginBody.username } doReturn "ajj" }
+            }
+            And("long enough password") {
                 mock<ValidateWithLoginBody> { on { loginBody.password } doReturn longEnoughPassword }
             }
 
@@ -131,8 +141,10 @@ object CredentialsValidatorTest : Spek({
             //endregion
 
             //region Short password check
-            Given("long enough login and short password") {
+            Given("long enough login") {
                 mock<ValidateWithLoginBody> { on { loginBody.username } doReturn longEnoughLogin }
+            }
+            And("short password") {
                 mock<ValidateWithLoginBody> { on { loginBody.password } doReturn "123" }
             }
 
@@ -151,8 +163,10 @@ object CredentialsValidatorTest : Spek({
             var result = false
             //endregion
 
-            Given("simple login and password") {
+            Given("long enough login") {
                 mock<ValidateWithLoginBody> { on { loginBody.username } doReturn longEnoughLogin }
+            }
+            And("long enough password") {
                 mock<ValidateWithLoginBody> { on { loginBody.password } doReturn longEnoughPassword }
             }
 
