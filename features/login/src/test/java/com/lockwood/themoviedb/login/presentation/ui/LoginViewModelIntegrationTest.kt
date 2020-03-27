@@ -76,8 +76,10 @@ object LoginViewModelIntegrationTest : Spek({
 
         Scenario("no internet login") {
 
-            Given("login with special characters and simple password") {
+            Given("resource reader that return no internet message") {
                 mock<TextView> { on { resourceReader.string(R.string.title_check_network_connection) } doReturn noInternetMessage }
+            }
+            And("connectivity manager tell that no internet connection") {
                 mock<ConnectivityManager> { on { connectivityManager.hasInternetConnection } doReturn false }
             }
 
@@ -89,6 +91,6 @@ object LoginViewModelIntegrationTest : Spek({
                 assertThat(errorTextView.text).isEqualTo(noInternetMessage)
             }
         }
-    }
 
+    }
 })
