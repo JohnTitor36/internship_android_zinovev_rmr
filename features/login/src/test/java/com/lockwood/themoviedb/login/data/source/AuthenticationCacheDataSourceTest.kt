@@ -11,7 +11,7 @@ import org.spekframework.spek2.style.gherkin.Feature
 
 object AuthenticationCacheDataSourceTest : Spek({
 
-    Feature("Unsupported requests in cache") {
+    Feature("Unsupported requests in cache throw Exception") {
 
         //region Fields
         val authenticationPreferences by memoized {

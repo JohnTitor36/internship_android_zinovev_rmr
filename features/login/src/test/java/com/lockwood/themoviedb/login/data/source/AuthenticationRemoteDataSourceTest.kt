@@ -9,7 +9,7 @@ import org.spekframework.spek2.style.gherkin.Feature
 
 object AuthenticationRemoteDataSourceTest : Spek({
 
-    Feature("Unsupported requests in remote") {
+    Feature("Unsupported requests in remote throw Exception") {
 
         //region Fields
         val authenticationRemote by memoized {
