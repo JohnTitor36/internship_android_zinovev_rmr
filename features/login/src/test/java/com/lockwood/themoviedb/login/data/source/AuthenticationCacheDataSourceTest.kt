@@ -13,6 +13,7 @@ object AuthenticationCacheDataSourceTest : Spek({
 
     Feature("Unsupported requests in cache") {
 
+        //region Fields
         val authenticationPreferences by memoized {
             mock<AuthenticationPreferences> { }
         }
@@ -20,6 +21,7 @@ object AuthenticationCacheDataSourceTest : Spek({
         val cacheDataSource by memoized {
             AuthenticationCacheDataSource(authenticationPreferences)
         }
+        //endregion
 
         //region Functions
         fun emptyLoginBodyEntity(): ValidateWithLoginBodyEntity {

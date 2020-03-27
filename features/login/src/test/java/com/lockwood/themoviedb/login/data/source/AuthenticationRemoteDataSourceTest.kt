@@ -11,6 +11,7 @@ object AuthenticationRemoteDataSourceTest : Spek({
 
     Feature("Unsupported requests in remote") {
 
+        //region Fields
         val authenticationRemote by memoized {
             mock<AuthenticationRemote> { }
         }
@@ -18,6 +19,7 @@ object AuthenticationRemoteDataSourceTest : Spek({
         val remoteDataSource by memoized {
             AuthenticationRemoteDataSource(authenticationRemote)
         }
+        //endregion
 
         Scenario("make unsupported fetch current request token") {
             //region Fields
