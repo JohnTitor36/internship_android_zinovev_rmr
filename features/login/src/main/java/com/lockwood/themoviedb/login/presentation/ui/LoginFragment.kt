@@ -57,7 +57,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         login_edit_text.addTextChangedListener { viewModel.setLogin(it.toString()) }
         password_edit_text.addTextChangedListener { viewModel.setPassword(it.toString()) }
 
-        password_edit_text.addTextChangedListener { viewModel.setPassword(it.toString()) }
         sign_in_button.setOnClickListener {
             hideKeyboard()
             viewModel.login()

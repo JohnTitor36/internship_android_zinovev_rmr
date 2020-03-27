@@ -34,6 +34,7 @@ versions.mockitokotlin = "2.2.0"
 versions.mockwebserver = "4.4.0"
 versions.assertj = "3.15.0"
 versions.spek = "2.0.10"
+versions.arch = "2.1.0"
 
 def android = [:]
 android.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
@@ -121,6 +122,12 @@ def junit5 = [:]
 junit5.core = "de.mannodermaus.junit5:android-test-core:$versions.runner"
 junit5.runner = "de.mannodermaus.junit5:android-test-runner:$versions.runner"
 deps.junit5 = junit5
+
+def arch = [:]
+arch.common = "androidx.arch.core:core-common:$versions.arch"
+arch.runtime = "androidx.arch.core:core-runtime:$versions.arch"
+arch.testing = "androidx.arch.core:core-testing:$versions.arch"
+deps.arch = arch
 
 def mock = [:]
 mock.core = "org.mockito:mockito-core:$versions.mockito"

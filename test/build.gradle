@@ -7,7 +7,9 @@ dependencies {
 
     implementation(
             deps.rxJava.rx2,
-            deps.mock.webserver
+            deps.mock.webserver,
+            deps.spek.dsl,
+            deps.arch.testing
     )
 
 }

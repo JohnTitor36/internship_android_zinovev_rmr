@@ -23,6 +23,7 @@ android {
         unitTests.all {
             testLogging.events = ["passed", "skipped", "failed"]
         }
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -31,6 +32,7 @@ dependencies {
     testImplementation(
             deps.kotlin.stdlib,
             deps.kotlin.reflect,
+            deps.arch.testing,
             deps.test.assertj,
             deps.jupiter.api,
             deps.jupiter.params,
