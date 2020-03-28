@@ -87,11 +87,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun observeCredentialsInputChanges() = with(viewModel) {
-        val lifecycleOwner = viewLifecycleOwner
-
         val validLengthObserver = Observer<String> { checkIsValidCredentialsLength() }
 
-        loginLiveData.observe(lifecycleOwner, validLengthObserver)
+        observe(loginLiveData) {
+
+        }
+        loginLiveData.observe( validLengthObserver)
         passwordLiveData.observe(lifecycleOwner, validLengthObserver)
     }
 
