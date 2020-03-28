@@ -21,7 +21,7 @@ class ApiValuesValidator @Inject constructor(
             return sessionId.isNotEmpty()
         }
 
-    fun resetApiValues(){
+    fun resetApiValues() {
         authenticationPreferences.resetCurrentRequestToken()
         authenticationPreferences.resetCurrentSessionId()
     }

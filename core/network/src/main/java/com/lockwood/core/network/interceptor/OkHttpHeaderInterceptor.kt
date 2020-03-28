@@ -1,7 +1,7 @@
 package com.lockwood.core.network.interceptor
 
-import com.lockwood.core.network.common.RequestConstants.HEADER_CONTENT_TYPE
 import com.lockwood.core.network.common.RequestConstants.CONTENT_TYPE_JSON
+import com.lockwood.core.network.common.RequestConstants.HEADER_CONTENT_TYPE
 import okhttp3.Interceptor
 import okhttp3.Response
 

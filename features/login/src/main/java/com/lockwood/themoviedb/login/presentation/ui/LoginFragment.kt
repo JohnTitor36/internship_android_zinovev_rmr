@@ -22,7 +22,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     companion object {
 
-        private const val MAIN_ACTIVITY_CLASS_NAME = "com.lockwood.themoviedb.presentation.ui.MainActivity"
+        private const val MAIN_ACTIVITY_CLASS_NAME =
+            "com.lockwood.themoviedb.presentation.ui.MainActivity"
     }
 
     @Inject
@@ -77,20 +78,28 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun observeLiveDataChanges() {
-        observeCredentialsChanges()
+        observeCredentialsInputChanges()
+        observeCredentialsLengthChanges()
         observeRequestChanges()
-        observeEventsChanges()
+        observeConnectivityChanges()
+        observeNavigationChanges()
         observeKeyboardAppearanceChanges()
     }
 
-    private fun observeCredentialsChanges() = with(viewModel) {
+    private fun observeCredentialsInputChanges() = with(viewModel) {
         val lifecycleOwner = viewLifecycleOwner
 
         val validLengthObserver = Observer<String> { checkIsValidCredentialsLength() }
-        val loginButtonObserver = Observer<Boolean> { sign_in_button.isEnabled = it }
 
         loginLiveData.observe(lifecycleOwner, validLengthObserver)
         passwordLiveData.observe(lifecycleOwner, validLengthObserver)
+    }
+
+    private fun observeCredentialsLengthChanges() = with(viewModel) {
+        val lifecycleOwner = viewLifecycleOwner
+
+        val loginButtonObserver = Observer<Boolean> { sign_in_button.isEnabled = it }
+
         isCredentialsLengthValid.observe(lifecycleOwner, loginButtonObserver)
     }
 
@@ -112,7 +121,18 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         errorMessageLiveData.observe(lifecycleOwner, errorMessageObserver)
     }
 
-    private fun observeEventsChanges() = with(viewModel) {
+    private fun observeConnectivityChanges() = with(viewModel) {
+        val lifecycleOwner = viewLifecycleOwner
+
+        val noInternetObserver = Observer<Event<Unit>> {
+            val checkNetworkMessage = getString(R.string.title_check_network_connection)
+            showMessage(checkNetworkMessage)
+        }
+
+        noInternetConnectionEvent.observe(lifecycleOwner, noInternetObserver)
+    }
+
+    private fun observeNavigationChanges() = with(viewModel) {
         val lifecycleOwner = viewLifecycleOwner
 
         // TODO: Заменить на переход к пин коду
@@ -122,13 +142,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             }
         }
 
-        val noInternetObserver = Observer<Event<Unit>> {
-            val checkNetworkMessage = getString(R.string.title_check_network_connection)
-            showMessage(checkNetworkMessage)
-        }
-
         openNextActivityEvent.observe(lifecycleOwner, openNextActivityObserver)
-        noInternetConnectionEvent.observe(lifecycleOwner, noInternetObserver)
     }
 
     private fun observeKeyboardAppearanceChanges() = with(viewModel) {

@@ -11,7 +11,8 @@ class LoginActivityRouter @Inject constructor(private val context: Context) {
 
     companion object {
 
-        private const val LOGIN_ACTIVITY_CLASS_NAME = "com.lockwood.themoviedb.login.presentation.ui.LoginActivity"
+        private const val LOGIN_ACTIVITY_CLASS_NAME =
+            "com.lockwood.themoviedb.login.presentation.ui.LoginActivity"
     }
 
     fun openLoginActivity() = context.launchActivity(LOGIN_ACTIVITY_CLASS_NAME) {

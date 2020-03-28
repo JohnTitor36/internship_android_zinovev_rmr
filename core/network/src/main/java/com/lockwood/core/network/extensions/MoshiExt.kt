@@ -3,9 +3,8 @@ package com.lockwood.core.network.extensions
 import com.lockwood.core.network.response.ErrorResponse
 import com.squareup.moshi.Moshi
 import okhttp3.Response
-import timber.log.Timber
 
-fun Moshi.parseStatusMessage(response: Response): String?{
+fun Moshi.parseStatusMessage(response: Response): String? {
     response.body?.let {
         val json = it.source()
         val errorResponse = adapter(ErrorResponse::class.java).fromJson(json)
