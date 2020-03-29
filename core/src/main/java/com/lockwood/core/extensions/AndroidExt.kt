@@ -10,4 +10,4 @@ fun Context.color(@ColorRes res: Int): Int = ContextCompat.getColor(this, res)
 
 fun Context.string(@StringRes res: Int): String = getString(res)
 
-fun Context.dimenInPx(@DimenRes res: Int) = resources.getDimensionPixelSize(res)
+fun Context.dimenPx(@DimenRes res: Int) = resources.getDimensionPixelSize(res)

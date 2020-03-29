@@ -2,6 +2,7 @@ package com.lockwood.themoviedb.login.presentation.ui
 
 import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.Event
+import com.lockwood.core.extensions.delegate
 import com.lockwood.core.extensions.invoke
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.network.di.qualifier.ApiKey
@@ -34,6 +35,7 @@ constructor(
     val loginLiveData: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
+
     val passwordLiveData: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
@@ -46,7 +48,7 @@ constructor(
         MutableLiveData<Boolean>()
     }
 
-    val keyboardOpened: MutableLiveData<Boolean> by lazy {
+    val keyboardOpenedLiveData: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
     }
 
@@ -58,11 +60,21 @@ constructor(
         MutableLiveData<Event<Unit>>()
     }
 
-    private val login: String
+    var login: String
         get() = loginLiveData.value.orEmpty().trim()
+        set(value) {
+            loginLiveData.value = value
+        }
 
-    private val password: String
+    var password: String
         get() = passwordLiveData.value.orEmpty().trim()
+        set(value) {
+            passwordLiveData.value = value
+        }
+
+    var keyboardOpened by keyboardOpenedLiveData.delegate()
+
+    private var errorMessage by errorMessageLiveData.delegate()
 
     private var requestToken: String
         get() = authenticationRepository.fetchCurrentRequestToken()
@@ -75,14 +87,6 @@ constructor(
         set(value) {
             authenticationRepository.saveCurrentSessionId(value)
         }
-
-    fun setLogin(login: String) {
-        loginLiveData.value = login
-    }
-
-    fun setPassword(password: String) {
-        passwordLiveData.value = password
-    }
 
     fun checkIsValidCredentialsLength() {
         val isValidLength = CredentialsValidator.isValidLength(login, password)
@@ -140,7 +144,6 @@ constructor(
 
     private fun handleSuccessLogin() {
         setIsLoading(false)
-        errorMessageLiveData.value = null
         userPreferences.setUserLoggedIn(true)
         openNextActivityEvent.invoke()
     }
@@ -155,12 +158,11 @@ constructor(
                 resourceReader.string(R.string.title_eng_invalid_username_or_password)
             val ruInvalidCredentials =
                 resourceReader.string(R.string.title_invalid_username_or_password)
-            errorMessageLiveData.value =
-                if (message.contains(Regex(engInvalidCredentials))) {
-                    ruInvalidCredentials
-                } else {
-                    message
-                }
+            errorMessage = if (message.contains(Regex(engInvalidCredentials))) {
+                ruInvalidCredentials
+            } else {
+                message
+            }
         }
     }
 

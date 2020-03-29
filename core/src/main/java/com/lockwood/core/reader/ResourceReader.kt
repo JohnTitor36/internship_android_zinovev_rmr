@@ -5,7 +5,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.StringRes
 import com.lockwood.core.extensions.color
-import com.lockwood.core.extensions.dimenInPx
+import com.lockwood.core.extensions.dimenPx
 import com.lockwood.core.extensions.string
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,6 +19,6 @@ class ResourceReader @Inject constructor(
 
     fun string(@StringRes res: Int): String = context.string(res)
 
-    fun dimenInPx(@DimenRes res: Int) = context.dimenInPx(res)
+    fun dimenInPx(@DimenRes res: Int) = context.dimenPx(res)
 
 }

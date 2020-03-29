@@ -3,6 +3,7 @@ package com.lockwood.core.extensions
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.Event
+import timber.log.Timber
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -13,6 +14,7 @@ fun MutableLiveData<Event<Unit>>.invoke() {
 }
 
 fun <T> MutableLiveData<T>.onNext(next: T) {
+    Timber.d("onNext: $next")
     value = next
 }
 

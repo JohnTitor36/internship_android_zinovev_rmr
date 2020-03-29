@@ -54,8 +54,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun addViewListeners() {
-        login_edit_text.addTextChangedListener { viewModel.setLogin(it.toString()) }
-        password_edit_text.addTextChangedListener { viewModel.setPassword(it.toString()) }
+        login_edit_text.addTextChangedListener { viewModel.login = it.toString() }
+        password_edit_text.addTextChangedListener { viewModel.password = it.toString() }
 
         sign_in_button.setOnClickListener {
             hideKeyboard()
@@ -70,9 +70,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             requireActivity().window.decorView.findViewById<View>(android.R.id.content)
         rootActivityView.afterMeasured {
             val heightDifference = rootActivityView.rootView.height - rootActivityView.height
-            val isKeyboardOpened =
-                heightDifference > requireContext().dimenInPx(R.dimen.keyboard_probably_height)
-            viewModel.keyboardOpened.value = isKeyboardOpened
+            val keyboardProbablyHeight = requireContext().dimenPx(R.dimen.keyboard_probably_height)
+            val isKeyboardOpened = heightDifference > keyboardProbablyHeight
+            viewModel.keyboardOpened = isKeyboardOpened
         }
     }
 
@@ -124,7 +124,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun observeKeyboardAppearanceChanges() {
-        observe(viewModel.keyboardOpened) { keyboardOpened ->
+        observe(viewModel.keyboardOpenedLiveData) { keyboardOpened ->
             login_title_text_view.isVisible = !keyboardOpened
             login_hint_text_view.isVisible = !keyboardOpened
         }
