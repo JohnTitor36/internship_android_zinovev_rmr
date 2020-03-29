@@ -14,7 +14,7 @@ class ViewModelFactory @Inject constructor(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val provider = providers[modelClass]
-            ?: providers.findByModel(modelClass)
+            ?: providers.findByClass(modelClass)
             ?: error("Unknown ViewModel class $modelClass")
 
         return try {
@@ -24,7 +24,7 @@ class ViewModelFactory @Inject constructor(
         }
     }
 
-    private fun <T> MapViewModelProviders.findByModel(modelClass: Class<T>): @JvmSuppressWildcards Provider<ViewModel>? {
+    private fun <T> MapViewModelProviders.findByClass(modelClass: Class<T>): @JvmSuppressWildcards Provider<ViewModel>? {
         return asIterable().find { modelClass.isAssignableFrom(it.key) }?.value
     }
 
