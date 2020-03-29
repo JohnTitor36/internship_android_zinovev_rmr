@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_input_layout"
-        tools:text="@string/title_invalid_username_or_password"
+        tools:text="@string/title_invalid_credentials"
         tools:visibility="visible" />
 
     <Button

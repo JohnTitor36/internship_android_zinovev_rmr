@@ -1,7 +1,6 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -9,7 +8,11 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.lockwood.core.event.LaunchActivityEvent
+import com.lockwood.core.event.Event
+import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.*
+import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
@@ -19,12 +22,6 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
-
-    companion object {
-
-        private const val MAIN_ACTIVITY_CLASS_NAME =
-            "com.lockwood.themoviedb.presentation.ui.MainActivity"
-    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -50,6 +47,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     override fun showError(error: String) = with(login_error_text_view) {
         text = error
         isVisible = error.isNotEmpty()
+    }
+
+    override fun onOnEvent(event: Event) {
+        super.onOnEvent(event)
+        when (event) {
+            is LaunchActivityEvent -> requireContext().launchActivity(event.className) {
+                flags = event.flags
+            }
+        }
     }
 
     private fun addViewListeners() {
@@ -80,7 +86,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         observeCredentialsLengthChanges()
         observeRequestChanges()
         observeConnectivityChanges()
-        observeNavigationChanges()
+        observeEvents()
         observeKeyboardAppearanceChanges()
     }
 
@@ -106,20 +112,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
     }
 
-    private fun observeConnectivityChanges() {
-        observe(viewModel.noInternetConnectionEvent) {
-            val checkNetworkMessage = getString(R.string.title_check_network_connection)
-            showMessage(checkNetworkMessage)
-        }
+    private fun observeEvents() {
+        observe(viewModel.eventsQueue, ::onOnEvent)
     }
 
-    private fun observeNavigationChanges() {
-        observe(viewModel.openNextActivityEvent) {
-            // TODO: Заменить на переход к пин коду
-            requireContext().launchActivity(MAIN_ACTIVITY_CLASS_NAME) {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
-        }
+    private fun observeConnectivityChanges() {
+//        com.lockwood.core.livedata.observe(viewModel.noInternetConnectionEvent) {
+//            val checkNetworkMessage = getString(R.string.title_check_network_connection)
+//            showMessage(checkNetworkMessage)
+//        }
     }
 
     private fun observeKeyboardAppearanceChanges() {

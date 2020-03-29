@@ -1,10 +1,10 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
-import com.lockwood.core.event.Event
-import com.lockwood.core.extensions.delegate
-import com.lockwood.core.extensions.invoke
+import com.lockwood.core.event.*
 import com.lockwood.core.extensions.schedulersIoToMain
+import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.manager.NetworkConnectivityManager
@@ -32,6 +32,13 @@ constructor(
     private val schedulers: SchedulersProvider
 ) : BaseViewModel() {
 
+    companion object {
+
+        private const val MAIN_ACTIVITY_CLASS_NAME =
+            "com.lockwood.themoviedb.presentation.ui.MainActivity"
+
+    }
+
     val loginLiveData: MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
@@ -52,12 +59,8 @@ constructor(
         MutableLiveData<Boolean>()
     }
 
-    val openNextActivityEvent by lazy {
-        MutableLiveData<Event<Unit>>()
-    }
-
-    val noInternetConnectionEvent by lazy {
-        MutableLiveData<Event<Unit>>()
+    val eventsQueue by lazy {
+        EventsQueue()
     }
 
     var login: String
@@ -74,8 +77,6 @@ constructor(
 
     var keyboardOpened by keyboardOpenedLiveData.delegate()
 
-    private var errorMessage by errorMessageLiveData.delegate()
-
     private var requestToken: String
         get() = authenticationRepository.fetchCurrentRequestToken()
         set(value) {
@@ -86,6 +87,12 @@ constructor(
         get() = authenticationRepository.fetchCurrentSessionId()
         set(value) {
             authenticationRepository.saveCurrentSessionId(value)
+        }
+
+    private val noInternetEvent: Event
+        get() {
+            val noInternetMessage = resourceReader.string(R.string.title_no_network)
+            return MessageEvent(noInternetMessage)
         }
 
     fun checkIsValidCredentialsLength() {
@@ -103,7 +110,7 @@ constructor(
                 )
                 .autoDispose()
         } else {
-            noInternetConnectionEvent.invoke()
+            eventsQueue.offer(noInternetEvent)
         }
     }
 
@@ -145,25 +152,33 @@ constructor(
     private fun handleSuccessLogin() {
         setIsLoading(false)
         userPreferences.setUserLoggedIn(true)
-        openNextActivityEvent.invoke()
+
+        val clearFlags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//    TODO:    val launchMainEvent = LaunchActivityEvent(MAIN_ACTIVITY_CLASS_NAME, clearFlags)
+        val launchMainEvent = LaunchActivityEvent(MAIN_ACTIVITY_CLASS_NAME)
+        eventsQueue.offer(launchMainEvent)
     }
 
     private fun handleFailedLogin(throwable: Throwable) {
         setIsLoading(false)
         if (throwable is NoInternetConnectionException) {
-            noInternetConnectionEvent.invoke()
+            eventsQueue.offer(noInternetEvent)
         } else {
-            val message = throwable.message!!
-            val engInvalidCredentials =
-                resourceReader.string(R.string.title_eng_invalid_username_or_password)
-            val ruInvalidCredentials =
-                resourceReader.string(R.string.title_invalid_username_or_password)
-            errorMessage = if (message.contains(Regex(engInvalidCredentials))) {
-                ruInvalidCredentials
+            val throwableMessage = throwable.message!!
+            val message = if (throwableMessage.isNoNetworkMessage()) {
+                resourceReader.string(R.string.title_invalid_credentials)
             } else {
-                message
+                throwableMessage
             }
+            val messageEvent = ErrorMessageEvent(message)
+            eventsQueue.offer(messageEvent)
         }
+    }
+
+    private fun String.isNoNetworkMessage(): Boolean {
+        val invalidCredentials =
+            resourceReader.string(R.string.title_eng_invalid_credentials)
+        return this.contains(Regex(invalidCredentials))
     }
 
 }

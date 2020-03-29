@@ -3,9 +3,13 @@ package com.lockwood.core.ui
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.lockwood.core.event.ErrorMessageEvent
+import com.lockwood.core.event.Event
+import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.message.MessageView
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId), MessageView {
@@ -29,6 +33,14 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId), Mess
             requireContext().getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(rootView.windowToken, 0)
         rootView.clearFocus()
+    }
+
+    @CallSuper
+    protected open fun onOnEvent(event: Event) {
+        when (event) {
+            is MessageEvent -> showMessage(event.message)
+            is ErrorMessageEvent -> showError(event.errorMessage)
+        }
     }
 
     override fun showMessage(message: String) = Unit

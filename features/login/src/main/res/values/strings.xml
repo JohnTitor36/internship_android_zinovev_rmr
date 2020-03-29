@@ -4,7 +4,7 @@
     <string name="title_input_hint_login">Логин</string>
     <string name="title_input_hint_password">Пароль</string>
     <string name="title_sign_in">Войти</string>
-    <string name="title_invalid_username_or_password">Неверный логин или пароль</string>
     <string name="title_some_error">Что-то пошло не так,\n попробуйте войти позже</string>
-    <string name="title_eng_invalid_username_or_password">Invalid (username|password)</string>
+    <string name="title_invalid_credentials">Неверный логин или пароль</string>
+    <string name="title_eng_invalid_credentials">Invalid (username|password)</string>
 </resources>

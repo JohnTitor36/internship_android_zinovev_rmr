@@ -8,7 +8,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import com.lockwood.core.event.Event
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.reader.ResourceReader
@@ -209,8 +208,8 @@ object LoginViewModelIntegrationTest : Spek({
                 }
             }
             And("resource reader that return message") {
-                mock<TextView> { on { resourceReader.string(R.string.title_eng_invalid_username_or_password) } doReturn emptyString() }
-                mock<TextView> { on { resourceReader.string(R.string.title_invalid_username_or_password) } doReturn emptyString() }
+                mock<TextView> { on { resourceReader.string(R.string.title_eng_invalid_credentials) } doReturn emptyString() }
+                mock<TextView> { on { resourceReader.string(R.string.title_invalid_credentials) } doReturn emptyString() }
             }
 
             When("login") {
