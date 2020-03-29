@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.extensions.*
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -15,7 +17,6 @@ import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
-import javax.inject.Provider
 
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
@@ -26,15 +27,13 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     @Inject
-    lateinit var viewModelFactory: Provider<LoginViewModel>
-
-    private lateinit var viewModel: LoginViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: LoginViewModel by viewModels { viewModelFactory }
 
     override val hasOptionMenu: Boolean = false
 
     override fun onAttach(context: Context) {
         inject()
-        viewModel = viewModelFactory.get()
         super.onAttach(context)
     }
 
