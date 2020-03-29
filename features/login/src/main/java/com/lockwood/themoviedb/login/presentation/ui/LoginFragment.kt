@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         rootView.buildSnackbar(message).show()
     }
 
-    override fun showError(error: String) = with(login_error_text_view){
+    override fun showError(error: String) = with(login_error_text_view) {
         text = error
         isVisible = error.isNotEmpty()
     }
