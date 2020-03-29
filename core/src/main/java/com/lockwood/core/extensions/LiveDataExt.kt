@@ -16,11 +16,11 @@ fun <T> MutableLiveData<T>.onNext(next: T) {
     value = next
 }
 
-inline fun <T, LD : LiveData<T>> Fragment.observe(
+fun <T, LD : LiveData<T>> Fragment.observe(
     liveData: LD,
-    observer: () -> Observer<T>
+    observer: Observer<T>
 ) {
-    liveData.observe(viewLifecycleOwner, observer.invoke())
+    liveData.observe(viewLifecycleOwner, observer)
 }
 
 inline fun <T, LD : LiveData<T>> Fragment.observe(

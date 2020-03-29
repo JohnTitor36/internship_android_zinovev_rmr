@@ -7,7 +7,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
-import com.lockwood.core.event.Event
 import com.lockwood.core.extensions.*
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -49,9 +48,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         rootView.buildSnackbar(message).show()
     }
 
-    override fun showError(error: String) {
-        login_error_text_view.text = error
-        login_error_text_view.isVisible = error.isNotEmpty()
+    override fun showError(error: String) = with(login_error_text_view){
+        text = error
+        isVisible = error.isNotEmpty()
     }
 
     private fun addViewListeners() {
@@ -86,75 +85,49 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         observeKeyboardAppearanceChanges()
     }
 
-    private fun observeCredentialsInputChanges() = with(viewModel) {
-        val validLengthObserver = Observer<String> { checkIsValidCredentialsLength() }
-
-        observe(loginLiveData) {
-
-        }
-        loginLiveData.observe( validLengthObserver)
-        passwordLiveData.observe(lifecycleOwner, validLengthObserver)
+    private fun observeCredentialsInputChanges() {
+        val validLengthObserver = Observer<String> { viewModel.checkIsValidCredentialsLength() }
+        observe(viewModel.loginLiveData, validLengthObserver)
+        observe(viewModel.passwordLiveData, validLengthObserver)
     }
 
-    private fun observeCredentialsLengthChanges() = with(viewModel) {
-        val lifecycleOwner = viewLifecycleOwner
-
-        val loginButtonObserver = Observer<Boolean> { sign_in_button.isEnabled = it }
-
-        isCredentialsLengthValid.observe(lifecycleOwner, loginButtonObserver)
+    private fun observeCredentialsLengthChanges() {
+        observe(viewModel.isCredentialsLengthValid) { sign_in_button.isEnabled = it }
     }
 
-    private fun observeRequestChanges() = with(viewModel) {
-        val lifecycleOwner = viewLifecycleOwner
-
-        val progressBarObserver = Observer<Boolean> {
+    private fun observeRequestChanges() {
+        observe(viewModel.isLoadingLiveData) { isLoading ->
             val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
-            loginProgressBar.isVisible = it
+            loginProgressBar.isVisible = isLoading
         }
-
-        val errorMessageObserver = Observer<String> { message ->
+        observe(viewModel.errorMessageLiveData) { message ->
             if (message != null) {
                 showError(message)
             }
         }
-
-        isLoadingLiveData.observe(lifecycleOwner, progressBarObserver)
-        errorMessageLiveData.observe(lifecycleOwner, errorMessageObserver)
     }
 
-    private fun observeConnectivityChanges() = with(viewModel) {
-        val lifecycleOwner = viewLifecycleOwner
-
-        val noInternetObserver = Observer<Event<Unit>> {
+    private fun observeConnectivityChanges() {
+        observe(viewModel.noInternetConnectionEvent) {
             val checkNetworkMessage = getString(R.string.title_check_network_connection)
             showMessage(checkNetworkMessage)
         }
-
-        noInternetConnectionEvent.observe(lifecycleOwner, noInternetObserver)
     }
 
-    private fun observeNavigationChanges() = with(viewModel) {
-        val lifecycleOwner = viewLifecycleOwner
-
-        // TODO: Заменить на переход к пин коду
-        val openNextActivityObserver = Observer<Event<Unit>> {
+    private fun observeNavigationChanges() {
+        observe(viewModel.openNextActivityEvent) {
+            // TODO: Заменить на переход к пин коду
             requireContext().launchActivity(MAIN_ACTIVITY_CLASS_NAME) {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
         }
-
-        openNextActivityEvent.observe(lifecycleOwner, openNextActivityObserver)
     }
 
-    private fun observeKeyboardAppearanceChanges() = with(viewModel) {
-        val lifecycleOwner = viewLifecycleOwner
-
-        val keyboardOpenedObserver = Observer<Boolean> { keyboardOpened ->
+    private fun observeKeyboardAppearanceChanges() {
+        observe(viewModel.keyboardOpened) { keyboardOpened ->
             login_title_text_view.isVisible = !keyboardOpened
             login_hint_text_view.isVisible = !keyboardOpened
         }
-
-        keyboardOpened.observe(lifecycleOwner, keyboardOpenedObserver)
     }
 
     private fun inject() {
