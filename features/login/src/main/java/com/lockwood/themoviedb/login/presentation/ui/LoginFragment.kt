@@ -44,7 +44,7 @@ class LoginFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentLoginBinding>(container).root
+    ): View = inflater.inflateViewBinding<FragmentLoginBinding>(container, false).root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

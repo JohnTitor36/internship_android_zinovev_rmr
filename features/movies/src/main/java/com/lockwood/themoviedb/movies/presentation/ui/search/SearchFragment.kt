@@ -33,7 +33,7 @@ class SearchFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentSearchBinding>(container).root
+    ): View = inflater.inflateViewBinding<FragmentSearchBinding>(container, false).root
 
     private fun inject() {
         DaggerSearchComponent.builder()

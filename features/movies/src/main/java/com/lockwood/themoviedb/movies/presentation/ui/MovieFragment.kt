@@ -33,7 +33,7 @@ class MovieFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentMovieBinding>(container).root
+    ): View = inflater.inflateViewBinding<FragmentMovieBinding>(container, false).root
 
     private fun inject() {
         DaggerMovieComponent.builder()

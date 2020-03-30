@@ -7,6 +7,8 @@ dependencies {
             deps.android.appcompat,
             deps.android.ktx,
             deps.material.material,
+            deps.navigation.fragment,
+            deps.navigation.ui,
             deps.lifecycle.viewmodel,
             deps.lifecycle.common,
             deps.rxJava.rx2,

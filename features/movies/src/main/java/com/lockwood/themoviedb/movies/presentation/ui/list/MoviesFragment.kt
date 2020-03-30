@@ -11,7 +11,6 @@ import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.movies.databinding.FragmentMoviesBinding
-import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.list.DaggerMoviesComponent
 import javax.inject.Inject
 
@@ -34,7 +33,7 @@ class MoviesFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentMoviesBinding>(container).root
+    ): View = inflater.inflateViewBinding<FragmentMoviesBinding>(container, false).root
 
     private fun inject() {
         DaggerMoviesComponent.builder()

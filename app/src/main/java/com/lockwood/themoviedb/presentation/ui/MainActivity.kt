@@ -2,11 +2,15 @@ package com.lockwood.themoviedb.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.ui.BaseActivity
 import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.themoviedb.R
 import com.lockwood.themoviedb.databinding.ActivityMainBinding
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
 import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
@@ -28,6 +32,7 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         setupAppBar()
+        setBottomNavigation()
         checkIsUserLoggedIn()
     }
 
@@ -35,6 +40,14 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         disableAppBarTitle()
         setDisplayHomeAsUpEnabled(false)
+    }
+
+    private fun setBottomNavigation() {
+        val fragmentManager = supportFragmentManager
+        val hostFragment = fragmentManager.findFragmentById(R.id.nav_host_fragment)
+        (hostFragment as NavHostFragment).findNavController().let { controller ->
+            binding.navigation.setupWithNavController(controller)
+        }
     }
 
     private fun checkIsUserLoggedIn() {

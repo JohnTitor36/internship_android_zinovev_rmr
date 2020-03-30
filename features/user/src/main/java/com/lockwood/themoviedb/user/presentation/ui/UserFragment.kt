@@ -36,7 +36,7 @@ class UserFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentUserBinding>(container).root
+    ): View = inflater.inflateViewBinding<FragmentUserBinding>(container, false).root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
