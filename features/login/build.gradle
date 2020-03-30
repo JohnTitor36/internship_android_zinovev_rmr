@@ -14,6 +14,8 @@ dependencies {
             deps.android.constraint,
             deps.android.ktx,
             deps.material.material,
+            deps.navigation.fragment,
+            deps.navigation.ui,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
