@@ -10,7 +10,6 @@ import com.lockwood.themoviedb.R
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
 import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
 import kotlinx.android.synthetic.main.include_app_bar.*
-import kotlinx.android.synthetic.main.include_app_bar.view.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
@@ -27,7 +26,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     }
 
     private fun setupAppBar() {
-        setSupportActionBar(appbar.toolbar)
+        setSupportActionBar(toolbar)
         disableAppBarTitle()
         setDisplayHomeAsUpEnabled(false)
     }

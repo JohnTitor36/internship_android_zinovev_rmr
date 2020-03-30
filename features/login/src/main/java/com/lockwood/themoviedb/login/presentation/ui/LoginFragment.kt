@@ -85,7 +85,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         observeCredentialsInputChanges()
         observeCredentialsLengthChanges()
         observeRequestChanges()
-        observeConnectivityChanges()
         observeEvents()
         observeKeyboardAppearanceChanges()
     }
@@ -114,13 +113,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private fun observeEvents() {
         observe(viewModel.eventsQueue, ::onOnEvent)
-    }
-
-    private fun observeConnectivityChanges() {
-//        com.lockwood.core.livedata.observe(viewModel.noInternetConnectionEvent) {
-//            val checkNetworkMessage = getString(R.string.title_check_network_connection)
-//            showMessage(checkNetworkMessage)
-//        }
     }
 
     private fun observeKeyboardAppearanceChanges() {

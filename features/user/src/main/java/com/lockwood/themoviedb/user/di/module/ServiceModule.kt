@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.user.di.model
+package com.lockwood.themoviedb.user.di.module
 
 import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.core.network.di.qualifier.AuthRetrofit

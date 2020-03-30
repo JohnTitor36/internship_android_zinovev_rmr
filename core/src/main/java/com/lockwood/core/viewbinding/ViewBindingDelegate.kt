@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
+import timber.log.Timber
 import java.lang.reflect.Method
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
@@ -36,11 +37,15 @@ class ViewBindingDelegate<T : ViewBinding> @PublishedApi internal constructor(
 
     init {
         fragment.viewLifecycleOwnerLiveData.observe(fragment, Observer { lifecycleOwner ->
-            lifecycleOwner.lifecycle.addObserver(
-                LifecycleEventObserver { _, event ->
-                    if (event == Lifecycle.Event.ON_DESTROY) binding = null
-                }
-            )
+            lifecycleOwner.lifecycle.doOnDestroy { binding = null }
+        })
+    }
+
+    private fun Lifecycle.doOnDestroy(action: () -> Unit) {
+        addObserver(LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_DESTROY) {
+                action.invoke()
+            }
         })
     }
 

@@ -31,8 +31,6 @@ class UserViewModel @Inject constructor(
     }
 
     fun fetchAccountDetails() {
-//        Для проверки токена пробуем получить информацию об аккаунте
-//        accountService.getAccountDetails(sessionId, apiKey)
         accountService.getAccountDetails(apiKey, sessionId)
             .schedulersIoToMain(schedulers)
             .subscribe(

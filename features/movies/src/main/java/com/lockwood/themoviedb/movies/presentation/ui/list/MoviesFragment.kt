@@ -5,14 +5,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.themoviedb.movies.R
-import com.lockwood.themoviedb.movies.di.component.list.DaggerMoviesListComponent
+import com.lockwood.themoviedb.movies.di.component.list.DaggerMoviesComponent
 import javax.inject.Inject
 
-class MoviesListFragment : BaseFragment(R.layout.fragment_movies_list) {
+class MoviesFragment : BaseFragment(R.layout.fragment_movies) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: MoviesListViewModel by viewModels { viewModelFactory }
+    private val viewModel: MoviesViewModel by viewModels { viewModelFactory }
 
     override val hasOptionMenu: Boolean = true
 
@@ -22,7 +22,7 @@ class MoviesListFragment : BaseFragment(R.layout.fragment_movies_list) {
     }
 
     private fun inject() {
-        DaggerMoviesListComponent.builder()
+        DaggerMoviesComponent.builder()
             .build()
             .inject(this)
     }
