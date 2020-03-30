@@ -6,20 +6,25 @@ import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.ui.BaseActivity
-import com.lockwood.themoviedb.R
+import com.lockwood.themoviedb.databinding.ActivityMainBinding
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
 import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
 import kotlinx.android.synthetic.main.include_app_bar.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var userPreferences: UserPreferences
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding)
 
         setupAppBar()
         checkIsUserLoggedIn()
