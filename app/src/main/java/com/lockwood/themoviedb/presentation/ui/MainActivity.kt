@@ -45,9 +45,8 @@ class MainActivity : BaseActivity() {
     private fun setBottomNavigation() {
         val fragmentManager = supportFragmentManager
         val hostFragment = fragmentManager.findFragmentById(R.id.nav_host_fragment)
-        (hostFragment as NavHostFragment).findNavController().let { controller ->
-            binding.navigation.setupWithNavController(controller)
-        }
+        val navController = (hostFragment as NavHostFragment).findNavController()
+        binding.navigation.setupWithNavController(navController)
     }
 
     private fun checkIsUserLoggedIn() {
