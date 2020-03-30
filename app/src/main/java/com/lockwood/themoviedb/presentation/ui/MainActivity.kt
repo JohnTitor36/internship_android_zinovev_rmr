@@ -6,6 +6,7 @@ import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.ui.BaseActivity
+import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.themoviedb.databinding.ActivityMainBinding
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
 import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
@@ -23,8 +24,8 @@ class MainActivity : BaseActivity() {
         inject()
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding)
+        binding = layoutInflater.inflateViewBinding()
+        setContentView(binding.root)
 
         setupAppBar()
         checkIsUserLoggedIn()

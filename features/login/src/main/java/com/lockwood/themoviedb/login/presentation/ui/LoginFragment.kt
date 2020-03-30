@@ -2,30 +2,38 @@ package com.lockwood.themoviedb.login.presentation.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.Event
+import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.*
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
+import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.login.R
+import com.lockwood.themoviedb.login.databinding.ActivityLoginBinding
+import com.lockwood.themoviedb.login.databinding.FragmentLoginBinding
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
-import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
-class LoginFragment : BaseFragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: LoginViewModel by viewModels { viewModelFactory }
+
+    private val activityBinding: ActivityLoginBinding by viewBinding()
+    private val binding: FragmentLoginBinding by viewBinding()
 
     override val hasOptionMenu: Boolean = false
 
@@ -33,6 +41,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         inject()
         super.onAttach(context)
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflateViewBinding<FragmentLoginBinding>(container).root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +58,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         rootView.buildSnackbar(message).show()
     }
 
-    override fun showError(error: String) = with(login_error_text_view) {
+    override fun showError(error: String) = with(binding.loginErrorTextView) {
         text = error
         isVisible = error.isNotEmpty()
     }
@@ -58,11 +72,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
     }
 
-    private fun addViewListeners() {
-        login_edit_text.addTextChangedListener { viewModel.login = it.toString() }
-        password_edit_text.addTextChangedListener { viewModel.password = it.toString() }
+    private fun observeEvents() {
+        observe(viewModel.eventsQueue, ::onOnEvent)
+    }
 
-        sign_in_button.setOnClickListener {
+    private fun addViewListeners() = with(binding) {
+        loginEditText.addTextChangedListener { viewModel.login = it.toString() }
+        passwordEditText.addTextChangedListener { viewModel.password = it.toString() }
+
+        signInButton.setOnClickListener {
             hideKeyboard()
             viewModel.login()
         }
@@ -96,13 +114,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun observeCredentialsLengthChanges() {
-        observe(viewModel.isCredentialsLengthValid) { sign_in_button.isEnabled = it }
+        observe(viewModel.isCredentialsLengthValid) { binding.signInButton.isEnabled = it }
     }
 
     private fun observeRequestChanges() {
         observe(viewModel.isLoadingLiveData) { isLoading ->
-            val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
-            loginProgressBar.isVisible = isLoading
+            activityBinding.loginProgressBar.isVisible = isLoading
         }
         observe(viewModel.errorMessageLiveData) { message ->
             if (message != null) {
@@ -111,14 +128,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
     }
 
-    private fun observeEvents() {
-        observe(viewModel.eventsQueue, ::onOnEvent)
-    }
-
     private fun observeKeyboardAppearanceChanges() {
         observe(viewModel.keyboardOpenedLiveData) { keyboardOpened ->
-            login_title_text_view.isVisible = !keyboardOpened
-            login_hint_text_view.isVisible = !keyboardOpened
+            binding.loginTitleTextView.isVisible = !keyboardOpened
+            binding.loginHintTextView.isVisible = !keyboardOpened
         }
     }
 

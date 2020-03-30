@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.CallSuper
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.lockwood.core.event.ErrorMessageEvent
@@ -12,7 +11,7 @@ import com.lockwood.core.event.Event
 import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.message.MessageView
 
-abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId), MessageView {
+abstract class BaseFragment : Fragment(), MessageView {
 
     protected lateinit var rootView: View
 

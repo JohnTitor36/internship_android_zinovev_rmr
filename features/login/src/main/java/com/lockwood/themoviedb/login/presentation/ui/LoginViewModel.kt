@@ -164,14 +164,16 @@ constructor(
         if (throwable is NoInternetConnectionException) {
             eventsQueue.offer(noInternetEvent)
         } else {
-            val throwableMessage = throwable.message!!
-            val message = if (throwableMessage.isNoNetworkMessage()) {
-                resourceReader.string(R.string.title_invalid_credentials)
-            } else {
-                throwableMessage
+            val throwableMessage = throwable.message
+            if (throwableMessage != null) {
+                val message = if (throwableMessage.isNoNetworkMessage()) {
+                    resourceReader.string(R.string.title_invalid_credentials)
+                } else {
+                    throwableMessage
+                }
+                val messageEvent = ErrorMessageEvent(message)
+                eventsQueue.offer(messageEvent)
             }
-            val messageEvent = ErrorMessageEvent(message)
-            eventsQueue.offer(messageEvent)
         }
     }
 
