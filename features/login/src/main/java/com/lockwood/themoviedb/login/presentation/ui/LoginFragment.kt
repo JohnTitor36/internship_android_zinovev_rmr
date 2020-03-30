@@ -21,7 +21,6 @@ import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.login.R
-import com.lockwood.themoviedb.login.databinding.ActivityLoginBinding
 import com.lockwood.themoviedb.login.databinding.FragmentLoginBinding
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
 import javax.inject.Inject
@@ -32,7 +31,6 @@ class LoginFragment : BaseFragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: LoginViewModel by viewModels { viewModelFactory }
 
-    private val activityBinding: ActivityLoginBinding by viewBinding()
     private val binding: FragmentLoginBinding by viewBinding()
 
     override val hasOptionMenu: Boolean = false
@@ -119,7 +117,8 @@ class LoginFragment : BaseFragment() {
 
     private fun observeRequestChanges() {
         observe(viewModel.isLoadingLiveData) { isLoading ->
-            activityBinding.loginProgressBar.isVisible = isLoading
+            val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
+            loginProgressBar.isVisible = isLoading
         }
         observe(viewModel.errorMessageLiveData) { message ->
             if (message != null) {
