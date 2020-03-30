@@ -2,5 +2,5 @@ apply from: rootProject.file('buildsystem/android-library.gradle')
 
 dependencies {
     implementation(deps.glide.glide)
-    kapt(deps.glide.glideCompiler)
+    kapt(deps.glide.compiler)
 }

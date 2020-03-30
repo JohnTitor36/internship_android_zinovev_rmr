@@ -100,7 +100,7 @@ deps.assisted = assisted
 
 def glide = [:]
 glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
-glide.glidecompiler = "com.github.bumptech.glide:compiler:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
 
 def tools = [:]
