@@ -16,9 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
 
-        <activity
-            android:name="com.lockwood.themoviedb.presentation.ui.MainActivity"
-            android:windowSoftInputMode="adjustResize">
+        <activity android:name="com.lockwood.themoviedb.presentation.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

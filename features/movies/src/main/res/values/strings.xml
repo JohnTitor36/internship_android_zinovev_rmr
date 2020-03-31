@@ -3,6 +3,7 @@
     <string name="title_time">Время</string>
     <string name="title_rating">Рейтинг фильма</string>
     <string name="title_search_any_movie">Найдем любой\nфильм на ваш\nвкус</string>
+    <string name="title_search_empty">По вашему запросу ничего\nне найдено :(</string>
     <string name="title_favorite">Избранное</string>
     <string name="title_favorite_empty">Вы не добавили ни одного фильма</string>
     <string name="title_favorite_search">Найти любимые фильмы</string>
