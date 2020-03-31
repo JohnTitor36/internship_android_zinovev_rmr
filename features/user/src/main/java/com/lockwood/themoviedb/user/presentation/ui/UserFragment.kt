@@ -47,7 +47,11 @@ class UserFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observe(viewModel.liveState, ::renderState)
+        addViewListeners()
         viewModel.fetchAccountDetails()
+    }
+
+    private fun addViewListeners() = with(binding) {
         binding.signOutButton.setOnClickListener { viewModel.logout() }
     }
 
