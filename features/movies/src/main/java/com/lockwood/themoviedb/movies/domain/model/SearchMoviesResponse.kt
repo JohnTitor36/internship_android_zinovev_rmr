@@ -1,5 +1,7 @@
 package com.lockwood.themoviedb.movies.domain.model
 
+typealias Movie = SearchMoviesResponse.Result
+
 data class SearchMoviesResponse(
     val page: Int, // 1
     val totalResults: Int, // 2

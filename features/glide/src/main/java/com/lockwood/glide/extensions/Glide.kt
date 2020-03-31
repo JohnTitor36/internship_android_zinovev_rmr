@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.request.target.ViewTarget
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.glide.R
 
@@ -26,6 +27,10 @@ fun Context.drawableRequest(
         .error(error)
 }
 
-fun ImageView.load(url: String, requestBuilder: RequestBuilder<Drawable>) {
-    requestBuilder.load(url).into(this)
+@Suppress("DEPRECATION")
+fun ImageView.load(
+    url: String,
+    requestBuilder: RequestBuilder<Drawable>
+): ViewTarget<ImageView, Drawable> {
+    return requestBuilder.load(url).into(this)
 }

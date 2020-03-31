@@ -5,14 +5,14 @@ import com.lockwood.core.event.ErrorMessageEvent
 import com.lockwood.core.event.EventsQueue
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
+import com.lockwood.core.livedata.mapDistinct
 import com.lockwood.core.network.di.qualifier.ApiKey
-import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
+import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -20,7 +20,8 @@ data class SearchViewState(
     val movieName: String,
     val movieItemType: Int,
     val inputClicked: Boolean,
-    val inputStarted: Boolean
+    val inputStarted: Boolean,
+    val movies: List<Movie>
 )
 
 class SearchViewModel @Inject constructor(
@@ -31,12 +32,9 @@ class SearchViewModel @Inject constructor(
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(apiKey, resourceReader, connectivityManager, schedulers) {
 
-    companion object {
-
-        private const val MOVIES_SEARCH_DEBOUNCE = 1L
-    }
-
     val liveState: MutableLiveData<SearchViewState> = MutableLiveData(createInitialState())
+
+    val movies = liveState.mapDistinct { it.movies }
 
     val eventsQueue by lazy { EventsQueue() }
 
@@ -67,7 +65,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun createInitialState(): SearchViewState {
-        return SearchViewState("", 0, false, false)
+        return SearchViewState("", 0, false, false, emptyList())
     }
 
     private fun checkIsInputStarted(name: String) {
@@ -87,10 +85,12 @@ class SearchViewModel @Inject constructor(
         checkHasInternet(
             onHasConnection = {
                 moviesRepository.searchMovies(apiKey, name)
-                    .debounce(MOVIES_SEARCH_DEBOUNCE, TimeUnit.SECONDS)
                     .schedulersIoToMain(schedulers)
                     .subscribe(
-                        { Timber.d("data: ${it.results.firstOrNull()}") },
+                        {
+                            val movies = it.results
+                            state = state.copy(movies = movies)
+                        },
                         { handleError(it) }
                     )
                     .autoDispose()

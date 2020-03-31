@@ -46,9 +46,10 @@ class UserFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        addViewListeners()
+
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
-        addViewListeners()
         viewModel.fetchAccountDetails()
     }
 
@@ -60,20 +61,22 @@ class UserFragment : BaseFragment() {
         signOutButton.setOnClickListener { viewModel.logout() }
     }
 
-    private fun renderState(state: UserViewState) = with(binding) {
-        userNameTextView.text = state.username
+    private fun renderState(state: UserViewState) {
+        with(binding) {
+            userNameTextView.text = state.username
 
-        val context = requireContext()
-        val resourceReader = ResourceReader(context)
-        val defaultAvatar = resourceReader.drawable(R.drawable.ic_avatar_default)
-        // TODO: Добавить RoundDrawableCropWithBorder
-        val avatarRequest = context.drawableRequest(
-            resourceReader = resourceReader,
-            placeholder = defaultAvatar,
-            fallback = defaultAvatar,
-            error = defaultAvatar
-        )
-        userAvatarImageView.load(state.image, avatarRequest)
+            val context = requireContext()
+            val resourceReader = ResourceReader(context)
+            val defaultAvatar = resourceReader.drawable(R.drawable.ic_avatar_default)
+            // TODO: Добавить RoundDrawableCropWithBorder
+            val avatarRequest = context.drawableRequest(
+                resourceReader = resourceReader,
+                placeholder = defaultAvatar,
+                fallback = defaultAvatar,
+                error = defaultAvatar
+            )
+            userAvatarImageView.load(state.image, avatarRequest)
+        }
     }
 
     private fun inject() {

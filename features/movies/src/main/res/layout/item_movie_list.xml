@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/margin_big">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/item_movie_image"
         android:layout_width="64dp"
         android:layout_height="96dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,8 +25,8 @@
         android:layout_marginStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/item_movie_image"
+        app:layout_constraintTop_toTopOf="@+id/item_movie_image"
         tools:text="Удивительное путешествие до..." />
 
     <TextView
@@ -46,18 +46,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/item_movie_title"
         app:layout_constraintTop_toBottomOf="@+id/item_movie_eng_title"
         tools:text="фэнтези, боевик, комедия" />
 
     <TextView
-        android:id="@+id/item_movie_rating_start"
+        android:id="@+id/item_movie_vote_average"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="6.1"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/item_movie_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/item_movie_title"
@@ -65,13 +66,13 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/item_movie_rating_end"
+        android:id="@+id/item_movie_popularity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_movie_rating_start"
-        app:layout_constraintStart_toEndOf="@+id/item_movie_rating_start"
-        app:layout_constraintTop_toTopOf="@+id/item_movie_rating_start"
+        app:layout_constraintBottom_toBottomOf="@+id/item_movie_vote_average"
+        app:layout_constraintStart_toEndOf="@+id/item_movie_vote_average"
+        app:layout_constraintTop_toTopOf="@+id/item_movie_vote_average"
         tools:text="4 832" />
 
     <ImageView
@@ -80,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/item_movie_rating_start"
-        app:layout_constraintStart_toEndOf="@+id/item_movie_rating_end"
-        app:layout_constraintTop_toTopOf="@+id/item_movie_rating_start"
+        app:layout_constraintBottom_toBottomOf="@+id/item_movie_vote_average"
+        app:layout_constraintStart_toEndOf="@+id/item_movie_popularity"
+        app:layout_constraintTop_toTopOf="@+id/item_movie_vote_average"
         app:srcCompat="@drawable/ic_access_time" />
 
     <TextView

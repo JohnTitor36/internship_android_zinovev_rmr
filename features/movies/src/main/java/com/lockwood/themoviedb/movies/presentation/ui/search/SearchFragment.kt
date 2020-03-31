@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.extensions.buildSnackbar
@@ -20,15 +22,19 @@ import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
+import com.lockwood.themoviedb.movies.domain.model.Movie
+import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
 import javax.inject.Inject
 
-class SearchFragment : BaseFragment() {
+class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: SearchViewModel by viewModels { viewModelFactory }
 
     private val binding: FragmentSearchBinding by viewBinding()
+
+    private lateinit var moviesAdapter: MoviesAdapter
 
     override fun onAttach(context: Context) {
         inject()
@@ -44,9 +50,21 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupViews()
+        addViewListeners()
+
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
-        addViewListeners()
+        observe(viewModel.movies, ::renderMovies)
+    }
+
+    private fun setupViews() = with(binding) {
+        moviesAdapter = MoviesAdapter()
+        moviesAdapter.listener = this@SearchFragment
+        with(searchRecyclerViewMovies) {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = moviesAdapter
+        }
     }
 
     override fun showMessage(message: String) {
@@ -63,16 +81,12 @@ class SearchFragment : BaseFragment() {
     private fun renderState(state: SearchViewState) = with(binding) {
         searchTitle.isVisible = !state.inputClicked
         searchImageBackground.isVisible = !state.inputClicked
+        searchRecyclerViewMovies.isVisible = state.inputStarted
+    }
 
-        if (state.inputStarted) {
-            val movieName = state.movieName
-        }
-
-        // openMovieEvent add arg
-//            val fragmentManager = childFragmentManager
-//            val navController = fragmentManager.findNavController(R.id.search_nav_host_fragment)
-//            val action = EmptyFragmentDirections.searchMovies(movieName)
-//            navController.navigate(action)
+    // TODO: Исправить поведение добавления элементов в список
+    private fun renderMovies(list: List<Movie>) {
+        moviesAdapter.addItems(list)
     }
 
     private fun inject() {
@@ -82,6 +96,12 @@ class SearchFragment : BaseFragment() {
             .networkToolsProvider(networkToolsProvider)
             .build()
             .inject(this)
+    }
+
+    override fun onMovieClick(item: Movie) {
+        val navController = findNavController()
+        val action = SearchFragmentDirections.openMovie(item.id)
+        navController.navigate(action)
     }
 
 }

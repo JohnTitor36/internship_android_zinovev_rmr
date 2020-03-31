@@ -28,15 +28,9 @@ abstract class BaseAdapter<T>(protected val data: MutableList<T>) :
         holder.onBind(position)
     }
 
-    /**
-     * Добавить элементы в список и обновить его
-     *
-     * @param list элементы для добавлениия
-     */
     fun addItems(list: List<T>) {
-        val start = data.size
         data.addAll(list)
-        notifyItemRangeChanged(start, data.size)
+        notifyDataSetChanged()
     }
 
     /**
