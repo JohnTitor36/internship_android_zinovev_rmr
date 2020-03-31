@@ -54,6 +54,7 @@ class SearchFragment : BaseFragment() {
     private fun renderState(state: SearchViewState) = with(binding) {
         searchTitle.isVisible = !state.inputStarted
         searchImageBackground.isVisible = !state.inputStarted
+        searchFragment.isVisible = state.inputStarted
         Timber.d("movieName: ${state.movieName}")
     }
 
