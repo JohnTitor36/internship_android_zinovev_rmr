@@ -3,6 +3,7 @@ apply from: rootProject.file('buildsystem/android-library.gradle')
 dependencies {
     implementation project(":core")
     implementation project(":core:network")
+    implementation project(":features:glide")
 
     implementation(
             deps.kotlin.stdlib,
@@ -17,9 +18,14 @@ dependencies {
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
             deps.network.moshi,
+            deps.glide.glide,
             deps.tools.timber,
             deps.dagger.dagger
     )
 
-    kapt(deps.dagger.compiler, deps.network.moshicodegen)
+    kapt(
+            deps.dagger.compiler,
+            deps.glide.compiler,
+            deps.network.moshicodegen
+    )
 }

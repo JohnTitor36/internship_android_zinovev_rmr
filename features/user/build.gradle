@@ -13,11 +13,11 @@ dependencies {
             deps.android.fragment,
             deps.android.ktx,
             deps.material.material,
-            deps.glide.glide,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
             deps.network.moshi,
+            deps.glide.glide,
             deps.tools.timber,
             deps.dagger.dagger
     )

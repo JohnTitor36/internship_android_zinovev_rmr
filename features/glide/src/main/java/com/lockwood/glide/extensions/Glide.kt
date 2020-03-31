@@ -9,12 +9,12 @@ import com.bumptech.glide.RequestBuilder
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.glide.R
 
-private val ResourceReader.placeholder
+val ResourceReader.defaultPlaceholder
     get() = ColorDrawable(color(R.color.gray))
 
 fun Context.drawableRequest(
     resourceReader: ResourceReader = ResourceReader(this),
-    placeholder: Drawable? = resourceReader.placeholder,
+    placeholder: Drawable? = resourceReader.defaultPlaceholder,
     fallback: Drawable? = placeholder,
     error: Drawable? = null
 ): RequestBuilder<Drawable> {

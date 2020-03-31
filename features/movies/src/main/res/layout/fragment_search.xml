@@ -57,6 +57,8 @@
         <!-- region Movies list and Movie fragment -->
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:orientation="vertical"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/default_content_margin"
             android:layout_marginTop="@dimen/default_content_margin"
