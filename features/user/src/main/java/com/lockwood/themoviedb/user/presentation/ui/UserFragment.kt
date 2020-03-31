@@ -8,11 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
+import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.core.viewbinding.viewBinding
+import com.lockwood.glide.extensions.drawableRequest
+import com.lockwood.glide.extensions.load
+import com.lockwood.themoviedb.user.R
 import com.lockwood.themoviedb.user.databinding.FragmentUserBinding
 import com.lockwood.themoviedb.user.di.component.DaggerUserComponent
 import javax.inject.Inject
@@ -40,9 +45,26 @@ class UserFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.signOutButton.setOnClickListener { viewModel.logout() }
-        // Для проверки токена пробуем получить информацию об аккаунте
+
+        observe(viewModel.liveState, ::renderState)
         viewModel.fetchAccountDetails()
+        binding.signOutButton.setOnClickListener { viewModel.logout() }
+    }
+
+    private fun renderState(state: UserViewState) = with(binding) {
+        userNameTextView.text = state.username
+
+        val context = requireContext()
+        val resourceReader = ResourceReader(context)
+        val defaultAvatar = resourceReader.drawable(R.drawable.ic_avatar_default)
+        // TODO: Добавить RoundDrawableCropWithBorder
+        val avatarRequest = context.drawableRequest(
+            resourceReader = resourceReader,
+            placeholder = defaultAvatar,
+            fallback = defaultAvatar,
+            error = defaultAvatar
+        )
+        userAvatarImageView.load(state.image, avatarRequest)
     }
 
     private fun inject() {

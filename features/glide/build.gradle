@@ -1,6 +1,12 @@
 apply from: rootProject.file('buildsystem/android-library.gradle')
 
 dependencies {
-    implementation(deps.glide.glide)
+    implementation project(":core")
+
+    implementation(
+            deps.kotlin.stdlib,
+            deps.glide.glide
+    )
+
     kapt(deps.glide.compiler)
 }

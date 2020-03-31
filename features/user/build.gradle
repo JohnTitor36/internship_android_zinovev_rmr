@@ -4,6 +4,7 @@ dependencies {
     implementation project(":core")
     implementation project(":core:network")
     implementation project(":core:preferences")
+    implementation project(":features:glide")
 
     implementation(
             deps.kotlin.stdlib,
@@ -12,6 +13,7 @@ dependencies {
             deps.android.fragment,
             deps.android.ktx,
             deps.material.material,
+            deps.glide.glide,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
@@ -20,5 +22,9 @@ dependencies {
             deps.dagger.dagger
     )
 
-    kapt(deps.dagger.compiler, deps.network.moshicodegen)
+    kapt(
+            deps.dagger.compiler,
+            deps.glide.compiler,
+            deps.network.moshicodegen
+    )
 }
