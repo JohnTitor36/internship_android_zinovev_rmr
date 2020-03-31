@@ -21,6 +21,7 @@
         tools:ignore="FragmentTagUsage"
         tools:layout="@layout/fragment_login" />
 
+    <!-- region ProgressBar -->
     <FrameLayout
         android:id="@+id/login_progress_bar"
         android:layout_width="match_parent"
@@ -37,5 +38,6 @@
             android:theme="@style/AppTheme" />
 
     </FrameLayout>
+    <!-- endregion -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
