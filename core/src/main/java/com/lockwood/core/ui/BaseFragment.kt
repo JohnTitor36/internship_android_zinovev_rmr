@@ -15,13 +15,6 @@ abstract class BaseFragment : Fragment(), MessageView {
 
     protected lateinit var rootView: View
 
-    abstract val hasOptionMenu: Boolean
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(hasOptionMenu)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rootView = view

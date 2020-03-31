@@ -14,7 +14,6 @@ import com.lockwood.themoviedb.R
 import com.lockwood.themoviedb.databinding.ActivityMainBinding
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
 import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
-import kotlinx.android.synthetic.main.include_app_bar.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
@@ -31,15 +30,8 @@ class MainActivity : BaseActivity() {
         binding = layoutInflater.inflateViewBinding()
         setContentView(binding.root)
 
-        setupAppBar()
         setBottomNavigation()
         checkIsUserLoggedIn()
-    }
-
-    private fun setupAppBar() {
-        setSupportActionBar(toolbar)
-        disableAppBarTitle()
-        setDisplayHomeAsUpEnabled(false)
     }
 
     private fun setBottomNavigation() {

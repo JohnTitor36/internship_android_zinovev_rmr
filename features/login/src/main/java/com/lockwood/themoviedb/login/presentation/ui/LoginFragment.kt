@@ -33,8 +33,6 @@ class LoginFragment : BaseFragment() {
 
     private val binding: FragmentLoginBinding by viewBinding()
 
-    override val hasOptionMenu: Boolean = false
-
     override fun onAttach(context: Context) {
         inject()
         super.onAttach(context)
@@ -111,8 +109,8 @@ class LoginFragment : BaseFragment() {
         observe(viewModel.passwordLiveData, validLengthObserver)
     }
 
-    private fun observeCredentialsLengthChanges() {
-        observe(viewModel.isCredentialsLengthValid) { binding.signInButton.isEnabled = it }
+    private fun observeCredentialsLengthChanges() = with(binding) {
+        observe(viewModel.isCredentialsLengthValid) { signInButton.isEnabled = it }
     }
 
     private fun observeRequestChanges() {

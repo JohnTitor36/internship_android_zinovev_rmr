@@ -22,8 +22,6 @@ class MovieFragment : BaseFragment() {
 
     private val binding: FragmentMovieBinding by viewBinding()
 
-    override val hasOptionMenu: Boolean = true
-
     override fun onAttach(context: Context) {
         inject()
         super.onAttach(context)

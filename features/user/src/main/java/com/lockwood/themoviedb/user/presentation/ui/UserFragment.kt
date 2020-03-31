@@ -30,8 +30,6 @@ class UserFragment : BaseFragment() {
 
     private val binding: FragmentUserBinding by viewBinding()
 
-    override val hasOptionMenu: Boolean = false
-
     override fun onAttach(context: Context) {
         inject()
         super.onAttach(context)
@@ -52,7 +50,7 @@ class UserFragment : BaseFragment() {
     }
 
     private fun addViewListeners() = with(binding) {
-        binding.signOutButton.setOnClickListener { viewModel.logout() }
+        signOutButton.setOnClickListener { viewModel.logout() }
     }
 
     private fun renderState(state: UserViewState) = with(binding) {
