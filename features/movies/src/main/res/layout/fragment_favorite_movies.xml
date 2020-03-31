@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/favorite_title"
+        android:id="@+id/search_title"
         style="@style/Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:textSize="@dimen/text_size_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorite_title" />
+        app:layout_constraintTop_toBottomOf="@+id/search_title" />
 
     <TextView
         android:id="@+id/favorite_title_search"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/favorite_title_empty" />
 
     <ImageView
-        android:id="@+id/favorite_image_view"
+        android:id="@+id/search_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="60dp"

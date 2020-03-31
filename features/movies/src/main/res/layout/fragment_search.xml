@@ -5,20 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/favorite_title"
-        style="@style/Title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_content_margin"
-        android:layout_marginEnd="@dimen/default_content_margin"
-        android:text="@string/title_search_any_movie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
-        android:id="@+id/favorite_image_view"
+        android:id="@+id/search_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="120dp"
@@ -29,5 +17,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/search_title"
+        style="@style/Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_content_margin"
+        android:layout_marginEnd="@dimen/default_content_margin"
+        android:text="@string/title_search_any_movie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/search_input_layout"
+        layout="@layout/include_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_content_margin"
+        android:layout_marginTop="@dimen/margin_extra_big"
+        android:layout_marginEnd="@dimen/default_content_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_title" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
