@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.lockwood.core.extensions.findNavController
 import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.preferences.user.UserPreferences
@@ -35,9 +36,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setBottomNavigation() {
-        val fragmentManager = supportFragmentManager
-        val hostFragment = fragmentManager.findFragmentById(R.id.main_nav_host_fragment)
-        val navController = (hostFragment as NavHostFragment).findNavController()
+        val navController = supportFragmentManager.findNavController(R.id.main_nav_host_fragment)
         binding.navigation.setupWithNavController(navController)
     }
 

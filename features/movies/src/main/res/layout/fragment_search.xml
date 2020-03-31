@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/margin_extra_big"
-    android:orientation="vertical">
+    android:layout_marginTop="@dimen/margin_extra_big">
 
     <ImageView
         android:id="@+id/search_image_background"
@@ -14,7 +13,8 @@
         android:layout_marginStart="120dp"
         android:scaleType="fitEnd"
         android:src="@drawable/ic_search_background"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,21 +55,14 @@
         <!-- endregion -->
 
         <!-- region Movies list and Movie fragment -->
-        <FrameLayout
-            android:id="@+id/search_fragment"
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <fragment
-                android:id="@+id/search_nav_host_fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:navGraph="@navigation/search_graph"
-                tools:ignore="FragmentTagUsage"
-                tools:layout="@layout/fragment_movie" />
-        </FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/default_content_margin"
+            android:layout_marginTop="@dimen/default_content_margin"
+            android:layout_marginEnd="@dimen/default_content_margin"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_movie_list" />
         <!-- endregion -->
 
     </LinearLayout>

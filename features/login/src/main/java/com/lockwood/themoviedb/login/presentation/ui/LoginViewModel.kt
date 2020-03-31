@@ -154,8 +154,7 @@ constructor(
         userPreferences.setUserLoggedIn(true)
 
         val clearFlags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//    TODO:    val launchMainEvent = LaunchActivityEvent(MAIN_ACTIVITY_CLASS_NAME, clearFlags)
-        val launchMainEvent = LaunchActivityEvent(MAIN_ACTIVITY_CLASS_NAME)
+        val launchMainEvent = LaunchActivityEvent(MAIN_ACTIVITY_CLASS_NAME, clearFlags)
         eventsQueue.offer(launchMainEvent)
     }
 

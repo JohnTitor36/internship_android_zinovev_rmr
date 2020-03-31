@@ -45,7 +45,7 @@ class SearchFragment : BaseFragment() {
 
     private fun addViewListeners() = with(binding) {
         with(searchInputLayout.searchEditText) {
-            setOnFocusChangeListener { _, _ -> viewModel.inputStarted() }
+            setOnFocusChangeListener { _, _ -> viewModel.inputClicked() }
             addTextChangedListener { viewModel.movieNameEntered(it.toString()) }
         }
     }
@@ -53,7 +53,16 @@ class SearchFragment : BaseFragment() {
     private fun renderState(state: SearchViewState) = with(binding) {
         searchTitle.isVisible = !state.inputClicked
         searchImageBackground.isVisible = !state.inputClicked
-        searchFragment.isVisible = state.inputStarted
+
+        if (state.inputStarted) {
+            val movieName = state.movieName
+        }
+
+        // openMovieEvent add arg
+//            val fragmentManager = childFragmentManager
+//            val navController = fragmentManager.findNavController(R.id.search_nav_host_fragment)
+//            val action = EmptyFragmentDirections.searchMovies(movieName)
+//            navController.navigate(action)
     }
 
     private fun inject() {
