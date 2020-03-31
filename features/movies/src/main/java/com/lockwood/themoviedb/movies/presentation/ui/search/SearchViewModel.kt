@@ -8,7 +8,8 @@ import javax.inject.Inject
 data class SearchViewState(
     val movieName: String,
     val movieItemType: Int,
-    val inputStarted: Boolean
+    val inputStarted: Boolean,
+    val inputClicked: Boolean
 )
 
 class SearchViewModel @Inject constructor() : BaseViewModel() {
@@ -17,17 +18,22 @@ class SearchViewModel @Inject constructor() : BaseViewModel() {
     private var state: SearchViewState by liveState.delegate()
 
     private fun createInitialState(): SearchViewState {
-        return SearchViewState("", 0, false)
+        return SearchViewState("", 0, false, false)
     }
 
     fun inputStarted() {
-        if (!state.inputStarted) {
-            state = state.copy(inputStarted = true)
+        if (!state.inputClicked) {
+            state = state.copy(inputClicked = true)
         }
     }
 
     fun movieNameEntered(name: String) {
-        state = state.copy(movieName = name)
+        val inputStarted = if(!state.inputClicked){
+            name.isNotEmpty()
+        }  else {
+            true
+        }
+        state = state.copy(inputStarted = inputStarted, movieName = name)
     }
 
 }

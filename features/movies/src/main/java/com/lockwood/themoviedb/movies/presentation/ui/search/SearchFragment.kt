@@ -15,7 +15,6 @@ import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
-import timber.log.Timber
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment() {
@@ -52,12 +51,10 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun renderState(state: SearchViewState) = with(binding) {
-        searchTitle.isVisible = !state.inputStarted
-        searchImageBackground.isVisible = !state.inputStarted
+        searchTitle.isVisible = !state.inputClicked
+        searchImageBackground.isVisible = !state.inputClicked
         searchFragment.isVisible = state.inputStarted
-        Timber.d("movieName: ${state.movieName}")
     }
-
 
     private fun inject() {
         DaggerSearchComponent.builder()
