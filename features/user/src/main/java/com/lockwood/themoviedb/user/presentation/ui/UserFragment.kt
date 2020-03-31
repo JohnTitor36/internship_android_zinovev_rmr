@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.extensions.buildSnackbar
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -44,9 +46,14 @@ class UserFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
         addViewListeners()
         viewModel.fetchAccountDetails()
+    }
+
+    override fun showMessage(message: String) {
+        rootView.buildSnackbar(message).show()
     }
 
     private fun addViewListeners() = with(binding) {

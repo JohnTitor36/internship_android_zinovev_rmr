@@ -12,24 +12,13 @@ class NetworkConnectivityManager @Inject constructor(private val context: Contex
     private val connectivityManager
         get() = context.getSystemService<ConnectivityManager>()
 
-    @Suppress("deprecation", "NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    @Suppress("deprecation")
     val hasInternetConnection: Boolean
         get() {
             val connectivityManager = connectivityManager
             return if (connectivityManager != null) {
-                var isWifiConn = false
-                var isMobileConn = false
-                connectivityManager.allNetworks.forEach { network ->
-                    connectivityManager.getNetworkInfo(network).apply {
-                        if (type == ConnectivityManager.TYPE_WIFI) {
-                            isWifiConn = isWifiConn || isConnected
-                        }
-                        if (type == ConnectivityManager.TYPE_MOBILE) {
-                            isMobileConn = isMobileConn || isConnected
-                        }
-                    }
-                }
-                isWifiConn || isMobileConn
+                val activeNetworkInfo = connectivityManager.activeNetworkInfo
+                return activeNetworkInfo != null && activeNetworkInfo.isConnected
             } else {
                 false
             }

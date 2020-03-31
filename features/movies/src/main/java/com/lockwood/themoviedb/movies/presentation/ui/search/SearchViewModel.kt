@@ -42,8 +42,9 @@ class SearchViewModel @Inject constructor(
 
     private var state: SearchViewState by liveState.delegate()
 
+    // TDOO: Настроить softInpuMode под Snackbar
     override fun handleError(throwable: Throwable) {
-        if (throwable is NoInternetConnectionException) {
+        if (throwable.isNoInternetException) {
             eventsQueue.offer(noInternetEvent)
         } else {
             val throwableMessage = throwable.message
@@ -83,14 +84,19 @@ class SearchViewModel @Inject constructor(
             return
         }
 
-        moviesRepository.searchMovies(apiKey, name)
-            .debounce(MOVIES_SEARCH_DEBOUNCE, TimeUnit.SECONDS)
-            .schedulersIoToMain(schedulers)
-            .subscribe(
-                { Timber.d("data: ${it.results.firstOrNull()}") },
-                { handleError(it) }
-            )
-            .autoDispose()
+        checkHasInternet(
+            onHasConnection = {
+                moviesRepository.searchMovies(apiKey, name)
+                    .debounce(MOVIES_SEARCH_DEBOUNCE, TimeUnit.SECONDS)
+                    .schedulersIoToMain(schedulers)
+                    .subscribe(
+                        { Timber.d("data: ${it.results.firstOrNull()}") },
+                        { handleError(it) }
+                    )
+                    .autoDispose()
+            },
+            onNoConnection = { eventsQueue.offer(noInternetEvent) }
+        )
     }
 
 

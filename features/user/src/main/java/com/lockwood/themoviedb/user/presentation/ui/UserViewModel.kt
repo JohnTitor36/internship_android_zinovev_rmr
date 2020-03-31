@@ -1,6 +1,8 @@
 package com.lockwood.themoviedb.user.presentation.ui
 
 import androidx.lifecycle.MutableLiveData
+import com.lockwood.core.event.EventsQueue
+import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.di.qualifier.ApiKey
@@ -41,20 +43,30 @@ class UserViewModel @Inject constructor(
 
     private var state: UserViewState by liveState.delegate()
 
+    val eventsQueue by lazy { EventsQueue() }
+
     override fun handleError(throwable: Throwable) {
-        Timber.e(throwable)
+        if (throwable.isNoInternetException) {
+            eventsQueue.offer(noInternetEvent)
+        } else {
+            val message = throwable.message.toString()
+            val event = MessageEvent(message)
+            eventsQueue.offer(event)
+        }
     }
 
-    fun logout() {
-        // TODO: Перейти на clean architecture в user
-        val sessionBodyModel = DeleteSessionBodyModel(sessionId)
-        accountService.deleteSession(apiKey, sessionBodyModel)
-            .schedulersIoToMain(schedulers)
-            .subscribe(
-                { loginActivityRouter.openLoginActivity() },
-                { e -> handleError(e) }
-            ).autoDispose()
-    }
+    fun logout() = checkHasInternet(
+        onHasConnection = {
+            val sessionBodyModel = DeleteSessionBodyModel(sessionId)
+            accountService.deleteSession(apiKey, sessionBodyModel)
+                .schedulersIoToMain(schedulers)
+                .subscribe(
+                    { loginActivityRouter.openLoginActivity() },
+                    { e -> handleError(e) }
+                ).autoDispose()
+        },
+        onNoConnection = { eventsQueue.offer(noInternetEvent) }
+    )
 
     fun fetchAccountDetails() {
         accountService.getAccountDetails(apiKey, sessionId)

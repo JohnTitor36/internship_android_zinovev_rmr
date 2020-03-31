@@ -9,7 +9,6 @@ import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.livedata.mapDistinct
 import com.lockwood.core.network.di.qualifier.ApiKey
-import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.user.UserPreferences
@@ -72,7 +71,7 @@ constructor(
 
     override fun handleError(throwable: Throwable) {
         setLoading(false)
-        if (throwable is NoInternetConnectionException) {
+        if (throwable.isNoInternetException) {
             eventsQueue.offer(noInternetEvent)
         } else {
             val throwableMessage = throwable.message
@@ -102,8 +101,8 @@ constructor(
         state = state.copy(keyboardOpened = keyboardOpened)
     }
 
-    fun login() {
-        if (connectivityManager.hasInternetConnection) {
+    fun login() = checkHasInternet(
+        onHasConnection = {
             createRequestToken().schedulersIoToMain(schedulers)
                 .doOnSubscribe { setLoading(true) }
                 .subscribe(
@@ -111,10 +110,8 @@ constructor(
                     { handleError(it) }
                 )
                 .autoDispose()
-        } else {
-            eventsQueue.offer(noInternetEvent)
-        }
-    }
+        },
+        onNoConnection = { eventsQueue.offer(noInternetEvent) })
 
     private fun setLoading(loading: Boolean) {
         state = state.copy(loading = loading)
