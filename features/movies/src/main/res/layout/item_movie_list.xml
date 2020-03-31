@@ -15,7 +15,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_search_background" />
+        tools:src="@drawable/ic_search_background"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/item_movie_title"
@@ -78,6 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/item_movie_rating_start"
         app:layout_constraintStart_toEndOf="@+id/item_movie_rating_end"
         app:layout_constraintTop_toTopOf="@+id/item_movie_rating_start"
@@ -89,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginEnd="50dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -1,7 +1,7 @@
 package com.lockwood.themoviedb.movies.data.repository
 
 import com.lockwood.themoviedb.movies.data.model.SearchMoviesResponseEntity
-import io.reactivex.Single
+import io.reactivex.Observable
 
 interface MoviesRemote {
 
@@ -10,6 +10,6 @@ interface MoviesRemote {
         query: String,
         page: Int,
         language: String
-    ): Single<SearchMoviesResponseEntity>
+    ): Observable<SearchMoviesResponseEntity>
 
 }

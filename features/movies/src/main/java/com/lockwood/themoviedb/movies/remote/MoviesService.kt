@@ -1,7 +1,7 @@
 package com.lockwood.themoviedb.movies.remote
 
 import com.lockwood.themoviedb.movies.remote.model.response.SearchMoviesResponseModel
-import io.reactivex.Single
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,6 +13,6 @@ interface MoviesService {
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("language") language: String
-    ): Single<SearchMoviesResponseModel>
+    ): Observable<SearchMoviesResponseModel>
 
 }

@@ -9,7 +9,10 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.livedata.observe
+import com.lockwood.core.network.extensions.networkToolsProvider
+import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.core.viewbinding.viewBinding
@@ -67,6 +70,9 @@ class SearchFragment : BaseFragment() {
 
     private fun inject() {
         DaggerSearchComponent.builder()
+            .appToolsProvider(appToolsProvider)
+            .preferencesToolsProvider(preferencesToolsProvider)
+            .networkToolsProvider(networkToolsProvider)
             .build()
             .inject(this)
     }

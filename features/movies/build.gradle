@@ -3,6 +3,7 @@ apply from: rootProject.file('buildsystem/android-library.gradle')
 dependencies {
     implementation project(":core")
     implementation project(":core:network")
+    implementation project(":core:preferences")
     implementation project(":features:glide")
 
     implementation(

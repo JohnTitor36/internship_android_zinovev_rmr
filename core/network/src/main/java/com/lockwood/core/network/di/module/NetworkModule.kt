@@ -59,8 +59,8 @@ class NetworkModule {
         })
         // Чтобы быть уверенными, что утечки чувствительных данных не будет
         if (BuildConfig.DEBUG) {
-//            logging.level = HttpLoggingInterceptor.Level.BASIC
-            logging.level = HttpLoggingInterceptor.Level.BODY
+            logging.level = HttpLoggingInterceptor.Level.BASIC
+//            logging.level = HttpLoggingInterceptor.Level.BODY
         }
         return logging
     }

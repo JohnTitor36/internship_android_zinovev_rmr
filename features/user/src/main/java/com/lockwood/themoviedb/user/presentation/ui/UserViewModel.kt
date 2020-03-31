@@ -4,10 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.di.qualifier.ApiKey
+import com.lockwood.core.network.manager.NetworkConnectivityManager
+import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.di.qualifier.SessionId
+import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.router.LoginActivityRouter
-import com.lockwood.core.schedulers.AndroidSchedulersProvider
-import com.lockwood.core.ui.BaseViewModel
+import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.core.window.WindowManager
 import com.lockwood.themoviedb.user.remote.AccountService
 import com.lockwood.themoviedb.user.remote.model.body.DeleteSessionBodyModel
@@ -20,13 +22,15 @@ data class UserViewState(
 )
 
 class UserViewModel @Inject constructor(
-    @ApiKey private val apiKey: String,
-    @SessionId private val sessionId: String,
     private val accountService: AccountService,
-    private val schedulers: AndroidSchedulersProvider,
     private val loginActivityRouter: LoginActivityRouter,
-    private val windowManager: WindowManager
-) : BaseViewModel() {
+    private val windowManager: WindowManager,
+    @SessionId private val sessionId: String,
+    @ApiKey apiKey: String,
+    resourceReader: ResourceReader,
+    connectivityManager: NetworkConnectivityManager,
+    schedulers: SchedulersProvider
+) : BaseNetworkViewModel(apiKey, resourceReader, connectivityManager, schedulers) {
 
     companion object {
 
@@ -34,11 +38,11 @@ class UserViewModel @Inject constructor(
     }
 
     val liveState: MutableLiveData<UserViewState> = MutableLiveData(createInitialState())
+
     private var state: UserViewState by liveState.delegate()
 
-    // TODO: Добавить информацию о пользователе в префы
-    private fun createInitialState(): UserViewState {
-        return UserViewState("", "")
+    override fun handleError(throwable: Throwable) {
+        Timber.e(throwable)
     }
 
     fun logout() {
@@ -48,7 +52,7 @@ class UserViewModel @Inject constructor(
             .schedulersIoToMain(schedulers)
             .subscribe(
                 { loginActivityRouter.openLoginActivity() },
-                { e -> Timber.e(e) }
+                { e -> handleError(e) }
             ).autoDispose()
     }
 
@@ -64,6 +68,11 @@ class UserViewModel @Inject constructor(
                 },
                 { e -> Timber.e(e) }
             ).autoDispose()
+    }
+
+    // TODO: Добавить информацию о пользователе в префы
+    private fun createInitialState(): UserViewState {
+        return UserViewState("", "")
     }
 
     private fun gravatarImageUrl(hash: String): String {

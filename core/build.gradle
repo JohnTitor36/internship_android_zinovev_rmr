@@ -12,6 +12,7 @@ dependencies {
             deps.navigation.ui,
             deps.lifecycle.viewmodel,
             deps.lifecycle.common,
+            deps.lifecycle.livedata,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.tools.timber,

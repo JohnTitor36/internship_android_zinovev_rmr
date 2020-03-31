@@ -3,7 +3,7 @@ package com.lockwood.themoviedb.movies.data.source
 import com.lockwood.themoviedb.movies.data.model.SearchMoviesResponseEntity
 import com.lockwood.themoviedb.movies.data.repository.MoviesDataStore
 import com.lockwood.themoviedb.movies.data.repository.MoviesRemote
-import io.reactivex.Single
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class MoviesRemoteDataSource @Inject constructor(
@@ -15,7 +15,7 @@ class MoviesRemoteDataSource @Inject constructor(
         query: String,
         page: Int,
         language: String
-    ): Single<SearchMoviesResponseEntity> {
+    ): Observable<SearchMoviesResponseEntity> {
         return moviesRemote.searchMovies(apiKey, query, page, language)
     }
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.event.Event
 import com.lockwood.core.event.LaunchActivityEvent
@@ -46,17 +45,11 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeLiveDataChanges()
+
+        observe(viewModel.eventsQueue, ::onOnEvent)
+        observe(viewModel.liveState, ::renderState)
+        observe(viewModel.loading, ::renderLoading)
         addViewListeners()
-    }
-
-    override fun showMessage(message: String) {
-        rootView.buildSnackbar(message).show()
-    }
-
-    override fun showError(error: String) = with(binding.loginErrorTextView) {
-        text = error
-        isVisible = error.isNotEmpty()
     }
 
     override fun onOnEvent(event: Event) {
@@ -68,13 +61,30 @@ class LoginFragment : BaseFragment() {
         }
     }
 
-    private fun observeEvents() {
-        observe(viewModel.eventsQueue, ::onOnEvent)
+    override fun showMessage(message: String) {
+        rootView.buildSnackbar(message).show()
+    }
+
+    override fun showError(error: String) = with(binding.loginErrorTextView) {
+        text = error
+        isVisible = error.isNotEmpty()
+    }
+
+    private fun renderState(state: LoginViewState) = with(binding) {
+        signInButton.isEnabled = state.validCredentials
+
+        loginTitleTextView.isVisible = !state.keyboardOpened
+        loginHintTextView.isVisible = !state.keyboardOpened
+    }
+
+    private fun renderLoading(loading: Boolean) {
+        val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
+        loginProgressBar.isVisible = loading
     }
 
     private fun addViewListeners() = with(binding) {
-        loginEditText.addTextChangedListener { viewModel.login = it.toString() }
-        passwordEditText.addTextChangedListener { viewModel.password = it.toString() }
+        loginEditText.addTextChangedListener { viewModel.onLoginChanged(it.toString()) }
+        passwordEditText.addTextChangedListener { viewModel.onPasswordChanged(it.toString()) }
 
         signInButton.setOnClickListener {
             hideKeyboard()
@@ -85,50 +95,13 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun checkKeyboardVisibility() {
-        val rootActivityView =
-            requireActivity().window.decorView.findViewById<View>(android.R.id.content)
+        val window = requireActivity().window
+        val rootActivityView = window.decorView.findViewById<View>(android.R.id.content)
         rootActivityView.afterMeasured {
             val heightDifference = rootActivityView.rootView.height - rootActivityView.height
             val keyboardProbablyHeight = requireContext().dimenPx(R.dimen.keyboard_probably_height)
             val isKeyboardOpened = heightDifference > keyboardProbablyHeight
-            viewModel.keyboardOpened = isKeyboardOpened
-        }
-    }
-
-    private fun observeLiveDataChanges() {
-        observeCredentialsInputChanges()
-        observeCredentialsLengthChanges()
-        observeRequestChanges()
-        observeEvents()
-        observeKeyboardAppearanceChanges()
-    }
-
-    private fun observeCredentialsInputChanges() {
-        val validLengthObserver = Observer<String> { viewModel.checkIsValidCredentialsLength() }
-        observe(viewModel.loginLiveData, validLengthObserver)
-        observe(viewModel.passwordLiveData, validLengthObserver)
-    }
-
-    private fun observeCredentialsLengthChanges() = with(binding) {
-        observe(viewModel.isCredentialsLengthValid) { signInButton.isEnabled = it }
-    }
-
-    private fun observeRequestChanges() {
-        observe(viewModel.isLoadingLiveData) { isLoading ->
-            val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
-            loginProgressBar.isVisible = isLoading
-        }
-        observe(viewModel.errorMessageLiveData) { message ->
-            if (message != null) {
-                showError(message)
-            }
-        }
-    }
-
-    private fun observeKeyboardAppearanceChanges() {
-        observe(viewModel.keyboardOpenedLiveData) { keyboardOpened ->
-            binding.loginTitleTextView.isVisible = !keyboardOpened
-            binding.loginHintTextView.isVisible = !keyboardOpened
+            viewModel.onKeyboardOpened(isKeyboardOpened)
         }
     }
 
