@@ -13,8 +13,8 @@ import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.router.LoginActivityRouter
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.core.window.WindowManager
-import com.lockwood.themoviedb.user.remote.AccountService
-import com.lockwood.themoviedb.user.remote.model.body.DeleteSessionBodyModel
+import com.lockwood.themoviedb.user.domain.model.DeleteSessionBody
+import com.lockwood.themoviedb.user.domain.repository.AccountRepository
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,7 +24,7 @@ data class UserViewState(
 )
 
 class UserViewModel @Inject constructor(
-    private val accountService: AccountService,
+    private val accountRepository: AccountRepository,
     private val loginActivityRouter: LoginActivityRouter,
     private val windowManager: WindowManager,
     @SessionId private val sessionId: String,
@@ -57,8 +57,8 @@ class UserViewModel @Inject constructor(
 
     fun logout() = checkHasInternet(
         onHasConnection = {
-            val sessionBodyModel = DeleteSessionBodyModel(sessionId)
-            accountService.deleteSession(apiKey, sessionBodyModel)
+            val sessionBodyModel = DeleteSessionBody(sessionId)
+            accountRepository.deleteSession(apiKey, sessionBodyModel)
                 .schedulersIoToMain(schedulers)
                 .subscribe(
                     { loginActivityRouter.openLoginActivity() },
@@ -69,7 +69,7 @@ class UserViewModel @Inject constructor(
     )
 
     fun fetchAccountDetails() {
-        accountService.getAccountDetails(apiKey, sessionId)
+        accountRepository.getAccountDetails(apiKey, sessionId)
             .schedulersIoToMain(schedulers)
             .subscribe(
                 { accountResponse ->
