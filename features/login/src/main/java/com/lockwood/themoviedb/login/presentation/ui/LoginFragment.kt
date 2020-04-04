@@ -48,7 +48,6 @@ class LoginFragment : BaseFragment() {
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
-        observe(viewModel.loading, ::renderLoading)
         addViewListeners()
     }
 
@@ -70,11 +69,10 @@ class LoginFragment : BaseFragment() {
         isVisible = error.isNotEmpty()
     }
 
-    private fun renderState(state: LoginViewState) = with(binding) {
-        signInButton.isEnabled = state.validCredentials
-
-        loginTitleTextView.isVisible = !state.keyboardOpened
-        loginHintTextView.isVisible = !state.keyboardOpened
+    private fun renderState(state: LoginViewState) {
+        renderLoading(state.loading)
+        renderTitleAboveCredentials(state.keyboardOpened)
+        renderSignIngButton(state.validCredentials)
     }
 
     private fun renderLoading(loading: Boolean) {
@@ -82,13 +80,26 @@ class LoginFragment : BaseFragment() {
         loginProgressBar.isVisible = loading
     }
 
+    private fun renderTitleAboveCredentials(keyboardOpened: Boolean) = with(binding) {
+        loginTitleTextView.isVisible = !keyboardOpened
+        loginHintTextView.isVisible = !keyboardOpened
+    }
+
+    private fun renderSignIngButton(validCredentials: Boolean) = with(binding) {
+        signInButton.isEnabled = validCredentials
+    }
+
     private fun addViewListeners() = with(binding) {
-        loginEditText.addTextChangedListener { viewModel.onLoginChanged(it.toString()) }
-        passwordEditText.addTextChangedListener { viewModel.onPasswordChanged(it.toString()) }
+        loginEditText.addTextChangedListener {
+            viewModel.onCredentialsChanged(it.toString(), passwordEditText.text.toString())
+        }
+        passwordEditText.addTextChangedListener {
+            viewModel.onCredentialsChanged(loginEditText.text.toString(), it.toString())
+        }
 
         signInButton.setOnClickListener {
             hideKeyboard()
-            viewModel.login()
+            viewModel.onEnterButtonClick()
         }
 
         checkKeyboardVisibility()

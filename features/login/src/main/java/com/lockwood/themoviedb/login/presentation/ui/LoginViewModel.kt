@@ -7,7 +7,6 @@ import com.lockwood.core.event.EventsQueue
 import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
-import com.lockwood.core.livedata.mapDistinct
 import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
@@ -52,9 +51,6 @@ constructor(
 
     val eventsQueue by lazy { EventsQueue() }
 
-    // Так как setLoading вызывается достаточно часто, то вынес в отдельный ивент
-    val loading = liveState.mapDistinct { it.loading }
-
     private var state: LoginViewState by liveState.delegate()
 
     private var requestToken: String
@@ -87,31 +83,24 @@ constructor(
         }
     }
 
-    fun onLoginChanged(login: String) {
-        val isValid = CredentialsValidator.isValidInput(login, state.password)
-        state = state.copy(login = login, validCredentials = isValid)
+    fun onCredentialsChanged(login: String, password: String) {
+        val isValid = CredentialsValidator.isValidInput(login, password)
+        state = state.copy(login = login, password = password, validCredentials = isValid)
     }
 
-    fun onPasswordChanged(password: String) {
-        val isValid = CredentialsValidator.isValidInput(state.login, password)
-        state = state.copy(password = password, validCredentials = isValid)
+    fun onEnterButtonClick() {
+        createRequestToken().schedulersIoToMain(schedulers)
+            .doOnSubscribe { setLoading(true) }
+            .subscribe(
+                { createSessionWithToken() },
+                { handleError(it) }
+            )
+            .autoDispose()
     }
 
     fun onKeyboardOpened(keyboardOpened: Boolean) {
         state = state.copy(keyboardOpened = keyboardOpened)
     }
-
-    fun login() = checkHasInternet(
-        onHasConnection = {
-            createRequestToken().schedulersIoToMain(schedulers)
-                .doOnSubscribe { setLoading(true) }
-                .subscribe(
-                    { createSessionWithToken() },
-                    { handleError(it) }
-                )
-                .autoDispose()
-        },
-        onNoConnection = { eventsQueue.offer(noInternetEvent) })
 
     private fun setLoading(loading: Boolean) {
         state = state.copy(loading = loading)
