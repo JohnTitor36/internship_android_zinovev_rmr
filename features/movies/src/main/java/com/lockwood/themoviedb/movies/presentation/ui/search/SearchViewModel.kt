@@ -13,7 +13,6 @@ import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 data class SearchViewState(

@@ -61,6 +61,7 @@ class UserFragment : BaseFragment() {
         signOutButton.setOnClickListener { viewModel.logout() }
     }
 
+    // TODO: Заменить with в функции на with внутри
     private fun renderState(state: UserViewState) {
         with(binding) {
             userNameTextView.text = state.username
