@@ -13,7 +13,6 @@ import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.test.extensions.disableTestMode
-import com.lockwood.test.extensions.emptyString
 import com.lockwood.test.extensions.enableTestMode
 import com.lockwood.test.schedulers.TestSchedulersProvider
 import com.lockwood.themoviedb.login.R
@@ -55,7 +54,7 @@ object LoginViewModelIntegrationTest : Spek({
 
         val viewModel by memoized {
             LoginViewModel(
-                emptyString(),
+                "",
                 resourceReader,
                 connectivityManager,
                 authenticationRepository,
@@ -209,8 +208,8 @@ object LoginViewModelIntegrationTest : Spek({
                 }
             }
             And("resource reader that return message") {
-                mock<TextView> { on { resourceReader.string(R.string.title_eng_invalid_username_or_password) } doReturn emptyString() }
-                mock<TextView> { on { resourceReader.string(R.string.title_invalid_username_or_password) } doReturn emptyString() }
+                mock<TextView> { on { resourceReader.string(R.string.title_eng_invalid_username_or_password) } doReturn "" }
+                mock<TextView> { on { resourceReader.string(R.string.title_invalid_username_or_password) } doReturn "" }
             }
 
             When("login") {

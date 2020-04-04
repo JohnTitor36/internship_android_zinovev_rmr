@@ -1,10 +1,8 @@
 package com.lockwood.themoviedb.login.data.source
 
-import com.lockwood.test.extensions.emptyString
-import com.lockwood.themoviedb.login.data.model.CreateSessionBodyEntity
-import com.lockwood.themoviedb.login.data.model.ValidateWithLoginBodyEntity
+import com.lockwood.test.extensions.catchException
 import com.nhaarman.mockitokotlin2.mock
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.assertj.core.api.Assertions.assertThat
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
 
@@ -18,80 +16,19 @@ object AuthenticationCacheDataSourceTest : Spek({
         }
         //endregion
 
-        //region Functions
-        fun emptyLoginBodyEntity(): ValidateWithLoginBodyEntity {
-            return ValidateWithLoginBodyEntity(
-                "", "", ""
-            )
-        }
-
-        fun emptySessionBodyEntity(): CreateSessionBodyEntity {
-            return CreateSessionBodyEntity(
-                ""
-            )
-        }
-        //endregion
-
         Scenario("make unsupported create request token request") {
             //region Fields
-            val apiKey = emptyString()
-
-            var isUnsupportedOperationException = false
+            var exception: Exception? = null
             //endregion
 
             When("create request token") {
-                try {
-                    cacheDataSource.createRequestToken(apiKey)
-                } catch (e: UnsupportedOperationException) {
-                    isUnsupportedOperationException = true
-                }
+                exception = catchException { cacheDataSource.createRequestToken("") }
             }
 
             Then("UnsupportedOperationException was thrown") {
-                assertTrue(isUnsupportedOperationException)
-            }
-        }
-
-        Scenario("make unsupported validate token with login request") {
-            //region Fields
-            val apiKey = emptyString()
-            val loginBody = emptyLoginBodyEntity()
-
-            var isUnsupportedOperationException = false
-            //endregion
-
-            When("validate token with login") {
-                try {
-                    cacheDataSource.validateTokenWithLogin(apiKey, loginBody)
-                } catch (e: UnsupportedOperationException) {
-                    isUnsupportedOperationException = true
-                }
-            }
-
-            Then("UnsupportedOperationException was thrown") {
-                assertTrue(isUnsupportedOperationException)
-            }
-        }
-
-        Scenario("make unsupported create session request") {
-            //region Fields
-            val apiKey = emptyString()
-            val sessionBody = emptySessionBodyEntity()
-
-            var isUnsupportedOperationException = false
-            //endregion
-
-            When("create session") {
-                try {
-                    cacheDataSource.createSession(apiKey, sessionBody)
-                } catch (e: UnsupportedOperationException) {
-                    isUnsupportedOperationException = true
-                }
-            }
-
-            Then("UnsupportedOperationException was thrown") {
-                assertTrue(isUnsupportedOperationException)
+                assertThat(exception).isInstanceOf(UnsupportedOperationException::class.java)
             }
         }
     }
+
 })
