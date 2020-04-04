@@ -1,25 +1,44 @@
 package com.lockwood.themoviedb.movies.presentation.ui
 
 import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.lockwood.core.ui.BaseFragment
-import com.lockwood.themoviedb.movies.R
+import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.core.viewbinding.viewBinding
+import com.lockwood.themoviedb.movies.databinding.FragmentMovieBinding
 import com.lockwood.themoviedb.movies.di.component.DaggerMovieComponent
 import javax.inject.Inject
-import javax.inject.Provider
 
-class MovieFragment : BaseFragment(R.layout.fragment_movie) {
+class MovieFragment : BaseFragment() {
 
     @Inject
-    lateinit var viewModelFactory: Provider<MovieViewModel>
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: MovieViewModel by viewModels { viewModelFactory }
 
-    private lateinit var viewModel: MovieViewModel
+    private val binding: FragmentMovieBinding by viewBinding()
 
-    override val hasOptionMenu: Boolean = true
+    val args: MovieFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         inject()
-        viewModel = viewModelFactory.get()
         super.onAttach(context)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflateViewBinding<FragmentMovieBinding>(container, false).root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.movieNameTitle.text = args.movieIdArg.toString()
     }
 
     private fun inject() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_root"
     android:layout_width="match_parent"
@@ -7,16 +8,20 @@
     tools:context="com.lockwood.themoviedb.login.presentation.ui.LoginActivity">
 
     <fragment
-        android:id="@+id/login_container"
-        android:name="com.lockwood.themoviedb.login.presentation.ui.LoginFragment"
+        android:id="@+id/login_nav_host"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/default_content_margin"
         android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_marginEnd="@dimen/default_content_margin"
         android:layout_marginBottom="@dimen/margin_regular"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/login_graph"
+        tools:ignore="FragmentTagUsage"
         tools:layout="@layout/fragment_login" />
 
+    <!-- region ProgressBar -->
     <FrameLayout
         android:id="@+id/login_progress_bar"
         android:layout_width="match_parent"
@@ -33,5 +38,6 @@
             android:theme="@style/AppTheme" />
 
     </FrameLayout>
+    <!-- endregion -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

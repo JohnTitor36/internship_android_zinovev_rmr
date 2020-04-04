@@ -1,44 +1,95 @@
 package com.lockwood.themoviedb.user.presentation.ui
 
+import androidx.lifecycle.MutableLiveData
+import com.lockwood.core.event.EventsQueue
+import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
+import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.di.qualifier.ApiKey
+import com.lockwood.core.network.manager.NetworkConnectivityManager
+import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.di.qualifier.SessionId
+import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.router.LoginActivityRouter
-import com.lockwood.core.schedulers.AndroidSchedulersProvider
-import com.lockwood.core.ui.BaseViewModel
-import com.lockwood.themoviedb.user.remote.AccountService
-import com.lockwood.themoviedb.user.remote.model.body.DeleteSessionBodyModel
+import com.lockwood.core.schedulers.SchedulersProvider
+import com.lockwood.core.window.WindowManager
+import com.lockwood.themoviedb.user.domain.model.DeleteSessionBody
+import com.lockwood.themoviedb.user.domain.repository.AccountRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-class UserViewModel @Inject constructor(
-    @ApiKey private val apiKey: String,
-    @SessionId private val sessionId: String,
-    private val accountService: AccountService,
-    private val schedulers: AndroidSchedulersProvider,
-    private val loginActivityRouter: LoginActivityRouter
-) : BaseViewModel() {
+data class UserViewState(
+    val username: String,
+    val image: String
+)
 
-    fun logout() {
-        // TODO: Перейти на clean architecture в user
-        val sessionBodyModel = DeleteSessionBodyModel(sessionId)
-        accountService.deleteSession(apiKey, sessionBodyModel)
+class UserViewModel @Inject constructor(
+    private val accountRepository: AccountRepository,
+    private val loginActivityRouter: LoginActivityRouter,
+    private val windowManager: WindowManager,
+    @SessionId private val sessionId: String,
+    @ApiKey apiKey: String,
+    resourceReader: ResourceReader,
+    connectivityManager: NetworkConnectivityManager,
+    schedulers: SchedulersProvider
+) : BaseNetworkViewModel(apiKey, resourceReader, connectivityManager, schedulers) {
+
+    companion object {
+
+        private const val GRAVATAR_IMAGE_BASE_URL = "https://www.gravatar.com/avatar/"
+    }
+
+    val liveState: MutableLiveData<UserViewState> = MutableLiveData(createInitialState())
+
+    private var state: UserViewState by liveState.delegate()
+
+    val eventsQueue by lazy { EventsQueue() }
+
+    override fun handleError(throwable: Throwable) {
+        if (throwable.isNoInternetException) {
+            eventsQueue.offer(noInternetEvent)
+        } else {
+            val message = throwable.message.toString()
+            val event = MessageEvent(message)
+            eventsQueue.offer(event)
+        }
+    }
+
+    fun logout() = checkHasInternet(
+        onHasConnection = {
+            val sessionBodyModel = DeleteSessionBody(sessionId)
+            accountRepository.deleteSession(apiKey, sessionBodyModel)
+                .schedulersIoToMain(schedulers)
+                .subscribe(
+                    { loginActivityRouter.openLoginActivity() },
+                    { e -> handleError(e) }
+                ).autoDispose()
+        },
+        onNoConnection = { eventsQueue.offer(noInternetEvent) }
+    )
+
+    fun fetchAccountDetails() {
+        accountRepository.getAccountDetails(apiKey, sessionId)
             .schedulersIoToMain(schedulers)
             .subscribe(
-                { loginActivityRouter.openLoginActivity() },
+                { accountResponse ->
+                    state = state.copy(
+                        username = accountResponse.username,
+                        image = gravatarImageUrl(accountResponse.avatar.gravatar.hash)
+                    )
+                },
                 { e -> Timber.e(e) }
             ).autoDispose()
     }
 
-    fun fetchAccountDetails() {
-//        Для проверки токена пробуем получить информацию об аккаунте
-//        accountService.getAccountDetails(sessionId, apiKey)
-        accountService.getAccountDetails(apiKey, sessionId)
-            .schedulersIoToMain(schedulers)
-            .subscribe(
-                { accountResponse -> Timber.d("account: ${accountResponse.id}") },
-                { e -> Timber.e(e) }
-            ).autoDispose()
+    // TODO: Добавить информацию о пользователе в префы
+    private fun createInitialState(): UserViewState {
+        return UserViewState("", "")
+    }
+
+    private fun gravatarImageUrl(hash: String): String {
+        val imageSize = windowManager.screenWidth / 4
+        return "$GRAVATAR_IMAGE_BASE_URL$hash?s=$imageSize"
     }
 
 }

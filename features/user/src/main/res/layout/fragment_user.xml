@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/user_avatar_description"
-        android:src="@drawable/ic_avatar_placeholder"
+        android:src="@drawable/ic_avatar_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/user_name_text_view"
         style="@style/Center"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:textAppearance="@style/Medium"
@@ -33,20 +33,6 @@
         app:layout_constraintTop_toBottomOf="@+id/user_avatar_image_view"
         tools:text="Виталий Белов" />
 
-    <TextView
-        android:id="@+id/user_mail_text_view"
-        style="@style/Center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAppearance="@style/Regular"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/text_size_regular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name_text_view"
-        tools:text="VitaliyBelov420@gmail.com" />
-
     <Button
         android:id="@+id/sign_out_button"
         style="@style/Button"
@@ -56,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_mail_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_text_view"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

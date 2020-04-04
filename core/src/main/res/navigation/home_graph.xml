@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_graph"
+    app:startDestination="@id/input_search">
+
+    <fragment
+        android:id="@+id/input_search"
+        android:name="com.lockwood.themoviedb.movies.presentation.ui.search.SearchFragment">
+        <action
+            android:id="@+id/open_movie"
+            app:destination="@id/movie" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movie"
+        android:name="com.lockwood.themoviedb.movies.presentation.ui.MovieFragment">
+        <argument
+            android:name="movieIdArg"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>

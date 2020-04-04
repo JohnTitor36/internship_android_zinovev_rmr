@@ -10,7 +10,7 @@ versions.fragment = "1.3.0-alpha01"
 versions.activity = "1.2.0-alpha02"
 versions.cardview = "1.0.0"
 versions.constraint = "2.0.0-beta4"
-versions.lifecycle = "2.2.0"
+versions.lifecycle = "2.3.0-alpha01"
 versions.arch = "2.1.0"
 versions.navigation = "2.3.0-alpha03"
 versions.preference = "1.1.0"
@@ -100,7 +100,7 @@ deps.assisted = assisted
 
 def glide = [:]
 glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
-glide.glidecompiler = "com.github.bumptech.glide:compiler:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
 deps.glide = glide
 
 def tools = [:]

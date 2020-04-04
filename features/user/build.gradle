@@ -4,20 +4,27 @@ dependencies {
     implementation project(":core")
     implementation project(":core:network")
     implementation project(":core:preferences")
+    implementation project(":features:glide")
 
     implementation(
             deps.kotlin.stdlib,
             deps.android.appcompat,
             deps.android.constraint,
+            deps.android.fragment,
             deps.android.ktx,
             deps.material.material,
             deps.rxJava.rx2,
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
             deps.network.moshi,
+            deps.glide.glide,
             deps.tools.timber,
             deps.dagger.dagger
     )
 
-    kapt(deps.dagger.compiler, deps.network.moshicodegen)
+    kapt(
+            deps.dagger.compiler,
+            deps.glide.compiler,
+            deps.network.moshicodegen
+    )
 }

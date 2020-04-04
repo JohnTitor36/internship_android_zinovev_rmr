@@ -2,34 +2,42 @@ package com.lockwood.themoviedb.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.lockwood.core.extensions.findNavController
 import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.ui.BaseActivity
+import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.themoviedb.R
+import com.lockwood.themoviedb.databinding.ActivityMainBinding
 import com.lockwood.themoviedb.di.component.DaggerMainComponent
 import com.lockwood.themoviedb.login.presentation.ui.LoginActivity
-import kotlinx.android.synthetic.main.include_app_bar.*
-import kotlinx.android.synthetic.main.include_app_bar.view.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var userPreferences: UserPreferences
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
         super.onCreate(savedInstanceState)
 
-        setupAppBar()
+        binding = layoutInflater.inflateViewBinding()
+        setContentView(binding.root)
+
+        setBottomNavigation()
         checkIsUserLoggedIn()
     }
 
-    private fun setupAppBar() {
-        setSupportActionBar(appbar.toolbar)
-        disableAppBarTitle()
-        setDisplayHomeAsUpEnabled(false)
+    private fun setBottomNavigation() {
+        val navController = supportFragmentManager.findNavController(R.id.main_nav_host_fragment)
+        binding.navigation.setupWithNavController(navController)
     }
 
     private fun checkIsUserLoggedIn() {

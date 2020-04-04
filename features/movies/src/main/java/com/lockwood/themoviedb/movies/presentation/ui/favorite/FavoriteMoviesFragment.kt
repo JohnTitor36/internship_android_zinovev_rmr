@@ -1,26 +1,37 @@
 package com.lockwood.themoviedb.movies.presentation.ui.favorite
 
 import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.ui.BaseFragment
-import com.lockwood.themoviedb.movies.R
+import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.core.viewbinding.viewBinding
+import com.lockwood.themoviedb.movies.databinding.FragmentFavoriteMoviesBinding
 import com.lockwood.themoviedb.movies.di.component.favorite.DaggerFavoriteMoviesComponent
 import javax.inject.Inject
-import javax.inject.Provider
 
-class FavoriteMoviesFragment : BaseFragment(R.layout.fragment_favorite_movies) {
+class FavoriteMoviesFragment : BaseFragment() {
 
     @Inject
-    lateinit var viewModelFactory: Provider<FavoriteMoviesViewModel>
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: FavoriteMoviesViewModel by viewModels { viewModelFactory }
 
-    private lateinit var viewModel: FavoriteMoviesViewModel
-
-    override val hasOptionMenu: Boolean = true
+    private val binding: FragmentFavoriteMoviesBinding by viewBinding()
 
     override fun onAttach(context: Context) {
         inject()
-        viewModel = viewModelFactory.get()
         super.onAttach(context)
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = inflater.inflateViewBinding<FragmentFavoriteMoviesBinding>(container, false).root
 
     private fun inject() {
         DaggerFavoriteMoviesComponent.builder()
