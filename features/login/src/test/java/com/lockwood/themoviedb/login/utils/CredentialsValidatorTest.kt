@@ -1,183 +1,42 @@
 package com.lockwood.themoviedb.login.utils
 
-import com.lockwood.themoviedb.login.domain.model.ValidateWithLoginBody
-import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.mock
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.spekframework.spek2.Spek
-import org.spekframework.spek2.style.gherkin.Feature
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
-// Unit-тесты нетривиальной логики логина
-object CredentialsValidatorTest : Spek({
+class CredentialsValidatorTest {
 
-    Feature("Check login and password contains forbidden characters") {
-
-        //region Fields
-        val simpleLogin = "ajj_the_band"
-        val simplePassword = "123456"
-
-        val loginBody by memoized {
-            mock<ValidateWithLoginBody> {}
-        }
-        //endregion
-
-        Scenario("login contains forbidden characters") {
-            //region Fields
-            var result = false
-            //endregion
-
-            Given("login with special characters") {
-                mock<ValidateWithLoginBody> { on { loginBody.username } doReturn "ajj@%+/'!#^?:.(){}~" }
-            }
-            And("simple password") {
-                mock<ValidateWithLoginBody> { on { loginBody.password } doReturn simplePassword }
-            }
-
-            When("validate login and password") {
-                result = CredentialsValidator.isValidInput(loginBody.username, loginBody.password)
-            }
-
-            Then("it should be not valid") {
-                assertFalse(result)
-            }
-        }
-
-        Scenario("password contains forbidden characters") {
-            //region Fields
-            var result = false
-            //endregion
-
-            Given("simple login") {
-                mock<ValidateWithLoginBody> { on { loginBody.username } doReturn simpleLogin }
-            }
-            And("password with forbidden special characters") {
-                mock<ValidateWithLoginBody> { on { loginBody.password } doReturn "123456*#$%@#@$" }
-            }
-
-            When("validate login and password") {
-                result = CredentialsValidator.isValidInput(loginBody.username, loginBody.password)
-            }
-
-            Then("it should be not valid") {
-                assertFalse(result)
-            }
-        }
-
-        Scenario("login contains approved characters") {
-            //region Fields
-            var result = false
-            //endregion
-
-            Given("simple login") {
-                mock<ValidateWithLoginBody> { on { loginBody.username } doReturn simpleLogin }
-            }
-            And("simple password") {
-                mock<ValidateWithLoginBody> { on { loginBody.password } doReturn simplePassword }
-            }
-
-            When("validate login and password") {
-                result = CredentialsValidator.isValidInput(loginBody.username, loginBody.password)
-            }
-
-            Then("it should be valid") {
-                assertTrue(result)
-            }
-        }
-
-        Scenario("password contains approved special characters") {
-            //region Fields
-            var result = false
-            //endregion
-
-            Given("simple login") {
-                mock<ValidateWithLoginBody> { on { loginBody.username } doReturn simpleLogin }
-            }
-            And("password with approved special characters") {
-                mock<ValidateWithLoginBody> { on { loginBody.password } doReturn "123456_@%+/'!#^?:.(){}~" }
-            }
-
-            When("validate login and password") {
-                result = CredentialsValidator.isValidInput(loginBody.username, loginBody.password)
-            }
-
-            Then("it should be valid") {
-                assertTrue(result)
-            }
-        }
+    @ParameterizedTest
+    @ValueSource(strings = ["redmadrobot", "ajj_the_band", "123456"])
+    fun `when check credentials by some login and valid password - should return true`(login: String) {
+        // given
+        val validPassword = "123456"
+        // when
+        val result = CredentialsValidator.isValidInput(login, validPassword)
+        // then
+        assertThat(result).isEqualTo(true)
     }
 
-    Feature("Check length of login and password is valid") {
-
-        //region Fields
-        val longEnoughLogin = "ajj_the_band"
-        val longEnoughPassword = "123456"
-
-        val loginBody by memoized {
-            mock<ValidateWithLoginBody> {}
-        }
-        //endregion
-
-        Scenario("too short credentials") {
-            //region Fields
-            var result = false
-            //endregion
-
-            //region Short login check
-            Given("short login") {
-                mock<ValidateWithLoginBody> { on { loginBody.username } doReturn "ajj" }
-            }
-            And("long enough password") {
-                mock<ValidateWithLoginBody> { on { loginBody.password } doReturn longEnoughPassword }
-            }
-
-            When("validate login and password length") {
-                result = CredentialsValidator.isValidLength(loginBody.username, loginBody.password)
-            }
-
-            Then("it should be not valid") {
-                assertFalse(result)
-            }
-            //endregion
-
-            //region Short password check
-            Given("long enough login") {
-                mock<ValidateWithLoginBody> { on { loginBody.username } doReturn longEnoughLogin }
-            }
-            And("short password") {
-                mock<ValidateWithLoginBody> { on { loginBody.password } doReturn "123" }
-            }
-
-            When("validate login and password length") {
-                result = CredentialsValidator.isValidLength(loginBody.username, loginBody.password)
-            }
-
-            Then("it should be not valid") {
-                assertFalse(result)
-            }
-            //endregion
-        }
-
-        Scenario("long enough credentials") {
-            //region Fields
-            var result = false
-            //endregion
-
-            Given("long enough login") {
-                mock<ValidateWithLoginBody> { on { loginBody.username } doReturn longEnoughLogin }
-            }
-            And("long enough password") {
-                mock<ValidateWithLoginBody> { on { loginBody.password } doReturn longEnoughPassword }
-            }
-
-            When("validate login and password length") {
-                result = CredentialsValidator.isValidLength(loginBody.username, loginBody.password)
-            }
-
-            Then("it should be valid") {
-                assertTrue(result)
-            }
-        }
-
+    @ParameterizedTest
+    @ValueSource(strings = ["123456", "*#$%@#@$", "qwerty"])
+    fun `when check credentials by valid login and some password - should return true`(password: String) {
+        // given
+        val validLogin = "123456"
+        // when
+        val result = CredentialsValidator.isValidInput(validLogin, validLogin)
+        // then
+        assertThat(result).isEqualTo(true)
     }
-})
+
+    @ParameterizedTest
+    @ValueSource(strings = ["redmadrobot@%+/'!.", "ajj_the_band#^?:", "123456(){}~"])
+    fun `when check credentials by login with forbidden characters and valid password - should return false`(login: String) {
+        // given
+        val validPassword = "123456"
+        // when
+        val result = CredentialsValidator.isValidInput(login, validPassword)
+        // then
+        assertThat(result).isEqualTo(false)
+    }
+
+}

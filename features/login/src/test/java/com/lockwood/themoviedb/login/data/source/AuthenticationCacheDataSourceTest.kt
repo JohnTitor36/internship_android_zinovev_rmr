@@ -1,6 +1,5 @@
 package com.lockwood.themoviedb.login.data.source
 
-import com.lockwood.core.preferences.authentication.AuthenticationPreferences
 import com.lockwood.test.extensions.emptyString
 import com.lockwood.themoviedb.login.data.model.CreateSessionBodyEntity
 import com.lockwood.themoviedb.login.data.model.ValidateWithLoginBodyEntity
