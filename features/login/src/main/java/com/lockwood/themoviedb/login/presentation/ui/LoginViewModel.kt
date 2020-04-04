@@ -2,7 +2,6 @@ package com.lockwood.themoviedb.login.presentation.ui
 
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
-import com.lockwood.core.event.ErrorMessageEvent
 import com.lockwood.core.event.EventsQueue
 import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.extensions.schedulersIoToMain
@@ -26,6 +25,7 @@ import javax.inject.Inject
 data class LoginViewState(
     val login: String,
     val password: String,
+    val errorMessage: String,
     val loading: Boolean,
     val validCredentials: Boolean,
     val keyboardOpened: Boolean
@@ -77,8 +77,7 @@ constructor(
                 } else {
                     throwableMessage
                 }
-                val messageEvent = ErrorMessageEvent(message)
-                eventsQueue.offer(messageEvent)
+                state = state.copy(errorMessage = message)
             }
         }
     }
@@ -107,7 +106,7 @@ constructor(
     }
 
     private fun createInitialState(): LoginViewState {
-        return LoginViewState("", "", false, false, false)
+        return LoginViewState("", "", "", false, false, false)
     }
 
     private fun createSessionWithToken() {

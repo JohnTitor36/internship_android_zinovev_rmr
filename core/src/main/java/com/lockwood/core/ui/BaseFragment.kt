@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.lockwood.core.event.ErrorMessageEvent
 import com.lockwood.core.event.Event
 import com.lockwood.core.event.MessageEvent
+import com.lockwood.core.extensions.buildSnackbar
 import com.lockwood.core.message.MessageView
 
 abstract class BaseFragment : Fragment(), MessageView {
@@ -35,7 +36,9 @@ abstract class BaseFragment : Fragment(), MessageView {
         }
     }
 
-    override fun showMessage(message: String) = Unit
+    override fun showMessage(message: String) {
+        rootView.buildSnackbar(message).show()
+    }
 
     override fun showError(error: String) = Unit
 

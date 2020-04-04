@@ -60,19 +60,11 @@ class LoginFragment : BaseFragment() {
         }
     }
 
-    override fun showMessage(message: String) {
-        rootView.buildSnackbar(message).show()
-    }
-
-    override fun showError(error: String) = with(binding.loginErrorTextView) {
-        text = error
-        isVisible = error.isNotEmpty()
-    }
-
     private fun renderState(state: LoginViewState) {
         renderLoading(state.loading)
         renderTitleAboveCredentials(state.keyboardOpened)
         renderSignIngButton(state.validCredentials)
+        renderErrorMessage(state.errorMessage)
     }
 
     private fun renderLoading(loading: Boolean) {
@@ -87,6 +79,10 @@ class LoginFragment : BaseFragment() {
 
     private fun renderSignIngButton(validCredentials: Boolean) = with(binding) {
         signInButton.isEnabled = validCredentials
+    }
+
+    private fun renderErrorMessage(errorMessage: String) = with(binding) {
+        loginErrorTextView.text = errorMessage
     }
 
     private fun addViewListeners() = with(binding) {

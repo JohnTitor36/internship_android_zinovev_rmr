@@ -5,15 +5,21 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
 
-private const val BASE_URL = "https://api.themoviedb.org/3/"
+const val BASE_URL = "https://api.themoviedb.org/3/"
 
-val mockServer = MockWebServer().apply { start() }
+const val CREATE_REQUEST_TOKEN = "authentication/token/new"
 
-val mockWebServerUrl = mockServer.url(BASE_URL).toString()
+const val VALIDATE_TOKEN_WITH_LOGIN_PATH = "authentication/token/validate_with_login"
 
-val notFoundDispatcher = object : Dispatcher() {
+const val CREATE_SESSION_PATH = "authentication/session/new"
 
-    override fun dispatch(request: RecordedRequest): MockResponse {
-        return MockResponse().notFoundResponse()
+inline fun MockWebServer.dispatchResponses(
+    crossinline onDispatch: (String?) -> MockResponse?
+) {
+    val dispatcherForResponses = object : Dispatcher() {
+        override fun dispatch(request: RecordedRequest): MockResponse {
+            return onDispatch(request.path) ?: MockResponse()
+        }
     }
+    dispatcher = dispatcherForResponses
 }
