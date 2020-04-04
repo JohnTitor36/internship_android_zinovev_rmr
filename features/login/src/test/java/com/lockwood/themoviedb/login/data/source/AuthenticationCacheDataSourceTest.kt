@@ -14,12 +14,8 @@ object AuthenticationCacheDataSourceTest : Spek({
     Feature("Unsupported requests in cache throw Exception") {
 
         //region Fields
-        val authenticationPreferences by memoized {
-            mock<AuthenticationPreferences> { }
-        }
-
         val cacheDataSource by memoized {
-            AuthenticationCacheDataSource(authenticationPreferences)
+            AuthenticationCacheDataSource(mock())
         }
         //endregion
 
