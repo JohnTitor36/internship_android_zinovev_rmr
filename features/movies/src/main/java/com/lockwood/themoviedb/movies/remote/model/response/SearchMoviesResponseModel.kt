@@ -1,5 +1,6 @@
 package com.lockwood.themoviedb.movies.remote.model.response
 
+import com.lockwood.core.network.common.Language
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.*
@@ -32,7 +33,7 @@ data class SearchMoviesResponseModel(
         @Json(name = "backdrop_path")
         val backdropPath: String, // /xcUf6yIheo78btFqihlRLftdR3M.jpg
         @Json(name = "original_language")
-        val originalLanguage: String, // en
+        val originalLanguage: Language, // en
         @Json(name = "original_title")
         val originalTitle: String, // Dolittle
         @Json(name = "genre_ids")

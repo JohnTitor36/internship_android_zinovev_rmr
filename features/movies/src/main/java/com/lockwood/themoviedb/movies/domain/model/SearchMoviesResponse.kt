@@ -1,5 +1,6 @@
 package com.lockwood.themoviedb.movies.domain.model
 
+import com.lockwood.core.network.common.Language
 import java.util.*
 
 typealias Movie = SearchMoviesResponse.Result
@@ -18,7 +19,7 @@ data class SearchMoviesResponse(
         val id: Int, // 448119
         val adult: Boolean, // false
         val backdropPath: String, // /xcUf6yIheo78btFqihlRLftdR3M.jpg
-        val originalLanguage: String, // en
+        val originalLanguage: Language, // en
         val originalTitle: String, // Dolittle
         val genreIds: List<Int>,
         val title: String, // Удивительное путешествие доктора Дулиттла
