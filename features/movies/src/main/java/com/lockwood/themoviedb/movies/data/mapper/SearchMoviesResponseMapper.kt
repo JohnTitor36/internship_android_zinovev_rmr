@@ -10,44 +10,48 @@ class SearchMoviesResponseMapper @Inject constructor() :
 
     override fun mapFromEntity(type: SearchMoviesResponseEntity): SearchMoviesResponse {
         val results = type.results.map {
-            SearchMoviesResponse.Result(
-                it.popularity,
-                it.voteCount,
-                it.video,
-                it.posterPath,
-                it.id,
-                it.adult,
-                it.backdropPath,
-                it.originalLanguage,
-                it.originalTitle,
-                it.genreIds,
-                it.title,
-                it.voteAverage,
-                it.overview,
-                it.releaseDate
-            )
+            with(it){
+                SearchMoviesResponse.Result(
+                    popularity,
+                    voteCount,
+                    video,
+                    posterPath,
+                    id,
+                    adult,
+                    backdropPath,
+                    originalLanguage,
+                    originalTitle,
+                    genreIds,
+                    title,
+                    voteAverage,
+                    overview,
+                    releaseDate
+                )
+            }
         }
         return SearchMoviesResponse(type.page, type.totalResults, type.totalPages, results)
     }
 
     override fun mapToEntity(type: SearchMoviesResponse): SearchMoviesResponseEntity {
         val results = type.results.map {
-            SearchMoviesResponseEntity.Result(
-                it.popularity,
-                it.voteCount,
-                it.video,
-                it.posterPath,
-                it.id,
-                it.adult,
-                it.backdropPath,
-                it.originalLanguage,
-                it.originalTitle,
-                it.genreIds,
-                it.title,
-                it.voteAverage,
-                it.overview,
-                it.releaseDate
-            )
+            with(it){
+                SearchMoviesResponseEntity.Result(
+                    popularity,
+                    voteCount,
+                    video,
+                    posterPath,
+                    id,
+                    adult,
+                    backdropPath,
+                    originalLanguage,
+                    originalTitle,
+                    genreIds,
+                    title,
+                    voteAverage,
+                    overview,
+                    releaseDate
+                )
+            }
         }
         return SearchMoviesResponseEntity(type.page, type.totalResults, type.totalPages, results)
     }

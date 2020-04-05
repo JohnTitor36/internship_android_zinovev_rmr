@@ -10,44 +10,48 @@ class SearchMoviesResponseMapper @Inject constructor() :
 
     override fun mapFromRemote(type: SearchMoviesResponseModel): SearchMoviesResponseEntity {
         val results = type.results.map {
-            SearchMoviesResponseEntity.Result(
-                it.popularity,
-                it.voteCount,
-                it.video,
-                it.posterPath,
-                it.id,
-                it.adult,
-                it.backdropPath,
-                it.originalLanguage,
-                it.originalTitle,
-                it.genreIds,
-                it.title,
-                it.voteAverage,
-                it.overview,
-                it.releaseDate
-            )
+            with(it) {
+                SearchMoviesResponseEntity.Result(
+                    popularity,
+                    voteCount,
+                    video,
+                    posterPath,
+                    id,
+                    adult,
+                    backdropPath,
+                    originalLanguage,
+                    originalTitle,
+                    genreIds,
+                    title,
+                    voteAverage,
+                    overview,
+                    releaseDate
+                )
+            }
         }
         return SearchMoviesResponseEntity(type.page, type.totalResults, type.totalPages, results)
     }
 
     override fun mapToRemote(type: SearchMoviesResponseEntity): SearchMoviesResponseModel {
         val results = type.results.map {
-            SearchMoviesResponseModel.Result(
-                it.popularity,
-                it.voteCount,
-                it.video,
-                it.posterPath,
-                it.id,
-                it.adult,
-                it.backdropPath,
-                it.originalLanguage,
-                it.originalTitle,
-                it.genreIds,
-                it.title,
-                it.voteAverage,
-                it.overview,
-                it.releaseDate
-            )
+            with(it) {
+                SearchMoviesResponseModel.Result(
+                    popularity,
+                    voteCount,
+                    video,
+                    posterPath,
+                    id,
+                    adult,
+                    backdropPath,
+                    originalLanguage,
+                    originalTitle,
+                    genreIds,
+                    title,
+                    voteAverage,
+                    overview,
+                    releaseDate
+                )
+            }
         }
         return SearchMoviesResponseModel(type.page, type.totalResults, type.totalPages, results)
     }
