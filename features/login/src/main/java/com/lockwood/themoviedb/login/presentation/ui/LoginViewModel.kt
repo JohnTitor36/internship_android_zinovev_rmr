@@ -25,9 +25,8 @@ constructor(
     private val authenticationRepository: AuthenticationRepository,
     private val userPreferences: UserPreferences,
     resourceReader: ResourceReader,
-    connectivityManager: NetworkConnectivityManager,
     schedulers: SchedulersProvider
-) : BaseNetworkViewModel(resourceReader, connectivityManager, schedulers) {
+) : BaseNetworkViewModel(resourceReader, schedulers) {
 
     companion object {
 

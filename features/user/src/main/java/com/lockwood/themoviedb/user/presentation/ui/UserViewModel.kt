@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
-import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.di.qualifier.SessionId
 import com.lockwood.core.reader.ResourceReader
@@ -21,9 +20,8 @@ class UserViewModel @Inject constructor(
     private val loginActivityRouter: LoginActivityRouter,
     @SessionId private val sessionId: String,
     resourceReader: ResourceReader,
-    connectivityManager: NetworkConnectivityManager,
     schedulers: SchedulersProvider
-) : BaseNetworkViewModel(resourceReader, connectivityManager, schedulers) {
+) : BaseNetworkViewModel(resourceReader, schedulers) {
 
     val liveState: MutableLiveData<UserViewState> = MutableLiveData(UserViewState.initialState)
 
@@ -39,18 +37,15 @@ class UserViewModel @Inject constructor(
         }
     }
 
-    fun logout() = checkHasInternet(
-        onHasConnection = {
-            val sessionBodyModel = DeleteSessionBody(sessionId)
-            accountRepository.deleteSession(sessionBodyModel)
-                .schedulersIoToMain(schedulers)
-                .subscribe(
-                    { loginActivityRouter.openLoginActivity() },
-                    { e -> handleError(e) }
-                ).autoDispose()
-        },
-        onNoConnection = { eventsQueue.offer(noInternetEvent) }
-    )
+    fun onLogoutClick() {
+        val sessionBodyModel = DeleteSessionBody(sessionId)
+        accountRepository.deleteSession(sessionBodyModel)
+            .schedulersIoToMain(schedulers)
+            .subscribe(
+                { loginActivityRouter.openLoginActivity() },
+                { e -> handleError(e) }
+            ).autoDispose()
+    }
 
     fun fetchAccountDetails() {
         accountRepository.getAccountDetails(sessionId)

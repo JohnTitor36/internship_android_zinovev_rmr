@@ -58,7 +58,7 @@ class UserFragment : BaseFragment() {
     }
 
     private fun addViewListeners() = with(binding) {
-        signOutButton.setOnClickListener { viewModel.logout() }
+        signOutButton.setOnClickListener { viewModel.onLogoutClick() }
     }
 
     private fun renderState(state: UserViewState) {
