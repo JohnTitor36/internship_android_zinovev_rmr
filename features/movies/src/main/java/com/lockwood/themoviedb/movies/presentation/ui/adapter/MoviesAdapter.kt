@@ -12,7 +12,7 @@ import com.lockwood.themoviedb.movies.databinding.ItemMovieEmtpyBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
 import com.lockwood.themoviedb.movies.domain.model.Movie
 
-class MoviesAdapter(data: MutableList<Movie> = mutableListOf()) :
+class MoviesAdapter(data: List<Movie> = emptyList()) :
     BaseAdapter<Movie>(data) {
 
     interface MoviesAdapterListener {

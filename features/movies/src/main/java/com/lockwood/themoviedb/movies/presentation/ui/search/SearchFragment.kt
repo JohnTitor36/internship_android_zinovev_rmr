@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
@@ -55,7 +54,6 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
-        observe(viewModel.movies, ::renderMovies)
     }
 
     private fun setupViews() = with(binding) {
@@ -78,15 +76,13 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         }
     }
 
-    private fun renderState(state: SearchViewState) = with(binding) {
-        searchTitle.isVisible = !state.inputClicked
-        searchImageBackground.isVisible = !state.inputClicked
-        searchRecyclerViewMovies.isVisible = state.inputStarted
-    }
-
-    // TODO: Исправить поведение добавления элементов в список
-    private fun renderMovies(list: List<Movie>) {
-        moviesAdapter.addItems(list)
+    private fun renderState(state: SearchViewState) {
+        with(binding) {
+            searchTitle.isVisible = !state.inputClicked
+            searchImageBackground.isVisible = !state.inputClicked
+            searchRecyclerViewMovies.isVisible = state.inputStarted
+            moviesAdapter.setItems(state.movies)
+        }
     }
 
     private fun inject() {
@@ -99,9 +95,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     }
 
     override fun onMovieClick(item: Movie) {
-        val navController = findNavController()
-        val action = SearchFragmentDirections.openMovie(item.id)
-        navController.navigate(action)
+        viewModel.openMovie(item.id)
     }
 
 }

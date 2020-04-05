@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.ErrorMessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
-import com.lockwood.core.livedata.mapDistinct
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
@@ -18,8 +17,6 @@ class SearchViewModel @Inject constructor(
 ) : BaseNetworkViewModel(resourceReader, schedulers) {
 
     val liveState: MutableLiveData<SearchViewState> = MutableLiveData(SearchViewState.initialState)
-
-    val movies = liveState.mapDistinct { it.movies }
 
     private var state: SearchViewState by liveState.delegate()
 
@@ -45,6 +42,11 @@ class SearchViewModel @Inject constructor(
     fun movieNameEntered(name: String) {
         checkIsInputStarted(name)
         onLoadMovies(name)
+    }
+
+    fun openMovie(id: Int) {
+        val direction = SearchFragmentDirections.openMovie(id)
+        navigateTo(direction)
     }
 
     private fun checkIsInputStarted(name: String) {

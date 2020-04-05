@@ -2,7 +2,7 @@ package com.lockwood.core.ui
 
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<T>(protected val data: MutableList<T>) :
+abstract class BaseAdapter<T>(protected var data: List<T>) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
     companion object {
@@ -39,8 +39,8 @@ abstract class BaseAdapter<T>(protected val data: MutableList<T>) :
         holder.onBind(position)
     }
 
-    fun addItems(list: List<T>) {
-        data.addAll(list)
+    fun setItems(list: List<T>) {
+        data = list
         notifyDataSetChanged()
     }
 
@@ -48,7 +48,7 @@ abstract class BaseAdapter<T>(protected val data: MutableList<T>) :
      * Очистить данные
      */
     fun clearItems() {
-        data.clear()
+        data = emptyList()
     }
 
 }
