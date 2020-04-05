@@ -38,7 +38,7 @@ constructor(
             "com.lockwood.themoviedb.presentation.ui.MainActivity"
     }
 
-    val liveState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState.initialState())
+    val liveState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState.initialState)
 
     val eventsQueue by lazy { EventsQueue() }
 

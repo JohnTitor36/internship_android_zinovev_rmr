@@ -22,7 +22,7 @@ class SearchViewModel @Inject constructor(
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(apiKey, resourceReader, connectivityManager, schedulers) {
 
-    val liveState: MutableLiveData<SearchViewState> = MutableLiveData(SearchViewState.initialState())
+    val liveState: MutableLiveData<SearchViewState> = MutableLiveData(SearchViewState.initialState)
 
     val movies = liveState.mapDistinct { it.movies }
 

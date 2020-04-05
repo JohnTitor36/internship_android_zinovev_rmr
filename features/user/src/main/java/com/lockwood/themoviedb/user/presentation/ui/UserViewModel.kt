@@ -35,7 +35,7 @@ class UserViewModel @Inject constructor(
         private const val GRAVATAR_IMAGE_BASE_URL = "https://www.gravatar.com/avatar/"
     }
 
-    val liveState: MutableLiveData<UserViewState> = MutableLiveData(UserViewState.initialState())
+    val liveState: MutableLiveData<UserViewState> = MutableLiveData(UserViewState.initialState)
 
     private var state: UserViewState by liveState.delegate()
 
