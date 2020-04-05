@@ -18,11 +18,6 @@ import com.lockwood.themoviedb.user.domain.repository.AccountRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-data class UserViewState(
-    val username: String,
-    val image: String
-)
-
 class UserViewModel @Inject constructor(
     private val accountRepository: AccountRepository,
     private val loginActivityRouter: LoginActivityRouter,

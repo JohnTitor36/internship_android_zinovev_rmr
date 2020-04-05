@@ -15,14 +15,6 @@ import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
 import javax.inject.Inject
 
-data class SearchViewState(
-    val movieName: String,
-    val movieItemType: Int,
-    val inputClicked: Boolean,
-    val inputStarted: Boolean,
-    val movies: List<Movie>
-)
-
 class SearchViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository,
     @ApiKey apiKey: String,

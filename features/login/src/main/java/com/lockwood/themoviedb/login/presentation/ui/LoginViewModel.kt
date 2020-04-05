@@ -22,15 +22,6 @@ import com.lockwood.themoviedb.login.utils.CredentialsValidator
 import io.reactivex.Completable
 import javax.inject.Inject
 
-data class LoginViewState(
-    val login: String,
-    val password: String,
-    val errorMessage: String,
-    val loading: Boolean,
-    val validCredentials: Boolean,
-    val keyboardOpened: Boolean
-)
-
 class LoginViewModel @Inject
 constructor(
     private val authenticationRepository: AuthenticationRepository,
