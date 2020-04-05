@@ -57,13 +57,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:text="6.1"
         app:layout_constraintBottom_toBottomOf="@+id/item_movie_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/item_movie_title"
         app:layout_constraintTop_toBottomOf="@+id/item_movie_genres"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="6.1" />
 
     <TextView
         android:id="@+id/item_movie_popularity"
