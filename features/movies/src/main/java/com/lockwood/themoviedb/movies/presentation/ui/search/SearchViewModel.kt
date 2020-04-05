@@ -11,7 +11,6 @@ import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
-import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
 import javax.inject.Inject
 

@@ -2,8 +2,6 @@ package com.lockwood.themoviedb.presentation.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lockwood.core.extensions.findNavController
 import com.lockwood.core.extensions.launchActivity

@@ -14,6 +14,5 @@
         android:hint="@string/title_movies_search"
         android:inputType="textAutoCorrect"
         android:textSize="@dimen/text_size_regular" />
-</com.google.android.material.textfield.TextInputLayout>
-    <!-- TODO: заменить FilledBox на OutlinedBox -->
+</com.google.android.material.textfield.TextInputLayout><!-- TODO: заменить FilledBox на OutlinedBox -->
     <!-- TODO: настроить стиль TextInputLayout -->
