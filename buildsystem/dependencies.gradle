@@ -72,6 +72,7 @@ network.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit2"
 network.rxconverter = "com.squareup.retrofit2:adapter-rxjava2:$versions.rxConverter"
 network.logging = "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor"
 network.moshi = "com.squareup.moshi:moshi:$versions.moshi"
+network.moshireflection = "com.squareup.moshi:moshi-kotlin:$versions.moshi"
 network.moshicodegen = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
 network.moshiconverter = "com.squareup.retrofit2:converter-moshi:$versions.moshiConverter"
 deps.network = network

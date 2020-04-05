@@ -7,9 +7,13 @@ import com.lockwood.core.network.interceptor.HttpApiKeyInterceptor
 import com.lockwood.core.network.interceptor.HttpErrorInterceptor
 import com.lockwood.core.network.interceptor.HttpHeaderInterceptor
 import com.lockwood.core.network.manager.NetworkConnectivityManager
-import com.lockwood.core.network.moshi.adapter.*
+import com.lockwood.core.network.moshi.adapter.DateAdapter
+import com.lockwood.core.network.moshi.adapter.GravatarUrlAdapter
+import com.lockwood.core.network.moshi.adapter.LanguageAdapter
+import com.lockwood.core.network.moshi.adapter.PosterAdapter
 import com.lockwood.core.window.WindowManager
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Authenticator
@@ -85,13 +89,15 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideMoshi(windowManager: WindowManager): Moshi {
-        return Moshi.Builder()
-            .add(DateAdapter())
-            .add(LanguageAdapter())
-            .add(GravatarUrlAdapter(windowManager))
-            .add(PosterAdapter(windowManager))
-            .add(BackdropAdapter(windowManager))
-            .build()
+        val builder = Moshi.Builder()
+        val adapters = arrayOf(
+            DateAdapter(),
+            LanguageAdapter(),
+            GravatarUrlAdapter(windowManager),
+            PosterAdapter(windowManager)
+        )
+        adapters.forEach { builder.add(it) }
+        return builder.add(KotlinJsonAdapterFactory()).build()
     }
 
     @Provides

@@ -10,7 +10,7 @@ object PosterUtils {
     private val sizes = arrayOf(92, 154, 185, 342, 500, 780)
 
     // https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
-    fun posterPathToUrl(path: String, @Px width: Int): String {
+    fun posterPathToUrl(path: String?, @Px width: Int): String {
         val size = if (width >= IMAGE_SIZE_LIMIT) {
             ORIGINAL_SIZE
         } else {

@@ -10,7 +10,7 @@ object BackdropUtils {
     private val sizes = arrayOf(300, 780, 1280)
 
     // https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
-    fun backdropPathToUrl(path: String, @Px width: Int): String {
+    fun backdropPathToUrl(path: String?, @Px width: Int): String {
         val size = if (width >= IMAGE_SIZE_LIMIT) {
             ORIGINAL_SIZE
         } else {

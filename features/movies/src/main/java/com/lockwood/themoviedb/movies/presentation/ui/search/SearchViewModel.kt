@@ -22,6 +22,7 @@ class SearchViewModel @Inject constructor(
 
     // TDOO: Настроить softInpuMode под Snackbar
     override fun handleError(throwable: Throwable) {
+        super.handleError(throwable)
         if (throwable.isNoInternetException) {
             eventsQueue.offer(noInternetEvent)
         } else {
