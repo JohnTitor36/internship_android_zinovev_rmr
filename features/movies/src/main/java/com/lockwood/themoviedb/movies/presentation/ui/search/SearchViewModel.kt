@@ -2,9 +2,7 @@ package com.lockwood.themoviedb.movies.presentation.ui.search
 
 import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.ErrorMessageEvent
-import com.lockwood.core.event.EventsQueue
 import com.lockwood.core.extensions.schedulersIoToMain
-import com.lockwood.core.extensions.toFormatString
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.livedata.mapDistinct
 import com.lockwood.core.network.di.qualifier.ApiKey
@@ -13,7 +11,6 @@ import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -75,9 +72,6 @@ class SearchViewModel @Inject constructor(
                     .subscribe(
                         {
                             val movies = it.results
-                            val movie = movies.firstOrNull()
-                            Timber.d("date: ${movie?.releaseDate}")
-                            Timber.d("dateString: ${movie?.releaseDate?.toFormatString()}")
                             state = state.copy(movies = movies)
                         },
                         { handleError(it) }

@@ -7,9 +7,9 @@ import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val compositeDisposable by lazy { CompositeDisposable() }
+    val eventsQueue by lazy { EventsQueue() }
 
-    protected val eventsQueue by lazy { EventsQueue() }
+    private val compositeDisposable by lazy { CompositeDisposable() }
 
     open fun handleError(throwable: Throwable) = Unit
 
