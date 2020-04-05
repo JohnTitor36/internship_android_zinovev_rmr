@@ -1,6 +1,6 @@
 package com.lockwood.core.network.moshi.adapter
 
-import com.lockwood.core.common.Language
+import com.lockwood.core.data.Language
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 

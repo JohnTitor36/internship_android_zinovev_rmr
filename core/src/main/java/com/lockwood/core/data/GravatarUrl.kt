@@ -1,3 +1,3 @@
-package com.lockwood.core.common
+package com.lockwood.core.data
 
 class GravatarUrl(val value: String)

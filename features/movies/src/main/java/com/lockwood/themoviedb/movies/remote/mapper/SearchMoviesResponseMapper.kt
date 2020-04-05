@@ -1,5 +1,7 @@
 package com.lockwood.themoviedb.movies.remote.mapper
 
+import com.lockwood.core.data.BackdropUrl
+import com.lockwood.core.data.PosterUrl
 import com.lockwood.core.mapper.EntityRemoteMapper
 import com.lockwood.themoviedb.movies.data.model.SearchMoviesResponseEntity
 import com.lockwood.themoviedb.movies.remote.model.response.SearchMoviesResponseModel
@@ -15,10 +17,10 @@ class SearchMoviesResponseMapper @Inject constructor() :
                     popularity,
                     voteCount,
                     video,
-                    posterPath,
+                    poster.value,
                     id,
                     adult,
-                    backdropPath,
+                    backdrop.value,
                     originalLanguage,
                     originalTitle,
                     genreIds,
@@ -39,10 +41,10 @@ class SearchMoviesResponseMapper @Inject constructor() :
                     popularity,
                     voteCount,
                     video,
-                    posterPath,
+                    PosterUrl(poster),
                     id,
                     adult,
-                    backdropPath,
+                    BackdropUrl(backdrop),
                     originalLanguage,
                     originalTitle,
                     genreIds,

@@ -6,9 +6,7 @@ import com.lockwood.core.network.di.qualifier.*
 import com.lockwood.core.network.interceptor.OkHttpErrorInterceptor
 import com.lockwood.core.network.interceptor.OkHttpHeaderInterceptor
 import com.lockwood.core.network.manager.NetworkConnectivityManager
-import com.lockwood.core.network.moshi.adapter.DateAdapter
-import com.lockwood.core.network.moshi.adapter.GravatarUrlAdapter
-import com.lockwood.core.network.moshi.adapter.LanguageAdapter
+import com.lockwood.core.network.moshi.adapter.*
 import com.lockwood.core.window.WindowManager
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -83,6 +81,8 @@ class NetworkModule {
             .add(DateAdapter())
             .add(LanguageAdapter())
             .add(GravatarUrlAdapter(windowManager))
+            .add(PosterAdapter(windowManager))
+            .add(BackdropAdapter(windowManager))
             .build()
     }
 

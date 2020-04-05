@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.user.remote.model.response
 
-import com.lockwood.core.common.GravatarUrl
+import com.lockwood.core.data.GravatarUrl
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

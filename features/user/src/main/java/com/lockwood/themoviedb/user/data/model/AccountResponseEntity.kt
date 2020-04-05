@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.user.data.model
 
-import com.lockwood.core.common.GravatarUrl
+import com.lockwood.core.data.GravatarUrl
 
 data class AccountResponseEntity(
     val gravatarUrl: GravatarUrl,

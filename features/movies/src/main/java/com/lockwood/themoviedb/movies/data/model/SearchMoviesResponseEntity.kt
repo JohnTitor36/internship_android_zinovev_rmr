@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.movies.data.model
 
-import com.lockwood.core.common.Language
+import com.lockwood.core.data.Language
 import java.util.*
 
 data class SearchMoviesResponseEntity(
@@ -13,10 +13,10 @@ data class SearchMoviesResponseEntity(
         val popularity: Double, // 154.651
         val voteCount: Int, // 944
         val video: Boolean, // false
-        val posterPath: String, // /AwsewPKXebJvtl4EU5Dx5uBCW6G.jpg
+        val poster: String, // /AwsewPKXebJvtl4EU5Dx5uBCW6G.jpg
         val id: Int, // 448119
         val adult: Boolean, // false
-        val backdropPath: String, // /xcUf6yIheo78btFqihlRLftdR3M.jpg
+        val backdrop: String, // /xcUf6yIheo78btFqihlRLftdR3M.jpg
         val originalLanguage: Language, // en
         val originalTitle: String, // Dolittle
         val genreIds: List<Int>,

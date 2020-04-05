@@ -47,14 +47,13 @@ class MoviesAdapter(data: MutableList<Movie> = mutableListOf()) :
             val context = root.context
             val resourceReader = ResourceReader(context)
             val placeholder = resourceReader.defaultPlaceholder
-            val imageUlr = "https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.posterPath}"
             val avatarRequest = context.drawableRequest(
                 resourceReader = resourceReader,
                 placeholder = placeholder,
                 fallback = placeholder,
                 error = placeholder
             )
-            itemMovieImage.load(imageUlr, avatarRequest).waitForLayout()
+            itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
             itemMovieEngTitle.text = movie.originalTitle
