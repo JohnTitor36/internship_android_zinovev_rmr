@@ -5,11 +5,22 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseAdapter<T>(protected val data: MutableList<T>) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
+    companion object {
+        /** Тип View без данных */
+        const val VIEW_TYPE_EMPTY = 0
+
+        /** Тип View с программой */
+        const val VIEW_TYPE_NORMAL = 1
+
+        // Для отображения STUB view показываем только один item
+        private const val STUB_VIEW_ITEMS_COUNT = 1
+    }
+
     override fun getItemCount(): Int {
         return if (data.isNotEmpty()) {
             data.size
         } else {
-            1
+            STUB_VIEW_ITEMS_COUNT
         }
     }
 
@@ -40,11 +51,4 @@ abstract class BaseAdapter<T>(protected val data: MutableList<T>) :
         data.clear()
     }
 
-    companion object {
-        /** Тип View без данных */
-        const val VIEW_TYPE_EMPTY = 0
-
-        /** Тип View с программой */
-        const val VIEW_TYPE_NORMAL = 1
-    }
 }
