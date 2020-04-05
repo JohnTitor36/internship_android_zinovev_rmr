@@ -18,6 +18,7 @@ import com.lockwood.themoviedb.user.domain.repository.AccountRepository
 import timber.log.Timber
 import javax.inject.Inject
 
+// TODO: Добавить информацию о пользователе в префы
 class UserViewModel @Inject constructor(
     private val accountRepository: AccountRepository,
     private val loginActivityRouter: LoginActivityRouter,
@@ -34,7 +35,7 @@ class UserViewModel @Inject constructor(
         private const val GRAVATAR_IMAGE_BASE_URL = "https://www.gravatar.com/avatar/"
     }
 
-    val liveState: MutableLiveData<UserViewState> = MutableLiveData(createInitialState())
+    val liveState: MutableLiveData<UserViewState> = MutableLiveData(UserViewState.initialState())
 
     private var state: UserViewState by liveState.delegate()
 
@@ -75,11 +76,6 @@ class UserViewModel @Inject constructor(
                 },
                 { e -> Timber.e(e) }
             ).autoDispose()
-    }
-
-    // TODO: Добавить информацию о пользователе в префы
-    private fun createInitialState(): UserViewState {
-        return UserViewState("", "")
     }
 
     private fun gravatarImageUrl(hash: String): String {

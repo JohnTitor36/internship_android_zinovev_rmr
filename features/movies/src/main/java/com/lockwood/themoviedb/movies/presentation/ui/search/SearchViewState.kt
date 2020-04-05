@@ -8,4 +8,19 @@ data class SearchViewState(
     val inputClicked: Boolean,
     val inputStarted: Boolean,
     val movies: List<Movie>
-)
+) {
+
+    companion object {
+
+        fun initialState(): SearchViewState {
+            return SearchViewState(
+                movieName = "",
+                movieItemType = 0,
+                inputClicked = false,
+                inputStarted = false,
+                movies = emptyList()
+            )
+        }
+
+    }
+}

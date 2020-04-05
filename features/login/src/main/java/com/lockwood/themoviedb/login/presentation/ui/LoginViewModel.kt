@@ -38,7 +38,7 @@ constructor(
             "com.lockwood.themoviedb.presentation.ui.MainActivity"
     }
 
-    val liveState: MutableLiveData<LoginViewState> = MutableLiveData(createInitialState())
+    val liveState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState.initialState())
 
     val eventsQueue by lazy { EventsQueue() }
 
@@ -94,10 +94,6 @@ constructor(
 
     private fun setLoading(loading: Boolean) {
         state = state.copy(loading = loading)
-    }
-
-    private fun createInitialState(): LoginViewState {
-        return LoginViewState("", "", "", false, false, false)
     }
 
     private fun createSessionWithToken() {

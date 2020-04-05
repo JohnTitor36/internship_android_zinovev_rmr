@@ -7,4 +7,20 @@ data class LoginViewState(
     val loading: Boolean,
     val validCredentials: Boolean,
     val keyboardOpened: Boolean
-)
+) {
+
+    companion object {
+
+        fun initialState(): LoginViewState {
+            return LoginViewState(
+                login = "",
+                password = "",
+                errorMessage = "",
+                loading = false,
+                validCredentials = false,
+                keyboardOpened = false
+            )
+        }
+    }
+
+}
