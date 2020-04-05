@@ -11,8 +11,8 @@ data class LoginViewState(
 
     companion object {
 
-        fun initialState(): LoginViewState {
-            return LoginViewState(
+        val initialState
+            get() = LoginViewState(
                 login = "",
                 password = "",
                 errorMessage = "",
@@ -20,7 +20,7 @@ data class LoginViewState(
                 validCredentials = false,
                 keyboardOpened = false
             )
-        }
+
     }
 
 }

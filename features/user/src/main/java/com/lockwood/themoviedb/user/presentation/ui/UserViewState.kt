@@ -7,12 +7,12 @@ data class UserViewState(
 
     companion object {
 
-        fun initialState(): UserViewState {
-            return UserViewState(
+        val initialState
+            get() = UserViewState(
                 username = "",
                 image = ""
             )
-        }
+
     }
 
 }

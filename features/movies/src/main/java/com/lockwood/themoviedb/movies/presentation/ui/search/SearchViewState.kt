@@ -12,15 +12,14 @@ data class SearchViewState(
 
     companion object {
 
-        fun initialState(): SearchViewState {
-            return SearchViewState(
+        val initialState
+            get() = SearchViewState(
                 movieName = "",
                 movieItemType = 0,
                 inputClicked = false,
                 inputStarted = false,
                 movies = emptyList()
             )
-        }
 
     }
 }
