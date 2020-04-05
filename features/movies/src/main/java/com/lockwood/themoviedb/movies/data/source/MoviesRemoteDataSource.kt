@@ -11,12 +11,11 @@ class MoviesRemoteDataSource @Inject constructor(
 ) : MoviesDataStore {
 
     override fun searchMovies(
-        apiKey: String,
         query: String,
         page: Int,
         language: String
     ): Observable<SearchMoviesResponseEntity> {
-        return moviesRemote.searchMovies(apiKey, query, page, language)
+        return moviesRemote.searchMovies(query, page, language)
     }
 
 }

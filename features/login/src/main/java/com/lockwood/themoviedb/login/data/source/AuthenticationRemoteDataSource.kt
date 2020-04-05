@@ -30,22 +30,20 @@ class AuthenticationRemoteDataSource @Inject constructor(
         throw UnsupportedOperationException()
     }
 
-    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> {
-        return authenticationRemote.createRequestToken(apiKey)
+    override fun createRequestToken(): Single<CreateRequestTokenResponseEntity> {
+        return authenticationRemote.createRequestToken()
     }
 
     override fun validateTokenWithLogin(
-        apiKey: String,
         loginBody: ValidateWithLoginBodyEntity
     ): Completable {
-        return authenticationRemote.validateTokenWithLogin(apiKey, loginBody)
+        return authenticationRemote.validateTokenWithLogin(loginBody)
     }
 
     override fun createSession(
-        apiKey: String,
         sessionBody: CreateSessionBodyEntity
     ): Single<CreateSessionResponseEntity> {
-        return authenticationRemote.createSession(apiKey, sessionBody)
+        return authenticationRemote.createSession(sessionBody)
     }
 
 }

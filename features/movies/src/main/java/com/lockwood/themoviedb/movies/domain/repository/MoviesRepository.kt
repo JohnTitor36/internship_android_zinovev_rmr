@@ -11,7 +11,6 @@ interface MoviesRepository {
     }
 
     fun searchMovies(
-        apiKey: String,
         query: String,
         page: Int = 1,
         language: String = LOCALE_RU

@@ -11,14 +11,12 @@ import javax.inject.Singleton
 class NetworkApiModule {
 
     @Provides
-    @Singleton
     @BaseUrl
     fun provideBaseUrl(): String {
         return BuildConfig.BASE_URL
     }
 
     @Provides
-    @Singleton
     @ApiKey
     fun provideApiKey(): String {
         return BuildConfig.MOVIES_API_KEY

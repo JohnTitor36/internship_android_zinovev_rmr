@@ -6,7 +6,6 @@ import io.reactivex.Observable
 interface MoviesRemote {
 
     fun searchMovies(
-        apiKey: String,
         query: String,
         page: Int,
         language: String

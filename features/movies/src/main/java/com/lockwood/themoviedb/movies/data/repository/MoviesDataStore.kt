@@ -6,7 +6,6 @@ import io.reactivex.Observable
 interface MoviesDataStore {
 
     fun searchMovies(
-        apiKey: String,
         query: String,
         page: Int,
         language: String

@@ -5,7 +5,7 @@ import com.lockwood.core.network.common.RequestConstants.HEADER_CONTENT_TYPE
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class OkHttpHeaderInterceptor : Interceptor {
+class HttpHeaderInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()

@@ -17,10 +17,10 @@ interface AuthenticationRepository {
 
     fun saveCurrentSessionId(sessionId: String)
 
-    fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponse>
+    fun createRequestToken(): Single<CreateRequestTokenResponse>
 
-    fun validateTokenWithLogin(apiKey: String, loginBody: ValidateWithLoginBody): Completable
+    fun validateTokenWithLogin(loginBody: ValidateWithLoginBody): Completable
 
-    fun createSession(apiKey: String, sessionBody: CreateSessionBody): Single<CreateSessionResponse>
+    fun createSession(sessionBody: CreateSessionBody): Single<CreateSessionResponse>
 
 }

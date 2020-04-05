@@ -9,15 +9,13 @@ import io.reactivex.Single
 
 interface AuthenticationRemote {
 
-    fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity>
+    fun createRequestToken(): Single<CreateRequestTokenResponseEntity>
 
     fun validateTokenWithLogin(
-        apiKey: String, loginBody:
-        ValidateWithLoginBodyEntity
+        loginBody: ValidateWithLoginBodyEntity
     ): Completable
 
     fun createSession(
-        apiKey: String,
         sessionBody: CreateSessionBodyEntity
     ): Single<CreateSessionResponseEntity>
 

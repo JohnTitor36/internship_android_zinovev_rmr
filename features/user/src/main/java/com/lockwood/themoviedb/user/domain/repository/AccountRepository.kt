@@ -8,12 +8,10 @@ import io.reactivex.Single
 interface AccountRepository {
 
     fun getAccountDetails(
-        apiKey: String,
         sessionId: String
     ): Single<AccountResponse>
 
     fun deleteSession(
-        apiKey: String,
         deleteSessionBody: DeleteSessionBody
     ): Completable
 

@@ -5,7 +5,6 @@ import com.lockwood.core.event.ErrorMessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.livedata.mapDistinct
-import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
@@ -15,11 +14,10 @@ import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository,
-    @ApiKey apiKey: String,
     resourceReader: ResourceReader,
     connectivityManager: NetworkConnectivityManager,
     schedulers: SchedulersProvider
-) : BaseNetworkViewModel(apiKey, resourceReader, connectivityManager, schedulers) {
+) : BaseNetworkViewModel(resourceReader, connectivityManager, schedulers) {
 
     val liveState: MutableLiveData<SearchViewState> = MutableLiveData(SearchViewState.initialState)
 
@@ -67,7 +65,7 @@ class SearchViewModel @Inject constructor(
 
         checkHasInternet(
             onHasConnection = {
-                moviesRepository.searchMovies(apiKey, name)
+                moviesRepository.searchMovies(name)
                     .schedulersIoToMain(schedulers)
                     .subscribe(
                         {

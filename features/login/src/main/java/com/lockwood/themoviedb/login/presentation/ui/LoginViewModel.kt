@@ -2,11 +2,9 @@ package com.lockwood.themoviedb.login.presentation.ui
 
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
-import com.lockwood.core.event.EventsQueue
 import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
-import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.user.UserPreferences
@@ -26,11 +24,10 @@ class LoginViewModel @Inject
 constructor(
     private val authenticationRepository: AuthenticationRepository,
     private val userPreferences: UserPreferences,
-    @ApiKey apiKey: String,
     resourceReader: ResourceReader,
     connectivityManager: NetworkConnectivityManager,
     schedulers: SchedulersProvider
-) : BaseNetworkViewModel(apiKey, resourceReader, connectivityManager, schedulers) {
+) : BaseNetworkViewModel(resourceReader, connectivityManager, schedulers) {
 
     companion object {
 
@@ -107,7 +104,7 @@ constructor(
 
     private fun createRequestToken(): Completable {
         return Completable.fromSingle(
-            authenticationRepository.createRequestToken(apiKey)
+            authenticationRepository.createRequestToken()
                 .doOnSuccess { response: CreateRequestTokenResponse ->
                     requestToken = response.requestToken
                 }
@@ -116,13 +113,13 @@ constructor(
 
     private fun validateRequestToken(): Completable {
         val loginBody = ValidateWithLoginBody(state.login, state.password, requestToken)
-        return authenticationRepository.validateTokenWithLogin(apiKey, loginBody)
+        return authenticationRepository.validateTokenWithLogin( loginBody)
     }
 
     private fun createSession(): Completable {
         val createSessionBody = CreateSessionBody(requestToken)
         return Completable.fromSingle(
-            authenticationRepository.createSession(apiKey, createSessionBody)
+            authenticationRepository.createSession( createSessionBody)
                 .doOnSuccess { response: CreateSessionResponse ->
                     sessionId = response.sessionId
                 }

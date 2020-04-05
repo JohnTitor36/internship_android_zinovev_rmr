@@ -42,25 +42,23 @@ class DefaultAuthenticationRepository @Inject constructor(
         return authenticationCacheDataSource.saveCurrentSessionId(sessionId)
     }
 
-    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponse> {
-        return authenticationRemoteDataSource.createRequestToken(apiKey)
+    override fun createRequestToken(): Single<CreateRequestTokenResponse> {
+        return authenticationRemoteDataSource.createRequestToken()
             .map { createRequestTokenResponseMapper.mapFromEntity(it) }
     }
 
     override fun validateTokenWithLogin(
-        apiKey: String,
         loginBody: ValidateWithLoginBody
     ): Completable {
         val loginBodyEntity = validateWithLoginBodyMapper.mapToRemote(loginBody)
-        return authenticationRemoteDataSource.validateTokenWithLogin(apiKey, loginBodyEntity)
+        return authenticationRemoteDataSource.validateTokenWithLogin(loginBodyEntity)
     }
 
     override fun createSession(
-        apiKey: String,
         sessionBody: CreateSessionBody
     ): Single<CreateSessionResponse> {
         val sessionBodyEntity = createSessionBodyMapper.mapToRemote(sessionBody)
-        return authenticationRemoteDataSource.createSession(apiKey, sessionBodyEntity)
+        return authenticationRemoteDataSource.createSession(sessionBodyEntity)
             .map { createSessionResponseMapper.mapFromRemote(it) }
     }
 

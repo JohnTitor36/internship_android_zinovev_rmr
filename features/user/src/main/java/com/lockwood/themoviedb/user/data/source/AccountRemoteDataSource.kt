@@ -13,17 +13,15 @@ class AccountRemoteDataSource @Inject constructor(
 ) : AccountDataStore {
 
     override fun getAccountDetails(
-        apiKey: String,
         sessionId: String
     ): Single<AccountResponseEntity> {
-        return accountRemote.getAccountDetails(apiKey, sessionId)
+        return accountRemote.getAccountDetails(sessionId)
     }
 
     override fun deleteSession(
-        apiKey: String,
         deleteSessionBody: DeleteSessionBodyEntity
     ): Completable {
-        return accountRemote.deleteSession(apiKey, deleteSessionBody)
+        return accountRemote.deleteSession(deleteSessionBody)
     }
 
 }

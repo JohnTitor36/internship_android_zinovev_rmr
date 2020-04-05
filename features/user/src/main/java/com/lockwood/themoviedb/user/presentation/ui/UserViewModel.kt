@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
-import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.di.qualifier.SessionId
@@ -21,11 +20,10 @@ class UserViewModel @Inject constructor(
     private val accountRepository: AccountRepository,
     private val loginActivityRouter: LoginActivityRouter,
     @SessionId private val sessionId: String,
-    @ApiKey apiKey: String,
     resourceReader: ResourceReader,
     connectivityManager: NetworkConnectivityManager,
     schedulers: SchedulersProvider
-) : BaseNetworkViewModel(apiKey, resourceReader, connectivityManager, schedulers) {
+) : BaseNetworkViewModel(resourceReader, connectivityManager, schedulers) {
 
     val liveState: MutableLiveData<UserViewState> = MutableLiveData(UserViewState.initialState)
 
@@ -44,7 +42,7 @@ class UserViewModel @Inject constructor(
     fun logout() = checkHasInternet(
         onHasConnection = {
             val sessionBodyModel = DeleteSessionBody(sessionId)
-            accountRepository.deleteSession(apiKey, sessionBodyModel)
+            accountRepository.deleteSession(sessionBodyModel)
                 .schedulersIoToMain(schedulers)
                 .subscribe(
                     { loginActivityRouter.openLoginActivity() },
@@ -55,11 +53,10 @@ class UserViewModel @Inject constructor(
     )
 
     fun fetchAccountDetails() {
-        accountRepository.getAccountDetails(apiKey, sessionId)
+        accountRepository.getAccountDetails(sessionId)
             .schedulersIoToMain(schedulers)
             .subscribe(
                 { accountResponse ->
-                    Timber.d("url: ${accountResponse.gravatarUrl.value}")
                     state = state.copy(
                         username = accountResponse.username,
                         image = accountResponse.gravatarUrl.value

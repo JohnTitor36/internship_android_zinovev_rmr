@@ -18,14 +18,14 @@ class DefaultAccountRepository @Inject constructor(
     private val deleteSessionBodyMapper: DeleteSessionBodyMapper
 ) : AccountRepository {
 
-    override fun getAccountDetails(apiKey: String, sessionId: String): Single<AccountResponse> {
-        return accountRemoteDataSource.getAccountDetails(apiKey, sessionId)
+    override fun getAccountDetails( sessionId: String): Single<AccountResponse> {
+        return accountRemoteDataSource.getAccountDetails( sessionId)
             .map { accountResponseMapper.mapFromEntity(it) }
     }
 
-    override fun deleteSession(apiKey: String, deleteSessionBody: DeleteSessionBody): Completable {
+    override fun deleteSession( deleteSessionBody: DeleteSessionBody): Completable {
         val body = deleteSessionBodyMapper.mapToEntity(deleteSessionBody)
-        return accountRemoteDataSource.deleteSession(apiKey, body)
+        return accountRemoteDataSource.deleteSession( body)
     }
 
 }

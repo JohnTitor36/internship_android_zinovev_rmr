@@ -14,12 +14,11 @@ class DefaultMoviesRemote @Inject constructor(
 ) : MoviesRemote {
 
     override fun searchMovies(
-        apiKey: String,
         query: String,
         page: Int,
         language: String
     ): Observable<SearchMoviesResponseEntity> {
-        return moviesService.searchMovies(apiKey, query, page, language)
+        return moviesService.searchMovies(query, page, language)
             .map { searchMoviesResponseMapper.mapFromRemote(it) }
     }
 

@@ -30,19 +30,17 @@ class AuthenticationCacheDataSource @Inject constructor(
         authenticationPreferences.saveCurrentSessionId(sessionId)
     }
 
-    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> {
+    override fun createRequestToken(): Single<CreateRequestTokenResponseEntity> {
         throw UnsupportedOperationException()
     }
 
     override fun validateTokenWithLogin(
-        apiKey: String,
         loginBody: ValidateWithLoginBodyEntity
     ): Completable {
         throw UnsupportedOperationException()
     }
 
     override fun createSession(
-        apiKey: String,
         sessionBody: CreateSessionBodyEntity
     ): Single<CreateSessionResponseEntity> {
         throw UnsupportedOperationException()

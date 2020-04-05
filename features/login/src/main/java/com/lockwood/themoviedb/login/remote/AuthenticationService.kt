@@ -9,24 +9,19 @@ import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface AuthenticationService {
 
     @GET("authentication/token/new")
-    fun createRequestToken(
-        @Query("api_key") apiKey: String
-    ): Single<CreateRequestTokenResponseModel>
+    fun createRequestToken(): Single<CreateRequestTokenResponseModel>
 
     @POST("authentication/token/validate_with_login")
     fun validateTokenWithLogin(
-        @Query("api_key") apiKey: String,
         @Body loginBody: ValidateWithLoginBodyModel
     ): Completable
 
     @POST("authentication/session/new")
     fun createSession(
-        @Query("api_key") apiKey: String,
         @Body sessionBody: CreateSessionBodyModel
     ): Single<CreateSessionResponseModel>
 

@@ -10,7 +10,6 @@ import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.core.ui.BaseViewModel
 
 abstract class BaseNetworkViewModel(
-    protected val apiKey: String,
     protected val resourceReader: ResourceReader,
     protected val connectivityManager: NetworkConnectivityManager,
     protected val schedulers: SchedulersProvider

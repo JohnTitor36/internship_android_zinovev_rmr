@@ -17,15 +17,13 @@ interface AuthenticationDataStore {
 
     fun saveCurrentSessionId(sessionId: String)
 
-    fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity>
+    fun createRequestToken(): Single<CreateRequestTokenResponseEntity>
 
     fun validateTokenWithLogin(
-        apiKey: String,
         loginBody: ValidateWithLoginBodyEntity
     ): Completable
 
     fun createSession(
-        apiKey: String,
         sessionBody: CreateSessionBodyEntity
     ): Single<CreateSessionResponseEntity>
 

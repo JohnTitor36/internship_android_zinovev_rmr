@@ -13,13 +13,11 @@ interface AccountService {
 
     @GET("account")
     fun getAccountDetails(
-        @Query("api_key") apiKey: String,
         @Query("session_id") sessionId: String
     ): Single<AccountResponseModel>
 
     @HTTP(method = "DELETE", path = "authentication/session", hasBody = true)
     fun deleteSession(
-        @Query("api_key") apiKey: String,
         @Body deleteSessionBody: DeleteSessionBodyModel
     ): Completable
 

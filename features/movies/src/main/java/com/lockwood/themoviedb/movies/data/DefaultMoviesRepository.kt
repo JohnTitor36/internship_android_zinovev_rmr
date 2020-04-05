@@ -15,12 +15,11 @@ class DefaultMoviesRepository @Inject constructor(
 ) : MoviesRepository {
 
     override fun searchMovies(
-        apiKey: String,
         query: String,
         page: Int,
         language: String
     ): Observable<SearchMoviesResponse> {
-        return moviesRemoteDataSource.searchMovies(apiKey, query, page, language)
+        return moviesRemoteDataSource.searchMovies( query, page, language)
             .map { searchMoviesResponseMapper.mapFromEntity(it) }
     }
 

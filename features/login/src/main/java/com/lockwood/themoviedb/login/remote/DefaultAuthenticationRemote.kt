@@ -23,25 +23,23 @@ class DefaultAuthenticationRemote @Inject constructor(
     private val validateWithLoginBodyEntityMapper: ValidateWithLoginBodyEntityMapper
 ) : AuthenticationRemote {
 
-    override fun createRequestToken(apiKey: String): Single<CreateRequestTokenResponseEntity> {
-        return authenticationService.createRequestToken(apiKey)
+    override fun createRequestToken(): Single<CreateRequestTokenResponseEntity> {
+        return authenticationService.createRequestToken()
             .map { createRequestTokenResponseEntityMapper.mapFromRemote(it) }
     }
 
     override fun validateTokenWithLogin(
-        apiKey: String,
         loginBody: ValidateWithLoginBodyEntity
     ): Completable {
         val loginBodyModel = validateWithLoginBodyEntityMapper.mapToRemote(loginBody)
-        return authenticationService.validateTokenWithLogin(apiKey, loginBodyModel)
+        return authenticationService.validateTokenWithLogin(loginBodyModel)
     }
 
     override fun createSession(
-        apiKey: String,
         sessionBody: CreateSessionBodyEntity
     ): Single<CreateSessionResponseEntity> {
         val sessionBodyModel = createSessionBodyEntityMapper.mapToRemote(sessionBody)
-        return authenticationService.createSession(apiKey, sessionBodyModel)
+        return authenticationService.createSession(sessionBodyModel)
             .map { createSessionResponseEntityMapper.mapFromRemote(it) }
     }
 

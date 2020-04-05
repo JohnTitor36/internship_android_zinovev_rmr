@@ -8,7 +8,7 @@ import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class OkHttpErrorInterceptor(
+class HttpErrorInterceptor(
     private val connectivityManager: NetworkConnectivityManager,
     private val moshi: Moshi
 ) : Interceptor {
