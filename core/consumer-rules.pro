@@ -1,8 +1,0 @@
--android
--optimizationpasses 5
--allowaccessmodification
--dontusemixedcaseclassnames
--dontskipnonpubliclibraryclasses
--dontskipnonpubliclibraryclassmembers
--verbose
--dontpreverify
