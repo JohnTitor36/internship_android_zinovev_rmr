@@ -2,6 +2,7 @@ package com.lockwood.themoviedb.movies.remote.model.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class SearchMoviesResponseModel(
@@ -43,6 +44,6 @@ data class SearchMoviesResponseModel(
         @Json(name = "overview")
         val overview: String, // Семь лет назад доктор Дулиттл, прославленный врач-ветеринар, живущий в викторианской Англии, потерял свою жену. Теперь он ведет затворнический образ жизни, скрывшись за высокими стенами своего поместья. Экзотические животные из его коллекции — его единственная компания. Но когда неизвестная болезнь становится угрозой для жизни юной королевы, доктору Дулиттлу приходится покинуть свое убежище и отправиться в невероятное путешествие к мифическому острову. В поисках лекарства для королевы он вступит в схватку с беспощадными врагами, познакомится с диковинными существами и будет вынужден проявить недюжинное мужество и смекалку.
         @Json(name = "release_date")
-        val releaseDate: String // 2020-01-01
+        val releaseDate: Date // 2020-01-01
     )
 }

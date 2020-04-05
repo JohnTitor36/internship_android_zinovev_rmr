@@ -1,4 +1,5 @@
 apply from: rootProject.file('buildsystem/android-library.gradle')
+apply from: rootProject.file('buildsystem/test-android.gradle')
 
 dependencies {
 

@@ -40,8 +40,6 @@ constructor(
 
     val liveState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState.initialState)
 
-    val eventsQueue by lazy { EventsQueue() }
-
     private var state: LoginViewState by liveState.delegate()
 
     private var requestToken: String

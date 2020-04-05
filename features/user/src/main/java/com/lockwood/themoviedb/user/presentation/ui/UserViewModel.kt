@@ -39,8 +39,6 @@ class UserViewModel @Inject constructor(
 
     private var state: UserViewState by liveState.delegate()
 
-    val eventsQueue by lazy { EventsQueue() }
-
     override fun handleError(throwable: Throwable) {
         if (throwable.isNoInternetException) {
             eventsQueue.offer(noInternetEvent)
