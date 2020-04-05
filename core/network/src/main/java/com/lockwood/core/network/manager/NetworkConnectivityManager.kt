@@ -18,7 +18,7 @@ class NetworkConnectivityManager @Inject constructor(private val context: Contex
             val connectivityManager = connectivityManager
             return if (connectivityManager != null) {
                 val activeNetworkInfo = connectivityManager.activeNetworkInfo
-                return activeNetworkInfo != null && activeNetworkInfo.isConnected
+                activeNetworkInfo != null && activeNetworkInfo.isConnected
             } else {
                 false
             }
