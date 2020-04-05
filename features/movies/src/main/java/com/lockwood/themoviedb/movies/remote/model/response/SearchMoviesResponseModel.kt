@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.movies.remote.model.response
 
-import com.lockwood.core.network.common.Language
+import com.lockwood.core.common.Language
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.*

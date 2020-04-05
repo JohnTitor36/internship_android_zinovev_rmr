@@ -5,35 +5,39 @@ import com.lockwood.themoviedb.user.data.model.AccountResponseEntity
 import com.lockwood.themoviedb.user.remote.model.response.AccountResponseModel
 import javax.inject.Inject
 
+typealias Avatar = AccountResponseModel.Avatar
+typealias Gravatar = AccountResponseModel.Avatar.Gravatar
+
 class AccountResponseMapper @Inject constructor() :
     EntityRemoteMapper<AccountResponseModel, AccountResponseEntity> {
 
     override fun mapFromRemote(type: AccountResponseModel): AccountResponseEntity {
-        val gravatar = AccountResponseEntity.Avatar.Gravatar(type.avatar.gravatar.hash)
-        val avatar = AccountResponseEntity.Avatar(gravatar)
-        return AccountResponseEntity(
-            avatar,
-            type.id,
-            type.iso6391,
-            type.iso31661,
-            type.name,
-            type.includeAdult,
-            type.username
-        )
+        with(type) {
+            return AccountResponseEntity(
+                avatar.gravatar.url,
+                id,
+                iso6391,
+                iso31661,
+                name,
+                includeAdult,
+                username
+            )
+        }
+
     }
 
     override fun mapToRemote(type: AccountResponseEntity): AccountResponseModel {
-        val gravatar = AccountResponseModel.Avatar.Gravatar(type.avatar.gravatar.hash)
-        val avatar = AccountResponseModel.Avatar(gravatar)
-        return AccountResponseModel(
-            avatar,
-            type.id,
-            type.iso6391,
-            type.iso31661,
-            type.name,
-            type.includeAdult,
-            type.username
-        )
+        with(type) {
+            return AccountResponseModel(
+                Avatar(Gravatar(gravatarUrl)),
+                id,
+                iso6391,
+                iso31661,
+                name,
+                includeAdult,
+                username
+            )
+        }
     }
 
 }

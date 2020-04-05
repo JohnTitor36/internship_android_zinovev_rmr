@@ -1,4 +1,4 @@
-package com.lockwood.core.network.common
+package com.lockwood.core.common
 
 enum class Language(val value: String) {
     RU("ru"),

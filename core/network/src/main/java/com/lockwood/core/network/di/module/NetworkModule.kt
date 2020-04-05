@@ -7,7 +7,9 @@ import com.lockwood.core.network.interceptor.OkHttpErrorInterceptor
 import com.lockwood.core.network.interceptor.OkHttpHeaderInterceptor
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.moshi.adapter.DateAdapter
+import com.lockwood.core.network.moshi.adapter.GravatarUrlAdapter
 import com.lockwood.core.network.moshi.adapter.LanguageAdapter
+import com.lockwood.core.window.WindowManager
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -76,10 +78,11 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideMoshi(): Moshi {
+    fun provideMoshi(windowManager: WindowManager): Moshi {
         return Moshi.Builder()
             .add(DateAdapter())
             .add(LanguageAdapter())
+            .add(GravatarUrlAdapter(windowManager))
             .build()
     }
 

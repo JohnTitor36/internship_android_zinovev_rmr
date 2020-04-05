@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.movies.data.model
 
-import com.lockwood.core.network.common.Language
+import com.lockwood.core.common.Language
 import java.util.*
 
 data class SearchMoviesResponseEntity(

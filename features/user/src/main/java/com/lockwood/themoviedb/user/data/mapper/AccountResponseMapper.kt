@@ -8,31 +8,31 @@ import javax.inject.Inject
 class AccountResponseMapper @Inject constructor() : Mapper<AccountResponseEntity, AccountResponse> {
 
     override fun mapFromEntity(type: AccountResponseEntity): AccountResponse {
-        val gravatar = AccountResponse.Avatar.Gravatar(type.avatar.gravatar.hash)
-        val avatar = AccountResponse.Avatar(gravatar)
-        return AccountResponse(
-            avatar,
-            type.id,
-            type.iso6391,
-            type.iso31661,
-            type.name,
-            type.includeAdult,
-            type.username
-        )
+        with(type) {
+            return AccountResponse(
+                gravatarUrl,
+                id,
+                iso6391,
+                iso31661,
+                name,
+                includeAdult,
+                username
+            )
+        }
     }
 
     override fun mapToEntity(type: AccountResponse): AccountResponseEntity {
-        val gravatar = AccountResponseEntity.Avatar.Gravatar(type.avatar.gravatar.hash)
-        val avatar = AccountResponseEntity.Avatar(gravatar)
-        return AccountResponseEntity(
-            avatar,
-            type.id,
-            type.iso6391,
-            type.iso31661,
-            type.name,
-            type.includeAdult,
-            type.username
-        )
+        with(type) {
+            return AccountResponseEntity(
+                gravatarUrl,
+                id,
+                iso6391,
+                iso31661,
+                name,
+                includeAdult,
+                username
+            )
+        }
     }
 
 }

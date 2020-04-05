@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.movies.domain.model
 
-import com.lockwood.core.network.common.Language
+import com.lockwood.core.common.Language
 import java.util.*
 
 typealias Movie = SearchMoviesResponse.Result
