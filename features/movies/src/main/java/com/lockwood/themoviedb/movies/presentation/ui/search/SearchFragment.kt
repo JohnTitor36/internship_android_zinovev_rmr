@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -70,8 +71,8 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         rootView.buildSnackbar(message).show()
     }
 
-    private fun addViewListeners() = with(binding) {
-        with(searchInputLayout.searchEditText) {
+    private fun addViewListeners() {
+        with(binding.searchInputLayout.searchEditText) {
             setOnFocusChangeListener { _, _ -> viewModel.inputClicked() }
             addTextChangedListener { viewModel.movieNameEntered(it.toString()) }
         }
