@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.ui.BaseFragment
-import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.movies.databinding.FragmentFavoriteMoviesBinding
 import com.lockwood.themoviedb.movies.di.component.favorite.DaggerFavoriteMoviesComponent
@@ -31,7 +31,7 @@ class FavoriteMoviesFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentFavoriteMoviesBinding>(container, false).root
+    ): View = createView<FragmentFavoriteMoviesBinding>(inflater, container)
 
     private fun inject() {
         DaggerFavoriteMoviesComponent.builder()

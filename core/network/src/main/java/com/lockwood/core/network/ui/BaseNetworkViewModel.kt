@@ -27,6 +27,7 @@ abstract class BaseNetworkViewModel(
             return this is NoInternetConnectionException
         }
 
+    // TODO: убрать, уже есть NoInternetConnectionException
     protected fun checkHasInternet(
         onHasConnection: () -> Unit,
         onNoConnection: () -> Unit

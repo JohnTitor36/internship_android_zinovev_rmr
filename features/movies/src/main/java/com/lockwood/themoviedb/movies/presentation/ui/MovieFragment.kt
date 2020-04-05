@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.lockwood.core.ui.BaseFragment
-import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.movies.databinding.FragmentMovieBinding
 import com.lockwood.themoviedb.movies.di.component.DaggerMovieComponent
@@ -34,7 +34,7 @@ class MovieFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentMovieBinding>(container, false).root
+    ): View = createView<FragmentMovieBinding>(inflater, container)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

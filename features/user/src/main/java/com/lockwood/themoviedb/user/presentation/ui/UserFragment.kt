@@ -15,7 +15,7 @@ import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseFragment
-import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.glide.extensions.drawableRequest
 import com.lockwood.glide.extensions.load
@@ -41,7 +41,7 @@ class UserFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentUserBinding>(container, false).root
+    ): View = createView<FragmentUserBinding>(inflater,container)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,7 +61,6 @@ class UserFragment : BaseFragment() {
         signOutButton.setOnClickListener { viewModel.logout() }
     }
 
-    // TODO: Заменить with в функции на with внутри
     private fun renderState(state: UserViewState) {
         with(binding) {
             userNameTextView.text = state.username

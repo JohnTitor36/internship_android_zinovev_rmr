@@ -12,12 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.event.Event
 import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.observe
-import com.lockwood.core.extensions.*
+import com.lockwood.core.extensions.afterMeasured
+import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.extensions.dimenPx
+import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
-import com.lockwood.core.viewbinding.inflateViewBinding
+import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.databinding.FragmentLoginBinding
@@ -41,14 +44,13 @@ class LoginFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = inflater.inflateViewBinding<FragmentLoginBinding>(container, false).root
+    ): View = createView<FragmentLoginBinding>(inflater, container)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
-        observe(viewModel.loading, ::renderLoading)
         addViewListeners()
     }
 
@@ -61,20 +63,11 @@ class LoginFragment : BaseFragment() {
         }
     }
 
-    override fun showMessage(message: String) {
-        rootView.buildSnackbar(message).show()
-    }
-
-    override fun showError(error: String) = with(binding.loginErrorTextView) {
-        text = error
-        isVisible = error.isNotEmpty()
-    }
-
-    private fun renderState(state: LoginViewState) = with(binding) {
-        signInButton.isEnabled = state.validCredentials
-
-        loginTitleTextView.isVisible = !state.keyboardOpened
-        loginHintTextView.isVisible = !state.keyboardOpened
+    private fun renderState(state: LoginViewState) {
+        renderLoading(state.loading)
+        renderTitleAboveCredentials(state.keyboardOpened)
+        renderSignIngButton(state.validCredentials)
+        renderErrorMessage(state.errorMessage)
     }
 
     private fun renderLoading(loading: Boolean) {
@@ -82,13 +75,30 @@ class LoginFragment : BaseFragment() {
         loginProgressBar.isVisible = loading
     }
 
+    private fun renderTitleAboveCredentials(keyboardOpened: Boolean) = with(binding) {
+        loginTitleTextView.isVisible = !keyboardOpened
+        loginHintTextView.isVisible = !keyboardOpened
+    }
+
+    private fun renderSignIngButton(validCredentials: Boolean) = with(binding) {
+        signInButton.isEnabled = validCredentials
+    }
+
+    private fun renderErrorMessage(errorMessage: String) = with(binding) {
+        loginErrorTextView.text = errorMessage
+    }
+
     private fun addViewListeners() = with(binding) {
-        loginEditText.addTextChangedListener { viewModel.onLoginChanged(it.toString()) }
-        passwordEditText.addTextChangedListener { viewModel.onPasswordChanged(it.toString()) }
+        loginEditText.addTextChangedListener {
+            viewModel.onCredentialsChanged(it.toString(), passwordEditText.text.toString())
+        }
+        passwordEditText.addTextChangedListener {
+            viewModel.onCredentialsChanged(loginEditText.text.toString(), it.toString())
+        }
 
         signInButton.setOnClickListener {
             hideKeyboard()
-            viewModel.login()
+            viewModel.onEnterButtonClick()
         }
 
         checkKeyboardVisibility()
