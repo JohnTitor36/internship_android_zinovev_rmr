@@ -1,4 +1,4 @@
-apply from: rootProject.file('buildsystem/android-library.gradle')
+apply from: rootProject.file('buildsystem/android/android-library.gradle')
 
 def secretsPropertiesFile = rootProject.file("secrets.properties")
 def secretProperties = new Properties()

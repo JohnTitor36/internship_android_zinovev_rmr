@@ -1,4 +1,4 @@
-apply from: rootProject.file('buildsystem/android-app.gradle')
+apply from: rootProject.file('buildsystem/android/android-app.gradle')
 apply plugin: "scabbard.gradle"
 apply from: 'https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle'
 
