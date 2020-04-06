@@ -2,7 +2,6 @@ package com.lockwood.themoviedb.movies.remote.model.response
 
 import com.lockwood.core.data.Language
 import com.lockwood.core.network.moshi.qualifier.BackdropUrl
-import com.lockwood.core.network.moshi.qualifier.GravatarUrl
 import com.lockwood.core.network.moshi.qualifier.PosterUrl
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

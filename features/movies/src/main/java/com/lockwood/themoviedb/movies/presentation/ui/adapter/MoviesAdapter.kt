@@ -5,7 +5,6 @@ import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseAdapter
 import com.lockwood.core.ui.BaseViewHolder
 import com.lockwood.core.viewbinding.inflateViewBinding
-import com.lockwood.glide.extensions.defaultPlaceholder
 import com.lockwood.glide.extensions.drawableRequest
 import com.lockwood.glide.extensions.load
 import com.lockwood.themoviedb.movies.R
