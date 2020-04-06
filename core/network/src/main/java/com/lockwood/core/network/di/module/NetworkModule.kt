@@ -7,10 +7,7 @@ import com.lockwood.core.network.interceptor.HttpApiKeyInterceptor
 import com.lockwood.core.network.interceptor.HttpErrorInterceptor
 import com.lockwood.core.network.interceptor.HttpHeaderInterceptor
 import com.lockwood.core.network.manager.NetworkConnectivityManager
-import com.lockwood.core.network.moshi.adapter.DateAdapter
-import com.lockwood.core.network.moshi.adapter.GravatarUrlAdapter
-import com.lockwood.core.network.moshi.adapter.LanguageAdapter
-import com.lockwood.core.network.moshi.adapter.PosterAdapter
+import com.lockwood.core.network.moshi.adapter.*
 import com.lockwood.core.window.WindowManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -26,6 +23,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 @Module
 class NetworkModule {
@@ -50,9 +48,9 @@ class NetworkModule {
     @ErrorInterceptor
     fun provideErrorInterceptor(
         connectivityManager: NetworkConnectivityManager,
-        moshi: Moshi
+        moshi: Moshi.Builder
     ): Interceptor {
-        return HttpErrorInterceptor(connectivityManager, moshi)
+        return HttpErrorInterceptor(connectivityManager, moshi.build())
     }
 
     @Provides
@@ -87,17 +85,19 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
-    fun provideMoshi(windowManager: WindowManager): Moshi {
-        val builder = Moshi.Builder()
+    fun provideMoshi(windowManager: WindowManager): Moshi.Builder {
+        val builder = Moshi.Builder().add(KotlinJsonAdapterFactory())
+
         val adapters = arrayOf(
             DateAdapter(),
             LanguageAdapter(),
             GravatarUrlAdapter(windowManager),
-            PosterAdapter(windowManager)
+            PosterAdapter(windowManager),
+            BackdropAdapter(windowManager)
         )
+
         adapters.forEach { builder.add(it) }
-        return builder.add(KotlinJsonAdapterFactory()).build()
+        return builder
     }
 
     @Provides
@@ -136,33 +136,25 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideRetrofitBuilder(
+    fun provideRetrofit(
         @BaseUrl baseUrl: String,
-        moshi: Moshi
+        okHttpClient: OkHttpClient,
+        moshi: Moshi.Builder
     ): Retrofit.Builder {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(MoshiConverterFactory.create(moshi.build()))
+            .client(okHttpClient)
     }
 
     @Provides
-    @Singleton
-    fun provideRetrofit(
-        retrofit: Retrofit.Builder,
-        okHttpClient: OkHttpClient
-    ): Retrofit {
-        return retrofit.client(okHttpClient).build()
-    }
-
-    @Provides
-    @Singleton
     @AuthRetrofit
     fun provideAuthRetrofit(
         retrofit: Retrofit.Builder,
         @AuthHttpClient okHttpClient: OkHttpClient
-    ): Retrofit {
-        return retrofit.client(okHttpClient).build()
+    ): Retrofit.Builder {
+        return retrofit.client(okHttpClient)
     }
 
 }

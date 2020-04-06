@@ -5,7 +5,6 @@ import com.lockwood.core.network.di.qualifier.ApiKey
 import com.lockwood.core.network.di.qualifier.BaseUrl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class NetworkApiModule {

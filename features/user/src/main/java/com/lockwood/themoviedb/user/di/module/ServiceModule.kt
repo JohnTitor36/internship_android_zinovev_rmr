@@ -12,8 +12,8 @@ class ServiceModule {
 
     @Provides
     @FeatureScope
-    fun provideAccountService(@AuthRetrofit retrofit: Retrofit): AccountService {
-        return retrofit.create(AccountService::class.java)
+    fun provideAccountService(@AuthRetrofit retrofit: Retrofit.Builder): AccountService {
+        return retrofit.build().create(AccountService::class.java)
     }
 
 }

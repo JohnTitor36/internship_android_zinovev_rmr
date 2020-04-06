@@ -20,7 +20,7 @@ class DefaultAccountRemote @Inject constructor(
     override fun getAccountDetails(
         sessionId: String
     ): Single<AccountResponseEntity> {
-        return accountService.getAccountDetails( sessionId)
+        return accountService.getAccountDetails(sessionId)
             .map { accountResponseMapper.mapFromRemote(it) }
     }
 
@@ -28,7 +28,7 @@ class DefaultAccountRemote @Inject constructor(
         deleteSessionBody: DeleteSessionBodyEntity
     ): Completable {
         val body = deleteSessionBodyMapper.mapToRemote(deleteSessionBody)
-        return accountService.deleteSession( body)
+        return accountService.deleteSession(body)
     }
 
 }

@@ -8,12 +8,12 @@ import retrofit2.Retrofit
 
 interface NetworkToolsProvider : NetworkApiProvider {
 
-    fun provideMoshi(): Moshi
+    fun provideMoshi(): Moshi.Builder
 
-    fun provideRetrofit(): Retrofit
+    fun provideRetrofit(): Retrofit.Builder
 
     @AuthRetrofit
-    fun provideAuthRetrofit(): Retrofit
+    fun provideAuthRetrofit(): Retrofit.Builder
 
     fun provideOkHttpClient(): OkHttpClient
 

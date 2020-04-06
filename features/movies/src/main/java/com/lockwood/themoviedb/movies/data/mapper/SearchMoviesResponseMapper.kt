@@ -10,7 +10,7 @@ class SearchMoviesResponseMapper @Inject constructor() :
 
     override fun mapFromEntity(type: SearchMoviesResponseEntity): SearchMoviesResponse {
         val results = type.results.map {
-            with(it){
+            with(it) {
                 SearchMoviesResponse.Result(
                     popularity,
                     voteCount,
@@ -34,7 +34,7 @@ class SearchMoviesResponseMapper @Inject constructor() :
 
     override fun mapToEntity(type: SearchMoviesResponse): SearchMoviesResponseEntity {
         val results = type.results.map {
-            with(it){
+            with(it) {
                 SearchMoviesResponseEntity.Result(
                     popularity,
                     voteCount,

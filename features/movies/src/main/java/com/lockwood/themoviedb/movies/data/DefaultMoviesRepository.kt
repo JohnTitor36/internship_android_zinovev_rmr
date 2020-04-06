@@ -19,7 +19,7 @@ class DefaultMoviesRepository @Inject constructor(
         page: Int,
         language: String
     ): Observable<SearchMoviesResponse> {
-        return moviesRemoteDataSource.searchMovies( query, page, language)
+        return moviesRemoteDataSource.searchMovies(query, page, language)
             .map { searchMoviesResponseMapper.mapFromEntity(it) }
     }
 

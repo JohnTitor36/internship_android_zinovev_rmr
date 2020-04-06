@@ -12,8 +12,8 @@ class SearchServiceModule {
 
     @Provides
     @FeatureScope
-    fun provideAuthenticationService(@AuthRetrofit retrofit: Retrofit): MoviesService {
-        return retrofit.create(MoviesService::class.java)
+    fun provideAuthenticationService(@AuthRetrofit retrofit: Retrofit.Builder): MoviesService {
+        return retrofit.build().create(MoviesService::class.java)
     }
 
 }

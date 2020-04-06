@@ -11,8 +11,8 @@ class ServiceModule {
 
     @Provides
     @FeatureScope
-    fun provideAuthenticationService(retrofit: Retrofit): AuthenticationService {
-        return retrofit.create(AuthenticationService::class.java)
+    fun provideAuthenticationService(retrofit: Retrofit.Builder): AuthenticationService {
+        return retrofit.build().create(AuthenticationService::class.java)
     }
 
 }

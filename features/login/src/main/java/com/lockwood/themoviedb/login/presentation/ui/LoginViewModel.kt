@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
-import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.reader.ResourceReader
@@ -113,13 +112,13 @@ constructor(
 
     private fun validateRequestToken(): Completable {
         val loginBody = ValidateWithLoginBody(state.login, state.password, requestToken)
-        return authenticationRepository.validateTokenWithLogin( loginBody)
+        return authenticationRepository.validateTokenWithLogin(loginBody)
     }
 
     private fun createSession(): Completable {
         val createSessionBody = CreateSessionBody(requestToken)
         return Completable.fromSingle(
-            authenticationRepository.createSession( createSessionBody)
+            authenticationRepository.createSession(createSessionBody)
                 .doOnSuccess { response: CreateSessionResponse ->
                     sessionId = response.sessionId
                 }

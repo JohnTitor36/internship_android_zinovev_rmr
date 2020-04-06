@@ -23,4 +23,8 @@ object ApiImageUtils {
         return url.substring(startIndex, endIndex)
     }
 
+    fun isPlaceholder(url: String): Boolean {
+        return url.contains(PLACE_HOLDER_IMAGE)
+    }
+
 }
