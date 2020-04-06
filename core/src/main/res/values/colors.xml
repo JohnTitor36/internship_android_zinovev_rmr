@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">@color/bg_black</color>
-    <color name="primaryDark">@color/bg_black</color>
-    <color name="accent">@color/orange</color>
-
     <color name="gray">#656D8A</color>
     <color name="gray_light">#DADADA</color>
     <color name="light">#E7EDFF</color>
@@ -16,5 +12,4 @@
     <color name="red">#E1172F</color>
     <color name="purple">#6C63FF</color>
     <color name="black_transparent">#AA000000</color>
-
 </resources>

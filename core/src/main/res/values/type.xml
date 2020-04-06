@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Regular" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="Medium" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_regular</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/light</item>
+    </style>
+
+    <style name="Title" parent="Medium">
+        <item name="android:textSize">@dimen/text_size_title</item>
+    </style>
+
+</resources>

@@ -8,7 +8,6 @@
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="android:textAppearance">@style/Regular</item>
-        <item name="android:textColor">@color/light</item>
         <item name="hintTextColor">@color/gray</item>
         <item name="boxStrokeColor">@color/purple</item>
         <item name="boxCornerRadiusTopStart">@dimen/button_corner_radius</item>
