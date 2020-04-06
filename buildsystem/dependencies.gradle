@@ -16,6 +16,7 @@ versions.navigation = "2.3.0-alpha03"
 versions.preference = "1.1.0"
 versions.security = "1.0.0-alpha02"
 versions.glide = "4.11.0"
+versions.glideTransoframtions = "4.1.0"
 versions.rx2 = "2.2.18"
 versions.rxAndroid = "2.1.1"
 versions.dagger = "2.27"
@@ -102,6 +103,7 @@ deps.assisted = assisted
 def glide = [:]
 glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
 glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+glide.transformations = "jp.wasabeef:glide-transformations:$versions.glideTransoframtions"
 deps.glide = glide
 
 def tools = [:]
