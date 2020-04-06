@@ -1,6 +1,6 @@
 package com.lockwood.themoviedb.user.remote.model.response
 
-import com.lockwood.core.data.GravatarUrl
+import com.lockwood.core.network.moshi.qualifier.GravatarUrl
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -28,8 +28,9 @@ data class AccountResponseModel(
     ) {
         @JsonClass(generateAdapter = true)
         data class Gravatar(
+            @GravatarUrl
             @Json(name = "hash")
-            val url: GravatarUrl // c9e9fc152ee756a900db85757c29815d
+            val url: String // c9e9fc152ee756a900db85757c29815d
         )
     }
 }

@@ -55,7 +55,7 @@ class UserViewModel @Inject constructor(
                 { accountResponse ->
                     state = state.copy(
                         username = accountResponse.username,
-                        image = accountResponse.gravatarUrl.value
+                        image = accountResponse.gravatarUrl
                     )
                 },
                 { e -> Timber.e(e) }
