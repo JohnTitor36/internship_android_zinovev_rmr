@@ -8,6 +8,7 @@ import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
@@ -15,6 +16,12 @@ class SearchViewModel @Inject constructor(
     resourceReader: ResourceReader,
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(resourceReader, schedulers) {
+
+    companion object {
+
+        private const val DEFAULT_PAGE = 1
+        private const val DEBOUNCE_IN_MILLISECONDS = 500L
+    }
 
     val liveState: MutableLiveData<SearchViewState> = MutableLiveData(SearchViewState.initialState)
 
@@ -41,13 +48,23 @@ class SearchViewModel @Inject constructor(
     }
 
     fun movieNameEntered(name: String) {
+        resetPagination()
         checkIsInputStarted(name)
         onLoadMovies(name)
+    }
+
+    fun loadMoreMovies() {
+        val nextPage = state.currentPage + 1
+        onLoadMovies(state.movieName, nextPage)
     }
 
     fun openMovie(id: Int) {
         val direction = SearchFragmentDirections.openMovie(id)
         navigateTo(direction)
+    }
+
+    private fun resetPagination() {
+        state = state.copy(movies = emptyList(), currentPage = DEFAULT_PAGE)
     }
 
     private fun checkIsInputStarted(name: String) {
@@ -59,17 +76,23 @@ class SearchViewModel @Inject constructor(
         state = state.copy(inputStarted = inputStarted, movieName = name)
     }
 
-    private fun onLoadMovies(name: String) {
+    private fun onLoadMovies(name: String, page: Int = DEFAULT_PAGE) {
         if (name.isEmpty()) {
             return
         }
 
-        moviesRepository.searchMovies(name)
+        moviesRepository.searchMovies(name, page)
+            .debounce(DEBOUNCE_IN_MILLISECONDS,TimeUnit.MILLISECONDS)
             .schedulersIoToMain(schedulers)
             .subscribe(
                 {
-                    val movies = it.results
-                    state = state.copy(movies = movies)
+                    val movies = state.movies + it.results
+                    state = state.copy(
+                        movies = movies,
+                        currentPage = it.page,
+                        pageCount = it.totalPages,
+                        perPage = it.totalResults / it.totalPages
+                    )
                 },
                 { handleError(it) }
             )

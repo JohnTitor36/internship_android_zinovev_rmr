@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lockwood.core.event.observe
+import com.lockwood.core.extensions.addOnLastItemListener
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.extensions.buildSnackbar
 import com.lockwood.core.livedata.observe
@@ -26,6 +27,11 @@ import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
+
+    companion object {
+
+        private const val LAST_ITEM_REACHED_OFFSET = 5
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -62,6 +68,9 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         with(searchRecyclerViewMovies) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = moviesAdapter
+            addOnLastItemListener(LAST_ITEM_REACHED_OFFSET) {
+                viewModel.loadMoreMovies()
+            }
         }
     }
 

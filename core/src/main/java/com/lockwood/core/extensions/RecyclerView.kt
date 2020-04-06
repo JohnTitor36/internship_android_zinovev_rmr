@@ -1,5 +1,6 @@
 package com.lockwood.core.extensions
 
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,5 +66,22 @@ fun RecyclerView.LayoutManager.isLastItemVisible(offset: Int): Boolean {
         }
     }
     return false
+}
+
+inline fun RecyclerView.addOnLastItemListener(
+    offset: Int,
+    crossinline onLastPositionReached: () -> Unit
+) {
+    addOnScrollListener(
+        object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (!recyclerView.isEmpty() && recyclerView.layoutManager?.isLastItemVisible(offset = offset) == true) {
+                    onLastPositionReached()
+                }
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        }
+    )
 }
 
