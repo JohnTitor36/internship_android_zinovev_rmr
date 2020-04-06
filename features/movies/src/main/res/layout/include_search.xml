@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/search_input_layout"
-    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:hintEnabled="false">
+    android:layout_marginStart="@dimen/default_content_margin"
+    android:layout_marginEnd="@dimen/default_content_margin"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/search_title">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/search_edit_text"
-        android:layout_width="match_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/title_movies_search"
-        android:inputType="textAutoCorrect"
-        android:textSize="@dimen/text_size_regular" />
-</com.google.android.material.textfield.TextInputLayout><!-- TODO: заменить FilledBox на OutlinedBox -->
-    <!-- TODO: настроить стиль TextInputLayout -->
+        android:layout_weight="0.9"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/title_movies_search"
+            android:inputType="textAutoCorrect"
+            android:textSize="@dimen/text_size_regular" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:src="@drawable/ic_movies_card"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>

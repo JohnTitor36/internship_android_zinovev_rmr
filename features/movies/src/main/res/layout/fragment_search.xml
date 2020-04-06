@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/margin_extra_big">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/search_image_background"
@@ -42,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/search_input_layout"
+                android:id="@+id/include_search_layout"
                 layout="@layout/include_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

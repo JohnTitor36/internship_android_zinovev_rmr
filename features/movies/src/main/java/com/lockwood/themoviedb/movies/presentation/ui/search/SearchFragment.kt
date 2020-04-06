@@ -79,7 +79,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     }
 
     private fun addViewListeners() {
-        with(binding.searchInputLayout.searchEditText) {
+        with(binding.includeSearchLayout.searchEditText) {
             setOnFocusChangeListener { _, _ -> viewModel.inputClicked() }
             addTextChangedListener { viewModel.movieNameEntered(it.toString()) }
         }
