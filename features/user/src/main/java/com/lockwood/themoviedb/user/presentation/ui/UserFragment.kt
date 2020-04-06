@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.request.RequestOptions
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.extensions.buildSnackbar
@@ -22,6 +23,7 @@ import com.lockwood.glide.extensions.load
 import com.lockwood.themoviedb.user.R
 import com.lockwood.themoviedb.user.databinding.FragmentUserBinding
 import com.lockwood.themoviedb.user.di.component.DaggerUserComponent
+import jp.wasabeef.glide.transformations.CropCircleWithBorderTransformation
 import javax.inject.Inject
 
 class UserFragment : BaseFragment() {
@@ -68,13 +70,17 @@ class UserFragment : BaseFragment() {
             val context = requireContext()
             val resourceReader = ResourceReader(context)
             val defaultAvatar = resourceReader.drawable(R.drawable.ic_avatar_default)
+            val circleWithBorderTransformation = CropCircleWithBorderTransformation(
+                resourceReader.dimenInPx(R.dimen.user_avatar_corners_size),
+                resourceReader.color(R.color.avatar_corner)
+            )
             // TODO: Добавить RoundDrawableCropWithBorder
             val avatarRequest = context.drawableRequest(
                 resourceReader = resourceReader,
                 placeholder = defaultAvatar,
                 fallback = defaultAvatar,
                 error = defaultAvatar
-            )
+            ).apply(RequestOptions.bitmapTransform(circleWithBorderTransformation))
             userAvatarImageView.load(state.image, avatarRequest)
         }
     }

@@ -18,6 +18,7 @@ dependencies {
             deps.network.retrofit2,
             deps.network.moshi,
             deps.glide.glide,
+            deps.glide.transformations,
             deps.tools.timber,
             deps.dagger.dagger
     )

@@ -4,7 +4,7 @@
     android:viewportWidth="136"
     android:viewportHeight="136">
     <path
-        android:fillColor="#2A2E42"
+        android:fillColor="@color/avatar_corner"
         android:pathData="M68,68m-68,0a68,68 0,1 1,136 0a68,68 0,1 1,-136 0" />
     <path
         android:fillColor="#6C63FF"
