@@ -11,4 +11,8 @@
         <item name="android:navigationBarColor">@color/dark_blue_light</item>
     </style>
 
+    <style name="AppTheme.Edge">
+        <item name="android:navigationBarColor">@color/bg_black</item>
+    </style>
+
 </resources>

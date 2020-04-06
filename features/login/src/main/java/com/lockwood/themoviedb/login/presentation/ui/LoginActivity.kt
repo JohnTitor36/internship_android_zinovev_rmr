@@ -12,7 +12,7 @@ class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.navigationBarColor = color(R.color.bg_black)
+        setTheme(R.style.AppTheme_Edge)
         super.onCreate(savedInstanceState)
 
         binding = layoutInflater.inflateViewBinding()

@@ -57,7 +57,7 @@
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="60dp"
         android:scaleType="fitEnd"
-        android:src="@drawable/ic_movie_night"
+        android:src="@drawable/ic_movie_night_144dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

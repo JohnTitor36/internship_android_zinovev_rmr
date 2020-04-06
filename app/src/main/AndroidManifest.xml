@@ -17,6 +17,7 @@
         tools:targetApi="m">
 
         <activity
+            android:theme="@style/AppTheme.Launcher"
             android:name="com.lockwood.themoviedb.presentation.ui.MainActivity"
             android:windowSoftInputMode="adjustNothing">
 
