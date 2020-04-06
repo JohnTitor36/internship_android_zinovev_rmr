@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary">@color/bg_black</color>
-    <color name="primaryDark">@color/bg_black</color>
-    <color name="accent">@color/orange</color>
+    <color name="primaryVariant">@color/bg_black</color>
+    <color name="secondary">@color/orange</color>
 </resources>
