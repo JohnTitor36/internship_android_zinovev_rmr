@@ -10,7 +10,7 @@
         android:id="@+id/search_image_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="@dimen/search_image_background_margin"
         android:scaleType="fitEnd"
         android:src="@drawable/ic_search_background"
         tools:ignore="ContentDescription"
@@ -29,7 +29,6 @@
 
             <TextView
                 android:id="@+id/search_title"
-                style="@style/Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_content_margin"
@@ -37,6 +36,7 @@
                 android:layout_marginEnd="@dimen/default_content_margin"
                 android:paddingBottom="@dimen/margin_extra_big"
                 android:text="@string/title_search_any_movie"
+                android:textAppearance="@style/Title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +60,6 @@
             android:id="@+id/search_recycler_view_movies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingTop="@dimen/default_content_margin"
             android:scrollbars="none"

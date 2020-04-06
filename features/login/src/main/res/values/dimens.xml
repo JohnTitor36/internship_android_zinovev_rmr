@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="keyboard_probably_height">200dp</dimen>
-    <dimen name="title_margin">11dp</dimen>
 </resources>

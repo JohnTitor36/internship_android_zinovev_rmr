@@ -64,7 +64,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun resetPagination() {
-        state = state.copy(movies = emptyList(), currentPage = DEFAULT_PAGE)
+        state = state.copy(currentPage = DEFAULT_PAGE)
     }
 
     private fun checkIsInputStarted(name: String) {
@@ -86,7 +86,12 @@ class SearchViewModel @Inject constructor(
             .schedulersIoToMain(schedulers)
             .subscribe(
                 {
-                    val movies = state.movies + it.results
+                    val startMovies = if (page != DEFAULT_PAGE) {
+                        state.movies
+                    } else {
+                        emptyList()
+                    }
+                    val movies = startMovies + it.results
                     state = state.copy(
                         movies = movies,
                         currentPage = it.page,
