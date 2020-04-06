@@ -8,6 +8,7 @@ import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.glide.extensions.defaultPlaceholder
 import com.lockwood.glide.extensions.drawableRequest
 import com.lockwood.glide.extensions.load
+import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.ItemMovieEmtpyBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
 import com.lockwood.themoviedb.movies.domain.model.Movie
@@ -46,7 +47,7 @@ class MoviesAdapter(data: List<Movie> = emptyList()) :
 
             val context = root.context
             val resourceReader = ResourceReader(context)
-            val placeholder = resourceReader.defaultPlaceholder
+            val placeholder = resourceReader.drawable(R.drawable.ic_poster_placeholder)
             val avatarRequest = context.drawableRequest(
                 resourceReader = resourceReader,
                 placeholder = placeholder,

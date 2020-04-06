@@ -1,6 +1,9 @@
 package com.lockwood.themoviedb.movies.remote.model.response
 
 import com.lockwood.core.data.Language
+import com.lockwood.core.network.moshi.qualifier.BackdropUrl
+import com.lockwood.core.network.moshi.qualifier.GravatarUrl
+import com.lockwood.core.network.moshi.qualifier.PosterUrl
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.*
@@ -24,12 +27,14 @@ data class SearchMoviesResponseModel(
         val voteCount: Int, // 944
         @Json(name = "video")
         val video: Boolean, // false
+        @PosterUrl
         @Json(name = "poster_path")
         val poster: String?, // /AwsewPKXebJvtl4EU5Dx5uBCW6G.jpg
         @Json(name = "id")
         val id: Int, // 448119
         @Json(name = "adult")
         val adult: Boolean, // false
+        @BackdropUrl
         @Json(name = "backdrop_path")
         val backdrop: String?, // /xcUf6yIheo78btFqihlRLftdR3M.jpg
         @Json(name = "original_language")

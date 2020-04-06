@@ -1,7 +1,5 @@
 package com.lockwood.themoviedb.movies.remote.mapper
 
-import com.lockwood.core.data.BackdropUrl
-import com.lockwood.core.data.PosterUrl
 import com.lockwood.core.mapper.EntityRemoteMapper
 import com.lockwood.themoviedb.movies.data.model.SearchMoviesResponseEntity
 import com.lockwood.themoviedb.movies.remote.model.response.SearchMoviesResponseModel
