@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_big">
+    android:background="?attr/selectableItemBackground"
+    android:paddingStart="@dimen/default_content_margin"
+    android:paddingTop="@dimen/margin_small"
+    android:paddingEnd="@dimen/default_content_margin"
+    android:paddingBottom="@dimen/margin_small">
 
     <ImageView
         android:id="@+id/item_movie_image"
@@ -17,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription"
-        tools:src="@drawable/ic_search_background" />
+        tools:src="@drawable/ic_poster_placeholder" />
 
     <TextView
         android:id="@+id/item_movie_title"
