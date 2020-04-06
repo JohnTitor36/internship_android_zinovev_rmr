@@ -82,7 +82,7 @@ class SearchViewModel @Inject constructor(
         }
 
         moviesRepository.searchMovies(name, page)
-            .debounce(DEBOUNCE_IN_MILLISECONDS,TimeUnit.MILLISECONDS)
+            .debounce(DEBOUNCE_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .schedulersIoToMain(schedulers)
             .subscribe(
                 {

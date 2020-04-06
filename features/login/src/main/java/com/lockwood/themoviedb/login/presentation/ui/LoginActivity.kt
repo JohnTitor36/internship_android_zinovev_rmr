@@ -1,7 +1,6 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
 import android.os.Bundle
-import com.lockwood.core.extensions.color
 import com.lockwood.core.ui.BaseActivity
 import com.lockwood.core.viewbinding.inflateViewBinding
 import com.lockwood.themoviedb.login.R

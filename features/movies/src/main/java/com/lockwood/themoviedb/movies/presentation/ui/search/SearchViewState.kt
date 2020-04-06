@@ -12,7 +12,7 @@ data class SearchViewState(
     override var pageCount: Int,
     override var currentPage: Int,
     override var perPage: Int
-):Pagination {
+) : Pagination {
 
     companion object {
 
