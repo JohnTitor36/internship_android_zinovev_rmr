@@ -28,6 +28,7 @@ class UserViewModel @Inject constructor(
     private var state: UserViewState by liveState.delegate()
 
     override fun handleError(throwable: Throwable) {
+        super.handleError(throwable)
         if (throwable.isNoInternetException) {
             eventsQueue.offer(noInternetEvent)
         } else {

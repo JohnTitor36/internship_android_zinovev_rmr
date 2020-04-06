@@ -27,13 +27,13 @@ data class SearchMoviesResponseModel(
         @Json(name = "video")
         val video: Boolean, // false
         @Json(name = "poster_path")
-        val poster: PosterUrl?, // /AwsewPKXebJvtl4EU5Dx5uBCW6G.jpg
+        val poster: PosterUrl, // /AwsewPKXebJvtl4EU5Dx5uBCW6G.jpg
         @Json(name = "id")
         val id: Int, // 448119
         @Json(name = "adult")
         val adult: Boolean, // false
         @Json(name = "backdrop_path")
-        val backdrop: BackdropUrl?, // /xcUf6yIheo78btFqihlRLftdR3M.jpg
+        val backdrop: BackdropUrl, // /xcUf6yIheo78btFqihlRLftdR3M.jpg
         @Json(name = "original_language")
         val originalLanguage: Language, // en
         @Json(name = "original_title")

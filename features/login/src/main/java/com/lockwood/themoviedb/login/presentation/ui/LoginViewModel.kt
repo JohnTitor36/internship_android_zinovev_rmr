@@ -51,6 +51,7 @@ constructor(
         }
 
     override fun handleError(throwable: Throwable) {
+        super.handleError(throwable)
         setLoading(false)
         if (throwable.isNoInternetException) {
             eventsQueue.offer(noInternetEvent)
