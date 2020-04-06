@@ -1,6 +1,7 @@
 package com.lockwood.themoviedb.movies.presentation.ui.adapter
 
 import android.view.ViewGroup
+import com.bumptech.glide.request.RequestOptions
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseAdapter
 import com.lockwood.core.ui.BaseViewHolder
@@ -11,6 +12,7 @@ import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.ItemMovieEmtpyBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
 import com.lockwood.themoviedb.movies.domain.model.Movie
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class MoviesAdapter(data: List<Movie> = emptyList()) :
     BaseAdapter<Movie>(data) {
@@ -47,12 +49,17 @@ class MoviesAdapter(data: List<Movie> = emptyList()) :
             val context = root.context
             val resourceReader = ResourceReader(context)
             val placeholder = resourceReader.drawable(R.drawable.ic_poster_placeholder)
+            val roundedCornersTransformation = RoundedCornersTransformation(
+                resourceReader.dimenInPx(R.dimen.item_movies_corner_radius),
+                0,
+                RoundedCornersTransformation.CornerType.ALL
+            )
             val avatarRequest = context.drawableRequest(
                 resourceReader = resourceReader,
                 placeholder = placeholder,
                 fallback = placeholder,
                 error = placeholder
-            )
+            ).apply(RequestOptions.bitmapTransform(roundedCornersTransformation))
             itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
