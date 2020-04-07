@@ -19,7 +19,7 @@
         <item name="android:imeOptions">actionSearch</item>
     </style>
 
-    <style name="ThemeOverlay.RecyclerView.Clear" parent="ThemeOverlay.TextInputEditText">
+    <style name="RecyclerView.Clear">
         <item name="android:scrollbars">none</item>
         <item name="android:overScrollMode">never</item>
     </style>

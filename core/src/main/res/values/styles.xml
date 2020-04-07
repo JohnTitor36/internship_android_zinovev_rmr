@@ -24,4 +24,9 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="RecyclerView">
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:overScrollMode">ifContentScrolls</item>
+    </style>
+
 </resources>
