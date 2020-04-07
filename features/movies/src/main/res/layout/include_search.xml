@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:baselineAligned="false"
     android:orientation="horizontal"
     android:weightSum="1"
     app:layout_constraintEnd_toEndOf="parent"
@@ -18,11 +19,11 @@
         android:layout_weight="0.9"
         app:hintEnabled="false"
         app:startIconDrawable="@drawable/ic_search"
-        app:startIconTint="@color/appbar_icos_color">
+        app:startIconTint="@color/search_appbar_icons_color">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_edit_text"
-            style="@style/ThemeOverlay.TextInputEditText"
+            style="@style/ThemeOverlay.TextInputEditText.Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_clear"
@@ -30,7 +31,7 @@
             android:imeOptions="actionSearch"
             android:inputType="textAutoCorrect"
             android:textSize="@dimen/text_size_regular"
-            app:drawableTint="@color/appbar_icos_color" />
+            app:drawableTint="@color/search_appbar_icons_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <FrameLayout
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_movies_card"
-            android:tint="@color/appbar_icos_color"
+            android:tint="@color/search_appbar_icons_color"
             tools:ignore="ContentDescription" />
 
     </FrameLayout>

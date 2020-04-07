@@ -2,8 +2,15 @@
 <resources>
 
     <style name="ThemeOverlay.TextInputLayout.Search" parent="ThemeOverlay.TextInputLayout">
-        <item name="hintTextColor">@color/gray</item>
-        <item name="boxStrokeColor">@color/purple</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="boxBackgroundColor">@color/search_appbar_color</item>
+        <item name="hintTextColor">@color/search_appbar_icons_color</item>
+        <item name="boxStrokeColor">@color/search_appbar_color</item>
+    </style>
+
+    <style name="ThemeOverlay.TextInputEditText.Search" parent="ThemeOverlay.TextInputEditText">
+        <item name="android:textColor">@color/light_transparent</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
 </resources>
