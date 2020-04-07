@@ -17,9 +17,11 @@ import com.lockwood.core.extensions.buildSnackbar
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
+import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
+import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
 import com.lockwood.themoviedb.movies.domain.model.Movie
@@ -37,6 +39,9 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: SearchViewModel by viewModels { viewModelFactory }
+
+    @Inject
+    lateinit var resourceReader: ResourceReader
 
     private val binding: FragmentSearchBinding by viewBinding()
 
@@ -98,6 +103,22 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
             searchTitle.isVisible = !state.inputClicked
             searchImageBackground.isVisible = !state.inputClicked
 
+            with(includeSearchLayout) {
+                val changeTypeDrawable = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
+                    resourceReader.drawable(R.drawable.ic_movies_card)
+                } else {
+                    resourceReader.drawable(R.drawable.ic_movies_list)
+                }
+                searchChangeViewTypeImage.setImageDrawable(changeTypeDrawable)
+
+                val clearDrawable = if (state.inputEmpty) {
+                    null
+                } else {
+                    resourceReader.drawable(R.drawable.ic_clear)
+                }
+                searchInputLayout.endIconDrawable = clearDrawable
+            }
+
             with(searchRecyclerViewMovies) {
                 isVisible = state.inputStarted
 
@@ -106,19 +127,18 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
                     // обновляем только отображаемые данные
                     moviesAdapter.setItems(state.movies)
                 } else {
-                    // обновляем и отображаемые данные
+                    // обновляем адаптер с отображаемыми данными
+                    moviesAdapter = MoviesAdapter(state.movies, state.viewItemType).apply {
+                        listener = this@SearchFragment
+                    }
+                    adapter = moviesAdapter
+                    // и кол-во столбцов для gridLayoutManager
                     val spanCount = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
                         1
                     } else {
                         2
                     }
-                    gridLayoutManager = GridLayoutManager(requireContext(), spanCount)
-                    moviesAdapter = MoviesAdapter(state.movies, state.viewItemType).apply {
-                        listener = this@SearchFragment
-                    }
-                    // и layoutManager с adapter-ом
-                    // layoutManager = gridLayoutManager
-                    adapter = moviesAdapter
+                    gridLayoutManager.spanCount = spanCount
                 }
             }
         }

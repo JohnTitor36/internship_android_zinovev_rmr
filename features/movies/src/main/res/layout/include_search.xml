@@ -16,9 +16,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.9"
-        app:startIconDrawable="@drawable/ic_search"
         app:endIconTint="@color/appbar_icos_color"
         app:hintEnabled="false"
+        app:startIconDrawable="@drawable/ic_search"
         app:startIconTint="@color/appbar_icos_color">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -26,21 +26,27 @@
             style="@style/ThemeOverlay.TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:imeOptions="actionSearch"
             android:hint="@string/title_movies_search"
+            android:imeOptions="actionSearch"
             android:inputType="textAutoCorrect"
             android:textSize="@dimen/text_size_regular" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/search_change_view_type"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.1"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:src="@drawable/ic_movies_card"
-        android:tint="@color/appbar_icos_color"
-        tools:ignore="ContentDescription" />
+        android:layout_weight="0.1">
+
+        <ImageView
+            android:id="@+id/search_change_view_type_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_movies_card"
+            android:tint="@color/appbar_icos_color"
+            tools:ignore="ContentDescription" />
+
+    </FrameLayout>
 
 </LinearLayout>

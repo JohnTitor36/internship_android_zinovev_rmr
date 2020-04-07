@@ -10,7 +10,6 @@ import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_GRID
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -85,7 +84,11 @@ class SearchViewModel @Inject constructor(
         } else {
             true
         }
-        state = state.copy(inputStarted = inputStarted, movieName = name)
+        state = state.copy(
+            inputStarted = inputStarted,
+            inputEmpty = name.isEmpty(),
+            movieName = name
+        )
     }
 
     private fun onLoadMovies(name: String, page: Int = DEFAULT_PAGE) {
