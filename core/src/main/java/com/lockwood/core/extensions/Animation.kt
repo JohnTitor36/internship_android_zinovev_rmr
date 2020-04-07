@@ -11,3 +11,7 @@ fun View.beginDelayedTransition() {
         AutoTransition()
     )
 }
+
+fun View.endDelayedTransition() {
+    TransitionManager.endTransitions(rootView as ViewGroup)
+}

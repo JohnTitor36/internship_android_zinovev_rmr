@@ -2,7 +2,6 @@ package com.lockwood.themoviedb.movies.presentation.ui.search
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -113,6 +112,12 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
             searchTitle.isVisible = !state.inputClicked
             searchImageBackground.isVisible = !state.inputClicked
 
+            if (!state.inputStarted) {
+                searchTitle.beginDelayedTransition()
+            } else {
+                searchTitle.endDelayedTransition()
+            }
+
             with(includeSearchLayout) {
                 val changeTypeDrawable = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
                     resourceReader.drawable(R.drawable.ic_movies_card)
@@ -131,7 +136,6 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
 
             with(searchRecyclerViewMovies) {
                 isVisible = state.inputStarted
-                beginDelayedTransition()
 
                 val isTypeChanged = state.viewItemType != moviesAdapter.itemViewType
                 if (!isTypeChanged) {
