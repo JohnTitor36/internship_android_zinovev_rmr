@@ -16,7 +16,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.9"
-        app:endIconTint="@color/appbar_icos_color"
         app:hintEnabled="false"
         app:startIconDrawable="@drawable/ic_search"
         app:startIconTint="@color/appbar_icos_color">
@@ -26,10 +25,12 @@
             style="@style/ThemeOverlay.TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_clear"
             android:hint="@string/title_movies_search"
             android:imeOptions="actionSearch"
             android:inputType="textAutoCorrect"
-            android:textSize="@dimen/text_size_regular" />
+            android:textSize="@dimen/text_size_regular"
+            app:drawableTint="@color/appbar_icos_color" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <FrameLayout

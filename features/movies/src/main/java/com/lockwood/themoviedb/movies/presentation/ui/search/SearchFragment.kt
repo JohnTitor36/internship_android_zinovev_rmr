@@ -25,6 +25,7 @@ import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
 import com.lockwood.themoviedb.movies.domain.model.Movie
+import com.lockwood.themoviedb.movies.extensions.updateCompoundDrawables
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import javax.inject.Inject
@@ -116,7 +117,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
                 } else {
                     resourceReader.drawable(R.drawable.ic_clear)
                 }
-                searchInputLayout.endIconDrawable = clearDrawable
+                searchEditText.updateCompoundDrawables(end = clearDrawable)
             }
 
             with(searchRecyclerViewMovies) {
