@@ -37,7 +37,7 @@
         tools:text="Удивительное путешествие до..." />
 
     <TextView
-        android:id="@+id/item_movie_eng_title"
+        android:id="@+id/item_movie_original_title"
         style="@style/MovieTitle.Original"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="@+id/item_movie_image"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/item_movie_image"
-        app:layout_constraintTop_toBottomOf="@+id/item_movie_eng_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_movie_original_title"
         tools:text="фэнтези, боевик, комедия" />
 
     <TextView

@@ -18,6 +18,7 @@ import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
 import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import java.util.*
 
 class MoviesAdapter(
     data: List<Movie> = emptyList(),
@@ -97,10 +98,17 @@ class MoviesAdapter(
             itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
-            itemMovieEngTitle.text = movie.originalTitle
-            itemMovieVoteAverage.text = movie.voteAverage.toString()
+
+            val originalTitle = resourceReader.string(R.string.title_movie_with_year)
+            val movieYear = movie.releaseDate.toYear()
+            val movieOriginalTitle = movie.originalTitle
+            itemMovieOriginalTitle.text = originalTitle.format(movieOriginalTitle, movieYear)
+
             val ratingColor = movie.voteAverage.toRatingColorRes()
+            itemMovieVoteAverage.text = movie.voteAverage.toString()
+
             itemMovieVoteAverage.setTextColor(resourceReader.color(ratingColor))
+
             itemMoviePopularity.text = movie.popularity.toString()
 
             root.setOnClickListener { listener.onMovieClick(movie) }
@@ -119,10 +127,17 @@ class MoviesAdapter(
             itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
-            itemMovieEngTitle.text = movie.originalTitle
-            itemMovieVoteAverage.text = movie.voteAverage.toString()
+
+            val originalTitle = resourceReader.string(R.string.title_movie_with_year)
+            val movieYear = movie.releaseDate.toYear()
+            val movieOriginalTitle = movie.originalTitle
+            itemMovieOriginalTitle.text = originalTitle.format(movieOriginalTitle, movieYear)
+
             val ratingColor = movie.voteAverage.toRatingColorRes()
+            itemMovieVoteAverage.text = movie.voteAverage.toString()
+
             itemMovieVoteAverage.setTextColor(resourceReader.color(ratingColor))
+
             itemMoviePopularity.text = movie.popularity.toString()
 
             root.setOnClickListener { listener.onMovieClick(movie) }
@@ -133,6 +148,15 @@ class MoviesAdapter(
         BaseViewHolder(itemBinding.root) {
 
         override fun onBind(position: Int) = Unit
+    }
+
+    // TODO: переписать адаптер под Calendar
+    private fun Date.toYear(): String {
+        val time = time
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = time
+        }
+        return calendar.get(Calendar.YEAR).toString()
     }
 
     private fun Double.toRatingColorRes(): Int {
