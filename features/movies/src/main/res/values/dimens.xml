@@ -12,4 +12,5 @@
     <dimen name="item_movie_list_image_width">64dp</dimen>
     <dimen name="item_movie_list_image_height">96dp</dimen>
     <dimen name="item_movie_time_icon_size">14dp</dimen>
+    <dimen name="appbar_icon_size">32dp</dimen>
 </resources>

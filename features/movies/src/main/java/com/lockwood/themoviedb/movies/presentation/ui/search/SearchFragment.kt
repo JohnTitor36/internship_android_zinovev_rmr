@@ -131,6 +131,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
 
             with(searchRecyclerViewMovies) {
                 isVisible = state.inputStarted
+                beginDelayedTransition()
 
                 val isTypeChanged = state.viewItemType != moviesAdapter.itemViewType
                 if (!isTypeChanged) {
@@ -152,6 +153,8 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
                 }
             }
         }
+
+
     }
 
     private fun inject() {

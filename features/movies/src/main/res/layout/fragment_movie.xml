@@ -18,19 +18,19 @@
 
         <ImageButton
             android:id="@+id/movie_back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/appbar_icon_size"
+            android:layout_height="@dimen/appbar_icon_size"
             android:layout_gravity="start|center"
-            android:background="?selectableItemBackgroundBorderless"
             android:layout_marginStart="6dp"
+            android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back"
             android:tint="@color/search_appbar_icons_color"
             tools:ignore="ContentDescription" />
 
         <ImageButton
             android:id="@+id/movie_favorite_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/appbar_icon_size"
+            android:layout_height="@dimen/appbar_icon_size"
             android:layout_gravity="end|center"
             android:layout_marginEnd="6dp"
             android:background="?selectableItemBackgroundBorderless"
