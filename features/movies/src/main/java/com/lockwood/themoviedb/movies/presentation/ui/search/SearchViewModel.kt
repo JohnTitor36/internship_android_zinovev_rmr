@@ -8,6 +8,9 @@ import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
+import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_GRID
+import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -23,7 +26,7 @@ class SearchViewModel @Inject constructor(
         private const val DEBOUNCE_IN_MILLISECONDS = 500L
     }
 
-    val liveState: MutableLiveData<SearchViewState> = MutableLiveData(SearchViewState.initialState)
+    val liveState = MutableLiveData(SearchViewState.initialState)
 
     private var state: SearchViewState by liveState.delegate()
 
@@ -63,6 +66,15 @@ class SearchViewModel @Inject constructor(
         navigateTo(direction)
     }
 
+    fun changeMoviesViewType() {
+        val newViewType = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
+            ITEM_VIEW_TYPE_GRID
+        } else {
+            ITEM_VIEW_TYPE_LIST
+        }
+        state = state.copy(viewItemType = newViewType)
+    }
+
     private fun resetPagination() {
         state = state.copy(currentPage = DEFAULT_PAGE)
     }
@@ -96,7 +108,11 @@ class SearchViewModel @Inject constructor(
                         movies = movies,
                         currentPage = it.page,
                         pageCount = it.totalPages,
-                        perPage = it.totalResults / it.totalPages
+                        perPage = if (it.totalPages > 0) {
+                            it.totalResults / it.totalPages
+                        } else {
+                            0
+                        }
                     )
                 },
                 { handleError(it) }

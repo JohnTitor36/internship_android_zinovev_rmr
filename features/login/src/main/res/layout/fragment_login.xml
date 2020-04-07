@@ -37,7 +37,7 @@
     <!-- region Login input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_input_layout"
-        style="@style/TextInputLayout"
+        style="@style/ThemeOverlay.TextInputLayout.Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_extra_big"
@@ -47,10 +47,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_edit_text"
-            style="@style/TextInputEditText"
+            style="@style/ThemeOverlay.TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title_input_hint_login"
+            android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
             android:textSize="@dimen/text_size_regular" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -59,10 +60,11 @@
     <!-- region Password input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input_layout"
-        style="@style/TextInputLayout"
+        style="@style/ThemeOverlay.TextInputLayout.Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_big"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_input_layout"
@@ -71,7 +73,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_edit_text"
-            style="@style/TextInputEditText"
+            style="@style/ThemeOverlay.TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title_input_hint_password"

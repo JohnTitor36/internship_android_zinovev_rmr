@@ -2,13 +2,14 @@ package com.lockwood.themoviedb.movies.presentation.ui.search
 
 import com.lockwood.core.pagination.Pagination
 import com.lockwood.themoviedb.movies.domain.model.Movie
+import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType
 
 data class SearchViewState(
     val movieName: String,
-    val movieItemType: Int,
     val inputClicked: Boolean,
     val inputStarted: Boolean,
     val movies: List<Movie>,
+    val viewItemType: Int,
     override var pageCount: Int,
     override var currentPage: Int,
     override var perPage: Int
@@ -19,7 +20,7 @@ data class SearchViewState(
         val initialState
             get() = SearchViewState(
                 movieName = "",
-                movieItemType = 0,
+                viewItemType = MoviesItemViewType.ITEM_VIEW_TYPE_LIST,
                 inputClicked = false,
                 inputStarted = false,
                 movies = emptyList(),

@@ -7,10 +7,10 @@ abstract class BaseAdapter<T>(protected var data: List<T>) :
 
     companion object {
         /** Тип View без данных */
-        const val VIEW_TYPE_EMPTY = 0
+        const val VIEW_TYPE_EMPTY = -1
 
         /** Тип View с программой */
-        const val VIEW_TYPE_NORMAL = 1
+        const val VIEW_TYPE_CONTENT = 0
 
         // Для отображения STUB view показываем только один item
         private const val STUB_VIEW_ITEMS_COUNT = 1
@@ -26,7 +26,7 @@ abstract class BaseAdapter<T>(protected var data: List<T>) :
 
     override fun getItemViewType(position: Int): Int {
         return if (!data.isNullOrEmpty()) {
-            VIEW_TYPE_NORMAL
+            VIEW_TYPE_CONTENT
         } else {
             VIEW_TYPE_EMPTY
         }
@@ -43,12 +43,4 @@ abstract class BaseAdapter<T>(protected var data: List<T>) :
         data = list
         notifyDataSetChanged()
     }
-
-    /**
-     * Очистить данные
-     */
-    fun clearItems() {
-        data = emptyList()
-    }
-
 }

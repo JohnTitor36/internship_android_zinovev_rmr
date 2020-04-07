@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeOverlay.TextInputLayout.Search" parent="ThemeOverlay.TextInputLayout">
+        <item name="hintTextColor">@color/gray</item>
+        <item name="boxStrokeColor">@color/purple</item>
+    </style>
+
+</resources>

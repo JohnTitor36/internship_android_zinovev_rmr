@@ -6,22 +6,9 @@
         <item name="android:textColor">@drawable/btn_text_color_actionable</item>
     </style>
 
-    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="android:textAppearance">@style/Regular</item>
+    <style name="ThemeOverlay.TextInputLayout.Login" parent="ThemeOverlay.TextInputLayout">
         <item name="hintTextColor">@color/gray</item>
         <item name="boxStrokeColor">@color/purple</item>
-        <item name="boxCornerRadiusTopStart">@dimen/button_corner_radius</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/button_corner_radius</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/button_corner_radius</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/button_corner_radius</item>
-    </style>
-
-    <style name="TextInputEditText" parent="Widget.AppCompat.EditText">
-        <item name="android:textAppearance">@style/Regular</item>
-        <item name="android:padding">18dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
     </style>
 
 </resources>

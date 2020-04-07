@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.addOnLastItemListener
 import com.lockwood.core.extensions.appToolsProvider
@@ -24,6 +24,7 @@ import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
 import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
+import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
@@ -40,6 +41,8 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     private val binding: FragmentSearchBinding by viewBinding()
 
     private lateinit var moviesAdapter: MoviesAdapter
+
+    private lateinit var gridLayoutManager: GridLayoutManager
 
     override fun onAttach(context: Context) {
         inject()
@@ -63,14 +66,19 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     }
 
     private fun setupViews() = with(binding) {
-        moviesAdapter = MoviesAdapter()
-        moviesAdapter.listener = this@SearchFragment
+        moviesAdapter = MoviesAdapter().apply {
+            listener = this@SearchFragment
+        }
+        gridLayoutManager = GridLayoutManager(requireContext(), 1)
         with(searchRecyclerViewMovies) {
-            layoutManager = LinearLayoutManager(requireContext())
+            layoutManager = gridLayoutManager
             adapter = moviesAdapter
             addOnLastItemListener(LAST_ITEM_REACHED_OFFSET) {
                 viewModel.loadMoreMovies()
             }
+        }
+        includeSearchLayout.searchChangeViewType.setOnClickListener {
+            viewModel.changeMoviesViewType()
         }
     }
 
@@ -89,8 +97,30 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         with(binding) {
             searchTitle.isVisible = !state.inputClicked
             searchImageBackground.isVisible = !state.inputClicked
-            searchRecyclerViewMovies.isVisible = state.inputStarted
-            moviesAdapter.setItems(state.movies)
+
+            with(searchRecyclerViewMovies) {
+                isVisible = state.inputStarted
+
+                val isTypeChanged = state.viewItemType != moviesAdapter.itemViewType
+                if (!isTypeChanged) {
+                    // обновляем только отображаемые данные
+                    moviesAdapter.setItems(state.movies)
+                } else {
+                    // обновляем и отображаемые данные
+                    val spanCount = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
+                        1
+                    } else {
+                        2
+                    }
+                    gridLayoutManager = GridLayoutManager(requireContext(), spanCount)
+                    moviesAdapter = MoviesAdapter(state.movies, state.viewItemType).apply {
+                        listener = this@SearchFragment
+                    }
+                    // и layoutManager с adapter-ом
+                    // layoutManager = gridLayoutManager
+                    adapter = moviesAdapter
+                }
+            }
         }
     }
 
