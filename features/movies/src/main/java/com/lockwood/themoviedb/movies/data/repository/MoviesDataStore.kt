@@ -13,8 +13,8 @@ interface MoviesDataStore {
         language: String
     ): Observable<SearchMoviesResponseEntity>
 
-    fun searchGenres(
-      language: String
-    ): Observable<SearchMoviesResponseEntity>
+//    fun searchGenres(
+//      language: String
+//    ): Observable<SearchMoviesResponseEntity>
 
 }

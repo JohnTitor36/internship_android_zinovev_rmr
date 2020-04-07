@@ -38,7 +38,10 @@ class MovieFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.movieNameTitle.text = args.movieIdArg.toString()
+    }
+
+    private fun setupView() {
+
     }
 
     private fun inject() {
