@@ -2,6 +2,7 @@ package com.lockwood.themoviedb.movies.presentation.ui.search
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lockwood.core.event.observe
-import com.lockwood.core.extensions.addOnLastItemListener
-import com.lockwood.core.extensions.appToolsProvider
-import com.lockwood.core.extensions.buildSnackbar
+import com.lockwood.core.extensions.*
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -25,7 +24,6 @@ import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
 import com.lockwood.themoviedb.movies.domain.model.Movie
-import com.lockwood.themoviedb.movies.extensions.updateCompoundDrawables
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import javax.inject.Inject
@@ -91,8 +89,15 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
                 viewModel.loadMoreMovies()
             }
         }
-        includeSearchLayout.searchChangeViewType.setOnClickListener {
-            viewModel.changeMoviesViewType()
+
+        with(includeSearchLayout) {
+            searchChangeViewType.setOnClickListener {
+                viewModel.changeMoviesViewType()
+            }
+
+            searchEditText.setOnEndDrawableClickListener {
+                text.clear()
+            }
         }
     }
 

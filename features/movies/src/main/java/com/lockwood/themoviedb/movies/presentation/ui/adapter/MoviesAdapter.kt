@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestOptions
+import com.lockwood.core.extensions.toYear
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseAdapter
 import com.lockwood.core.ui.BaseViewHolder
@@ -18,7 +19,6 @@ import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
 import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
-import java.util.*
 
 class MoviesAdapter(
     data: List<Movie> = emptyList(),
@@ -148,15 +148,6 @@ class MoviesAdapter(
         BaseViewHolder(itemBinding.root) {
 
         override fun onBind(position: Int) = Unit
-    }
-
-    // TODO: переписать адаптер под Calendar
-    private fun Date.toYear(): String {
-        val time = time
-        val calendar = Calendar.getInstance().apply {
-            timeInMillis = time
-        }
-        return calendar.get(Calendar.YEAR).toString()
     }
 
     private fun Double.toRatingColorRes(): Int {
