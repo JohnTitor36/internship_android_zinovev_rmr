@@ -37,6 +37,7 @@
             android:layout_width="@dimen/default_icon_size"
             android:layout_height="@dimen/default_icon_size"
             android:layout_gravity="center"
+            android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_movies_card"
             android:tint="@color/search_appbar_icons_color"
             tools:ignore="ContentDescription" />
