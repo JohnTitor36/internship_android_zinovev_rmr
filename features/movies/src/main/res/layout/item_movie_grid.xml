@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/item_movie_image"
-        android:layout_width="152dp"
-        android:layout_height="208dp"
+        android:layout_width="@dimen/item_movie_grid_image_width"
+        android:layout_height="@dimen/item_movie_grid_image_height"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -60,7 +60,7 @@
 
     <TextView
         android:id="@+id/item_movie_vote_average"
-        android:layout_width="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -103,6 +103,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/item_movie_image"
         app:layout_constraintTop_toTopOf="@+id/item_movie_duration_image"
-        tools:text=" 91 мин" />
+        tools:text="91 мин" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

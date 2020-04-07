@@ -7,22 +7,22 @@
     android:orientation="vertical">
 
     <TextView
-        style="@style/Medium"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_extra_big"
         android:gravity="center"
         android:text="@string/title_search_empty"
         android:textAlignment="center"
+        android:textAppearance="@style/Medium"
         android:textColor="@color/light"
         android:textSize="@dimen/text_size_regular" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginStart="@dimen/empty_movies_background_image_margin"
+        android:layout_marginEnd="@dimen/empty_movies_background_image_margin"
+        android:layout_marginBottom="@dimen/empty_movies_background_image_margin"
         android:scaleType="fitStart"
         android:src="@drawable/ic_alien"
         tools:ignore="ContentDescription" />

@@ -16,22 +16,14 @@
         style="@style/ThemeOverlay.TextInputLayout.Search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        app:hintEnabled="false"
-        app:startIconDrawable="@drawable/ic_search"
-        app:startIconTint="@color/search_appbar_icons_color">
+        android:layout_weight="0.9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_edit_text"
             style="@style/ThemeOverlay.TextInputEditText.Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_clear"
-            android:hint="@string/title_movies_search"
-            android:imeOptions="actionSearch"
-            android:inputType="textAutoCorrect"
-            android:textSize="@dimen/text_size_regular"
-            app:drawableTint="@color/search_appbar_icons_color" />
+            android:hint="@string/title_movies_search" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <FrameLayout

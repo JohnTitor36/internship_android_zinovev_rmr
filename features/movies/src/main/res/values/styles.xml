@@ -6,11 +6,22 @@
         <item name="boxBackgroundColor">@color/search_appbar_color</item>
         <item name="hintTextColor">@color/search_appbar_icons_color</item>
         <item name="boxStrokeColor">@color/search_appbar_color</item>
+        <item name="hintEnabled">false</item>
+        <item name="startIconDrawable">@drawable/ic_search</item>
+        <item name="startIconTint">@color/search_appbar_icons_color</item>
     </style>
 
     <style name="ThemeOverlay.TextInputEditText.Search" parent="ThemeOverlay.TextInputEditText">
+        <item name="drawableTint">@color/search_appbar_icons_color</item>
         <item name="android:textColor">@color/light_transparent</item>
         <item name="android:textCursorDrawable">@null</item>
+        <item name="android:inputType">textAutoCorrect</item>
+        <item name="android:imeOptions">actionSearch</item>
+    </style>
+
+    <style name="ThemeOverlay.RecyclerView.Clear" parent="ThemeOverlay.TextInputEditText">
+        <item name="android:scrollbars">none</item>
+        <item name="android:overScrollMode">never</item>
     </style>
 
 </resources>

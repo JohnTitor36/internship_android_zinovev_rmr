@@ -57,11 +57,11 @@
         <!-- region Movies list and Movie fragment -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler_view_movies"
+            style="@style/ThemeOverlay.RecyclerView.Clear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingTop="@dimen/default_content_margin"
-            android:scrollbars="none"
             tools:itemCount="4"
             tools:listitem="@layout/item_movie_list" />
         <!-- endregion -->
