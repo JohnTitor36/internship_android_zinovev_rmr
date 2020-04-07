@@ -16,22 +16,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/movie_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center"
+            android:background="?selectableItemBackgroundBorderless"
             android:layout_marginStart="6dp"
             android:src="@drawable/ic_arrow_back"
             android:tint="@color/search_appbar_icons_color"
             tools:ignore="ContentDescription" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/movie_favorite_button"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="end|center"
             android:layout_marginEnd="6dp"
+            android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_favorite_border"
             android:tint="@color/search_appbar_icons_color"
             android:visibility="invisible"
@@ -171,7 +173,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
-                android:background="@color/gray"
+                android:background="@color/dark_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/movie_duration" />
