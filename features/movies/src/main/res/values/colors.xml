@@ -3,6 +3,11 @@
     <color name="search_appbar_icons_color">#E7EDFF</color>
     <color name="search_appbar_color">#E5282C3F</color>
 
+    <color name="movie_rating_good">@color/green</color>
+    <color name="movie_rating_normal">@color/light</color>
+    <color name="movie_rating_not_so_good">@color/yellow</color>
+    <color name="movie_rating_bad">@color/red</color>
+
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/gray
     </color>
 </resources>

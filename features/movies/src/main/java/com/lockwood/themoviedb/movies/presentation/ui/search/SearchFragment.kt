@@ -71,6 +71,14 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         observe(viewModel.liveState, ::renderState)
     }
 
+    override fun showMessage(message: String) {
+        rootView.buildSnackbar(message).show()
+    }
+
+    override fun onMovieClick(item: Movie) {
+        viewModel.openMovie(item.id)
+    }
+
     private fun setupViews() = with(binding) {
         moviesAdapter = MoviesAdapter().apply {
             listener = this@SearchFragment
@@ -86,10 +94,6 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         includeSearchLayout.searchChangeViewType.setOnClickListener {
             viewModel.changeMoviesViewType()
         }
-    }
-
-    override fun showMessage(message: String) {
-        rootView.buildSnackbar(message).show()
     }
 
     private fun addViewListeners() {
@@ -154,8 +158,5 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
             .inject(this)
     }
 
-    override fun onMovieClick(item: Movie) {
-        viewModel.openMovie(item.id)
-    }
 
 }

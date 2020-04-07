@@ -24,6 +24,7 @@
 
     <TextView
         android:id="@+id/item_movie_title"
+        style="@style/MovieTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -37,6 +38,7 @@
 
     <TextView
         android:id="@+id/item_movie_eng_title"
+        style="@style/MovieTitle.Original"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -48,10 +50,10 @@
 
     <TextView
         android:id="@+id/item_movie_genres"
+        style="@style/TitleGenres"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/item_movie_image"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/item_movie_image"
@@ -60,6 +62,7 @@
 
     <TextView
         android:id="@+id/item_movie_vote_average"
+        style="@style/TitleVoteAverage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -73,6 +76,7 @@
 
     <TextView
         android:id="@+id/item_movie_popularity"
+        style="@style/TitleRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
@@ -83,21 +87,21 @@
 
     <ImageView
         android:id="@+id/item_movie_duration_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/item_movie_time_icon_size"
+        android:layout_height="@dimen/item_movie_time_icon_size"
         android:layout_marginEnd="6dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/item_movie_vote_average"
         app:layout_constraintEnd_toStartOf="@+id/item_movie_duration_title"
         app:layout_constraintTop_toTopOf="@+id/item_movie_vote_average"
-        app:srcCompat="@drawable/ic_access_time" />
+        app:srcCompat="@drawable/ic_access_time"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/item_movie_duration_title"
+        style="@style/TitleDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/item_movie_duration_image"
         app:layout_constraintEnd_toEndOf="@+id/item_movie_image"
         app:layout_constraintHorizontal_bias="1.0"

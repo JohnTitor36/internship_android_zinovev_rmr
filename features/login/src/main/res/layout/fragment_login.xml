@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/login_title_text_view"
-        style="@style/Title"
+        android:textAppearance="@style/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_margin"

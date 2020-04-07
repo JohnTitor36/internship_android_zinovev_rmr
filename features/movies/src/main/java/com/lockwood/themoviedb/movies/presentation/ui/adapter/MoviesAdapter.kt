@@ -93,11 +93,14 @@ class MoviesAdapter(
             movie: Movie,
             avatarRequest: RequestBuilder<Drawable>
         ) = with(itemBinding) {
+            val resourceReader = ResourceReader(itemBinding.root.context)
             itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
             itemMovieEngTitle.text = movie.originalTitle
             itemMovieVoteAverage.text = movie.voteAverage.toString()
+            val ratingColor = movie.voteAverage.toRatingColorRes()
+            itemMovieVoteAverage.setTextColor(resourceReader.color(ratingColor))
             itemMoviePopularity.text = movie.popularity.toString()
 
             root.setOnClickListener { listener.onMovieClick(movie) }
@@ -112,11 +115,14 @@ class MoviesAdapter(
             movie: Movie,
             avatarRequest: RequestBuilder<Drawable>
         ) = with(itemBinding) {
+            val resourceReader = ResourceReader(itemBinding.root.context)
             itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
             itemMovieEngTitle.text = movie.originalTitle
             itemMovieVoteAverage.text = movie.voteAverage.toString()
+            val ratingColor = movie.voteAverage.toRatingColorRes()
+            itemMovieVoteAverage.setTextColor(resourceReader.color(ratingColor))
             itemMoviePopularity.text = movie.popularity.toString()
 
             root.setOnClickListener { listener.onMovieClick(movie) }
@@ -129,5 +135,13 @@ class MoviesAdapter(
         override fun onBind(position: Int) = Unit
     }
 
+    private fun Double.toRatingColorRes(): Int {
+        return when (this.toInt()) {
+            in 10 downTo 8 -> R.color.movie_rating_good
+            in 9 downTo 7 -> R.color.movie_rating_normal
+            in 6 downTo 4 -> R.color.movie_rating_not_so_good
+            else -> R.color.movie_rating_bad
+        }
+    }
 
 }
