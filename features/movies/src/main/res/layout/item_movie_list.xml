@@ -92,16 +92,19 @@
         android:layout_width="@dimen/item_movie_time_icon_size"
         android:layout_height="@dimen/item_movie_time_icon_size"
         android:layout_marginEnd="6dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/item_movie_duration_title"
         app:layout_constraintEnd_toStartOf="@+id/item_movie_duration_title"
         app:layout_constraintTop_toTopOf="@+id/item_movie_duration_title"
-        app:srcCompat="@drawable/ic_access_time" />
+        app:srcCompat="@drawable/ic_access_time"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/item_movie_duration_title"
+        style="@style/TitleDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TitleDuration"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/item_movie_vote_average"
         app:layout_constraintEnd_toEndOf="@+id/item_movie_genres"
         app:layout_constraintTop_toTopOf="@+id/item_movie_vote_average"

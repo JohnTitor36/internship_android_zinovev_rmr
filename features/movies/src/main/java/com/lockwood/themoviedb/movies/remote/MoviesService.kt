@@ -14,4 +14,9 @@ interface MoviesService {
         @Query("language") language: String
     ): Observable<SearchMoviesResponseModel>
 
+    @GET("genre/movie/list")
+    fun searchGenres(
+        @Query("language") language: String
+    ): Observable<SearchMoviesResponseModel>
+
 }
