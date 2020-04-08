@@ -4,9 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/include_movie_appbar" />
+    <include
+        android:id="@+id/movie_appbar"
+        layout="@layout/include_movie_appbar" />
 
     <ScrollView
+        android:id="@+id/movie_content"
         style="@style/RecyclerView.Clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +40,7 @@
     </ScrollView>
 
     <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/movie_progress_bar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -22,7 +22,7 @@ import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
-import com.lockwood.themoviedb.movies.domain.model.Movie
+import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import javax.inject.Inject
@@ -68,11 +68,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         observe(viewModel.liveState, ::renderState)
     }
 
-    override fun showMessage(message: String) {
-        rootView.buildSnackbar(message).show()
-    }
-
-    override fun onMovieClick(item: Movie) {
+    override fun onMovieClick(item: MovieItem) {
         viewModel.openMovie(item.id)
     }
 
@@ -91,7 +87,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
 
         with(includeSearchLayout) {
             searchChangeViewType.setOnClickListener {
-                viewModel.changeMoviesViewType()
+                viewModel.onChangeMoviesViewType()
             }
 
             searchEditText.setOnEndDrawableClickListener {
@@ -102,8 +98,8 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
 
     private fun addViewListeners() {
         with(binding.includeSearchLayout.searchEditText) {
-            setOnFocusChangeListener { _, _ -> viewModel.inputClicked() }
-            addTextChangedListener { viewModel.movieNameEntered(it.toString()) }
+            setOnFocusChangeListener { _, _ -> viewModel.onInputClicked() }
+            addTextChangedListener { viewModel.onMovieNameEntered(it.toString()) }
         }
     }
 

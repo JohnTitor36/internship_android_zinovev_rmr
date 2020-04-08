@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @FeatureScope
 class DefaultMoviesRemote @Inject constructor(
-    private val moviesService: MoviesService,
+    private val moviesService: MoviesSearchService,
     private val searchMoviesResponseMapper: SearchMoviesResponseMapper
 ) : MoviesRemote {
 

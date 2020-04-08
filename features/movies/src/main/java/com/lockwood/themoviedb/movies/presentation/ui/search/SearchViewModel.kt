@@ -43,16 +43,25 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun inputClicked() {
+    fun onInputClicked() {
         if (!state.inputClicked) {
             state = state.copy(inputClicked = true)
         }
     }
 
-    fun movieNameEntered(name: String) {
+    fun onMovieNameEntered(name: String) {
         resetPagination()
         checkIsInputStarted(name)
         onLoadMovies(name)
+    }
+
+    fun onChangeMoviesViewType() {
+        val newViewType = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
+            ITEM_VIEW_TYPE_GRID
+        } else {
+            ITEM_VIEW_TYPE_LIST
+        }
+        state = state.copy(viewItemType = newViewType)
     }
 
     fun loadMoreMovies() {
@@ -63,15 +72,6 @@ class SearchViewModel @Inject constructor(
     fun openMovie(id: Int) {
         val direction = SearchFragmentDirections.openMovie(id)
         navigateTo(direction)
-    }
-
-    fun changeMoviesViewType() {
-        val newViewType = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
-            ITEM_VIEW_TYPE_GRID
-        } else {
-            ITEM_VIEW_TYPE_LIST
-        }
-        state = state.copy(viewItemType = newViewType)
     }
 
     private fun resetPagination() {

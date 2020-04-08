@@ -1,7 +1,7 @@
 package com.lockwood.themoviedb.movies.presentation.ui.search
 
 import com.lockwood.core.pagination.Pagination
-import com.lockwood.themoviedb.movies.domain.model.Movie
+import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType
 
 data class SearchViewState(
@@ -9,7 +9,7 @@ data class SearchViewState(
     val inputClicked: Boolean,
     val inputStarted: Boolean,
     val inputEmpty: Boolean,
-    val movies: List<Movie>,
+    val movies: List<MovieItem>,
     val viewItemType: Int,
     override var pageCount: Int,
     override var currentPage: Int,

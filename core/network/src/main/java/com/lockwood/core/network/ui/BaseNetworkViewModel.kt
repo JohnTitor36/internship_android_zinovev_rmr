@@ -1,5 +1,6 @@
 package com.lockwood.core.network.ui
 
+import com.lockwood.core.event.ErrorMessageEvent
 import com.lockwood.core.event.Event
 import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.network.R

@@ -16,19 +16,19 @@ import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.ItemMovieEmtpyBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieGridBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
-import com.lockwood.themoviedb.movies.domain.model.Movie
+import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class MoviesAdapter(
-    data: List<Movie> = emptyList(),
+    data: List<MovieItem> = emptyList(),
     val itemViewType: Int = ITEM_VIEW_TYPE_LIST
 ) :
-    BaseAdapter<Movie>(data) {
+    BaseAdapter<MovieItem>(data) {
 
     interface MoviesAdapterListener {
 
-        fun onMovieClick(item: Movie)
+        fun onMovieClick(item: MovieItem)
 
     }
 
@@ -81,7 +81,7 @@ class MoviesAdapter(
 
         abstract fun bindMovie(
             itemBinding: T,
-            movie: Movie,
+            movie: MovieItem,
             avatarRequest: RequestBuilder<Drawable>
         )
     }
@@ -91,7 +91,7 @@ class MoviesAdapter(
 
         override fun bindMovie(
             itemBinding: ItemMovieListBinding,
-            movie: Movie,
+            movie: MovieItem,
             avatarRequest: RequestBuilder<Drawable>
         ) = with(itemBinding) {
             val resourceReader = ResourceReader(itemBinding.root.context)
@@ -120,7 +120,7 @@ class MoviesAdapter(
 
         override fun bindMovie(
             itemBinding: ItemMovieGridBinding,
-            movie: Movie,
+            movie: MovieItem,
             avatarRequest: RequestBuilder<Drawable>
         ) = with(itemBinding) {
             val resourceReader = ResourceReader(itemBinding.root.context)

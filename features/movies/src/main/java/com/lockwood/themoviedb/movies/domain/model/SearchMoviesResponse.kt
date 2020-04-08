@@ -3,7 +3,7 @@ package com.lockwood.themoviedb.movies.domain.model
 import com.lockwood.core.data.Language
 import java.util.*
 
-typealias Movie = SearchMoviesResponse.Result
+typealias MovieItem = SearchMoviesResponse.Result
 
 data class SearchMoviesResponse(
     val page: Int, // 1

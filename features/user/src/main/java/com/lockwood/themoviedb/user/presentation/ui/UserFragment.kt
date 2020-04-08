@@ -55,10 +55,6 @@ class UserFragment : BaseFragment() {
         viewModel.fetchAccountDetails()
     }
 
-    override fun showMessage(message: String) {
-        rootView.buildSnackbar(message).show()
-    }
-
     private fun addViewListeners() = with(binding) {
         signOutButton.setOnClickListener { viewModel.onLogoutClick() }
     }
