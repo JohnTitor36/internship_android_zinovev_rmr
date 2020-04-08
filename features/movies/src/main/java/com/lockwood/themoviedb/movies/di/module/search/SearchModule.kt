@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import com.lockwood.core.di.key.ViewModelKey
 import com.lockwood.core.di.module.ViewModelModule
 import com.lockwood.core.di.scope.FeatureScope
-import com.lockwood.themoviedb.movies.data.DefaultMoviesRepository
-import com.lockwood.themoviedb.movies.data.repository.MoviesRemote
-import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
+import com.lockwood.themoviedb.movies.data.DefaultSearchMoviesRepository
+import com.lockwood.themoviedb.movies.data.repository.SearchMoviesRemote
+import com.lockwood.themoviedb.movies.domain.repository.SearchMoviesRepository
 import com.lockwood.themoviedb.movies.presentation.ui.search.SearchViewModel
-import com.lockwood.themoviedb.movies.remote.DefaultMoviesRemote
+import com.lockwood.themoviedb.movies.remote.DefaultSearchMoviesRemote
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -18,11 +18,11 @@ abstract class SearchModule {
 
     @Binds
     @FeatureScope
-    abstract fun provideMoviesRepository(authentication: DefaultMoviesRepository): MoviesRepository
+    abstract fun provideSearchMoviesRepository(searchMoviesRepository: DefaultSearchMoviesRepository): SearchMoviesRepository
 
     @Binds
     @FeatureScope
-    abstract fun provideMoviesRemote(movies: DefaultMoviesRemote): MoviesRemote
+    abstract fun provideSearchMoviesRemote(searchMoviesRemote: DefaultSearchMoviesRemote): SearchMoviesRemote
 
     @Binds
     @FeatureScope

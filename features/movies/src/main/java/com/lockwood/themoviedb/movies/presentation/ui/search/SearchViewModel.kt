@@ -7,14 +7,14 @@ import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
-import com.lockwood.themoviedb.movies.domain.repository.MoviesRepository
+import com.lockwood.themoviedb.movies.domain.repository.SearchMoviesRepository
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_GRID
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val moviesRepository: MoviesRepository,
+    private val searchMoviesRepository: SearchMoviesRepository,
     resourceReader: ResourceReader,
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(resourceReader, schedulers) {
@@ -96,7 +96,7 @@ class SearchViewModel @Inject constructor(
             return
         }
 
-        moviesRepository.searchMovies(name, page)
+        searchMoviesRepository.searchMovies(name, page)
             .debounce(DEBOUNCE_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .schedulersIoToMain(schedulers)
             .subscribe(

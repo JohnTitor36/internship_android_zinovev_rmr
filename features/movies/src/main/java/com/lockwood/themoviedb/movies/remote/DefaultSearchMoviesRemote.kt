@@ -2,16 +2,16 @@ package com.lockwood.themoviedb.movies.remote
 
 import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.themoviedb.movies.data.model.SearchMoviesResponseEntity
-import com.lockwood.themoviedb.movies.data.repository.MoviesRemote
+import com.lockwood.themoviedb.movies.data.repository.SearchMoviesRemote
 import com.lockwood.themoviedb.movies.remote.mapper.SearchMoviesResponseMapper
 import io.reactivex.Observable
 import javax.inject.Inject
 
 @FeatureScope
-class DefaultMoviesRemote @Inject constructor(
-    private val moviesService: MoviesSearchService,
+class DefaultSearchMoviesRemote @Inject constructor(
+    private val moviesService: SearchMoviesService,
     private val searchMoviesResponseMapper: SearchMoviesResponseMapper
-) : MoviesRemote {
+) : SearchMoviesRemote {
 
     override fun searchMovies(
         query: String,

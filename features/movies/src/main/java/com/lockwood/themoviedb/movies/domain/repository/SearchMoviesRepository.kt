@@ -3,7 +3,7 @@ package com.lockwood.themoviedb.movies.domain.repository
 import com.lockwood.themoviedb.movies.domain.model.SearchMoviesResponse
 import io.reactivex.Observable
 
-interface MoviesRepository {
+interface SearchMoviesRepository {
 
     companion object {
 

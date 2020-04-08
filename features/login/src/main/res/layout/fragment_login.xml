@@ -10,11 +10,11 @@
 
     <TextView
         android:id="@+id/login_title_text_view"
-        android:textAppearance="@style/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_margin"
         android:text="@string/title_welcome"
+        android:textAppearance="@style/Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
