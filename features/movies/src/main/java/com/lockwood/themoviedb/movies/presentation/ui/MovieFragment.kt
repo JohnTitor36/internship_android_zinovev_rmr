@@ -9,9 +9,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.request.RequestOptions
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
-import com.lockwood.core.extensions.beginDelayedTransition
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -19,9 +19,14 @@ import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
+import com.lockwood.glide.extensions.drawableRequest
+import com.lockwood.glide.extensions.load
 import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.FragmentMovieBinding
 import com.lockwood.themoviedb.movies.di.component.DaggerMovieComponent
+import com.lockwood.themoviedb.movies.domain.model.Movie
+import com.lockwood.themoviedb.movies.utils.MovieUtils
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import javax.inject.Inject
 
 class MovieFragment : BaseFragment() {
@@ -73,8 +78,6 @@ class MovieFragment : BaseFragment() {
             movieProgressBar.isVisible = state.loading
             movieContent.isVisible = !state.loading
 
-            movieContent.beginDelayedTransition()
-
             val favoriteDrawable = if (state.favoriteMovie) {
                 resourceReader.drawable(R.drawable.ic_favorite)
             } else {
@@ -83,7 +86,56 @@ class MovieFragment : BaseFragment() {
             movieAppbar.movieFavoriteButton.setImageDrawable(favoriteDrawable)
             movieAppbar.movieFavoriteButton.isEnabled = !state.loading
 
+            val movie = state.movie
+            if (movie != null) {
+                renderMovie(movie)
+            }
         }
+    }
+
+    private fun renderMovie(movie: Movie) {
+        val placeholder = resourceReader.drawable(R.drawable.ic_poster_placeholder)
+        val roundedCornersTransformation = RoundedCornersTransformation(
+            resourceReader.dimenInPx(R.dimen.item_movies_corner_radius),
+            0,
+            RoundedCornersTransformation.CornerType.ALL
+        )
+        val imageRequest = requireContext().drawableRequest(
+            resourceReader = resourceReader,
+            placeholder = placeholder,
+            fallback = placeholder,
+            error = placeholder
+        ).apply(RequestOptions.bitmapTransform(roundedCornersTransformation))
+
+        val ratingColorRes = MovieUtils.ratingToColorRes(movie.voteAverage)
+        val ratingColor = resourceReader.color(ratingColorRes)
+
+        with(binding.movieInfo) {
+
+            movieTitle.text = movie.title
+            movieOriginalTitle.text = MovieUtils.buildOriginalTitle(
+                resourceReader,
+                movie.originalTitle,
+                movie.releaseDate
+            )
+
+            movieVoteAverage.text = movie.voteAverage.toString()
+            movieVoteAverage.setTextColor(ratingColor)
+
+            val genres = movie.genreModels.map { it.name }
+            movieGenres.text = MovieUtils.buildGenresCaption(genres)
+
+            movieDuration.text = MovieUtils.buildDurationTitle(
+                resourceReader,
+                movie.runtime
+            )
+
+            moviePopularity.text = movie.popularity.toString()
+
+            movieImage.load(movie.poster, imageRequest)
+        }
+
+        binding.movieDescription.text = movie.overview
     }
 
     private fun inject() {

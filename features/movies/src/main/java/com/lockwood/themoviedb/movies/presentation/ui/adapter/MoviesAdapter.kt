@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.RequestOptions
-import com.lockwood.core.extensions.toYear
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseAdapter
 import com.lockwood.core.ui.BaseViewHolder
@@ -18,13 +17,13 @@ import com.lockwood.themoviedb.movies.databinding.ItemMovieGridBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
 import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
+import com.lockwood.themoviedb.movies.utils.MovieUtils
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class MoviesAdapter(
     data: List<MovieItem> = emptyList(),
     val itemViewType: Int = ITEM_VIEW_TYPE_LIST
-) :
-    BaseAdapter<MovieItem>(data) {
+) : BaseAdapter<MovieItem>(data) {
 
     interface MoviesAdapterListener {
 
@@ -69,20 +68,24 @@ class MoviesAdapter(
                 0,
                 RoundedCornersTransformation.CornerType.ALL
             )
-            val avatarRequest = context.drawableRequest(
+            val imageRequest = context.drawableRequest(
                 resourceReader = resourceReader,
                 placeholder = placeholder,
                 fallback = placeholder,
                 error = placeholder
             ).apply(RequestOptions.bitmapTransform(roundedCornersTransformation))
 
-            bindMovie(itemBinding, movie, avatarRequest)
+            val ratingColorRes = MovieUtils.ratingToColorRes(movie.voteAverage)
+            val ratingColor = resourceReader.color(ratingColorRes)
+
+            bindMovie(itemBinding, movie, imageRequest, ratingColor)
         }
 
         abstract fun bindMovie(
             itemBinding: T,
             movie: MovieItem,
-            avatarRequest: RequestBuilder<Drawable>
+            avatarRequest: RequestBuilder<Drawable>,
+            ratingColor: Int
         )
     }
 
@@ -92,24 +95,23 @@ class MoviesAdapter(
         override fun bindMovie(
             itemBinding: ItemMovieListBinding,
             movie: MovieItem,
-            avatarRequest: RequestBuilder<Drawable>
+            avatarRequest: RequestBuilder<Drawable>,
+            ratingColor: Int
         ) = with(itemBinding) {
             val resourceReader = ResourceReader(itemBinding.root.context)
-            itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
+            itemMovieOriginalTitle.text = MovieUtils.buildOriginalTitle(
+                resourceReader,
+                movie.originalTitle,
+                movie.releaseDate
+            )
 
-            val originalTitle = resourceReader.string(R.string.title_movie_with_year)
-            val movieYear = movie.releaseDate.toYear()
-            val movieOriginalTitle = movie.originalTitle
-            itemMovieOriginalTitle.text = originalTitle.format(movieOriginalTitle, movieYear)
-
-            val ratingColor = movie.voteAverage.toRatingColorRes()
+            itemMovieVoteAverage.setTextColor(ratingColor)
             itemMovieVoteAverage.text = movie.voteAverage.toString()
-
-            itemMovieVoteAverage.setTextColor(resourceReader.color(ratingColor))
-
             itemMoviePopularity.text = movie.popularity.toString()
+
+            itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             root.setOnClickListener { listener.onMovieClick(movie) }
         }
@@ -121,24 +123,23 @@ class MoviesAdapter(
         override fun bindMovie(
             itemBinding: ItemMovieGridBinding,
             movie: MovieItem,
-            avatarRequest: RequestBuilder<Drawable>
+            avatarRequest: RequestBuilder<Drawable>,
+            ratingColor: Int
         ) = with(itemBinding) {
             val resourceReader = ResourceReader(itemBinding.root.context)
-            itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             itemMovieTitle.text = movie.title
+            itemMovieOriginalTitle.text = MovieUtils.buildOriginalTitle(
+                resourceReader,
+                movie.originalTitle,
+                movie.releaseDate
+            )
 
-            val originalTitle = resourceReader.string(R.string.title_movie_with_year)
-            val movieYear = movie.releaseDate.toYear()
-            val movieOriginalTitle = movie.originalTitle
-            itemMovieOriginalTitle.text = originalTitle.format(movieOriginalTitle, movieYear)
-
-            val ratingColor = movie.voteAverage.toRatingColorRes()
+            itemMovieVoteAverage.setTextColor(ratingColor)
             itemMovieVoteAverage.text = movie.voteAverage.toString()
-
-            itemMovieVoteAverage.setTextColor(resourceReader.color(ratingColor))
-
             itemMoviePopularity.text = movie.popularity.toString()
+
+            itemMovieImage.load(movie.poster, avatarRequest).waitForLayout()
 
             root.setOnClickListener { listener.onMovieClick(movie) }
         }
@@ -148,15 +149,6 @@ class MoviesAdapter(
         BaseViewHolder(itemBinding.root) {
 
         override fun onBind(position: Int) = Unit
-    }
-
-    private fun Double.toRatingColorRes(): Int {
-        return when (this.toInt()) {
-            in 10 downTo 8 -> R.color.movie_rating_good
-            in 9 downTo 7 -> R.color.movie_rating_normal
-            in 6 downTo 4 -> R.color.movie_rating_not_so_good
-            else -> R.color.movie_rating_bad
-        }
     }
 
 }

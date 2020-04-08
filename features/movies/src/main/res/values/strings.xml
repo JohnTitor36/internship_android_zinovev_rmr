@@ -8,5 +8,6 @@
     <string name="title_favorite_empty">Вы не добавили ни одного фильма</string>
     <string name="title_favorite_search">Найти любимые фильмы</string>
     <string name="title_movie_with_year">%1$s (%2$s)</string>
+    <string name="title_movie_runtime">%1$d мин</string>
     <string name="title_movie_rating">Рейтинг фильма</string>
 </resources>

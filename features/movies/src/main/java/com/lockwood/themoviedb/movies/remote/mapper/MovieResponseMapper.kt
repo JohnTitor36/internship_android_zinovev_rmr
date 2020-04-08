@@ -14,7 +14,7 @@ class MovieResponseMapper @Inject constructor() :
             val genreModels = genreModels.map { MovieResponseEntity.GenreEntity(it.id, it.name) }
             return MovieResponseEntity(
                 adult,
-                backdropPath ?: String.EMPTY,
+                backdrop ?: String.EMPTY,
                 budget,
                 genreModels,
                 homepage,
@@ -24,7 +24,7 @@ class MovieResponseMapper @Inject constructor() :
                 originalTitle,
                 overview,
                 popularity,
-                posterPath ?: String.EMPTY,
+                poster ?: String.EMPTY,
                 releaseDate,
                 revenue,
                 runtime,
@@ -43,7 +43,7 @@ class MovieResponseMapper @Inject constructor() :
             val genreModels = genreModels.map { MovieResponseModel.GenreModel(it.id, it.name) }
             return MovieResponseModel(
                 adult,
-                backdropPath,
+                backdrop,
                 budget,
                 genreModels,
                 homepage,
@@ -53,7 +53,7 @@ class MovieResponseMapper @Inject constructor() :
                 originalTitle,
                 overview,
                 popularity,
-                posterPath,
+                poster,
                 releaseDate,
                 revenue,
                 runtime,

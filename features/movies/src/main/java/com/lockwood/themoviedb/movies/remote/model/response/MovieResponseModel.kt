@@ -5,6 +5,7 @@ import com.lockwood.core.network.moshi.qualifier.BackdropUrl
 import com.lockwood.core.network.moshi.qualifier.PosterUrl
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class MovieResponseModel(
@@ -12,7 +13,7 @@ data class MovieResponseModel(
     val adult: Boolean, // false
     @BackdropUrl
     @Json(name = "backdrop_path")
-    val backdropPath: String?, // /pcq2CGl0EhwxqXhwb4etSLvvlKQ.jpg
+    val backdrop: String?, // /pcq2CGl0EhwxqXhwb4etSLvvlKQ.jpg
     @Json(name = "budget")
     val budget: Int, // 4000000
     @Json(name = "genres")
@@ -33,9 +34,9 @@ data class MovieResponseModel(
     val popularity: Double, // 13.336
     @PosterUrl
     @Json(name = "poster_path")
-    val posterPath: String?, // /pphPNH41WVYBVidpf7HVkSIBMe4.jpg
+    val poster: String?, // /pphPNH41WVYBVidpf7HVkSIBMe4.jpg
     @Json(name = "release_date")
-    val releaseDate: String, // 1978-11-15
+    val releaseDate: Date, // 1978-11-15
     @Json(name = "revenue")
     val revenue: Int, // 30471420
     @Json(name = "runtime")
