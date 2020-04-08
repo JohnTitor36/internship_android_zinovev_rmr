@@ -61,8 +61,9 @@ class MovieFragment : BaseFragment() {
     }
 
     private fun setupView() {
-        with(binding) {
-            movieAppbar.movieFavoriteButton.setOnClickListener { viewModel.onFavoriteClicked() }
+        with(binding.movieAppbar) {
+            movieBackButton.setOnClickListener { requireActivity().onBackPressed() }
+            movieFavoriteButton.setOnClickListener { viewModel.onFavoriteClicked() }
         }
     }
 
@@ -80,6 +81,7 @@ class MovieFragment : BaseFragment() {
                 resourceReader.drawable(R.drawable.ic_favorite_border)
             }
             movieAppbar.movieFavoriteButton.setImageDrawable(favoriteDrawable)
+            movieAppbar.movieFavoriteButton.isEnabled = !state.loading
 
         }
     }
