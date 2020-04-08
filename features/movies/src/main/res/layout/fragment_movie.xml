@@ -1,197 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/movie_appbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:paddingStart="@dimen/default_content_margin"
-        android:paddingEnd="@dimen/default_content_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/movie_back_button"
-            android:layout_width="@dimen/appbar_icon_size"
-            android:layout_height="@dimen/appbar_icon_size"
-            android:layout_gravity="start|center"
-            android:layout_marginStart="6dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_arrow_back"
-            android:tint="@color/search_appbar_icons_color"
-            tools:ignore="ContentDescription" />
-
-        <ImageButton
-            android:id="@+id/movie_favorite_button"
-            android:layout_width="@dimen/appbar_icon_size"
-            android:layout_height="@dimen/appbar_icon_size"
-            android:layout_gravity="end|center"
-            android:layout_marginEnd="6dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_favorite_border"
-            android:tint="@color/search_appbar_icons_color"
-            android:visibility="invisible"
-            tools:ignore="ContentDescription"
-            tools:visibility="visible" />
-
-    </FrameLayout>
+    <include layout="@layout/include_movie_appbar" />
 
     <ScrollView
         style="@style/RecyclerView.Clear"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?actionBarSize">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/movie_image"
-                android:layout_width="@dimen/item_movie_list_image_width"
-                android:layout_height="@dimen/item_movie_list_image_height"
-                android:layout_marginStart="@dimen/default_content_margin"
-                android:layout_marginTop="@dimen/default_content_margin"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/ic_poster_placeholder" />
-
-            <TextView
-                android:id="@+id/movie_title"
-                style="@style/MovieTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_content_margin"
-                android:layout_marginEnd="@dimen/default_content_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/movie_image"
-                app:layout_constraintTop_toTopOf="@+id/movie_image"
-                tools:text="Удивительное путешествие до..." />
-
-            <TextView
-                android:id="@+id/movie_original_title"
-                style="@style/MovieTitle.Original"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="@dimen/default_content_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/movie_title"
-                app:layout_constraintTop_toBottomOf="@+id/movie_title"
-                tools:text="Dolittle (2020)" />
-
-            <TextView
-                android:id="@+id/movie_genres"
-                style="@style/TitleGenres"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="@dimen/default_content_margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/movie_title"
-                app:layout_constraintTop_toBottomOf="@+id/movie_original_title"
-                tools:text="фэнтези, боевик, комедия" />
-
-            <TextView
-                android:id="@+id/movie_vote_average"
-                style="@style/TitleVoteAverage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/movie_duration"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/movie_genres"
-                app:layout_constraintTop_toBottomOf="@+id/move_time_title"
-                tools:text="6.1" />
-
-            <TextView
-                android:id="@+id/movie_popularity"
-                style="@style/TitleRating"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="@dimen/default_content_margin"
-                app:layout_constraintBottom_toBottomOf="@+id/movie_vote_average"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/movie_vote_average"
-                app:layout_constraintTop_toTopOf="@+id/movie_vote_average"
-                app:layout_constraintVertical_bias="0.8"
-                tools:text="4 832" />
-
-            <TextView
-                android:id="@+id/move_time_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_content_margin"
-                android:layout_marginTop="16dp"
-                android:text="@string/title_time"
-                app:layout_constraintEnd_toStartOf="@+id/movie_rating_title"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_image" />
-
-            <TextView
-                android:id="@+id/movie_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/default_content_margin"
-                app:layout_constraintEnd_toStartOf="@+id/movie_vote_average"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/move_time_title"
-                tools:text="91Мин" />
-
-            <TextView
-                android:id="@+id/movie_rating_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/default_content_margin"
-                android:text="@string/title_movie_rating"
-                app:layout_constraintBottom_toBottomOf="@+id/move_time_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/movie_genres"
-                app:layout_constraintTop_toTopOf="@+id/move_time_title" />
+            <include layout="@layout/include_movie_info" />
 
             <View
                 android:id="@+id/movie_separator"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/dark_blue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_duration" />
+                android:background="@color/dark_blue" />
 
             <TextView
                 android:id="@+id/movie_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/default_content_margin"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_separator"
-                app:layout_constraintVertical_bias="0.0"
                 tools:text="Семь лет назад доктор Дулиттл, прославленный врач-ветеринар, живущий в викторианской Англии, потерял свою жену. Теперь он ведет затворнический образ жизни, скрывшись за высокими стенами своего поместья. Экзотические животные из его коллекции — его единственная компания. Но когда неизвестная болезнь становится угрозой для жизни юной королевы, доктору Дулиттлу приходится покинуть свое убежище и отправиться в невероятное путешествие к мифическому острову. В поисках лекарства для королевы он вступит в схватку с беспощадными врагами, познакомится с диковинными существами и будет вынужден проявить недюжинное мужество и смекалку." />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+    <androidx.core.widget.ContentLoadingProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/default_content_margin"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
+</FrameLayout>
