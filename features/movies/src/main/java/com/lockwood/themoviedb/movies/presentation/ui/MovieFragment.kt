@@ -76,7 +76,7 @@ class MovieFragment : BaseFragment() {
         with(binding) {
 
             movieProgressBar.isVisible = state.loading
-            movieContent.isVisible = !state.loading
+            movieContent.isVisible = !state.loading && state.movie != null
 
             val favoriteDrawable = if (state.favoriteMovie) {
                 resourceReader.drawable(R.drawable.ic_favorite)
