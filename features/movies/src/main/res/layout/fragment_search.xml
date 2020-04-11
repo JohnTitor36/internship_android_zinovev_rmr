@@ -58,7 +58,7 @@
         <!-- region Movies list and Movie fragment -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler_view_movies"
-            style="@style/RecyclerView.Clear"
+            style="@style/ScrollView.Clear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

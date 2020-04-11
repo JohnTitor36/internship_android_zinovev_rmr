@@ -19,7 +19,7 @@
         <item name="android:imeOptions">actionSearch</item>
     </style>
 
-    <style name="RecyclerView.Clear">
+    <style name="ScrollView.Clear">
         <item name="android:scrollbars">none</item>
         <item name="android:overScrollMode">never</item>
     </style>
@@ -32,7 +32,7 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="MovieTitle.Expand" parent="MovieTitle">
+    <style name="MovieTitle.Full" parent="MovieTitle">
         <item name="android:ellipsize">none</item>
         <item name="android:maxLines">2</item>
         <item name="android:lines">1</item>
@@ -45,7 +45,7 @@
         <item name="android:textColor">@color/gray</item>
     </style>
 
-    <style name="MovieTitle.Original.Expand" parent="MovieTitle.Original">
+    <style name="MovieTitle.Original.Full" parent="MovieTitle.Original">
         <item name="android:maxLines">2</item>
         <item name="android:lines">1</item>
         <item name="android:singleLine">false</item>

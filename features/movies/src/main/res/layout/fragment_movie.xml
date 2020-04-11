@@ -10,7 +10,7 @@
 
     <ScrollView
         android:id="@+id/movie_content"
-        style="@style/RecyclerView.Clear"
+        style="@style/ScrollView.Clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?actionBarSize">

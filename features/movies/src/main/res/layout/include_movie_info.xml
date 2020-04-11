@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/movie_title"
-        style="@style/MovieTitle.Expand"
+        style="@style/MovieTitle.Full"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_content_margin"
@@ -36,7 +36,7 @@
 
     <TextView
         android:id="@+id/movie_original_title"
-        style="@style/MovieTitle.Original.Expand"
+        style="@style/MovieTitle.Original.Full"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
