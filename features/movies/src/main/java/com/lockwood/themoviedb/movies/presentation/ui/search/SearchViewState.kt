@@ -1,5 +1,6 @@
 package com.lockwood.themoviedb.movies.presentation.ui.search
 
+import com.lockwood.core.extensions.EMPTY
 import com.lockwood.themoviedb.movies.domain.model.Movie
 
 data class SearchViewState(
@@ -14,7 +15,7 @@ data class SearchViewState(
 
         val initialState
             get() = SearchViewState(
-                movieName = "",
+                movieName = String.EMPTY,
                 movieItemType = 0,
                 inputClicked = false,
                 inputStarted = false,

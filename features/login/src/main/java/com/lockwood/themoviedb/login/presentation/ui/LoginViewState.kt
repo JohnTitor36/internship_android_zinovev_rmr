@@ -1,5 +1,7 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
+import com.lockwood.core.extensions.EMPTY
+
 data class LoginViewState(
     val login: String,
     val password: String,
@@ -13,9 +15,9 @@ data class LoginViewState(
 
         val initialState
             get() = LoginViewState(
-                login = "",
-                password = "",
-                errorMessage = "",
+                login = String.EMPTY,
+                password = String.EMPTY,
+                errorMessage = String.EMPTY,
                 loading = false,
                 validCredentials = false,
                 keyboardOpened = false

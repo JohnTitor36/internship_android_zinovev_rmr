@@ -1,4 +1,6 @@
 <resources>
     <string name="title_check_network_connection">Проверьте подключение к интернету</string>
     <string name="title_status_exception_cause">404 Not Found</string>
+    <string name="gravatar_url">https://www.gravatar.com/avatar/%1$s?s=%2$d</string>
+    <string name="tmdb_image_url">https://image.tmdb.org/t/p/%1$s%2$s</string>
 </resources>

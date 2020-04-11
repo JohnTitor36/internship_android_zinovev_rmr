@@ -8,7 +8,6 @@ import com.lockwood.core.network.interceptor.HttpErrorInterceptor
 import com.lockwood.core.network.interceptor.HttpHeaderInterceptor
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.network.moshi.adapter.*
-import com.lockwood.core.window.WindowManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -85,15 +84,19 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideMoshi(windowManager: WindowManager): Moshi.Builder {
+    fun provideMoshi(
+        gravatarUrlAdapter: GravatarUrlAdapter,
+        posterAdapter: PosterAdapter,
+        backdropAdapter: BackdropAdapter
+    ): Moshi.Builder {
         val builder = Moshi.Builder().add(KotlinJsonAdapterFactory())
 
         val adapters = arrayOf(
             DateAdapter(),
             LanguageAdapter(),
-            GravatarUrlAdapter(windowManager),
-            PosterAdapter(windowManager),
-            BackdropAdapter(windowManager)
+            gravatarUrlAdapter,
+            posterAdapter,
+            backdropAdapter
         )
 
         adapters.forEach { builder.add(it) }

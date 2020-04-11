@@ -25,6 +25,7 @@ import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.databinding.FragmentLoginBinding
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
+import timber.log.Timber
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -75,17 +76,23 @@ class LoginFragment : BaseFragment() {
         loginProgressBar.isVisible = loading
     }
 
-    private fun renderTitleAboveCredentials(keyboardOpened: Boolean) = with(binding) {
-        loginTitleTextView.isVisible = !keyboardOpened
-        loginHintTextView.isVisible = !keyboardOpened
+    private fun renderTitleAboveCredentials(keyboardOpened: Boolean) {
+        with(binding) {
+            loginTitleTextView.isVisible = !keyboardOpened
+            loginHintTextView.isVisible = !keyboardOpened
+        }
     }
 
-    private fun renderSignIngButton(validCredentials: Boolean) = with(binding) {
-        signInButton.isEnabled = validCredentials
+    private fun renderSignIngButton(validCredentials: Boolean) {
+        with(binding) {
+            signInButton.isEnabled = validCredentials
+        }
     }
 
-    private fun renderErrorMessage(errorMessage: String) = with(binding) {
-        loginErrorTextView.text = errorMessage
+    private fun renderErrorMessage(errorMessage: String) {
+        with(binding) {
+            loginErrorTextView.text = errorMessage
+        }
     }
 
     private fun addViewListeners() = with(binding) {

@@ -1,5 +1,7 @@
 package com.lockwood.themoviedb.user.presentation.ui
 
+import com.lockwood.core.extensions.EMPTY
+
 data class UserViewState(
     val username: String,
     val image: String
@@ -9,8 +11,8 @@ data class UserViewState(
 
         val initialState
             get() = UserViewState(
-                username = "",
-                image = ""
+                username = String.EMPTY,
+                image = String.EMPTY
             )
 
     }
