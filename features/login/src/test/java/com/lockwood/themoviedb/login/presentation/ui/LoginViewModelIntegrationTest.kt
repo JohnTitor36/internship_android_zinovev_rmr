@@ -1,14 +1,14 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
-import android.net.ConnectivityManager
 import com.lockwood.core.network.manager.NetworkConnectivityManager
 import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.test.extensions.*
 import com.lockwood.test.schedulers.TestSchedulersProvider
 import com.lockwood.themoviedb.login.R
-import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.willReturn
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
@@ -80,7 +80,7 @@ object LoginViewModelIntegrationTest : Spek({
                 }
             }
             And("read credentials error message from res") {
-                mock<ConnectivityManager> { on { mockResourceReader.string(R.string.title_invalid_credentials) } doReturn titleInvalidCredentialsRu }
+                given { mockResourceReader.string(R.string.title_invalid_credentials) } willReturn { titleInvalidCredentialsRu }
             }
 
             When("enter credentials with not correct password") {
