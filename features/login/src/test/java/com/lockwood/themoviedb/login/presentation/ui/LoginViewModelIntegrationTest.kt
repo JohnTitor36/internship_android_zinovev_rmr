@@ -25,17 +25,6 @@ object LoginViewModelIntegrationTest : Spek({
     val mockUserPreferences = mock<UserPreferences>()
 
     val testSchedulers by memoized { TestSchedulersProvider() }
-
-    val viewModel by memoized {
-        LoginViewModel(
-            apiKey = "",
-            authenticationRepository = mock { },
-            resourceReader = mockResourceReader,
-            connectivityManager = mockConnectivityManager,
-            userPreferences = mockUserPreferences,
-            schedulers = testSchedulers
-        )
-    }
     //endregion
 
     //region Setup
@@ -45,12 +34,31 @@ object LoginViewModelIntegrationTest : Spek({
 
     Feature("Login") {
 
+        //region Fields
+        var viewModel: LoginViewModel
+        //endregion
+
         //region Setup sever
         val mockServer = MockWebServer()
 
+        fun createViewModel(): LoginViewModel {
+            return LoginViewModel(
+                apiKey = "",
+                authenticationRepository = mock(),
+                resourceReader = mockResourceReader,
+                connectivityManager = mockConnectivityManager,
+                userPreferences = mockUserPreferences,
+                schedulers = testSchedulers
+            )
+        }
+
         //region Setup server scenario
+        fun initViewModel() {
+            viewModel = createViewModel()
+        }
+
         fun setUpServerScenario() {
-//            mockServer.start()
+            mockServer.start()
         }
 
         fun shutdownServerScenario() {
@@ -58,8 +66,13 @@ object LoginViewModelIntegrationTest : Spek({
         }
         //endregion
 
-        beforeEachScenario { setUpServerScenario() }
-        afterEachScenario { shutdownServerScenario() }
+        beforeEachScenario {
+            initViewModel()
+            setUpServerScenario()
+        }
+        afterEachScenario {
+            shutdownServerScenario()
+        }
         //endregion
 
         Scenario("click enter button And receive Invalid username and/or password error from server") {
