@@ -39,4 +39,15 @@ class CredentialsValidatorTest {
         assertThat(result).isEqualTo(false)
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = ["123", "пароль кириллицей", "password with spaces"])
+    fun `when check credentials by valid login and password with forbidden characters - should return false`(password: String) {
+        // given
+        val validLogin = "123456"
+        // when
+        val result = CredentialsValidator.isValidInput(validLogin, password)
+        // then
+        assertThat(result).isEqualTo(false)
+    }
+
 }
