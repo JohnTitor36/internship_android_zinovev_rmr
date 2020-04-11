@@ -68,7 +68,6 @@ class UserFragment : BaseFragment() {
             val context = requireContext()
             val resourceReader = ResourceReader(context)
             val defaultAvatar = resourceReader.drawable(R.drawable.ic_avatar_default)
-            // TODO: Добавить RoundDrawableCropWithBorder
             val avatarRequest = context.drawableRequest(
                 resourceReader = resourceReader,
                 placeholder = defaultAvatar,
