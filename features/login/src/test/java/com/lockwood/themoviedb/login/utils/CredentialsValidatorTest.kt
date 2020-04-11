@@ -14,7 +14,7 @@ class CredentialsValidatorTest {
         // when
         val result = CredentialsValidator.isValidInput(login, validPassword)
         // then
-        assertThat(result).isEqualTo(true)
+        assertThat(result).isTrue()
     }
 
     @ParameterizedTest
@@ -25,7 +25,7 @@ class CredentialsValidatorTest {
         // when
         val result = CredentialsValidator.isValidInput(validLogin, validLogin)
         // then
-        assertThat(result).isEqualTo(true)
+        assertThat(result).isTrue()
     }
 
     @ParameterizedTest
@@ -36,7 +36,7 @@ class CredentialsValidatorTest {
         // when
         val result = CredentialsValidator.isValidInput(login, validPassword)
         // then
-        assertThat(result).isEqualTo(false)
+        assertThat(result).isFalse()
     }
 
     @ParameterizedTest
@@ -47,7 +47,7 @@ class CredentialsValidatorTest {
         // when
         val result = CredentialsValidator.isValidInput(validLogin, password)
         // then
-        assertThat(result).isEqualTo(false)
+        assertThat(result).isFalse()
     }
 
 }
