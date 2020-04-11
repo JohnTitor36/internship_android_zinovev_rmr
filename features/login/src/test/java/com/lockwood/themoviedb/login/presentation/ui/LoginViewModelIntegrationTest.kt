@@ -20,9 +20,10 @@ object LoginViewModelIntegrationTest : Spek({
     //region Fields
 
     // Мокаем Android related компоненты
-    val resourceReader by memoized { mock<ResourceReader> {} }
-    val connectivityManager by memoized { mock<NetworkConnectivityManager> {} }
-    val userPreferences by memoized { mock<UserPreferences> {} }
+    val resourceReader = mock<ResourceReader>()
+    val connectivityManager = mock<NetworkConnectivityManager>()
+    val userPreferences = mock<UserPreferences>()
+
     val testSchedulers by memoized { TestSchedulersProvider() }
 
     val viewModel by memoized {
