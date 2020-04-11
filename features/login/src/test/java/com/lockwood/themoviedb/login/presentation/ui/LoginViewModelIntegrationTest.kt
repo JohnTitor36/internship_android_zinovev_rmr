@@ -20,9 +20,9 @@ object LoginViewModelIntegrationTest : Spek({
     //region Fields
 
     // Мокаем Android related компоненты
-    val resourceReader = mock<ResourceReader>()
-    val connectivityManager = mock<NetworkConnectivityManager>()
-    val userPreferences = mock<UserPreferences>()
+    val mockResourceReader = mock<ResourceReader>()
+    val mockConnectivityManager = mock<NetworkConnectivityManager>()
+    val mockUserPreferences = mock<UserPreferences>()
 
     val testSchedulers by memoized { TestSchedulersProvider() }
 
@@ -30,9 +30,9 @@ object LoginViewModelIntegrationTest : Spek({
         LoginViewModel(
             apiKey = "",
             authenticationRepository = mock { },
-            resourceReader = resourceReader,
-            connectivityManager = connectivityManager,
-            userPreferences = userPreferences,
+            resourceReader = mockResourceReader,
+            connectivityManager = mockConnectivityManager,
+            userPreferences = mockUserPreferences,
             schedulers = testSchedulers
         )
     }
@@ -80,7 +80,7 @@ object LoginViewModelIntegrationTest : Spek({
                 }
             }
             And("read credentials error message from res") {
-                mock<ConnectivityManager> { on { resourceReader.string(R.string.title_invalid_credentials) } doReturn titleInvalidCredentialsRu }
+                mock<ConnectivityManager> { on { mockResourceReader.string(R.string.title_invalid_credentials) } doReturn titleInvalidCredentialsRu }
             }
 
             When("enter credentials with not correct password") {
