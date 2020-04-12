@@ -72,7 +72,8 @@ constructor(
         } else {
             val throwableMessage = throwable.message
             if (throwableMessage != null) {
-                val message = if (throwableMessage.isInvalidCredentialsMessage()) {
+                val isInvalidCredentialsMessage = isInvalidCredentialsMessage(throwableMessage)
+                val message = if (isInvalidCredentialsMessage) {
                     resourceReader.string(R.string.title_invalid_credentials)
                 } else {
                     throwableMessage
@@ -153,9 +154,9 @@ constructor(
         eventsQueue.offer(launchMainEvent)
     }
 
-    private fun String.isInvalidCredentialsMessage(): Boolean {
+    private fun isInvalidCredentialsMessage(message: String): Boolean {
         val invalidCredentials = resourceReader.string(R.string.title_eng_invalid_credentials)
-        return this.contains(Regex(invalidCredentials))
+        return message.contains(Regex(invalidCredentials))
     }
 
 }

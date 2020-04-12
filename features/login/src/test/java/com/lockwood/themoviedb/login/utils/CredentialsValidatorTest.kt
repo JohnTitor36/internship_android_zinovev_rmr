@@ -30,7 +30,9 @@ class CredentialsValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["redmadrobot@%+/'!.", "ajj_the_band#^?:", "123456(){}~"])
-    fun `when check credentials by login with forbidden characters and valid password - should return false`(login: String) {
+    fun `when check credentials by login with forbidden characters and valid password - should return false`(
+        login: String
+    ) {
         // given
         val validPassword = "123456"
         // when
@@ -41,7 +43,9 @@ class CredentialsValidatorTest {
 
     @ParameterizedTest
     @ValueSource(strings = ["123", "пароль кириллицей", "password with spaces"])
-    fun `when check credentials by valid login and password with forbidden characters - should return false`(password: String) {
+    fun `when check credentials by valid login and password with forbidden characters - should return false`(
+        password: String
+    ) {
         // given
         val validLogin = "123456"
         // when

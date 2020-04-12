@@ -12,7 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.event.Event
 import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.observe
-import com.lockwood.core.extensions.*
+import com.lockwood.core.extensions.afterMeasured
+import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.extensions.dimenPx
+import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider

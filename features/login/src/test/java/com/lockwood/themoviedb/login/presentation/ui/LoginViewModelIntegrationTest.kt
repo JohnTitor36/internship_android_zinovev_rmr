@@ -1,16 +1,20 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
-import com.lockwood.core.network.manager.NetworkConnectivityManager
-import com.lockwood.core.preferences.user.UserPreferences
-import com.lockwood.core.reader.ResourceReader
-import com.lockwood.test.extensions.*
+import com.lockwood.test.extensions.disableTestMode
+import com.lockwood.test.extensions.enableTestMode
+import com.lockwood.test.extensions.withKey
 import com.lockwood.test.schedulers.TestSchedulersProvider
+import com.lockwood.themoviedb.login.AuthenticationNetworkEnvironment
+import com.lockwood.themoviedb.login.AuthenticationNetworkEnvironment.Companion.DEFAULT_API_KEY
+import com.lockwood.themoviedb.login.AuthenticationNetworkEnvironment.Companion.DEFAULT_REQUEST_TOKEN
 import com.lockwood.themoviedb.login.R
+import com.lockwood.themoviedb.login.extensions.VALIDATE_TOKEN_WITH_LOGIN_PATH
+import com.lockwood.themoviedb.login.extensions.createLoginViewModel
+import com.lockwood.themoviedb.login.extensions.invalidCredentialsResponse
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.willReturn
 import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
 import org.assertj.core.api.Assertions.assertThat
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.gherkin.Feature
@@ -18,13 +22,9 @@ import org.spekframework.spek2.style.gherkin.Feature
 object LoginViewModelIntegrationTest : Spek({
 
     //region Fields
+    val networkEnvironment = AuthenticationNetworkEnvironment()
 
-    // Мокаем Android related компоненты
-    val mockResourceReader = mock<ResourceReader>()
-    val mockConnectivityManager = mock<NetworkConnectivityManager>()
-    val mockUserPreferences = mock<UserPreferences>()
-
-    val testSchedulers by memoized { TestSchedulersProvider() }
+    var viewModel = createLoginViewModel(DEFAULT_API_KEY, mock())
     //endregion
 
     //region Setup
@@ -34,46 +34,27 @@ object LoginViewModelIntegrationTest : Spek({
 
     Feature("Login") {
 
-        //region Fields
-        var viewModel: LoginViewModel
-        //endregion
-
         //region Setup sever
-        val mockServer = MockWebServer()
-
-        fun createViewModel(): LoginViewModel {
-            return LoginViewModel(
-                apiKey = "",
-                authenticationRepository = mock(),
-                resourceReader = mockResourceReader,
-                connectivityManager = mockConnectivityManager,
-                userPreferences = mockUserPreferences,
-                schedulers = testSchedulers
-            )
-        }
-
-        //region Setup server scenario
-        fun initViewModel() {
-            viewModel = createViewModel()
-        }
-
         fun setUpServerScenario() {
-            mockServer.start()
+            with(networkEnvironment) {
+                setupServer()
+                viewModel = createLoginViewModel(
+                    apiKey = DEFAULT_API_KEY,
+                    authenticationRepository = authenticationRepository,
+                    resourceReader = mockResourceReader,
+                    connectivityManager = mockConnectivityManager,
+                    schedulers = TestSchedulersProvider()
+                )
+            }
         }
 
         fun shutdownServerScenario() {
-            mockServer.shutdown()
+            networkEnvironment.shutdownServer()
         }
         //endregion
 
-        beforeEachScenario {
-            initViewModel()
-            setUpServerScenario()
-        }
-        afterEachScenario {
-            shutdownServerScenario()
-        }
-        //endregion
+        beforeEachScenario { setUpServerScenario() }
+        afterEachScenario { shutdownServerScenario() }
 
         Scenario("click enter button And receive Invalid username and/or password error from server") {
 
@@ -82,18 +63,32 @@ object LoginViewModelIntegrationTest : Spek({
             val password = "test123"
 
             val titleInvalidCredentialsRu = "Неверный логин или пароль"
+            val titleInvalidCredentialsRegex = "Invalid (username|password)"
             //endregion
 
             Given("invalid username and/or password error") {
-                mockServer.dispatchResponses { path ->
+                networkEnvironment.dispatchResponses { path ->
                     return@dispatchResponses when (path) {
-                        VALIDATE_TOKEN_WITH_LOGIN_PATH -> MockResponse().invalidCredentialsResponse()
-                        else -> null
+                        VALIDATE_TOKEN_WITH_LOGIN_PATH.withKey(DEFAULT_API_KEY) -> MockResponse().invalidCredentialsResponse()
+                        else -> null // default
                     }
                 }
             }
+            And("has internet connection") {
+                with(networkEnvironment) {
+                    given { mockConnectivityManager.hasInternetConnection } willReturn { true }
+                }
+            }
+            And("fetch valid request token") {
+                with(networkEnvironment) {
+                    given { authenticationRepository.fetchCurrentRequestToken() } willReturn { DEFAULT_REQUEST_TOKEN }
+                }
+            }
             And("read credentials error message from res") {
-                given { mockResourceReader.string(R.string.title_invalid_credentials) } willReturn { titleInvalidCredentialsRu }
+                with(networkEnvironment) {
+                    given { mockResourceReader.string(R.string.title_invalid_credentials) } willReturn { titleInvalidCredentialsRu }
+                    given { mockResourceReader.string(R.string.title_eng_invalid_credentials) } willReturn { titleInvalidCredentialsRegex }
+                }
             }
 
             When("enter credentials with not correct password") {
@@ -115,7 +110,6 @@ object LoginViewModelIntegrationTest : Spek({
                 )
                 assertThat(state).isEqualTo(expectedState)
             }
-
         }
     }
 
