@@ -1,8 +1,6 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
-import android.content.Intent
 import androidx.lifecycle.MutableLiveData
-import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
@@ -27,12 +25,6 @@ constructor(
     resourceReader: ResourceReader,
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(resourceReader, schedulers) {
-
-    companion object {
-
-        private const val MAIN_ACTIVITY_CLASS_NAME =
-            "com.lockwood.themoviedb.presentation.ui.MainActivity"
-    }
 
     val liveState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState.initialState)
 
@@ -138,9 +130,7 @@ constructor(
         setLoading(false)
         userPreferences.setUserLoggedIn(true)
 
-        val clearFlags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val launchMainEvent = LaunchActivityEvent(MAIN_ACTIVITY_CLASS_NAME, clearFlags)
-        eventsQueue.offer(launchMainEvent)
+        //TODO: open pin fragment
     }
 
     private fun String.isInvalidCredentialsMessage(): Boolean {

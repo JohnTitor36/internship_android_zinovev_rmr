@@ -13,6 +13,7 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme_Edge)
         super.onCreate(savedInstanceState)
+        disableAbilityToScreenshot()
 
         binding = layoutInflater.inflateViewBinding()
         setContentView(binding.root)

@@ -9,10 +9,10 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.lockwood.core.event.Event
-import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.observe
-import com.lockwood.core.extensions.*
+import com.lockwood.core.extensions.afterMeasured
+import com.lockwood.core.extensions.appToolsProvider
+import com.lockwood.core.extensions.dimenPx
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -52,17 +52,6 @@ class LoginFragment : BaseFragment() {
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
-    }
-
-    override fun onOnEvent(event: Event) {
-        super.onOnEvent(event)
-        when (event) {
-            is LaunchActivityEvent -> {
-                requireContext().launchActivity(event.className) {
-                    flags = event.flags
-                }
-            }
-        }
     }
 
     override fun setupViews() {

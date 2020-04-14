@@ -9,12 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.lockwood.core.event.ErrorMessageEvent
-import com.lockwood.core.event.Event
-import com.lockwood.core.event.MessageEvent
-import com.lockwood.core.event.NavigationEvent
+import com.lockwood.core.event.*
 import com.lockwood.core.extensions.buildNavOptions
 import com.lockwood.core.extensions.buildSnackbar
+import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.extensions.navOptionsFromAction
 import com.lockwood.core.message.MessageView
 
@@ -52,9 +50,20 @@ abstract class BaseFragment : Fragment(), MessageView {
     @CallSuper
     protected open fun onOnEvent(event: Event) {
         when (event) {
-            is MessageEvent -> showMessage(event.message)
-            is ErrorMessageEvent -> showError(event.errorMessage)
-            is NavigationEvent -> navigateTo(event.direction, event.navOptions)
+            is MessageEvent -> {
+                showMessage(event.message)
+            }
+            is ErrorMessageEvent -> {
+                showError(event.errorMessage)
+            }
+            is NavigationEvent -> {
+                navigateTo(event.direction, event.navOptions)
+            }
+            is LaunchActivityEvent -> {
+                requireContext().launchActivity(event.className) {
+                    flags = event.flags
+                }
+            }
         }
     }
 

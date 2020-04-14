@@ -6,6 +6,25 @@
 
     <fragment
         android:id="@+id/login"
-        android:name="com.lockwood.themoviedb.login.presentation.ui.LoginFragment" />
+        android:name="com.lockwood.themoviedb.login.presentation.ui.LoginFragment">
+        <action
+            android:id="@+id/open_enter_pin"
+            app:destination="@id/enter_pin" />
+        <action
+            android:id="@+id/open_make_pin"
+            app:destination="@id/make_pin" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/make_pin"
+        android:name="com.lockwood.themoviedb.login.presentation.ui.pin.PinFragment">
+        <action
+            android:id="@+id/open_enter_pin"
+            app:destination="@id/enter_pin" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/enter_pin"
+        android:name="com.lockwood.themoviedb.login.presentation.ui.pin.PinEnterFragment" />
 
 </navigation>
