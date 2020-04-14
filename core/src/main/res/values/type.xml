@@ -21,4 +21,14 @@
         <item name="android:textSize">@dimen/text_size_title</item>
     </style>
 
+    <style name="Regular.Center" parent="Regular">
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Title.Center" parent="Title">
+        <item name="android:textAlignment">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

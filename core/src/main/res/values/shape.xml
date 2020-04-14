@@ -5,4 +5,9 @@
         <item name="cornerSize">@dimen/button_corner_radius</item>
     </style>
 
+    <style name="RoundShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/button_corner_radius_rounded</item>
+    </style>
+
 </resources>

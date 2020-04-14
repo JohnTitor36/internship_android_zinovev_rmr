@@ -21,4 +21,5 @@
     <color name="primary">@color/bg_black</color>
     <color name="primaryVariant">@color/bg_black</color>
     <color name="secondary">@color/orange</color>
+    <color name="avatar_corner">#2A2E42</color>
 </resources>

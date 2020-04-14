@@ -7,4 +7,5 @@
     <string name="title_some_error">Что-то пошло не так,\n попробуйте войти позже</string>
     <string name="title_invalid_credentials">Неверный логин или пароль</string>
     <string name="title_eng_invalid_credentials">Invalid (username|password)</string>
+    <string name="invalid_pin_message">Неверный пин-код</string>
 </resources>

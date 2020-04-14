@@ -2,4 +2,6 @@
     <string name="untrusted_environment">Внимание! Не доверенное окружение:\n%1$s</string>
     <string name="untrusted_environment_root">Вы используете root устройство</string>
     <string name="untrusted_environment_wifi">Вы используете ненадежное wi-fi соединение</string>
+    <string name="title_sing_out">Выйти</string>
+    <string name="user_avatar_description">Аватар профиля</string>
 </resources>

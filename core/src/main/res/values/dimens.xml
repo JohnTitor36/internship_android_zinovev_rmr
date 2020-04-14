@@ -6,7 +6,14 @@
     <dimen name="margin_extra_big">32dp</dimen>
 
     <dimen name="default_content_margin">@dimen/margin_regular</dimen>
+
     <dimen name="button_content_padding">19dp</dimen>
     <dimen name="button_corner_radius">8dp</dimen>
+    <dimen name="button_corner_radius_rounded">72dp</dimen>
+
+    <dimen name="title_margin_big">27dp</dimen>
     <dimen name="title_margin">11dp</dimen>
+
+    <dimen name="user_avatar_size">136dp</dimen>
+    <dimen name="user_avatar_corners_size">4dp</dimen>
 </resources>

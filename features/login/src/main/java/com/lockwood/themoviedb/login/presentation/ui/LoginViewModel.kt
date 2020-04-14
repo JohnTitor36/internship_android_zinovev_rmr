@@ -130,7 +130,21 @@ constructor(
         setLoading(false)
         userPreferences.setUserLoggedIn(true)
 
-        //TODO: open pin fragment
+//        if (hasPinPassword) {
+//            openPinMake()
+//        } else {
+//            openPinEnter()
+//        }
+        openPinMake()
+    }
+
+    private fun openPinMake() {
+        val direction = LoginFragmentDirections.openMakePin()
+        navigateTo(direction)
+    }
+
+    private fun openPinEnter() {
+        
     }
 
     private fun String.isInvalidCredentialsMessage(): Boolean {

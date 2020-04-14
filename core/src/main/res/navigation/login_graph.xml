@@ -4,6 +4,8 @@
     android:id="@+id/login_graph"
     app:startDestination="@id/login">
 
+    <!-- TODO: настроить navigation, чтобы не было возможности перейти на предыдущий фрагмент -->
+
     <fragment
         android:id="@+id/login"
         android:name="com.lockwood.themoviedb.login.presentation.ui.LoginFragment">
