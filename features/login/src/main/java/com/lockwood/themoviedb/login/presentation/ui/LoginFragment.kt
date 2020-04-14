@@ -44,7 +44,9 @@ class LoginFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = createView<FragmentLoginBinding>(inflater, container)
+    ): View {
+        return createView<FragmentLoginBinding>(inflater, container)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,6 +75,7 @@ class LoginFragment : BaseFragment() {
     private fun renderLoading(loading: Boolean) {
         val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
         loginProgressBar.isVisible = loading
+
     }
 
     private fun renderTitleAboveCredentials(keyboardOpened: Boolean) = with(binding) {

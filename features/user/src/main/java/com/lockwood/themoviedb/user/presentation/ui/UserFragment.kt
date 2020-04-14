@@ -42,7 +42,9 @@ class UserFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = createView<FragmentUserBinding>(inflater, container)
+    ): View {
+        return createView<FragmentUserBinding>(inflater, container)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

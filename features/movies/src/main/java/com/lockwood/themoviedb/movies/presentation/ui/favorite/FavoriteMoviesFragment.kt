@@ -31,7 +31,9 @@ class FavoriteMoviesFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = createView<FragmentFavoriteMoviesBinding>(inflater, container)
+    ): View {
+        return createView<FragmentFavoriteMoviesBinding>(inflater, container)
+    }
 
     private fun inject() {
         DaggerFavoriteMoviesComponent.builder()

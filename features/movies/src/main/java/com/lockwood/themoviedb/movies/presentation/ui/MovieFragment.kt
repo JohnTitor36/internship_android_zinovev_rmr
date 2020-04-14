@@ -51,7 +51,9 @@ class MovieFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = createView<FragmentMovieBinding>(inflater, container)
+    ): View {
+        return createView<FragmentMovieBinding>(inflater, container)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
