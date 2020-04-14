@@ -57,7 +57,9 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = createView<FragmentSearchBinding>(inflater, container)
+    ): View {
+        return createView<FragmentSearchBinding>(inflater, container)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
