@@ -90,7 +90,6 @@
         android:textAppearance="@style/Regular"
         android:textColor="@color/red"
         android:textSize="@dimen/text_size_regular"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_input_layout"
