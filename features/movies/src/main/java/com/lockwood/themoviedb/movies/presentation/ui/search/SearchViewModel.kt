@@ -56,12 +56,12 @@ class SearchViewModel @Inject constructor(
     }
 
     fun onChangeMoviesViewType() {
-        val newViewType = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
+        val newViewType = if (state.itemViewType == ITEM_VIEW_TYPE_LIST) {
             ITEM_VIEW_TYPE_GRID
         } else {
             ITEM_VIEW_TYPE_LIST
         }
-        state = state.copy(viewItemType = newViewType)
+        state = state.copy(itemViewType = newViewType)
     }
 
     fun loadMoreMovies() {

@@ -68,7 +68,7 @@ class LoginFragment : BaseFragment() {
     private fun renderState(state: LoginViewState) {
         renderLoading(state.loading)
         renderTitleAboveCredentials(state.keyboardOpened)
-        renderSignIngButton(state.validCredentials)
+        renderSigninButton(state.validCredentials)
         renderErrorMessage(state.errorMessage)
     }
 
@@ -84,7 +84,7 @@ class LoginFragment : BaseFragment() {
         }
     }
 
-    private fun renderSignIngButton(validCredentials: Boolean) {
+    private fun renderSigninButton(validCredentials: Boolean) {
         binding.signInButton.isEnabled = validCredentials
     }
 

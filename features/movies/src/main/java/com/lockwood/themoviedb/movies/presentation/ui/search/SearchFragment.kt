@@ -25,7 +25,7 @@ import com.lockwood.themoviedb.movies.databinding.FragmentSearchBinding
 import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
 import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
-import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
+import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
@@ -107,57 +107,76 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     }
 
     private fun renderState(state: SearchViewState) {
-        with(binding) {
-            searchTitle.isVisible = !state.inputClicked
-            searchImageBackground.isVisible = !state.inputClicked
+        renderInputClicked(state.inputClicked)
+        renderInputStarted(state.inputStarted)
+        renderInputEmpty(state.inputEmpty)
+        renderItemViewType(state.itemViewType)
+        renderMovies(state.movies, state.itemViewType)
+    }
 
-            if (!state.inputStarted) {
+    private fun renderInputClicked(inputClicked: Boolean) {
+        with(binding) {
+            searchTitle.isVisible = !inputClicked
+            searchImageBackground.isVisible = !inputClicked
+        }
+    }
+
+    private fun renderInputStarted(inputStarted: Boolean) {
+        with(binding) {
+            if (!inputStarted) {
                 searchTitle.beginDelayedTransition()
             } else {
                 searchTitle.endDelayedTransition()
             }
+            searchRecyclerViewMovies.isVisible = inputStarted
+        }
+    }
 
-            with(includeSearchLayout) {
-                val changeTypeDrawable = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
+    private fun renderInputEmpty(inputEmpty: Boolean) {
+        val clearDrawable = if (inputEmpty) {
+            null
+        } else {
+            resourceReader.drawable(R.drawable.ic_clear)
+        }
+        binding.includeSearchLayout.searchEditText.updateCompoundDrawables(end = clearDrawable)
+    }
+
+    private fun renderItemViewType(itemViewType: Int) {
+        with(binding.includeSearchLayout) {
+            val changeTypeDrawable =
+                if (itemViewType == MoviesItemViewType.ITEM_VIEW_TYPE_LIST) {
                     resourceReader.drawable(R.drawable.ic_movies_card)
                 } else {
                     resourceReader.drawable(R.drawable.ic_movies_list)
                 }
-                searchChangeViewTypeImage.setImageDrawable(changeTypeDrawable)
+            searchChangeViewTypeImage.setImageDrawable(changeTypeDrawable)
+        }
+    }
 
-                val clearDrawable = if (state.inputEmpty) {
-                    null
-                } else {
-                    resourceReader.drawable(R.drawable.ic_clear)
+    private fun renderMovies(movies: List<MovieItem>, itemViewType: Int) {
+        with(binding.searchRecyclerViewMovies) {
+            val isTypeChanged = itemViewType != moviesAdapter.itemViewType
+            if (!isTypeChanged) {
+
+                // обновляем только отображаемые данные
+                moviesAdapter.setItems(movies)
+            } else {
+
+                // обновляем адаптер с отображаемыми данными
+                moviesAdapter = MoviesAdapter(movies, itemViewType).apply {
+                    listener = this@SearchFragment
                 }
-                searchEditText.updateCompoundDrawables(end = clearDrawable)
-            }
+                adapter = moviesAdapter
 
-            with(searchRecyclerViewMovies) {
-                isVisible = state.inputStarted
-
-                val isTypeChanged = state.viewItemType != moviesAdapter.itemViewType
-                if (!isTypeChanged) {
-                    // обновляем только отображаемые данные
-                    moviesAdapter.setItems(state.movies)
+                // и кол-во столбцов для gridLayoutManager
+                val spanCount = if (itemViewType == MoviesItemViewType.ITEM_VIEW_TYPE_LIST) {
+                    1
                 } else {
-                    // обновляем адаптер с отображаемыми данными
-                    moviesAdapter = MoviesAdapter(state.movies, state.viewItemType).apply {
-                        listener = this@SearchFragment
-                    }
-                    adapter = moviesAdapter
-                    // и кол-во столбцов для gridLayoutManager
-                    val spanCount = if (state.viewItemType == ITEM_VIEW_TYPE_LIST) {
-                        1
-                    } else {
-                        2
-                    }
-                    gridLayoutManager.spanCount = spanCount
+                    2
                 }
+                gridLayoutManager.spanCount = spanCount
             }
         }
-
-
     }
 
     private fun inject() {

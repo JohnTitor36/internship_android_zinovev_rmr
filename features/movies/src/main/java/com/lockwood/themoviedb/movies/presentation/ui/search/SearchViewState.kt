@@ -11,7 +11,7 @@ data class SearchViewState(
     val inputStarted: Boolean,
     val inputEmpty: Boolean,
     val movies: List<MovieItem>,
-    val viewItemType: Int,
+    val itemViewType: Int,
     override var pageCount: Int,
     override var currentPage: Int,
     override var perPage: Int
@@ -22,7 +22,7 @@ data class SearchViewState(
         val initialState
             get() = SearchViewState(
                 movieName = String.EMPTY,
-                viewItemType = MoviesItemViewType.ITEM_VIEW_TYPE_LIST,
+                itemViewType = MoviesItemViewType.ITEM_VIEW_TYPE_LIST,
                 inputClicked = false,
                 inputStarted = false,
                 inputEmpty = true,
