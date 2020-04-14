@@ -13,14 +13,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search_input_layout"
-        style="@style/ThemeOverlay.TextInputLayout.Search"
+        style="@style/TextInputLayout.Search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.9">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_edit_text"
-            style="@style/ThemeOverlay.TextInputEditText.Search"
+            style="@style/TextInputEditText.Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title_movies_search" />

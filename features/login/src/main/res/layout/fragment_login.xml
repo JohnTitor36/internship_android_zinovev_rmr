@@ -37,7 +37,7 @@
     <!-- region Login input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/login_input_layout"
-        style="@style/ThemeOverlay.TextInputLayout.Login"
+        style="@style/TextInputLayout.Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_extra_big"
@@ -47,7 +47,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_edit_text"
-            style="@style/ThemeOverlay.TextInputEditText"
+            style="@style/TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title_input_hint_login"
@@ -60,7 +60,7 @@
     <!-- region Password input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input_layout"
-        style="@style/ThemeOverlay.TextInputLayout.Login"
+        style="@style/TextInputLayout.Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_big"
@@ -73,7 +73,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_edit_text"
-            style="@style/ThemeOverlay.TextInputEditText"
+            style="@style/TextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title_input_hint_password"

@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="ThemeOverlay.TextInputLayout.Login" parent="ThemeOverlay.TextInputLayout">
+    <style name="TextInputLayout.Login" parent="TextInputLayout">
         <item name="hintTextColor">@color/gray</item>
         <item name="boxStrokeColor">@color/purple</item>
     </style>

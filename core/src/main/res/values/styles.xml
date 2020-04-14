@@ -10,7 +10,7 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="ThemeOverlay.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="android:textAppearance">@style/Regular</item>
         <item name="shapeAppearance">@style/DefaultShapeAppearance</item>
     </style>
@@ -20,7 +20,7 @@
         <item name="cornerSize">@dimen/button_corner_radius</item>
     </style>
 
-    <style name="ThemeOverlay.TextInputEditText" parent="Widget.AppCompat.EditText">
+    <style name="TextInputEditText" parent="Widget.AppCompat.EditText">
         <item name="android:textAppearance">@style/Regular</item>
         <item name="android:padding">18dp</item>
         <item name="android:maxLines">1</item>
