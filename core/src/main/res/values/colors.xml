@@ -22,4 +22,7 @@
     <color name="primaryVariant">@color/bg_black</color>
     <color name="secondary">@color/orange</color>
     <color name="avatar_corner">#2A2E42</color>
+
+    <color name="search_appbar_icons_color">#E7EDFF</color>
+    <color name="search_appbar_color">#E5282C3F</color>
 </resources>

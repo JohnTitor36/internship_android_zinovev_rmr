@@ -5,6 +5,7 @@
     android:id="@+id/login_fragment_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?actionBarSize"
     android:focusableInTouchMode="true"
     tools:context="com.lockwood.themoviedb.login.presentation.ui.LoginActivity">
 

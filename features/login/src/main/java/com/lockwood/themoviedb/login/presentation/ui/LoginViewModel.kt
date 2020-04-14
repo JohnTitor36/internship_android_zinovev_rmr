@@ -128,7 +128,6 @@ constructor(
 
     private fun handleSuccessLogin() {
         setLoading(false)
-        userPreferences.setUserLoggedIn(true)
 
 //        if (hasPinPassword) {
 //            openPinMake()

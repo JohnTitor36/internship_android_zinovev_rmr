@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="search_appbar_icons_color">#E7EDFF</color>
-    <color name="search_appbar_color">#E5282C3F</color>
-
     <color name="movie_rating_good">@color/green</color>
     <color name="movie_rating_normal">@color/light</color>
     <color name="movie_rating_not_so_good">@color/yellow</color>

@@ -46,12 +46,12 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:spanCount="3"
         tools:itemCount="12"
-        tools:listitem="@layout/item_pin_digit" />
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_pin_digit"
+        tools:spanCount="3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

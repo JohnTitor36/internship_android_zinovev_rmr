@@ -16,4 +16,7 @@
 
     <dimen name="user_avatar_size">136dp</dimen>
     <dimen name="user_avatar_corners_size">4dp</dimen>
+
+    <dimen name="appbar_icon_size">32dp</dimen>
+    <dimen name="default_icon_size">24dp</dimen>
 </resources>

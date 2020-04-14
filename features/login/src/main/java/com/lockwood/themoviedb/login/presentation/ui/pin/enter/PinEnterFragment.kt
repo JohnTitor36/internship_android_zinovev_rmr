@@ -16,9 +16,10 @@ import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.login.databinding.FragmentEnterPinBinding
 import com.lockwood.themoviedb.login.di.component.DaggerPinEnterComponent
+import com.lockwood.themoviedb.login.presentation.adapter.PinAdapter
 import javax.inject.Inject
 
-class PinEnterFragment : BaseFragment() {
+class PinEnterFragment : BaseFragment(), PinAdapter.PinAdapterListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -50,8 +51,35 @@ class PinEnterFragment : BaseFragment() {
 
     }
 
+    override fun onDigitClick(digit: Int) {
+
+    }
+
+    override fun onClearClick() {
+
+    }
+
+    override fun onExitClick() {
+
+    }
+
     private fun renderState(state: PinEnterViewState) {
 
+    }
+
+    private fun setupRecyclerViewKeyboard() {
+//        moviesAdapter = MoviesAdapter().apply {
+//            listener = this@SearchFragment
+//        }
+//        gridLayoutManager = GridLayoutManager(requireContext(), 1)
+//
+//        with(binding.searchRecyclerViewMovies) {
+//            layoutManager = gridLayoutManager
+//            adapter = moviesAdapter
+//            addOnLastItemListener(LAST_ITEM_REACHED_OFFSET) {
+//                viewModel.loadMoreMovies()
+//            }
+//        }
     }
 
     private fun inject() {

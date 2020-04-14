@@ -8,4 +8,6 @@
     <string name="title_invalid_credentials">Неверный логин или пароль</string>
     <string name="title_eng_invalid_credentials">Invalid (username|password)</string>
     <string name="invalid_pin_message">Неверный пин-код</string>
+    <string name="title_make_pin">Придумайте пин-код для быстрого входа</string>
+    <string name="title_enter_pin_again">Повторите  ваш пин-код</string>
 </resources>
