@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Button.Dark" parent="Button">
+        <item name="backgroundTint">@color/btn_dark_background</item>
+        <item name="rippleColor">@color/btn_dark_ripple_color</item>
+        <item name="android:textColor">@color/btn_dark_text_color</item>
+    </style>
+
+</resources>

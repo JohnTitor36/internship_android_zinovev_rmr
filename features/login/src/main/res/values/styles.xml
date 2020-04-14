@@ -1,11 +1,5 @@
 <resources>
 
-    <style name="Button.Actionable" parent="Button">
-        <item name="android:background">@drawable/btn_background_actionable</item>
-        <item name="background">@drawable/btn_background_actionable</item>
-        <item name="android:textColor">@drawable/btn_text_color_actionable</item>
-    </style>
-
     <style name="ThemeOverlay.TextInputLayout.Login" parent="ThemeOverlay.TextInputLayout">
         <item name="hintTextColor">@color/gray</item>
         <item name="boxStrokeColor">@color/purple</item>
