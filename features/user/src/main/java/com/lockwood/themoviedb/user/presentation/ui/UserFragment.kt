@@ -45,15 +45,14 @@ class UserFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addViewListeners()
-
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
+
         viewModel.fetchAccountDetails()
     }
 
-    private fun addViewListeners() {
-        binding.signOutButton.setOnClickListener { viewModel.onLogoutClick() }
+    override fun setupViews() {
+        addViewListeners()
     }
 
     private fun renderState(state: UserViewState) {
@@ -71,6 +70,10 @@ class UserFragment : BaseFragment() {
             url = image,
             request = avatarRequest
         )
+    }
+
+    private fun addViewListeners() {
+        binding.signOutButton.setOnClickListener { viewModel.onLogoutClick() }
     }
 
     private fun inject() {

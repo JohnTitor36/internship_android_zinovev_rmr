@@ -25,6 +25,8 @@ abstract class BaseFragment : Fragment(), MessageView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rootView = view
+
+        setupViews()
     }
 
     override fun onPause() {
@@ -32,12 +34,20 @@ abstract class BaseFragment : Fragment(), MessageView {
         hideKeyboard()
     }
 
+    override fun showMessage(message: String) {
+        rootView.buildSnackbar(message).show()
+    }
+
+    override fun showError(error: String) = Unit
+
     protected fun hideKeyboard() {
         with(requireContext().getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager) {
             hideSoftInputFromWindow(rootView.windowToken, 0)
         }
         rootView.clearFocus()
     }
+
+    protected open fun setupViews() = Unit
 
     @CallSuper
     protected open fun onOnEvent(event: Event) {
@@ -47,12 +57,6 @@ abstract class BaseFragment : Fragment(), MessageView {
             is NavigationEvent -> navigateTo(event.direction, event.navOptions)
         }
     }
-
-    override fun showMessage(message: String) {
-        rootView.buildSnackbar(message).show()
-    }
-
-    override fun showError(error: String) = Unit
 
     protected fun navigateTo(
         direction: NavDirections,

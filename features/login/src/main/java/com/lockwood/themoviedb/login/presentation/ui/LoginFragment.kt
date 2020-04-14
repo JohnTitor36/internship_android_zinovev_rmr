@@ -53,7 +53,6 @@ class LoginFragment : BaseFragment() {
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
-        addViewListeners()
     }
 
     override fun onOnEvent(event: Event) {
@@ -63,6 +62,10 @@ class LoginFragment : BaseFragment() {
                 flags = event.flags
             }
         }
+    }
+
+    override fun setupViews() {
+        addViewListeners()
     }
 
     private fun renderState(state: LoginViewState) {

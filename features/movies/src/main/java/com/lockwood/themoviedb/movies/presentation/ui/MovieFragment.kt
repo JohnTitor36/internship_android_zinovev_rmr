@@ -58,8 +58,6 @@ class MovieFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupView()
-
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
 
@@ -67,7 +65,7 @@ class MovieFragment : BaseFragment() {
         viewModel.onLoadMovie(movieId)
     }
 
-    private fun setupView() {
+    override fun setupViews() {
         with(binding.movieAppbar) {
             movieBackButton.setOnClickListener { requireActivity().onBackPressed() }
             movieFavoriteButton.setOnClickListener { viewModel.onFavoriteClicked() }

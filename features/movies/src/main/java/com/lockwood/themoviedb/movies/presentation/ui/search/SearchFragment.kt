@@ -57,13 +57,12 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = createView<FragmentSearchBinding>(inflater, container)
+    ): View {
+        return createView<FragmentSearchBinding>(inflater, container)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupViews()
-        addViewListeners()
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
@@ -73,7 +72,13 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         viewModel.openMovie(item.id)
     }
 
-    private fun setupViews() {
+    override fun setupViews() {
+        setupRecyclerViewMovies()
+        setupIncludeSearchLayout()
+        addViewListeners()
+    }
+
+    private fun setupRecyclerViewMovies() {
         moviesAdapter = MoviesAdapter().apply {
             listener = this@SearchFragment
         }
@@ -86,7 +91,9 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
                 viewModel.loadMoreMovies()
             }
         }
+    }
 
+    private fun setupIncludeSearchLayout() {
         with(binding.includeSearchLayout) {
             searchChangeViewType.setOnClickListener {
                 viewModel.onChangeMoviesViewType()
@@ -96,7 +103,6 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
                 (this as EditText).text.clear()
             }
         }
-
     }
 
     private fun addViewListeners() {
