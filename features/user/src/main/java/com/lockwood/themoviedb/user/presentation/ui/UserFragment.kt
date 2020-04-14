@@ -67,7 +67,10 @@ class UserFragment : BaseFragment() {
 
     private fun renderUserImage(image: String) {
         val avatarRequest = requireContext().loadAvatarRequest()
-        binding.userAvatarImageView.load(url = image, request = avatarRequest)
+        binding.userAvatarImageView.load(
+            url = image,
+            request = avatarRequest
+        )
     }
 
     private fun inject() {

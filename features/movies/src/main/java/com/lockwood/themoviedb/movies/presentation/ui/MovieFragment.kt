@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.request.RequestOptions
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.livedata.observe
@@ -19,15 +18,15 @@ import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
-import com.lockwood.glide.extensions.drawableRequest
 import com.lockwood.glide.extensions.load
 import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.FragmentMovieBinding
 import com.lockwood.themoviedb.movies.di.component.DaggerMovieComponent
 import com.lockwood.themoviedb.movies.domain.model.Movie
 import com.lockwood.themoviedb.movies.extensions.loadMoviePosterRequest
-import com.lockwood.themoviedb.movies.utils.MovieUtils
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+import com.lockwood.themoviedb.movies.utils.MovieUtils.buildDurationTitle
+import com.lockwood.themoviedb.movies.utils.MovieUtils.buildOriginalTitle
+import com.lockwood.themoviedb.movies.utils.MovieUtils.ratingToColor
 import javax.inject.Inject
 
 class MovieFragment : BaseFragment() {
@@ -99,32 +98,37 @@ class MovieFragment : BaseFragment() {
     private fun renderMovie(movie: Movie) {
         val imageRequest = requireContext().loadMoviePosterRequest()
 
-        val ratingColorRes = MovieUtils.ratingToColorRes(movie.voteAverage)
-        val ratingColor = resourceReader.color(ratingColorRes)
+        val ratingColor = ratingToColor(
+            resourceReader = resourceReader,
+            rating = movie.voteAverage
+        )
 
         with(binding.movieInfo) {
 
             movieTitle.text = movie.title
-            movieOriginalTitle.text = MovieUtils.buildOriginalTitle(
-                resourceReader,
-                movie.originalTitle,
-                movie.releaseDate
+            movieOriginalTitle.text = buildOriginalTitle(
+                resourceReader = resourceReader,
+                title = movie.originalTitle,
+                releaseDate = movie.releaseDate
             )
 
             movieVoteAverage.text = movie.voteAverage.toString()
             movieVoteAverage.setTextColor(ratingColor)
 
             val genres = movie.genreModels.map { it.name }
-            movieGenres.text = MovieUtils.buildGenresCaption(genres)
+            movieGenres.text = genres.joinToString()
 
-            movieDuration.text = MovieUtils.buildDurationTitle(
-                resourceReader,
-                movie.runtime
+            movieDuration.text = buildDurationTitle(
+                resourceReader = resourceReader,
+                runtime = movie.runtime
             )
 
             moviePopularity.text = movie.popularity.toString()
 
-            movieImage.load(url = movie.poster, request = imageRequest)
+            movieImage.load(
+                url = movie.poster,
+                request = imageRequest
+            )
         }
 
         binding.movieDescription.text = movie.overview

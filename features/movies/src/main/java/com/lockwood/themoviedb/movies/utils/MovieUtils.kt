@@ -7,12 +7,6 @@ import java.util.*
 
 object MovieUtils {
 
-    fun buildGenresCaption(
-        genreNames: List<String>
-    ): String {
-        return genreNames.joinToString(separator = ", ")
-    }
-
     fun buildOriginalTitle(
         resourceReader: ResourceReader,
         title: String,
@@ -31,13 +25,17 @@ object MovieUtils {
         return resultTitle.format(runtime)
     }
 
-    fun ratingToColorRes(rating: Double): Int {
-        return when (rating.toInt()) {
+    fun ratingToColor(
+        resourceReader: ResourceReader,
+        rating: Double
+    ): Int {
+        val colorRes = when (rating.toInt()) {
             in 10 downTo 8 -> R.color.movie_rating_good
             in 9 downTo 7 -> R.color.movie_rating_normal
             in 6 downTo 4 -> R.color.movie_rating_not_so_good
             else -> R.color.movie_rating_bad
         }
+        return resourceReader.color(colorRes)
     }
 
 }
