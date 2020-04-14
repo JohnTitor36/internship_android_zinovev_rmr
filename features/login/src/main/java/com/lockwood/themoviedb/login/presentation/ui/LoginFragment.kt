@@ -12,10 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.event.Event
 import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.observe
-import com.lockwood.core.extensions.afterMeasured
-import com.lockwood.core.extensions.appToolsProvider
-import com.lockwood.core.extensions.dimenPx
-import com.lockwood.core.extensions.launchActivity
+import com.lockwood.core.extensions.*
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -25,6 +22,7 @@ import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.databinding.FragmentLoginBinding
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
+import com.scottyab.rootbeer.RootBeer
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -50,6 +48,7 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkRoot()
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
@@ -58,14 +57,23 @@ class LoginFragment : BaseFragment() {
     override fun onOnEvent(event: Event) {
         super.onOnEvent(event)
         when (event) {
-            is LaunchActivityEvent -> requireContext().launchActivity(event.className) {
-                flags = event.flags
+            is LaunchActivityEvent -> {
+                requireContext().launchActivity(event.className) {
+                    flags = event.flags
+                }
             }
         }
     }
 
     override fun setupViews() {
         addViewListeners()
+    }
+
+    private fun checkRoot() {
+        val isRooted = RootBeer(requireContext()).isRooted
+        if (isRooted) {
+            viewModel.onRootDeviceUsed()
+        }
     }
 
     private fun renderState(state: LoginViewState) {

@@ -3,6 +3,7 @@ package com.lockwood.themoviedb.login.presentation.ui
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.LaunchActivityEvent
+import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.ui.BaseNetworkViewModel
@@ -82,6 +83,14 @@ constructor(
             .autoDispose()
     }
 
+    fun onRootDeviceUsed() {
+        val untrustedEnvironmentMessage = resourceReader.string(R.string.untrusted_environment)
+        val rootMessage = resourceReader.string(R.string.untrusted_environment_root)
+        val message = untrustedEnvironmentMessage.format(rootMessage)
+        val rootEvent = MessageEvent(message)
+        eventsQueue.offer(rootEvent)
+    }
+
     fun onKeyboardOpened(keyboardOpened: Boolean) {
         state = state.copy(keyboardOpened = keyboardOpened)
     }
@@ -136,7 +145,7 @@ constructor(
 
     private fun String.isInvalidCredentialsMessage(): Boolean {
         val invalidCredentials = resourceReader.string(R.string.title_eng_invalid_credentials)
-        return this.contains(Regex(invalidCredentials))
+        return contains(Regex(invalidCredentials))
     }
 
 }

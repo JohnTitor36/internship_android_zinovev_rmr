@@ -1,0 +1,5 @@
+<resources>
+    <string name="untrusted_environment">Внимание! Не доверенное окружение:\n%1$s</string>
+    <string name="untrusted_environment_root">Вы используете root устройство</string>
+    <string name="untrusted_environment_wifi">Вы используете ненадежное wi-fi соединение</string>
+</resources>

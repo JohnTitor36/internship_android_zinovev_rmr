@@ -36,6 +36,7 @@ versions.mockwebserver = "4.4.0"
 versions.assertj = "3.15.0"
 versions.spek = "2.0.10"
 versions.arch = "2.1.0"
+versions.rootbeer = "0.0.8"
 
 def android = [:]
 android.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
@@ -44,6 +45,7 @@ android.fragment = "androidx.fragment:fragment-ktx:$versions.fragment"
 android.constraint = "androidx.constraintlayout:constraintlayout:$versions.constraint"
 android.security = "androidx.security:security-crypto:$versions.security"
 android.ktx = "androidx.core:core-ktx:$versions.ktx"
+android.rootbeer = "com.scottyab:rootbeer-lib:$versions.rootbeer"
 deps.android = android
 
 def navigation = [:]

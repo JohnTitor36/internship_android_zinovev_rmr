@@ -13,6 +13,7 @@ dependencies {
             deps.android.fragment,
             deps.android.constraint,
             deps.android.ktx,
+            deps.android.rootbeer,
             deps.material.material,
             deps.navigation.fragment,
             deps.navigation.ui,
