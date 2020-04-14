@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingBackupPin">
+    <domain-config>
+        <domain includeSubdomains="true">www.themoviedb.org</domain>
+        <domain includeSubdomains="true">api.themoviedb.org</domain>
+        <pin-set expiration="2020-12-02">
+            <pin digest="SHA-256">HkCBucsA3Tgiby96X7vjb/ojHaE1BrjvZ2+LRdJJd0E=</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>

@@ -14,6 +14,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Authenticator
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -101,7 +102,17 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
+    fun provideCertificatePinner(): CertificatePinner {
+        return CertificatePinner.Builder()
+            .add("www.themoviedb.org", "sha256/HkCBucsA3Tgiby96X7vjb/ojHaE1BrjvZ2+LRdJJd0E=")
+            .add("api.themoviedb.org", "sha256/HkCBucsA3Tgiby96X7vjb/ojHaE1BrjvZ2+LRdJJd0E=")
+            .build()
+    }
+
+    @Provides
     fun provideOkHttpClientBuilder(
+        certificatePinner: CertificatePinner,
         @ApiKeyInterceptor apiKeyInterceptor: Interceptor,
         @HeaderInterceptor headerInterceptor: Interceptor,
         @LoggingInterceptor loggingInterceptor: Interceptor,
@@ -111,6 +122,7 @@ class NetworkModule {
             .connectTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .readTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .addInterceptor(apiKeyInterceptor)
             .addInterceptor(headerInterceptor)
             .addInterceptor(loggingInterceptor)

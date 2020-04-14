@@ -10,12 +10,14 @@ interface NetworkToolsProvider : NetworkApiProvider {
 
     fun provideMoshi(): Moshi.Builder
 
+    fun provideOkHttpClientBuilder(): OkHttpClient.Builder
+
+    fun provideOkHttpClient(): OkHttpClient
+
     fun provideRetrofit(): Retrofit.Builder
 
     @AuthRetrofit
     fun provideAuthRetrofit(): Retrofit.Builder
-
-    fun provideOkHttpClient(): OkHttpClient
 
     fun provideNetworkConnectivityManager(): NetworkConnectivityManager
 
