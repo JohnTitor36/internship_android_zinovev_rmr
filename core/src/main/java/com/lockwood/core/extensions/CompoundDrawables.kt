@@ -2,7 +2,6 @@ package com.lockwood.core.extensions
 
 import android.graphics.drawable.Drawable
 import android.view.MotionEvent
-import android.widget.EditText
 import android.widget.TextView
 
 fun TextView.updateCompoundDrawables(

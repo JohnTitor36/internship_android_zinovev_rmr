@@ -40,7 +40,7 @@ class MovieFragment : BaseFragment() {
 
     private val binding: FragmentMovieBinding by viewBinding()
 
-    val args: MovieFragmentArgs by navArgs()
+    private val args: MovieFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         inject()
