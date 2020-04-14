@@ -72,12 +72,13 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         viewModel.openMovie(item.id)
     }
 
-    private fun setupViews() = with(binding) {
+    private fun setupViews()  {
         moviesAdapter = MoviesAdapter().apply {
             listener = this@SearchFragment
         }
         gridLayoutManager = GridLayoutManager(requireContext(), 1)
-        with(searchRecyclerViewMovies) {
+
+        with(binding.searchRecyclerViewMovies) {
             layoutManager = gridLayoutManager
             adapter = moviesAdapter
             addOnLastItemListener(LAST_ITEM_REACHED_OFFSET) {
@@ -85,7 +86,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
             }
         }
 
-        with(includeSearchLayout) {
+        with(binding.includeSearchLayout) {
             searchChangeViewType.setOnClickListener {
                 viewModel.onChangeMoviesViewType()
             }
@@ -94,6 +95,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
                 text.clear()
             }
         }
+
     }
 
     private fun addViewListeners() {

@@ -56,8 +56,8 @@ class UserFragment : BaseFragment() {
         viewModel.fetchAccountDetails()
     }
 
-    private fun addViewListeners() = with(binding) {
-        signOutButton.setOnClickListener { viewModel.onLogoutClick() }
+    private fun addViewListeners() {
+        binding.signOutButton.setOnClickListener { viewModel.onLogoutClick() }
     }
 
     private fun renderState(state: UserViewState) {

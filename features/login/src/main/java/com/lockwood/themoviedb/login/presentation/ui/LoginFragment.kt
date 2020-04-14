@@ -75,33 +75,36 @@ class LoginFragment : BaseFragment() {
     private fun renderLoading(loading: Boolean) {
         val loginProgressBar = requireActivity().findViewById<View>(R.id.login_progress_bar)
         loginProgressBar.isVisible = loading
-
     }
 
-    private fun renderTitleAboveCredentials(keyboardOpened: Boolean) = with(binding) {
-        loginTitleTextView.isVisible = !keyboardOpened
-        loginHintTextView.isVisible = !keyboardOpened
-    }
-
-    private fun renderSignIngButton(validCredentials: Boolean) = with(binding) {
-        signInButton.isEnabled = validCredentials
-    }
-
-    private fun renderErrorMessage(errorMessage: String) = with(binding) {
-        loginErrorTextView.text = errorMessage
-    }
-
-    private fun addViewListeners() = with(binding) {
-        loginEditText.addTextChangedListener {
-            viewModel.onCredentialsChanged(it.toString(), passwordEditText.text.toString())
+    private fun renderTitleAboveCredentials(keyboardOpened: Boolean) {
+        with(binding) {
+            loginTitleTextView.isVisible = !keyboardOpened
+            loginHintTextView.isVisible = !keyboardOpened
         }
-        passwordEditText.addTextChangedListener {
-            viewModel.onCredentialsChanged(loginEditText.text.toString(), it.toString())
-        }
+    }
 
-        signInButton.setOnClickListener {
-            hideKeyboard()
-            viewModel.onEnterButtonClick()
+    private fun renderSignIngButton(validCredentials: Boolean) {
+        binding.signInButton.isEnabled = validCredentials
+    }
+
+    private fun renderErrorMessage(errorMessage: String) {
+        binding.loginErrorTextView.text = errorMessage
+    }
+
+    private fun addViewListeners() {
+        with(binding) {
+            loginEditText.addTextChangedListener {
+                viewModel.onCredentialsChanged(it.toString(), passwordEditText.text.toString())
+            }
+            passwordEditText.addTextChangedListener {
+                viewModel.onCredentialsChanged(loginEditText.text.toString(), it.toString())
+            }
+
+            signInButton.setOnClickListener {
+                hideKeyboard()
+                viewModel.onEnterButtonClick()
+            }
         }
 
         checkKeyboardVisibility()
