@@ -7,6 +7,10 @@ dependencies {
 
     implementation(
             deps.rxJava.rx2,
+            deps.network.retrofit2,
+            deps.network.moshi,
+            deps.network.moshiconverter,
+            deps.network.rxconverter,
             deps.mock.webserver,
             deps.spek.dsl,
             deps.arch.testing
