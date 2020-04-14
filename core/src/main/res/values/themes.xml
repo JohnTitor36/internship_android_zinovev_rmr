@@ -15,4 +15,8 @@
         <item name="android:navigationBarColor">@color/bg_black</item>
     </style>
 
+    <style name="AppTheme.Launcher" parent="AppTheme.Edge">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
 </resources>
