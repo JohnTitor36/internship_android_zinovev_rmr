@@ -9,11 +9,11 @@ class CreateSessionResponseMapper @Inject constructor() :
     EntityRemoteMapper<CreateSessionResponseEntity, CreateSessionResponse> {
 
     override fun mapFromRemote(type: CreateSessionResponseEntity): CreateSessionResponse {
-        return CreateSessionResponse(type.success, type.sessionId)
+        return CreateSessionResponse(success = type.success, sessionId = type.sessionId)
     }
 
     override fun mapToRemote(type: CreateSessionResponse): CreateSessionResponseEntity {
-        return CreateSessionResponseEntity(type.success, type.sessionId)
+        return CreateSessionResponseEntity(success = type.success, sessionId = type.sessionId)
     }
 
 }

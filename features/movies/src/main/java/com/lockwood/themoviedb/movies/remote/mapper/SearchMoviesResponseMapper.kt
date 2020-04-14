@@ -13,48 +13,58 @@ class SearchMoviesResponseMapper @Inject constructor() :
         val results = type.results.map {
             with(it) {
                 SearchMoviesResponseEntity.Result(
-                    popularity,
-                    voteCount,
-                    video,
-                    poster ?: String.EMPTY,
-                    id,
-                    adult,
-                    backdrop ?: String.EMPTY,
-                    originalLanguage,
-                    originalTitle,
-                    genreIds,
-                    title,
-                    voteAverage,
-                    overview,
-                    releaseDate
+                    popularity = popularity,
+                    voteCount = voteCount,
+                    video = video,
+                    poster = poster ?: String.EMPTY,
+                    id = id,
+                    adult = adult,
+                    backdrop = backdrop ?: String.EMPTY,
+                    originalLanguage = originalLanguage,
+                    originalTitle = originalTitle,
+                    genreIds = genreIds,
+                    title = title,
+                    voteAverage = voteAverage,
+                    overview = overview,
+                    releaseDate = releaseDate
                 )
             }
         }
-        return SearchMoviesResponseEntity(type.page, type.totalResults, type.totalPages, results)
+        return SearchMoviesResponseEntity(
+            page = type.page,
+            totalResults = type.totalResults,
+            totalPages = type.totalPages,
+            results = results
+        )
     }
 
     override fun mapToRemote(type: SearchMoviesResponseEntity): SearchMoviesResponseModel {
         val results = type.results.map {
             with(it) {
                 SearchMoviesResponseModel.Result(
-                    popularity,
-                    voteCount,
-                    video,
-                    poster,
-                    id,
-                    adult,
-                    backdrop,
-                    originalLanguage,
-                    originalTitle,
-                    genreIds,
-                    title,
-                    voteAverage,
-                    overview,
-                    releaseDate
+                    popularity = popularity,
+                    voteCount = voteCount,
+                    video = video,
+                    poster = poster,
+                    id = id,
+                    adult = adult,
+                    backdrop = backdrop,
+                    originalLanguage = originalLanguage,
+                    originalTitle = originalTitle,
+                    genreIds = genreIds,
+                    title = title,
+                    voteAverage = voteAverage,
+                    overview = overview,
+                    releaseDate = releaseDate
                 )
             }
         }
-        return SearchMoviesResponseModel(type.page, type.totalResults, type.totalPages, results)
+        return SearchMoviesResponseModel(
+            page = type.page,
+            totalResults = type.totalResults,
+            totalPages = type.totalPages,
+            results = results
+        )
     }
 
 }

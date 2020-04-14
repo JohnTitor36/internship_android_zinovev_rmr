@@ -14,13 +14,13 @@ class AccountResponseMapper @Inject constructor() :
     override fun mapFromRemote(type: AccountResponseModel): AccountResponseEntity {
         with(type) {
             return AccountResponseEntity(
-                avatar.gravatar.url,
-                id,
-                iso6391,
-                iso31661,
-                name,
-                includeAdult,
-                username
+                gravatarUrl = avatar.gravatar.url,
+                id = id,
+                iso6391 = iso6391,
+                iso31661 = iso31661,
+                name = name,
+                includeAdult = includeAdult,
+                username = username
             )
         }
 
@@ -29,13 +29,13 @@ class AccountResponseMapper @Inject constructor() :
     override fun mapToRemote(type: AccountResponseEntity): AccountResponseModel {
         with(type) {
             return AccountResponseModel(
-                Avatar(Gravatar(gravatarUrl)),
-                id,
-                iso6391,
-                iso31661,
-                name,
-                includeAdult,
-                username
+                avatar = Avatar(Gravatar(gravatarUrl)),
+                id = id,
+                iso6391 = iso6391,
+                iso31661 = iso31661,
+                name = name,
+                includeAdult = includeAdult,
+                username = username
             )
         }
     }

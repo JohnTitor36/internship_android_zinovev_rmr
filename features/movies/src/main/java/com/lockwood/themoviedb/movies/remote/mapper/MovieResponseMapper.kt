@@ -11,58 +11,68 @@ class MovieResponseMapper @Inject constructor() :
 
     override fun mapFromRemote(type: MovieResponseModel): MovieResponseEntity {
         with(type) {
-            val genreModels = genreModels.map { MovieResponseEntity.GenreEntity(it.id, it.name) }
+            val genreModels = genreModels.map {
+                MovieResponseEntity.GenreEntity(
+                    id = it.id,
+                    name = it.name
+                )
+            }
             return MovieResponseEntity(
-                adult,
-                backdrop ?: String.EMPTY,
-                budget,
-                genreModels,
-                homepage,
-                id,
-                imdbId,
-                originalLanguage,
-                originalTitle,
-                overview,
-                popularity,
-                poster ?: String.EMPTY,
-                releaseDate,
-                revenue,
-                runtime,
-                status,
-                tagline,
-                title,
-                video,
-                voteAverage,
-                voteCount
+                adult = adult,
+                backdrop = backdrop ?: String.EMPTY,
+                budget = budget,
+                genreModels = genreModels,
+                homepage = homepage,
+                id = id,
+                imdbId = imdbId,
+                originalLanguage = originalLanguage,
+                originalTitle = originalTitle,
+                overview = overview,
+                popularity = popularity,
+                poster = poster ?: String.EMPTY,
+                releaseDate = releaseDate,
+                revenue = revenue,
+                runtime = runtime,
+                status = status,
+                tagline = tagline,
+                title = title,
+                video = video,
+                voteAverage = voteAverage,
+                voteCount = voteCount
             )
         }
     }
 
     override fun mapToRemote(type: MovieResponseEntity): MovieResponseModel {
         with(type) {
-            val genreModels = genreModels.map { MovieResponseModel.GenreModel(it.id, it.name) }
+            val genreModels = genreModels.map {
+                MovieResponseModel.GenreModel(
+                    id = it.id,
+                    name = it.name
+                )
+            }
             return MovieResponseModel(
-                adult,
-                backdrop,
-                budget,
-                genreModels,
-                homepage,
-                id,
-                imdbId,
-                originalLanguage,
-                originalTitle,
-                overview,
-                popularity,
-                poster,
-                releaseDate,
-                revenue,
-                runtime,
-                status,
-                tagline,
-                title,
-                video,
-                voteAverage,
-                voteCount
+                adult = adult,
+                backdrop = backdrop,
+                budget = budget,
+                genreModels = genreModels,
+                homepage = homepage,
+                id = id,
+                imdbId = imdbId,
+                originalLanguage = originalLanguage,
+                originalTitle = originalTitle,
+                overview = overview,
+                popularity = popularity,
+                poster = poster,
+                releaseDate = releaseDate,
+                revenue = revenue,
+                runtime = runtime,
+                status = status,
+                tagline = tagline,
+                title = title,
+                video = video,
+                voteAverage = voteAverage,
+                voteCount = voteCount
             )
         }
     }

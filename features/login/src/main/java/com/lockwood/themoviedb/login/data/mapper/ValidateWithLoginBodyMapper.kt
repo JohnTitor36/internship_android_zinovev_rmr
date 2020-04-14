@@ -9,11 +9,19 @@ class ValidateWithLoginBodyMapper @Inject constructor() :
     EntityRemoteMapper<ValidateWithLoginBodyEntity, ValidateWithLoginBody> {
 
     override fun mapFromRemote(type: ValidateWithLoginBodyEntity): ValidateWithLoginBody {
-        return ValidateWithLoginBody(type.username, type.password, type.requestToken)
+        return ValidateWithLoginBody(
+            username = type.username,
+            password = type.password,
+            requestToken = type.requestToken
+        )
     }
 
     override fun mapToRemote(type: ValidateWithLoginBody): ValidateWithLoginBodyEntity {
-        return ValidateWithLoginBodyEntity(type.username, type.password, type.requestToken)
+        return ValidateWithLoginBodyEntity(
+            username = type.username,
+            password = type.password,
+            requestToken = type.requestToken
+        )
     }
 
 }

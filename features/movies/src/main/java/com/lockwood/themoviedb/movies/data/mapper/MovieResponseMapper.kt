@@ -10,58 +10,68 @@ class MovieResponseMapper @Inject constructor() :
 
     override fun mapFromEntity(type: MovieResponseEntity): MovieResponse {
         with(type) {
-            val genreModels = genreModels.map { MovieResponse.Genre(it.id, it.name) }
+            val genreModels = genreModels.map {
+                MovieResponse.Genre(
+                    id = it.id,
+                    name = it.name
+                )
+            }
             return MovieResponse(
-                adult,
-                backdrop,
-                budget,
-                genreModels,
-                homepage,
-                id,
-                imdbId,
-                originalLanguage,
-                originalTitle,
-                overview,
-                popularity,
-                poster,
-                releaseDate,
-                revenue,
-                runtime,
-                status,
-                tagline,
-                title,
-                video,
-                voteAverage,
-                voteCount
+                adult = adult,
+                backdrop = backdrop,
+                budget = budget,
+                genreModels = genreModels,
+                homepage = homepage,
+                id = id,
+                imdbId = imdbId,
+                originalLanguage = originalLanguage,
+                originalTitle = originalTitle,
+                overview = overview,
+                popularity = popularity,
+                poster = poster,
+                releaseDate = releaseDate,
+                revenue = revenue,
+                runtime = runtime,
+                status = status,
+                tagline = tagline,
+                title = title,
+                video = video,
+                voteAverage = voteAverage,
+                voteCount = voteCount
             )
         }
     }
 
     override fun mapToEntity(type: MovieResponse): MovieResponseEntity {
         with(type) {
-            val genreModels = genreModels.map { MovieResponseEntity.GenreEntity(it.id, it.name) }
+            val genreModels = genreModels.map {
+                MovieResponseEntity.GenreEntity(
+                    id = it.id,
+                    name = it.name
+                )
+            }
             return MovieResponseEntity(
-                adult,
-                backdrop,
-                budget,
-                genreModels,
-                homepage,
-                id,
-                imdbId,
-                originalLanguage,
-                originalTitle,
-                overview,
-                popularity,
-                poster,
-                releaseDate,
-                revenue,
-                runtime,
-                status,
-                tagline,
-                title,
-                video,
-                voteAverage,
-                voteCount
+                adult = adult,
+                backdrop = backdrop,
+                budget = budget,
+                genreModels = genreModels,
+                homepage = homepage,
+                id = id,
+                imdbId = imdbId,
+                originalLanguage = originalLanguage,
+                originalTitle = originalTitle,
+                overview = overview,
+                popularity = popularity,
+                poster = poster,
+                releaseDate = releaseDate,
+                revenue = revenue,
+                runtime = runtime,
+                status = status,
+                tagline = tagline,
+                title = title,
+                video = video,
+                voteAverage = voteAverage,
+                voteCount = voteCount
             )
         }
     }

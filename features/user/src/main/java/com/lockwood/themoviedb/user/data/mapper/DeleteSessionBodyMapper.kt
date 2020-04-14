@@ -9,11 +9,11 @@ class DeleteSessionBodyMapper @Inject constructor() :
     Mapper<DeleteSessionBodyEntity, DeleteSessionBody> {
 
     override fun mapFromEntity(type: DeleteSessionBodyEntity): DeleteSessionBody {
-        return DeleteSessionBody(type.sessionId)
+        return DeleteSessionBody(sessionId = type.sessionId)
     }
 
     override fun mapToEntity(type: DeleteSessionBody): DeleteSessionBodyEntity {
-        return DeleteSessionBodyEntity(type.sessionId)
+        return DeleteSessionBodyEntity(sessionId = type.sessionId)
     }
 
 }

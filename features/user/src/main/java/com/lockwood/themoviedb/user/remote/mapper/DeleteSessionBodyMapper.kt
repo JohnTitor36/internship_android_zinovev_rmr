@@ -9,11 +9,11 @@ class DeleteSessionBodyMapper @Inject constructor() :
     EntityRemoteMapper<DeleteSessionBodyModel, DeleteSessionBodyEntity> {
 
     override fun mapFromRemote(type: DeleteSessionBodyModel): DeleteSessionBodyEntity {
-        return DeleteSessionBodyEntity(type.sessionId)
+        return DeleteSessionBodyEntity(sessionId = type.sessionId)
     }
 
     override fun mapToRemote(type: DeleteSessionBodyEntity): DeleteSessionBodyModel {
-        return DeleteSessionBodyModel(type.sessionId)
+        return DeleteSessionBodyModel(sessionId = type.sessionId)
     }
 
 }

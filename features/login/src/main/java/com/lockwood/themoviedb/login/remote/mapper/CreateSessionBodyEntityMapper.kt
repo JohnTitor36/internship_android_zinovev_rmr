@@ -9,11 +9,11 @@ class CreateSessionBodyEntityMapper @Inject constructor() :
     EntityRemoteMapper<CreateSessionBodyModel, CreateSessionBodyEntity> {
 
     override fun mapFromRemote(type: CreateSessionBodyModel): CreateSessionBodyEntity {
-        return CreateSessionBodyEntity(type.requestToken)
+        return CreateSessionBodyEntity(requestToken = type.requestToken)
     }
 
     override fun mapToRemote(type: CreateSessionBodyEntity): CreateSessionBodyModel {
-        return CreateSessionBodyModel(type.requestToken)
+        return CreateSessionBodyModel(requestToken = type.requestToken)
     }
 
 }

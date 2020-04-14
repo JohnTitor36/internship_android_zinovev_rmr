@@ -9,11 +9,19 @@ class CreateRequestTokenResponseMapper @Inject constructor() :
     Mapper<CreateRequestTokenResponseEntity, CreateRequestTokenResponse> {
 
     override fun mapFromEntity(type: CreateRequestTokenResponseEntity): CreateRequestTokenResponse {
-        return CreateRequestTokenResponse(type.success, type.expiresAt, type.requestToken)
+        return CreateRequestTokenResponse(
+            success = type.success,
+            expiresAt = type.expiresAt,
+            requestToken = type.requestToken
+        )
     }
 
     override fun mapToEntity(type: CreateRequestTokenResponse): CreateRequestTokenResponseEntity {
-        return CreateRequestTokenResponseEntity(type.success, type.expiresAt, type.requestToken)
+        return CreateRequestTokenResponseEntity(
+            success = type.success,
+            expiresAt = type.expiresAt,
+            requestToken = type.requestToken
+        )
     }
 
 }
