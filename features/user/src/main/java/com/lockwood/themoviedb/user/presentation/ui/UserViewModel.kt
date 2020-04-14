@@ -14,7 +14,6 @@ import com.lockwood.themoviedb.user.domain.repository.AccountRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-// TODO: Добавить информацию о пользователе в префы
 class UserViewModel @Inject constructor(
     private val accountRepository: AccountRepository,
     private val loginActivityRouter: LoginActivityRouter,

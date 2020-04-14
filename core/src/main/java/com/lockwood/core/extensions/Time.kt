@@ -12,7 +12,6 @@ fun Date.toFormatString(dateFormat: String): String {
     return dateFormat.format(this)
 }
 
-// TODO: переписать адаптер под Calendar
 fun Date.toYear(): String {
     val time = time
     val calendar = Calendar.getInstance().apply {

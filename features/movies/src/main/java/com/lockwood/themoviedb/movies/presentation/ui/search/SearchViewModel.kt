@@ -29,7 +29,6 @@ class SearchViewModel @Inject constructor(
 
     private var state: SearchViewState by liveState.delegate()
 
-    // TDOO: Настроить softInpuMode под Snackbar
     override fun handleError(throwable: Throwable) {
         super.handleError(throwable)
         if (throwable.isNoInternetException) {
