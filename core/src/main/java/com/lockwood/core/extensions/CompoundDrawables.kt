@@ -14,8 +14,8 @@ fun TextView.updateCompoundDrawables(
     setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom)
 }
 
-inline fun EditText.setOnEndDrawableClickListener(
-    crossinline action: EditText.() -> Unit
+inline fun TextView.setOnEndDrawableClickListener(
+    crossinline action: TextView.() -> Unit
 ) {
     setOnTouchListener { v, event ->
         if (event.x >= v.width - (v as TextView).totalPaddingRight) {
