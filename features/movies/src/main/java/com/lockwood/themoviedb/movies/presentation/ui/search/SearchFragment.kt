@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -72,7 +73,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         viewModel.openMovie(item.id)
     }
 
-    private fun setupViews()  {
+    private fun setupViews() {
         moviesAdapter = MoviesAdapter().apply {
             listener = this@SearchFragment
         }
@@ -92,7 +93,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
             }
 
             searchEditText.setOnEndDrawableClickListener {
-                text.clear()
+                (this as EditText).text.clear()
             }
         }
 
