@@ -27,10 +27,15 @@ abstract class BaseFragment : Fragment(), MessageView {
         rootView = view
     }
 
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
+    }
+
     protected fun hideKeyboard() {
-        val imm =
-            requireContext().getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(rootView.windowToken, 0)
+        with(requireContext().getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager) {
+            hideSoftInputFromWindow(rootView.windowToken, 0)
+        }
         rootView.clearFocus()
     }
 
