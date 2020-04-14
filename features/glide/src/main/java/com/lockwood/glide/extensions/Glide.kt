@@ -30,7 +30,7 @@ fun Context.drawableRequest(
 @Suppress("DEPRECATION")
 fun ImageView.load(
     url: String,
-    requestBuilder: RequestBuilder<Drawable>
+    request: RequestBuilder<Drawable>
 ): ViewTarget<ImageView, Drawable> {
-    return requestBuilder.load(url).into(this)
+    return request.load(url).into(this)
 }

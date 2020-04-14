@@ -16,6 +16,7 @@ import com.lockwood.themoviedb.movies.databinding.ItemMovieEmtpyBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieGridBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
 import com.lockwood.themoviedb.movies.domain.model.MovieItem
+import com.lockwood.themoviedb.movies.extensions.loadMoviePosterRequest
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import com.lockwood.themoviedb.movies.utils.MovieUtils
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
@@ -62,18 +63,7 @@ class MoviesAdapter(
 
             val context = itemBinding.root.context
             val resourceReader = ResourceReader(context)
-            val placeholder = resourceReader.drawable(R.drawable.ic_poster_placeholder)
-            val roundedCornersTransformation = RoundedCornersTransformation(
-                resourceReader.dimenInPx(R.dimen.item_movies_corner_radius),
-                0,
-                RoundedCornersTransformation.CornerType.ALL
-            )
-            val imageRequest = context.drawableRequest(
-                resourceReader = resourceReader,
-                placeholder = placeholder,
-                fallback = placeholder,
-                error = placeholder
-            ).apply(RequestOptions.bitmapTransform(roundedCornersTransformation))
+            val imageRequest = context.loadMoviePosterRequest()
 
             val ratingColorRes = MovieUtils.ratingToColorRes(movie.voteAverage)
             val ratingColor = resourceReader.color(ratingColorRes)
