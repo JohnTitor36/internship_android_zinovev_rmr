@@ -4,6 +4,7 @@ import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.themoviedb.login.remote.AuthenticationService
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 
 @Module
@@ -11,8 +12,12 @@ class ServiceModule {
 
     @Provides
     @FeatureScope
-    fun provideAuthenticationService(retrofit: Retrofit.Builder): AuthenticationService {
-        return retrofit.build().create(AuthenticationService::class.java)
+    fun provideAuthenticationService(
+        httpClientBuilder: OkHttpClient.Builder,
+        retrofit: Retrofit.Builder
+    ): AuthenticationService {
+        val noCacheClient = httpClientBuilder.cache(null).build()
+        return retrofit.client(noCacheClient).build().create(AuthenticationService::class.java)
     }
 
 }
