@@ -22,7 +22,7 @@ class SearchViewModel @Inject constructor(
     companion object {
 
         private const val DEFAULT_PAGE = 1
-        private const val DEBOUNCE_IN_MILLISECONDS = 500L
+        private const val DEBOUNCE_IN_MILLISECONDS = 2500L
     }
 
     val liveState = MutableLiveData(SearchViewState.initialState)

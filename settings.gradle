@@ -1,4 +1,4 @@
 rootProject.name = 'The Movie DB'
 include ':app', ':core', ':core:network', ':core:preferences'
-include ':features:login', ':features:movies', ':features:user', ':features:glide'
+include ':features:login', ':features:movies', ':features:user', ':features:imageloading'
 include ':test'

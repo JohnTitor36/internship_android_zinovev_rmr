@@ -4,7 +4,7 @@ dependencies {
     implementation project(":core")
     implementation project(":core:network")
     implementation project(":core:preferences")
-    implementation project(":features:glide")
+    implementation project(':features:imageloading')
 
     implementation(
             deps.kotlin.stdlib,
