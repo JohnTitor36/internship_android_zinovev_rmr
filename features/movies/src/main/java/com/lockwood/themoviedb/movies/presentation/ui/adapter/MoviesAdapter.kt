@@ -4,14 +4,12 @@ import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.RequestBuilder
-import com.bumptech.glide.request.RequestOptions
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.ui.BaseAdapter
 import com.lockwood.core.ui.BaseViewHolder
+import com.lockwood.core.viewbinding.inflateItemViewBinding
 import com.lockwood.core.viewbinding.inflateViewBinding
-import com.lockwood.glide.extensions.drawableRequest
 import com.lockwood.glide.extensions.load
-import com.lockwood.themoviedb.movies.R
 import com.lockwood.themoviedb.movies.databinding.ItemMovieEmtpyBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieGridBinding
 import com.lockwood.themoviedb.movies.databinding.ItemMovieListBinding
@@ -19,7 +17,6 @@ import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.extensions.loadMoviePosterRequest
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import com.lockwood.themoviedb.movies.utils.MovieUtils
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 class MoviesAdapter(
     data: List<MovieItem> = emptyList(),
@@ -38,18 +35,15 @@ class MoviesAdapter(
         return when (viewType) {
             VIEW_TYPE_CONTENT -> {
                 return if (itemViewType == ITEM_VIEW_TYPE_LIST) {
-                    val binding =
-                        parent.inflateViewBinding<ItemMovieListBinding>(attachToRoot = false)
+                    val binding = parent.inflateItemViewBinding<ItemMovieListBinding>()
                     MoviesListViewHolder(binding)
                 } else {
-                    val binding =
-                        parent.inflateViewBinding<ItemMovieGridBinding>(attachToRoot = false)
+                    val binding = parent.inflateItemViewBinding<ItemMovieGridBinding>()
                     MoviesGridViewHolder(binding)
                 }
             }
             else -> {
-                val binding =
-                    parent.inflateViewBinding<ItemMovieEmtpyBinding>(attachToRoot = false)
+                val binding = parent.inflateItemViewBinding<ItemMovieEmtpyBinding>()
                 EmptyMoviesViewHolder(binding)
             }
         }
