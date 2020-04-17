@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--
+    Почему через FrameLayout?
+    1. Для возможного добавления вьюшек
+    2. Чтобы во время обращения к вьюшке через код, обращались с ним как с контейнером
+    (т.е. обращаться именно к RecyclerView только по необходимости)
+     -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:itemCount="12"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/item_pin_digit"
+        tools:spanCount="3" />
+
+</FrameLayout>

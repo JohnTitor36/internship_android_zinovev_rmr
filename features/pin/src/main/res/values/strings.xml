@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="keyboard_probably_height">200dp</dimen>
+    <string name="title_exit">Выйти</string>
 </resources>

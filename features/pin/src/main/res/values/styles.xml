@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Button.Rounded.Pin" parent="Button.Rounded">
+        <item name="backgroundTint">@color/btn_pin_background_color</item>
+        <item name="rippleColor">@color/btn_pin_color</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="Button.Outlined.Pin" parent="Button.Outlined">
+        <item name="backgroundTint">@color/btn_pin_background_color</item>
+        <item name="colorSecondary">@color/btn_pin_color</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+
+</resources>

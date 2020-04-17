@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.livedata.observe
@@ -15,27 +14,20 @@ import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
+import com.lockwood.pin.adapter.listener.PinKeyboardListener
 import com.lockwood.themoviedb.login.databinding.FragmentPinBinding
 import com.lockwood.themoviedb.login.di.component.DaggerPinComponent
-import com.lockwood.themoviedb.login.presentation.adapter.PinAdapter
+import kotlinx.android.synthetic.main.fragment_pin.*
 import javax.inject.Inject
 
-class PinFragment : BaseFragment(), PinAdapter.PinAdapterListener {
-
-    companion object {
-
-        private const val PIN_KEYBOARD_SPANS_COUNT = 3
-    }
+@ExperimentalStdlibApi
+class PinFragment : BaseFragment(), PinKeyboardListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: PinViewModel by viewModels { viewModelFactory }
 
     private val binding: FragmentPinBinding by viewBinding()
-
-    private lateinit var pinAdapter: PinAdapter
-
-    private lateinit var gridLayoutManager: GridLayoutManager
 
     override fun onAttach(context: Context) {
         inject()
@@ -55,24 +47,29 @@ class PinFragment : BaseFragment(), PinAdapter.PinAdapterListener {
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
+
+        keyboard.pinKeyboardListener = this@PinFragment
     }
 
     override fun setupViews() {
         setupAppBar()
-        setupRecyclerViewKeyboard()
     }
 
     override fun onDigitClick(digit: Int) {
-
+        showMessage("onDigitClick:$digit")
     }
 
-    override fun onClearClick() {
+    override fun onClearDigitClick() {
+        showMessage("onClearDigitClick")
+    }
 
+    override fun onLastItemEntered(digits: String) {
+        showMessage("onClearDigitClick:$digits")
     }
 
     override fun onExitClick() {
+        showMessage("onExitClick")
     }
-
 
     private fun renderState(state: PinViewState) {
 
@@ -81,18 +78,6 @@ class PinFragment : BaseFragment(), PinAdapter.PinAdapterListener {
     private fun setupAppBar() {
         with(binding.movieAppbar) {
             pinBackButton.setOnClickListener { requireActivity().onBackPressed() }
-        }
-    }
-
-    private fun setupRecyclerViewKeyboard() {
-        pinAdapter = PinAdapter().apply {
-            listener = this@PinFragment
-        }
-        gridLayoutManager = GridLayoutManager(requireContext(), PIN_KEYBOARD_SPANS_COUNT)
-
-        with(binding.recyclerView) {
-            layoutManager = gridLayoutManager
-            adapter = pinAdapter
         }
     }
 

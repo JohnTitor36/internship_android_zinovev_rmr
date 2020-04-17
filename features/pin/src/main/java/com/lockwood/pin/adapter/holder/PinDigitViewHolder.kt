@@ -1,0 +1,35 @@
+package com.lockwood.pin.adapter.holder
+
+import com.lockwood.pin.adapter.base.BaseViewHolder
+import com.lockwood.pin.adapter.listener.PinKeyboardListener
+import com.lockwood.pin.databinding.ItemPinDigitBinding
+
+internal class PinDigitViewHolder(
+    itemBinding: ItemPinDigitBinding,
+    listener: PinKeyboardListener,
+    private val enteredDigits: MutableList<Int>
+) : BaseViewHolder<Int>(itemBinding, listener) {
+
+    companion object {
+
+        // Пока через константу, но можно будет вынести в attrs
+        private const val PIN_MAX_COUNT = 4
+    }
+
+    private val digits: String
+        get() = enteredDigits.joinToString(separator = "", transform = Int::toString)
+
+    override fun onBind(item: Int) {
+        enteredDigits.add(item)
+
+        with((itemViewBinding as ItemPinDigitBinding).itemPinDigitButton) {
+            text = item.toString()
+            setOnClickListener { listener.onDigitClick(item) }
+        }
+
+        if (enteredDigits.size == PIN_MAX_COUNT) {
+            listener.onLastItemEntered(digits)
+        }
+    }
+
+}

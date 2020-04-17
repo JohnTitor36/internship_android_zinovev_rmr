@@ -14,12 +14,12 @@ import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
+import com.lockwood.pin.adapter.listener.PinKeyboardListener
 import com.lockwood.themoviedb.login.databinding.FragmentEnterPinBinding
 import com.lockwood.themoviedb.login.di.component.DaggerPinEnterComponent
-import com.lockwood.themoviedb.login.presentation.adapter.PinAdapter
 import javax.inject.Inject
 
-class PinEnterFragment : BaseFragment(), PinAdapter.PinAdapterListener {
+class PinEnterFragment : BaseFragment(), PinKeyboardListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -55,8 +55,11 @@ class PinEnterFragment : BaseFragment(), PinAdapter.PinAdapterListener {
 
     }
 
-    override fun onClearClick() {
+    override fun onClearDigitClick() {
 
+    }
+
+    override fun onLastItemEntered(digits: String) {
     }
 
     override fun onExitClick() {
@@ -65,21 +68,6 @@ class PinEnterFragment : BaseFragment(), PinAdapter.PinAdapterListener {
 
     private fun renderState(state: PinEnterViewState) {
 
-    }
-
-    private fun setupRecyclerViewKeyboard() {
-//        moviesAdapter = MoviesAdapter().apply {
-//            listener = this@SearchFragment
-//        }
-//        gridLayoutManager = GridLayoutManager(requireContext(), 1)
-//
-//        with(binding.searchRecyclerViewMovies) {
-//            layoutManager = gridLayoutManager
-//            adapter = moviesAdapter
-//            addOnLastItemListener(LAST_ITEM_REACHED_OFFSET) {
-//                viewModel.loadMoreMovies()
-//            }
-//        }
     }
 
     private fun inject() {

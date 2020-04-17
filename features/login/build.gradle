@@ -5,6 +5,7 @@ dependencies {
     implementation project(":core")
     implementation project(":core:network")
     implementation project(":core:preferences")
+    implementation project(":features:pin")
     implementation project(":test")
 
     implementation(

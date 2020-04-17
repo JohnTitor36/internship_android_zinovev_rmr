@@ -9,6 +9,7 @@ import com.lockwood.themoviedb.login.di.module.ServiceModule
 import com.lockwood.themoviedb.login.presentation.ui.pin.PinFragment
 import dagger.Component
 
+@ExperimentalStdlibApi
 @Component(
     dependencies = [
         AppToolsProvider::class,
