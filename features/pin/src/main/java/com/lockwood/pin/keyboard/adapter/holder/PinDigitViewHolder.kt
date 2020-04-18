@@ -4,7 +4,6 @@ import com.lockwood.pin.databinding.ItemPinDigitBinding
 import com.lockwood.pin.keyboard.adapter.base.BaseViewHolder
 import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 
-@ExperimentalStdlibApi
 internal class PinDigitViewHolder(
     itemBinding: ItemPinDigitBinding,
     listeners: List<PinKeyboardListener>,

@@ -9,11 +9,12 @@
     <Button
         android:id="@+id/item_pin_digit_button"
         style="@style/Button.Rounded.Pin"
-        android:layout_width="@dimen/pin_digit_size"
-        android:layout_height="@dimen/pin_digit_size"
-        android:textAppearance="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:padding="@dimen/margin_regular"
+        android:textAppearance="@style/Title"
         android:textSize="@dimen/text_size_title"
         tools:text="1" />
 
