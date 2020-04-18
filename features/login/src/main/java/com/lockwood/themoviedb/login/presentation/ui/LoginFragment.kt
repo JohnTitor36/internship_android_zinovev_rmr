@@ -22,7 +22,6 @@ import com.lockwood.core.viewbinding.viewBinding
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.databinding.FragmentLoginBinding
 import com.lockwood.themoviedb.login.di.component.DaggerLoginComponent
-import com.scottyab.rootbeer.RootBeer
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
@@ -48,7 +47,7 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkRoot()
+        checkEnvironmentSecurity()
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
@@ -58,11 +57,8 @@ class LoginFragment : BaseFragment() {
         addViewListeners()
     }
 
-    private fun checkRoot() {
-        val isRooted = RootBeer(requireContext()).isRooted
-        if (isRooted) {
-            viewModel.onRootDeviceUsed()
-        }
+    private fun checkEnvironmentSecurity(){
+        viewModel.checkRoot()
     }
 
     private fun renderState(state: LoginViewState) {

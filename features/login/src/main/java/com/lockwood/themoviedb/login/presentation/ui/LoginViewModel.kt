@@ -5,7 +5,6 @@ import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.ui.BaseNetworkViewModel
-import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.login.R
@@ -15,13 +14,14 @@ import com.lockwood.themoviedb.login.domain.model.CreateSessionResponse
 import com.lockwood.themoviedb.login.domain.model.ValidateWithLoginBody
 import com.lockwood.themoviedb.login.domain.repository.AuthenticationRepository
 import com.lockwood.themoviedb.login.utils.CredentialsValidator
+import com.scottyab.rootbeer.RootBeer
 import io.reactivex.Completable
 import javax.inject.Inject
 
 class LoginViewModel @Inject
 constructor(
     private val authenticationRepository: AuthenticationRepository,
-    private val userPreferences: UserPreferences,
+    private val rootBeer: RootBeer,
     resourceReader: ResourceReader,
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(resourceReader, schedulers) {
@@ -75,16 +75,22 @@ constructor(
             .autoDispose()
     }
 
-    fun onRootDeviceUsed() {
+    fun onKeyboardOpened(keyboardOpened: Boolean) {
+        state = state.copy(keyboardOpened = keyboardOpened)
+    }
+
+    fun checkRoot() {
+        if (rootBeer.isRooted) {
+            onRootDeviceUsed()
+        }
+    }
+
+    private fun onRootDeviceUsed() {
         val untrustedEnvironmentMessage = resourceReader.string(R.string.untrusted_environment)
         val rootMessage = resourceReader.string(R.string.untrusted_environment_root)
         val message = untrustedEnvironmentMessage.format(rootMessage)
         val rootEvent = MessageEvent(message)
         eventsQueue.offer(rootEvent)
-    }
-
-    fun onKeyboardOpened(keyboardOpened: Boolean) {
-        state = state.copy(keyboardOpened = keyboardOpened)
     }
 
     private fun setLoading(loading: Boolean) {
@@ -143,7 +149,7 @@ constructor(
     }
 
     private fun openPinEnter() {
-        
+
     }
 
     private fun String.isInvalidCredentialsMessage(): Boolean {
