@@ -1,7 +1,6 @@
 package com.lockwood.pin.adapter.base
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 
 internal abstract class BaseAdapter<T>(
     protected val data: List<T>,

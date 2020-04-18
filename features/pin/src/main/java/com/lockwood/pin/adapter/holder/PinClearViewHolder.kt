@@ -12,11 +12,15 @@ internal class PinClearViewHolder(
 ) : BaseViewHolder<Int>(itemBinding, listener) {
 
     override fun onBind(item: Int) {
-        enteredDigits.removeLast()
 
         with(itemViewBinding as ItemPinClearBinding){
-            itemPinIcon.setOnClickListener { listener.onClearDigitClick() }
+            itemPinIcon.setOnClickListener { performClick() }
         }
+    }
+
+    private fun performClick(){
+        enteredDigits.removeLastOrNull()
+        listener.onClearDigitClick()
     }
 
 }

@@ -64,7 +64,7 @@ class PinFragment : BaseFragment(), PinKeyboardListener {
     }
 
     override fun onLastItemEntered(digits: String) {
-        showMessage("onClearDigitClick:$digits")
+        showMessage("onLastItemEntered:$digits")
     }
 
     override fun onExitClick() {

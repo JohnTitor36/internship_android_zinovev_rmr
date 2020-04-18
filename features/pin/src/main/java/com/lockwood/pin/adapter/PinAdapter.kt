@@ -54,7 +54,7 @@ internal class PinAdapter constructor(
         return when (viewType) {
             ITEM_VIEW_TYPE_DIGIT -> {
                 val binding = parent.inflateItemViewBinding<ItemPinDigitBinding>()
-                PinDigitViewHolder(binding, listener, enteredDigits)
+                PinDigitViewHolder(binding, listener, enteredDigits) { resetEnteredDigits() }
             }
             ITEM_VIEW_TYPE_CLEAR -> {
                 val binding = parent.inflateItemViewBinding<ItemPinClearBinding>()
@@ -71,7 +71,7 @@ internal class PinAdapter constructor(
         }
     }
 
-    fun resetEnteredDigits() {
+    private fun resetEnteredDigits() {
         enteredDigits.clear()
     }
 

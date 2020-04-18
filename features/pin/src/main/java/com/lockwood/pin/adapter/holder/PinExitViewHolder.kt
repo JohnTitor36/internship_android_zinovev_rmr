@@ -10,6 +10,7 @@ internal class PinExitViewHolder(
 ) : BaseViewHolder<Int>(itemBinding, listener) {
 
     override fun onBind(item: Int) {
+
         with(itemViewBinding as ItemPinExitBinding) {
             itemPinExit.setOnClickListener { listener.onExitClick() }
         }

@@ -7,7 +7,8 @@ import com.lockwood.pin.databinding.ItemPinDigitBinding
 internal class PinDigitViewHolder(
     itemBinding: ItemPinDigitBinding,
     listener: PinKeyboardListener,
-    private val enteredDigits: MutableList<Int>
+    private val enteredDigits: MutableList<Int>,
+    private val resetEnteredDigits: () -> Unit
 ) : BaseViewHolder<Int>(itemBinding, listener) {
 
     companion object {
@@ -20,15 +21,23 @@ internal class PinDigitViewHolder(
         get() = enteredDigits.joinToString(separator = "", transform = Int::toString)
 
     override fun onBind(item: Int) {
-        enteredDigits.add(item)
 
         with((itemViewBinding as ItemPinDigitBinding).itemPinDigitButton) {
             text = item.toString()
-            setOnClickListener { listener.onDigitClick(item) }
+            setOnClickListener { performClick(item) }
         }
+    }
 
+    private fun performClick(digit: Int) {
+        enteredDigits.add(digit)
+        listener.onDigitClick(digit)
+        checkLastItemEntered()
+    }
+
+    private fun checkLastItemEntered() {
         if (enteredDigits.size == PIN_MAX_COUNT) {
             listener.onLastItemEntered(digits)
+            resetEnteredDigits.invoke()
         }
     }
 
