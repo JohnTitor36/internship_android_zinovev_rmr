@@ -12,9 +12,9 @@
         android:layout_gravity="center"
         android:background="?selectableItemBackgroundBorderless"
         android:gravity="center"
-        android:textColor="@color/gray"
         android:text="@string/title_exit"
         android:textAppearance="@style/Medium"
+        android:textColor="@color/gray"
         android:tint="@color/gray" />
 
 </FrameLayout>

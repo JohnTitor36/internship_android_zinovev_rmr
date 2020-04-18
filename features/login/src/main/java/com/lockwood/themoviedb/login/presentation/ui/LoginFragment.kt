@@ -57,7 +57,7 @@ class LoginFragment : BaseFragment() {
         addViewListeners()
     }
 
-    private fun checkEnvironmentSecurity(){
+    private fun checkEnvironmentSecurity() {
         viewModel.checkRoot()
     }
 

@@ -51,7 +51,7 @@ internal class IndicatorAdapter(
     }
 
     private fun safeDecrement(): Int {
-        with(selectedItemsCount){
+        with(selectedItemsCount) {
             return if (this > 0) {
                 this - 1
             } else {
@@ -61,7 +61,7 @@ internal class IndicatorAdapter(
     }
 
     private fun safeIncrement(): Int {
-        with(selectedItemsCount){
+        with(selectedItemsCount) {
             return if (this < PIN_MAX_COUNT) {
                 this + 1
             } else {

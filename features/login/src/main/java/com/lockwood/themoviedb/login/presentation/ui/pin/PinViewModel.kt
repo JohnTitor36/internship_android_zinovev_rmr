@@ -1,8 +1,6 @@
 package com.lockwood.themoviedb.login.presentation.ui.pin
 
-import android.content.Intent
 import androidx.lifecycle.MutableLiveData
-import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.preferences.user.UserPreferences

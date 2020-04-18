@@ -10,11 +10,11 @@
         android:id="@+id/item_pin_icon"
         android:layout_width="@dimen/pin_digit_size"
         android:layout_height="@dimen/pin_digit_size"
-        android:background="?selectableItemBackgroundBorderless"
         android:layout_gravity="center"
-        android:tint="@color/gray"
+        android:background="?selectableItemBackgroundBorderless"
         android:src="@drawable/ic_backspace"
         android:textSize="@dimen/text_size_title"
+        android:tint="@color/gray"
         tools:ignore="ContentDescription"
         tools:text="1" />
 

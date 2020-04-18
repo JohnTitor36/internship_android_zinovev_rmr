@@ -23,7 +23,8 @@ constructor(
             "com.lockwood.themoviedb.presentation.ui.MainActivity"
     }
 
-    val liveState: MutableLiveData<PinEnterViewState> = MutableLiveData(PinEnterViewState.initialState)
+    val liveState: MutableLiveData<PinEnterViewState> =
+        MutableLiveData(PinEnterViewState.initialState)
 
     private var state: PinEnterViewState by liveState.delegate()
 

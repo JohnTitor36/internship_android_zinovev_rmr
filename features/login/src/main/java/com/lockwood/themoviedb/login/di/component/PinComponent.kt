@@ -5,7 +5,6 @@ import com.lockwood.core.di.provider.AppToolsProvider
 import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import com.lockwood.themoviedb.login.di.module.PinModule
-import com.lockwood.themoviedb.login.di.module.ServiceModule
 import com.lockwood.themoviedb.login.presentation.ui.pin.PinFragment
 import dagger.Component
 
