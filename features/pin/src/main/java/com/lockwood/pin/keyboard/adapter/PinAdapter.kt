@@ -6,7 +6,6 @@ import com.lockwood.pin.databinding.ItemPinClearBinding
 import com.lockwood.pin.databinding.ItemPinDigitBinding
 import com.lockwood.pin.databinding.ItemPinEmptyBinding
 import com.lockwood.pin.databinding.ItemPinExitBinding
-import com.lockwood.pin.keyboard.PinKeyboard.Companion.SPAN_COUNT
 import com.lockwood.pin.keyboard.adapter.PinItemViewType.ITEM_VIEW_TYPE_CLEAR
 import com.lockwood.pin.keyboard.adapter.PinItemViewType.ITEM_VIEW_TYPE_DIGIT
 import com.lockwood.pin.keyboard.adapter.PinItemViewType.ITEM_VIEW_TYPE_EXIT
@@ -27,12 +26,15 @@ internal class PinAdapter constructor(
 
     companion object {
 
-        private const val ITEM_POSITION_CLEAR = 9
-        private const val ITEM_POSITION_EXIT = 11
+        private const val DIGIT_ITEMS_COUNT = 9
+        private const val ROW_ITEMS_COUNT = 3
+
+        private const val ITEM_POSITION_EXIT = 9
+        private const val ITEM_POSITION_CLEAR = 11
 
         private val ITEM_POSITIONS_ARRAY = buildList {
-            addAll(List(ITEM_POSITION_CLEAR) { i -> i + 1 }) // 1..9
-            addAll(List(SPAN_COUNT) { _ -> 0 }) // 0, 0, 0
+            addAll(List(DIGIT_ITEMS_COUNT) { i -> i + 1 }) // 1..9
+            addAll(List(ROW_ITEMS_COUNT) { 0 }) // 0, 0, 0
         }
 
     }

@@ -19,7 +19,7 @@ class PinKeyboard @JvmOverloads constructor(
 
     companion object {
 
-        const val SPAN_COUNT = 3
+        private const val SPAN_COUNT = 3
 
     }
 
