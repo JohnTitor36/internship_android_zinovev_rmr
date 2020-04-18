@@ -1,7 +1,7 @@
-package com.lockwood.pin.adapter.holder
+package com.lockwood.pin.keyboard.adapter.holder
 
-import com.lockwood.pin.adapter.base.BaseViewHolder
-import com.lockwood.pin.adapter.listener.PinKeyboardListener
+import com.lockwood.pin.keyboard.adapter.base.BaseViewHolder
+import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 import com.lockwood.pin.databinding.ItemPinEmptyBinding
 
 internal class PinEmptyViewHolder(

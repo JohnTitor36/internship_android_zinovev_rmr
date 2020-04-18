@@ -1,4 +1,4 @@
-package com.lockwood.pin.adapter.listener
+package com.lockwood.pin.keyboard.listener
 
 interface PinKeyboardListener {
 

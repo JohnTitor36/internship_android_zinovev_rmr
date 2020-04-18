@@ -1,4 +1,4 @@
-package com.lockwood.pin.adapter
+package com.lockwood.pin.keyboard.adapter
 
 internal object PinItemViewType {
 

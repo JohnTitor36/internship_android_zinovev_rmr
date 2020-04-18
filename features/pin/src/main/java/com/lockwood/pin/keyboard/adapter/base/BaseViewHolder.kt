@@ -1,8 +1,8 @@
-package com.lockwood.pin.adapter.base
+package com.lockwood.pin.keyboard.adapter.base
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.lockwood.pin.adapter.listener.PinKeyboardListener
+import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 
 internal abstract class BaseViewHolder<T>(
     protected val itemViewBinding: ViewBinding,

@@ -1,12 +1,13 @@
-package com.lockwood.pin
+package com.lockwood.pin.keyboard
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import com.lockwood.pin.adapter.PinAdapter
-import com.lockwood.pin.adapter.listener.PinKeyboardListener
+import com.lockwood.pin.R
+import com.lockwood.pin.keyboard.adapter.PinAdapter
+import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 import kotlinx.android.synthetic.main.keyboard_pin.view.*
 
 @ExperimentalStdlibApi
@@ -42,7 +43,9 @@ class PinKeyboard @JvmOverloads constructor(
 
     private fun setupLayoutManger() {
         with(recyclerView) {
-            layoutManager = GridLayoutManager(context, SPAN_COUNT)
+            layoutManager = GridLayoutManager(context,
+                SPAN_COUNT
+            )
             adapter = pinAdapter
         }
     }

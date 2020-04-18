@@ -14,7 +14,7 @@ import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
-import com.lockwood.pin.adapter.listener.PinKeyboardListener
+import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 import com.lockwood.themoviedb.login.databinding.FragmentEnterPinBinding
 import com.lockwood.themoviedb.login.di.component.DaggerPinEnterComponent
 import javax.inject.Inject

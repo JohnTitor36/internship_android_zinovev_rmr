@@ -1,4 +1,4 @@
-package com.lockwood.pin.adapter.base
+package com.lockwood.pin.keyboard.adapter.base
 
 import androidx.recyclerview.widget.RecyclerView
 
