@@ -61,8 +61,14 @@ constructor(
     }
 
     fun onCredentialsChanged(login: String, password: String) {
-        val isValid = CredentialsValidator.isValidInput(login, password)
-        state = state.copy(login = login, password = password, validCredentials = isValid)
+        val formattedLogin = login.trim()
+        val formattedPassword = password.trim()
+        val isValid = CredentialsValidator.isValidInput(formattedLogin, formattedPassword)
+        state = state.copy(
+            login = formattedLogin,
+            password = formattedPassword,
+            validCredentials = isValid
+        )
     }
 
     fun onEnterButtonClick() {
