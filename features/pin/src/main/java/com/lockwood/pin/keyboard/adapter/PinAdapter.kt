@@ -27,8 +27,6 @@ internal class PinAdapter constructor(
 
     companion object {
 
-        const val PIN_MAX_COUNT = 4
-
         private const val ITEM_POSITION_CLEAR = 9
         private const val ITEM_POSITION_EXIT = 11
 

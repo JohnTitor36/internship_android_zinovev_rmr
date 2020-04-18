@@ -1,7 +1,6 @@
 package com.lockwood.pin.keyboard.adapter.holder
 
 import com.lockwood.pin.databinding.ItemPinDigitBinding
-import com.lockwood.pin.keyboard.adapter.PinAdapter.Companion.PIN_MAX_COUNT
 import com.lockwood.pin.keyboard.adapter.base.BaseViewHolder
 import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 
@@ -11,6 +10,12 @@ internal class PinDigitViewHolder(
     listeners: List<PinKeyboardListener>,
     private val enteredDigits: List<Int>
 ) : BaseViewHolder<Int>(itemBinding, listeners) {
+
+    companion object {
+
+        private const val PIN_MAX_COUNT = 4
+
+    }
 
     private val digits: String
         get() = enteredDigits.joinToString(separator = "", transform = Int::toString)

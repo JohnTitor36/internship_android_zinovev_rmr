@@ -6,7 +6,6 @@ import com.lockwood.pin.databinding.ItemIndiactorBinding
 import com.lockwood.pin.indicator.adapter.base.BaseAdapter
 import com.lockwood.pin.indicator.adapter.holder.IndicatorViewHolder
 import com.lockwood.pin.indicator.listener.IndicatorGroupListener
-import timber.log.Timber
 
 @ExperimentalStdlibApi
 internal class IndicatorAdapter(
@@ -16,6 +15,7 @@ internal class IndicatorAdapter(
 
     companion object {
 
+        private const val PIN_MAX_COUNT = 4
         private const val DEFAULT_SELECTED_ITEMS_COUNT = 0
         private const val DEFAULT_IS_SHOW_ERROR = false
     }
@@ -23,12 +23,12 @@ internal class IndicatorAdapter(
     val listener = object : IndicatorGroupListener {
 
         override fun onDigitCleared() {
-            selectedItemsCount--
+            selectedItemsCount = safeDecrement()
             this@IndicatorAdapter.notifyDataSetChanged()
         }
 
         override fun onDigitEntered() {
-            selectedItemsCount++
+            selectedItemsCount = safeIncrement()
             this@IndicatorAdapter.notifyDataSetChanged()
         }
 
@@ -48,6 +48,26 @@ internal class IndicatorAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndicatorViewHolder {
         val binding = parent.inflateItemViewBinding<ItemIndiactorBinding>()
         return IndicatorViewHolder(binding)
+    }
+
+    private fun safeDecrement(): Int {
+        with(selectedItemsCount){
+            return if (this > 0) {
+                this - 1
+            } else {
+                this
+            }
+        }
+    }
+
+    private fun safeIncrement(): Int {
+        with(selectedItemsCount){
+            return if (this < PIN_MAX_COUNT) {
+                this + 1
+            } else {
+                this
+            }
+        }
     }
 
 }
