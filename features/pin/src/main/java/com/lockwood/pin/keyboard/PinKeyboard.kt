@@ -25,15 +25,13 @@ class PinKeyboard @JvmOverloads constructor(
 
     private val pinAdapter = PinAdapter()
 
-    var pinKeyboardListener: PinKeyboardListener? = null
-        set(value) {
-            field = value
-            pinAdapter.listener = requireNotNull(value)
-        }
-
     init {
         inflateView()
         setupLayoutManger()
+    }
+
+    fun addPinKeyboardListener(pinKeyboardListener: PinKeyboardListener) {
+        pinAdapter.addPinKeyboardListener(pinKeyboardListener)
     }
 
     private fun inflateView() {
@@ -43,7 +41,8 @@ class PinKeyboard @JvmOverloads constructor(
 
     private fun setupLayoutManger() {
         with(recyclerView) {
-            layoutManager = GridLayoutManager(context,
+            layoutManager = GridLayoutManager(
+                context,
                 SPAN_COUNT
             )
             adapter = pinAdapter

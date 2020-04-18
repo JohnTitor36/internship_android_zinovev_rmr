@@ -48,7 +48,8 @@ class PinFragment : BaseFragment(), PinKeyboardListener {
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
 
-        keyboard.pinKeyboardListener = this@PinFragment
+        keyboard.addPinKeyboardListener(this@PinFragment)
+        indicators.setupWithPinKeyboard(keyboard)
     }
 
     override fun setupViews() {
@@ -56,19 +57,18 @@ class PinFragment : BaseFragment(), PinKeyboardListener {
     }
 
     override fun onDigitClick(digit: Int) {
-        showMessage("onDigitClick:$digit")
     }
 
     override fun onClearDigitClick() {
-        showMessage("onClearDigitClick")
     }
 
     override fun onLastItemEntered(digits: String) {
-        showMessage("onLastItemEntered:$digits")
     }
 
     override fun onExitClick() {
-        showMessage("onExitClick")
+    }
+
+    override fun onResetEnteredDigits() {
     }
 
     private fun renderState(state: PinViewState) {

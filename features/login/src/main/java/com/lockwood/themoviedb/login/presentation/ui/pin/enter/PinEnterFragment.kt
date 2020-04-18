@@ -66,6 +66,10 @@ class PinEnterFragment : BaseFragment(), PinKeyboardListener {
 
     }
 
+    override fun onResetEnteredDigits() {
+
+    }
+
     private fun renderState(state: PinEnterViewState) {
 
     }

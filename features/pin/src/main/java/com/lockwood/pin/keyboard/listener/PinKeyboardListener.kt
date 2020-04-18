@@ -6,8 +6,10 @@ interface PinKeyboardListener {
 
     fun onClearDigitClick()
 
-    fun onLastItemEntered(digits: String)
-
     fun onExitClick()
+
+    fun onResetEnteredDigits()
+
+    fun onLastItemEntered(digits: String)
 
 }

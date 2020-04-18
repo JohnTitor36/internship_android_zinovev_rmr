@@ -16,15 +16,12 @@
         android:layout_height="match_parent"
         android:layout_marginTop="?actionBarSize">
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/Title.Center"
-            android:layout_width="0dp"
+        <com.lockwood.pin.indicator.IndicatorGroup
+            android:id="@+id/indicators"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_content_margin"
             android:layout_marginEnd="@dimen/default_content_margin"
-            android:text="@string/title_make_pin"
-            android:textSize="@dimen/text_size_title_small"
             app:layout_constraintBottom_toTopOf="@+id/keyboard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

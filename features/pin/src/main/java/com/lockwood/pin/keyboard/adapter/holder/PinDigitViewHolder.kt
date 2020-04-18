@@ -1,43 +1,46 @@
 package com.lockwood.pin.keyboard.adapter.holder
 
+import com.lockwood.pin.databinding.ItemPinDigitBinding
+import com.lockwood.pin.keyboard.adapter.PinAdapter.Companion.PIN_MAX_COUNT
 import com.lockwood.pin.keyboard.adapter.base.BaseViewHolder
 import com.lockwood.pin.keyboard.listener.PinKeyboardListener
-import com.lockwood.pin.databinding.ItemPinDigitBinding
 
+@ExperimentalStdlibApi
 internal class PinDigitViewHolder(
     itemBinding: ItemPinDigitBinding,
-    listener: PinKeyboardListener,
-    private val enteredDigits: MutableList<Int>,
-    private val resetEnteredDigits: () -> Unit
-) : BaseViewHolder<Int>(itemBinding, listener) {
-
-    companion object {
-
-        // Пока через константу, но можно будет вынести в attrs
-        private const val PIN_MAX_COUNT = 4
-    }
+    listeners: List<PinKeyboardListener>,
+    private val enteredDigits: List<Int>
+) : BaseViewHolder<Int>(itemBinding, listeners) {
 
     private val digits: String
         get() = enteredDigits.joinToString(separator = "", transform = Int::toString)
 
     override fun onBind(item: Int) {
 
-        with((itemViewBinding as ItemPinDigitBinding).itemPinDigitButton) {
+        with((itemBinding as ItemPinDigitBinding).itemPinDigitButton) {
             text = item.toString()
-            setOnClickListener { performClick(item) }
+            setOnClickListener {
+                enterDigit(item)
+            }
         }
     }
 
-    private fun performClick(digit: Int) {
-        enteredDigits.add(digit)
-        listener.onDigitClick(digit)
+    private fun enterDigit(digit: Int) {
+        checkDigitClick(digit)
         checkLastItemEntered()
     }
 
+    private fun checkDigitClick(digit: Int) {
+        val notLastDigit = enteredDigits.size + 1 <= PIN_MAX_COUNT
+        if (notLastDigit) {
+            listeners.forEach { it.onDigitClick(digit) }
+        }
+    }
+
     private fun checkLastItemEntered() {
-        if (enteredDigits.size == PIN_MAX_COUNT) {
-            listener.onLastItemEntered(digits)
-            resetEnteredDigits.invoke()
+        val lastItemEntered = enteredDigits.size == PIN_MAX_COUNT
+        if (lastItemEntered) {
+            listeners.forEach { it.onLastItemEntered(digits) }
         }
     }
 
