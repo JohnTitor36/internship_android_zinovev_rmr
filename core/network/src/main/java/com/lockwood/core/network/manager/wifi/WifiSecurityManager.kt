@@ -11,7 +11,7 @@ class WifiSecurityManager @Inject constructor(
     companion object {
 
         private const val WIFI_SECURITY_TYPE_NONE = "NONE"
-        private const val WIFI_SECURITY_TYPE_WPA = "WPA"
+        private const val WIFI_SECURITY_TYPE_WPA = "WPA\\D"
         private const val WIFI_SECURITY_TYPE_WEP = "WEP"
 
         private const val NOT_SAFE_WI_FI_NAME = "free"
@@ -38,9 +38,8 @@ class WifiSecurityManager @Inject constructor(
                 WIFI_SECURITY_TYPE_WPA,
                 WIFI_SECURITY_TYPE_NONE
             )
-            notSafeSecurityTypes.map { capabilities.contains(it) }.none { it }
+            notSafeSecurityTypes.map { capabilities.contains(it.toRegex()) }.none { it }
         }
     }
-
 
 }
