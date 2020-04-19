@@ -3,13 +3,13 @@ package com.lockwood.core.network.interceptor
 import com.lockwood.core.network.exception.NoInternetConnectionException
 import com.lockwood.core.network.exception.StatusMessageException
 import com.lockwood.core.network.extensions.parseStatusMessage
-import com.lockwood.core.network.manager.NetworkConnectivityManager
+import com.lockwood.core.network.manager.ConnectivityManager
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.Response
 
 class HttpErrorInterceptor(
-    private val connectivityManager: NetworkConnectivityManager,
+    private val connectivityManager: ConnectivityManager,
     private val moshi: Moshi
 ) : Interceptor {
 

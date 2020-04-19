@@ -7,7 +7,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LoginActivityRouter @Inject constructor(private val context: Context) {
+class LoginActivityRouter @Inject constructor(
+    private val context: Context
+) {
 
     companion object {
 

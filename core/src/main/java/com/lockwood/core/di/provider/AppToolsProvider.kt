@@ -4,6 +4,7 @@ import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.router.LoginActivityRouter
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.core.window.WindowManager
+import com.scottyab.rootbeer.RootBeer
 
 interface AppToolsProvider : ApplicationProvider {
 
@@ -14,5 +15,7 @@ interface AppToolsProvider : ApplicationProvider {
     fun provideLoginActivityRouter(): LoginActivityRouter
 
     fun provideSchedulers(): SchedulersProvider
+
+    fun provideRootBeer(): RootBeer
 
 }

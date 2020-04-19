@@ -6,7 +6,7 @@ import com.lockwood.core.network.di.qualifier.*
 import com.lockwood.core.network.interceptor.HttpApiKeyInterceptor
 import com.lockwood.core.network.interceptor.HttpErrorInterceptor
 import com.lockwood.core.network.interceptor.HttpHeaderInterceptor
-import com.lockwood.core.network.manager.NetworkConnectivityManager
+import com.lockwood.core.network.manager.ConnectivityManager
 import com.lockwood.core.network.moshi.adapter.*
 import com.lockwood.core.window.WindowManager
 import com.squareup.moshi.Moshi
@@ -48,7 +48,7 @@ class NetworkModule {
     @Singleton
     @ErrorInterceptor
     fun provideErrorInterceptor(
-        connectivityManager: NetworkConnectivityManager,
+        connectivityManager: ConnectivityManager,
         moshi: Moshi.Builder
     ): Interceptor {
         return HttpErrorInterceptor(connectivityManager, moshi.build())
