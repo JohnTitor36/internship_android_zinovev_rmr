@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.lockwood.core.cryptographic.Cryptographer
+import com.lockwood.core.event.Event
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.livedata.observe
@@ -15,15 +16,14 @@ import com.lockwood.core.preferences.extensions.preferencesToolsProvider
 import com.lockwood.core.ui.BaseFragment
 import com.lockwood.core.viewbinding.createView
 import com.lockwood.core.viewbinding.viewBinding
-import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 import com.lockwood.themoviedb.login.databinding.FragmentPinBinding
 import com.lockwood.themoviedb.login.di.component.DaggerPinComponent
+import com.lockwood.themoviedb.login.event.KeyboardClearEvent
 import kotlinx.android.synthetic.main.fragment_pin.*
-import timber.log.Timber
 import javax.inject.Inject
 
 @ExperimentalStdlibApi
-class PinFragment : BaseFragment(), PinKeyboardListener {
+class PinFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -53,28 +53,24 @@ class PinFragment : BaseFragment(), PinKeyboardListener {
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
 
-        keyboard.addPinKeyboardListener(this@PinFragment)
+        keyboard.addPinKeyboardListener(viewModel.pinKeyboardListener)
         indicators.setupWithPinKeyboard(keyboard)
+    }
+
+    override fun onOnEvent(event: Event) {
+        super.onOnEvent(event)
+        when(event) {
+            is KeyboardClearEvent -> {
+                binding.keyboard.resetEnteredDigits()
+            }
+        }
     }
 
     override fun setupViews() {
         setupAppBar()
     }
 
-    override fun onDigitClick(digit: Int) {
-    }
 
-    override fun onClearDigitClick() {
-    }
-
-    override fun onLastItemEntered(digits: String) {
-    }
-
-    override fun onExitClick() {
-    }
-
-    override fun onResetEnteredDigits() {
-    }
 
     private fun renderState(state: PinViewState) {
 

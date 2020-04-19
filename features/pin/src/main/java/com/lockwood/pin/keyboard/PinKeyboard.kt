@@ -49,4 +49,8 @@ class PinKeyboard @JvmOverloads constructor(
         }
     }
 
+    fun resetEnteredDigits() {
+        pinAdapter.resetEnteredDigits()
+    }
+
 }

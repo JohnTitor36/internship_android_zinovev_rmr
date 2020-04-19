@@ -92,6 +92,9 @@ abstract class BaseFragment : Fragment(), MessageView {
             is NavigationEvent -> {
                 navigateTo(event.direction, event.navOptions)
             }
+            is BackPressEvent -> {
+                requireActivity().onBackPressed()
+            }
             is LaunchActivityEvent -> {
                 requireContext().launchActivity(event.className) {
                     flags = event.flags

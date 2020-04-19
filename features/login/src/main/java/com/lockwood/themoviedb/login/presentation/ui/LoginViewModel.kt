@@ -1,7 +1,6 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
 import androidx.lifecycle.MutableLiveData
-import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.manager.ConnectivityManager
@@ -17,7 +16,6 @@ import com.lockwood.themoviedb.login.domain.repository.AuthenticationRepository
 import com.lockwood.themoviedb.login.utils.CredentialsValidator
 import com.scottyab.rootbeer.RootBeer
 import io.reactivex.Completable
-import timber.log.Timber
 import javax.inject.Inject
 
 class LoginViewModel @Inject
