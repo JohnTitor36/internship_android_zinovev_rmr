@@ -2,7 +2,7 @@ package com.lockwood.core.network.di.provider
 
 import com.lockwood.core.network.di.qualifier.AuthRetrofit
 import com.lockwood.core.network.manager.ConnectivityManager
-import com.lockwood.core.network.manager.NetworkSecurityManager
+import com.lockwood.core.network.manager.wifi.WifiSecurityManager
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -22,6 +22,6 @@ interface NetworkToolsProvider : NetworkApiProvider {
 
     fun provideConnectivityManager(): ConnectivityManager
 
-    fun provideNetworkSecurityManager(): NetworkSecurityManager
+    fun provideNetworkSecurityManager(): WifiSecurityManager
 
 }

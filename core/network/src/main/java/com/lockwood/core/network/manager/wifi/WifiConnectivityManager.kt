@@ -1,6 +1,7 @@
 package com.lockwood.core.network.manager.wifi
 
 import android.content.Context
+import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import androidx.core.content.getSystemService
 import javax.inject.Inject
@@ -24,9 +25,14 @@ class WifiConnectivityManager @Inject constructor(
             return wifiManager.connectionInfo.ssid
         }
 
-    val currentEncryptionType: String
+    val currentNetworkCapabilities: String?
         get() {
-            return wifiManager.wifiState.toString()
+            return findNetworkCapabilities(currentSsid)
         }
+
+    private fun findNetworkCapabilities(ssid: String): String? {
+        val networkList: List<ScanResult> = wifiManager.scanResults
+        return networkList.firstOrNull { it.SSID == ssid }?.capabilities
+    }
 
 }
