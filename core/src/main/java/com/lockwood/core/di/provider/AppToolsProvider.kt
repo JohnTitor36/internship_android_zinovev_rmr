@@ -1,5 +1,6 @@
 package com.lockwood.core.di.provider
 
+import com.lockwood.core.cryptographic.Cryptographer
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.router.LoginActivityRouter
 import com.lockwood.core.schedulers.SchedulersProvider
@@ -17,5 +18,7 @@ interface AppToolsProvider : ApplicationProvider {
     fun provideSchedulers(): SchedulersProvider
 
     fun provideRootBeer(): RootBeer
+
+    fun provideCryptographer(): Cryptographer
 
 }

@@ -40,6 +40,7 @@ dependencies {
             deps.android.ktx,
             deps.android.fragment,
             deps.android.constraint,
+            deps.android.tink,
             deps.material.material,
             deps.navigation.fragment,
             deps.navigation.ui,

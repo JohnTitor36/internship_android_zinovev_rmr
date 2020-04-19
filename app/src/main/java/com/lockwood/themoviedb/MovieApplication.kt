@@ -2,6 +2,8 @@ package com.lockwood.themoviedb
 
 import android.app.Application
 import android.content.Context
+import com.google.crypto.tink.Config
+import com.google.crypto.tink.config.TinkConfig
 import com.lockwood.core.di.DaggerApplication
 import com.lockwood.core.di.component.DaggerCoreComponent
 import com.lockwood.core.di.provider.AppToolsProvider
@@ -58,6 +60,7 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
             Timber.plant(Timber.DebugTree())
         }
 
+        TinkConfig.register()
     }
 
     override fun getAppToolsProvider(): AppToolsProvider {

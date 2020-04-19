@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.lockwood.core.cryptographic.Cryptographer
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.appToolsProvider
 import com.lockwood.core.livedata.observe
@@ -18,6 +19,7 @@ import com.lockwood.pin.keyboard.listener.PinKeyboardListener
 import com.lockwood.themoviedb.login.databinding.FragmentPinBinding
 import com.lockwood.themoviedb.login.di.component.DaggerPinComponent
 import kotlinx.android.synthetic.main.fragment_pin.*
+import timber.log.Timber
 import javax.inject.Inject
 
 @ExperimentalStdlibApi
@@ -28,6 +30,9 @@ class PinFragment : BaseFragment(), PinKeyboardListener {
     private val viewModel: PinViewModel by viewModels { viewModelFactory }
 
     private val binding: FragmentPinBinding by viewBinding()
+
+    @Inject
+    lateinit var cryptographer: Cryptographer
 
     override fun onAttach(context: Context) {
         inject()
