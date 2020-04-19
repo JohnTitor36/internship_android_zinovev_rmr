@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import androidx.core.content.getSystemService
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,7 +23,8 @@ class WifiConnectivityManager @Inject constructor(
 
     val currentSsid: String
         get() {
-            return wifiManager.connectionInfo.ssid
+            val ssid = wifiManager.connectionInfo.ssid
+            return ssid.replace("\"", "")
         }
 
     val currentNetworkCapabilities: String?

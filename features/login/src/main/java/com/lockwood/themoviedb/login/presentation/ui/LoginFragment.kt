@@ -29,7 +29,7 @@ class LoginFragment : BaseFragment() {
 
     companion object {
 
-        private const val PERMISSION_LOCATION_REQUEST_CODE = 12
+        private const val PERMISSION_NETWORK_STATE_REQUEST_CODE = 12
         private const val PERMISSION_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
     }
 
@@ -59,7 +59,7 @@ class LoginFragment : BaseFragment() {
             viewModel.checkEnvironmentSecurity()
         } else {
             viewModel.showRequestLocationReasonMessage()
-            requestPermission(PERMISSION_LOCATION, PERMISSION_LOCATION_REQUEST_CODE)
+            requestPermission(PERMISSION_LOCATION, PERMISSION_NETWORK_STATE_REQUEST_CODE)
         }
 
         observe(viewModel.eventsQueue, ::onOnEvent)
@@ -68,7 +68,7 @@ class LoginFragment : BaseFragment() {
 
     override fun handlePermission(requestCode: Int, permissionGranted: Boolean) {
         when (requestCode) {
-            PERMISSION_LOCATION_REQUEST_CODE -> {
+            PERMISSION_NETWORK_STATE_REQUEST_CODE -> {
                 viewModel.checkEnvironmentSecurity()
             }
             else -> {

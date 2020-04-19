@@ -1,6 +1,5 @@
 package com.lockwood.core.network.manager.wifi
 
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,8 +30,6 @@ class WifiSecurityManager @Inject constructor(
 
     private fun isSafeSecurityType(): Boolean {
         val capabilities = wifiConnectivityManager.currentNetworkCapabilities
-        Timber.d("currentSsid: ${wifiConnectivityManager.currentSsid}")
-        Timber.d("capabilities: $capabilities")
         return if (capabilities.isNullOrEmpty()) {
             true
         } else {
