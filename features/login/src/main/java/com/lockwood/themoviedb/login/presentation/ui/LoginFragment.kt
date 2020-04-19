@@ -47,7 +47,7 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkEnvironmentSecurity()
+        viewModel.checkEnvironmentSecurity()
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
@@ -55,10 +55,6 @@ class LoginFragment : BaseFragment() {
 
     override fun setupViews() {
         addViewListeners()
-    }
-
-    private fun checkEnvironmentSecurity() {
-        viewModel.checkRoot()
     }
 
     private fun renderState(state: LoginViewState) {

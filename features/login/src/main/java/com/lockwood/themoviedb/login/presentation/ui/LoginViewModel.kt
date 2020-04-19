@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
+import com.lockwood.core.network.manager.ConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
@@ -21,10 +22,16 @@ import javax.inject.Inject
 class LoginViewModel @Inject
 constructor(
     private val authenticationRepository: AuthenticationRepository,
+    private val connectivityManager: ConnectivityManager,
     private val rootBeer: RootBeer,
     resourceReader: ResourceReader,
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(resourceReader, schedulers) {
+
+    companion object {
+
+        private const val CHECK_ENVIRONMENT_DELAY = 1L
+    }
 
     val liveState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState.initialState)
 
@@ -85,16 +92,22 @@ constructor(
         state = state.copy(keyboardOpened = keyboardOpened)
     }
 
-    fun checkRoot() {
-        if (rootBeer.isRooted) {
-            onRootDeviceUsed()
-        }
-    }
-
-    private fun onRootDeviceUsed() {
+    fun checkEnvironmentSecurity() {
         val untrustedEnvironmentMessage = resourceReader.string(R.string.untrusted_environment)
-        val rootMessage = resourceReader.string(R.string.untrusted_environment_root)
-        val message = untrustedEnvironmentMessage.format(rootMessage)
+        val messageBuilder = StringBuilder(untrustedEnvironmentMessage).appendln()
+
+        if (rootBeer.isRooted) {
+            val messageUsedRoot = resourceReader.string(R.string.untrusted_environment_root)
+            messageBuilder.appendln(messageUsedRoot)
+        }
+
+        if (!connectivityManager.safeConnection) {
+            val messageUsedNotSafeConnection =
+                resourceReader.string(R.string.untrusted_environment_wifi)
+            messageBuilder.appendln(messageUsedNotSafeConnection)
+        }
+
+        val message = messageBuilder.toString()
         val rootEvent = MessageEvent(message)
         eventsQueue.offer(rootEvent)
     }

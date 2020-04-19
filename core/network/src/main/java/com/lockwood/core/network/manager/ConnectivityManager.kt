@@ -25,7 +25,11 @@ class ConnectivityManager @Inject constructor(
 
     val safeConnection: Boolean
         get() {
-            return wifiSecurityManager.isSafeConnection()
+            return if (wifiEnabled) {
+                wifiSecurityManager.isSafeConnection()
+            } else {
+                true
+            }
         }
 
 }
