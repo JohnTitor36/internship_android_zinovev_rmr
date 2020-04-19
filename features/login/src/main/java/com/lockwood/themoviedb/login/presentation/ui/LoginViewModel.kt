@@ -17,6 +17,7 @@ import com.lockwood.themoviedb.login.domain.repository.AuthenticationRepository
 import com.lockwood.themoviedb.login.utils.CredentialsValidator
 import com.scottyab.rootbeer.RootBeer
 import io.reactivex.Completable
+import timber.log.Timber
 import javax.inject.Inject
 
 class LoginViewModel @Inject
@@ -94,20 +95,27 @@ constructor(
 
     fun checkEnvironmentSecurity() {
         val untrustedEnvironmentMessage = resourceReader.string(R.string.untrusted_environment)
-        val messageBuilder = StringBuilder(untrustedEnvironmentMessage).appendln()
+        val messageBuilder = StringBuilder(untrustedEnvironmentMessage)
 
         if (rootBeer.isRooted) {
-            val messageUsedRoot = resourceReader.string(R.string.untrusted_environment_root)
+            val messageUsedRoot = resourceReader.string(R.string.untrusted_device_root)
             messageBuilder.appendln(messageUsedRoot)
         }
 
         if (!connectivityManager.safeConnection) {
-            val messageUsedNotSafeConnection =
-                resourceReader.string(R.string.untrusted_environment_wifi)
+            val messageUsedNotSafeConnection = resourceReader.string(R.string.untrusted_wifi)
             messageBuilder.appendln(messageUsedNotSafeConnection)
         }
 
         val message = messageBuilder.toString()
+        if (message != untrustedEnvironmentMessage) {
+            val rootEvent = MessageEvent(message)
+            eventsQueue.offer(rootEvent)
+        }
+    }
+
+    fun showRequestLocationReasonMessage(){
+        val message = resourceReader.string(R.string.untrusted_environment_reason)
         val rootEvent = MessageEvent(message)
         eventsQueue.offer(rootEvent)
     }

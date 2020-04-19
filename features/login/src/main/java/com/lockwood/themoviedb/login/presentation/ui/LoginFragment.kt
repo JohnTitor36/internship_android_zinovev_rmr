@@ -1,5 +1,6 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
+import android.Manifest
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +27,12 @@ import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
 
+    companion object {
+
+        private const val PERMISSION_LOCATION_REQUEST_CODE = 12
+        private const val PERMISSION_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
+    }
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: LoginViewModel by viewModels { viewModelFactory }
@@ -47,10 +54,27 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.checkEnvironmentSecurity()
+
+        if (hasPermission(PERMISSION_LOCATION)) {
+            viewModel.checkEnvironmentSecurity()
+        } else {
+            viewModel.showRequestLocationReasonMessage()
+            requestPermission(PERMISSION_LOCATION, PERMISSION_LOCATION_REQUEST_CODE)
+        }
 
         observe(viewModel.eventsQueue, ::onOnEvent)
         observe(viewModel.liveState, ::renderState)
+    }
+
+    override fun handlePermission(requestCode: Int, permissionGranted: Boolean) {
+        when (requestCode) {
+            PERMISSION_LOCATION_REQUEST_CODE -> {
+                viewModel.checkEnvironmentSecurity()
+            }
+            else -> {
+
+            }
+        }
     }
 
     override fun setupViews() {
