@@ -8,7 +8,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NetworkConnectivityManager @Inject constructor(private val context: Context) {
+class NetworkConnectivityManager @Inject constructor(
+    private val context: Context
+) {
 
     private val connectivityManager
         get() = context.getSystemService<ConnectivityManager>()
