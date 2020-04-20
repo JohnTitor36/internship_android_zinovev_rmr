@@ -1,12 +1,16 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
+import com.lockwood.core.event.LaunchActivityEvent
 import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.manager.ConnectivityManager
 import com.lockwood.core.network.ui.BaseNetworkViewModel
+import com.lockwood.core.preferences.user.UserPreferences
 import com.lockwood.core.reader.ResourceReader
+import com.lockwood.core.router.LoginActivityRouter
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.login.R
 import com.lockwood.themoviedb.login.domain.model.CreateRequestTokenResponse
@@ -24,6 +28,8 @@ constructor(
     private val authenticationRepository: AuthenticationRepository,
     private val connectivityManager: ConnectivityManager,
     private val rootBeer: RootBeer,
+    private val userPreferences: UserPreferences,
+    private val loginActivityRouter: LoginActivityRouter,
     resourceReader: ResourceReader,
     schedulers: SchedulersProvider
 ) : BaseNetworkViewModel(resourceReader, schedulers) {
@@ -31,6 +37,9 @@ constructor(
     companion object {
 
         private const val CHECK_ENVIRONMENT_DELAY = 1L
+
+        private const val MAIN_ACTIVITY_CLASS_NAME =
+            "com.lockwood.themoviedb.presentation.ui.MainActivity"
     }
 
     val liveState: MutableLiveData<LoginViewState> = MutableLiveData(LoginViewState.initialState)
@@ -168,6 +177,12 @@ constructor(
 //        }
 
 //        openPinMake()
+
+        userPreferences.setUserLoggedIn(true)
+
+        val clearFlags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val launchMainEvent = LaunchActivityEvent(MAIN_ACTIVITY_CLASS_NAME, clearFlags)
+        eventsQueue.offer(launchMainEvent)
     }
 
     private fun openPinMake() {
