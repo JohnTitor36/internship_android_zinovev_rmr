@@ -27,6 +27,7 @@ import com.lockwood.themoviedb.movies.extensions.loadMoviePosterRequest
 import com.lockwood.themoviedb.movies.utils.MovieUtils.buildDurationTitle
 import com.lockwood.themoviedb.movies.utils.MovieUtils.buildOriginalTitle
 import com.lockwood.themoviedb.movies.utils.MovieUtils.ratingToColor
+import java.util.*
 import javax.inject.Inject
 
 class MovieFragment : BaseFragment() {
@@ -73,47 +74,87 @@ class MovieFragment : BaseFragment() {
     }
 
     private fun renderState(state: MovieViewState) {
+        // state-delegator пока не завёз, поэтому такой быдло код
+        renderLoading(state.loading, state.movie)
+        renderFavoriteButton(state.loading, state.favoriteMovie)
+        renderMovie(state.movie)
+    }
+
+    private fun renderLoading(loading: Boolean, movie: Movie?) {
         with(binding) {
-
-            movieProgressBar.isVisible = state.loading
-            movieContent.isVisible = !state.loading && state.movie != null
-
-            val favoriteDrawable = if (state.favoriteMovie) {
-                resourceReader.drawable(R.drawable.ic_favorite)
-            } else {
-                resourceReader.drawable(R.drawable.ic_favorite_border)
-            }
-            movieAppbar.movieFavoriteButton.setImageDrawable(favoriteDrawable)
-            movieAppbar.movieFavoriteButton.isEnabled = !state.loading
-
-            val movie = state.movie
-            if (movie != null) {
-                renderMovie(movie)
-            }
+            movieProgressBar.isVisible = loading
+            movieContent.isVisible = !loading && movie != null
         }
     }
 
-    private fun renderMovie(movie: Movie) {
+    private fun renderFavoriteButton(loading: Boolean, favoriteMovie: Boolean) {
+        val favoriteDrawable = if (favoriteMovie) {
+            resourceReader.drawable(R.drawable.ic_favorite)
+        } else {
+            resourceReader.drawable(R.drawable.ic_favorite_border)
+        }
+
+        with(binding.movieAppbar.movieFavoriteButton) {
+            isEnabled = !loading
+            setImageDrawable(favoriteDrawable)
+        }
+    }
+
+    private fun renderMovie(movie: Movie?) {
+        if (movie == null) {
+            return
+        }
+
+        renderMovieImage(movie.poster)
+        renderMovieRating(movie.voteAverage)
+        renderMovieTitles(movie.title, movie.originalTitle, movie.releaseDate)
+        renderMovieDescription(movie.overview)
+        renderMovieInfo(movie)
+    }
+
+    private fun renderMovieImage(poster: String) {
         val imageRequest = requireContext().loadMoviePosterRequest()
 
+        binding.movieInfo.movieImage.load(
+            url = poster,
+            request = imageRequest
+        )
+    }
+
+    private fun renderMovieRating(voteAverage: Double) {
         val ratingColor = ratingToColor(
             resourceReader = resourceReader,
-            rating = movie.voteAverage
+            rating = voteAverage
         )
 
-        with(binding.movieInfo) {
+        with(binding.movieInfo.movieVoteAverage) {
+            text = voteAverage.toString()
+            setTextColor(ratingColor)
+        }
+    }
 
-            movieTitle.text = movie.title
+    private fun renderMovieTitles(title: String, originalTitle: String, releaseDate: Date) {
+
+        with(binding.movieInfo) {
+            movieTitle.text = title
+
             movieOriginalTitle.text = buildOriginalTitle(
                 resourceReader = resourceReader,
-                title = movie.originalTitle,
-                releaseDate = movie.releaseDate
+                title = originalTitle,
+                releaseDate = releaseDate
             )
+        }
+    }
 
-            movieVoteAverage.text = movie.voteAverage.toString()
-            movieVoteAverage.setTextColor(ratingColor)
+    private fun renderMovieDescription(overview: String) {
 
-            val genres = movie.genreModels.map { it.name }
+        binding.movieDescription.text = overview
+    }
+
+    private fun renderMovieInfo(movie: Movie) {
+        val genres = movie.genreModels.map { it.name }
+
+        with(binding.movieInfo) {
             movieGenres.text = genres.joinToString()
 
             movieDuration.text = buildDurationTitle(
@@ -122,14 +163,7 @@ class MovieFragment : BaseFragment() {
             )
 
             moviePopularity.text = movie.popularity.toString()
-
-            movieImage.load(
-                url = movie.poster,
-                request = imageRequest
-            )
         }
-
-        binding.movieDescription.text = movie.overview
     }
 
     private fun inject() {
