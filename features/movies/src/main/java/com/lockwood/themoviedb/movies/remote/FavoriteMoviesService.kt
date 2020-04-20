@@ -6,18 +6,17 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.http.*
 
-interface SearchMoviesService {
+interface FavoriteMoviesService {
 
-    @GET("search/movie")
-    fun searchMovies(
-        @Query("query") query: String,
-        @Query("page") page: Int,
-        @Query("language") language: String
-    ): Observable<SearchMoviesResponseModel>
+    @POST("account/{account_id}/favorite")
+    fun markAsFavorite(
+        @Path("accountId") accountId: Int,
+        @Body markAsFavoriteBody: MarkAsFavoriteBody
+    ): Completable
 
-    @GET("genre/movie/list")
-    fun searchGenres(
-        @Query("page") page: Int,
+    @GET("account/{account_id}/favorite/movies")
+    fun loadFavoriteMovies(
+        @Path("accountId") accountId: Int,
         @Query("language") language: String
     ): Observable<SearchMoviesResponseModel>
 

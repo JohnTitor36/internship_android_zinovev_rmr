@@ -5,11 +5,8 @@ import com.lockwood.core.cryptographic.Cryptographer
 import com.lockwood.core.preferences.authentication.AuthenticationPreferences
 import com.lockwood.core.preferences.authentication.DefaultAuthenticationPreferences
 import com.lockwood.core.preferences.di.qualifier.EncryptedPreferences
-import com.lockwood.core.preferences.di.qualifier.Preferences
 import com.lockwood.core.preferences.di.qualifier.RequestToken
 import com.lockwood.core.preferences.di.qualifier.SessionId
-import com.lockwood.core.preferences.user.DefaultUserPreferences
-import com.lockwood.core.preferences.user.UserPreferences
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -24,12 +21,6 @@ class PreferencesApiModule {
         cryptographer: Cryptographer
     ): AuthenticationPreferences {
         return DefaultAuthenticationPreferences(sharedPreferences, cryptographer)
-    }
-
-    @Provides
-    @Singleton
-    fun provideUserCache(@Preferences sharedPreferences: SharedPreferences): UserPreferences {
-        return DefaultUserPreferences(sharedPreferences)
     }
 
     @Provides

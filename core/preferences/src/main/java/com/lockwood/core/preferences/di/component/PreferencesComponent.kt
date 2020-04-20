@@ -3,6 +3,7 @@ package com.lockwood.core.preferences.di.component
 import com.lockwood.core.di.provider.SecurityToolsProvider
 import com.lockwood.core.preferences.di.module.PreferencesApiModule
 import com.lockwood.core.preferences.di.module.PreferencesModule
+import com.lockwood.core.preferences.di.module.PreferencesUserModule
 import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import dagger.Component
 import javax.inject.Singleton
@@ -13,7 +14,8 @@ import javax.inject.Singleton
     ],
     modules = [
         PreferencesModule::class,
-        PreferencesApiModule::class
+        PreferencesApiModule::class,
+        PreferencesUserModule::class
     ]
 )
 @Singleton

@@ -25,3 +25,7 @@ annotation class LoggingInterceptor
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ApiKeyInterceptor
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class SessionInterceptor

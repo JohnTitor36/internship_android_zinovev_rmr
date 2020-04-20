@@ -6,12 +6,12 @@ import com.lockwood.core.preferences.di.qualifier.SessionId
 
 interface PreferencesApiProvider {
 
+    fun provideAuthenticationPreferences(): AuthenticationPreferences
+
     @RequestToken
     fun provideRequestToken(): String
 
     @SessionId
     fun provideSessionId(): String
-
-    fun provideAuthenticationPreferences(): AuthenticationPreferences
 
 }

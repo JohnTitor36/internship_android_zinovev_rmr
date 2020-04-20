@@ -3,11 +3,15 @@ package com.lockwood.core.network.di.module
 import com.lockwood.core.network.BuildConfig
 import com.lockwood.core.network.authenticator.UserToLoginAuthenticator
 import com.lockwood.core.network.di.qualifier.*
+import com.lockwood.core.network.extensions.addInterceptors
+import com.lockwood.core.network.extensions.commonTimeout
 import com.lockwood.core.network.interceptor.HttpApiKeyInterceptor
 import com.lockwood.core.network.interceptor.HttpErrorInterceptor
 import com.lockwood.core.network.interceptor.HttpHeaderInterceptor
+import com.lockwood.core.network.interceptor.HttpSessionInterceptor
 import com.lockwood.core.network.manager.ConnectivityManager
 import com.lockwood.core.network.moshi.adapter.*
+import com.lockwood.core.preferences.di.qualifier.SessionId
 import com.lockwood.core.window.WindowManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -80,6 +84,13 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    @SessionInterceptor
+    fun provideSessionInterceptor(@SessionId id: String): Interceptor {
+        return HttpSessionInterceptor(id)
+    }
+
+    @Provides
+    @Singleton
     @HeaderInterceptor
     fun provideHeaderInterceptor(): Interceptor {
         return HttpHeaderInterceptor()
@@ -119,14 +130,14 @@ class NetworkModule {
         @ErrorInterceptor errorInterceptor: Interceptor
     ): OkHttpClient.Builder {
         return OkHttpClient().newBuilder()
-            .connectTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .readTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .writeTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .certificatePinner(certificatePinner)
-            .addInterceptor(apiKeyInterceptor)
-            .addInterceptor(headerInterceptor)
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(errorInterceptor)
+            .commonTimeout(DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+            .addInterceptors(
+                apiKeyInterceptor,
+                headerInterceptor,
+                loggingInterceptor,
+                errorInterceptor
+            )
     }
 
     @Provides
