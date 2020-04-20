@@ -14,7 +14,9 @@ class PreferencesDelegate<T>(
     override fun getValue(
         thisRef: Any?,
         property: KProperty<*>
-    ): T = prefs.findPreference(name, default)
+    ): T {
+        return prefs.findPreference(name, default)
+    }
 
     override fun setValue(
         thisRef: Any?,

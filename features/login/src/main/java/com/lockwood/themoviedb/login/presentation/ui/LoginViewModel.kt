@@ -1,6 +1,7 @@
 package com.lockwood.themoviedb.login.presentation.ui
 
 import androidx.lifecycle.MutableLiveData
+import com.lockwood.core.event.MessageEvent
 import com.lockwood.core.extensions.schedulersIoToMain
 import com.lockwood.core.livedata.delegate
 import com.lockwood.core.network.manager.ConnectivityManager
@@ -165,7 +166,8 @@ constructor(
 //        } else {
 //            openPinEnter()
 //        }
-        openPinMake()
+
+//        openPinMake()
     }
 
     private fun openPinMake() {

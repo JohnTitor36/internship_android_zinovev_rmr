@@ -1,6 +1,7 @@
 package com.lockwood.core.preferences.di.component
 
 import com.lockwood.core.di.provider.ApplicationProvider
+import com.lockwood.core.di.provider.SecurityToolsProvider
 import com.lockwood.core.preferences.di.module.PreferencesApiModule
 import com.lockwood.core.preferences.di.module.PreferencesModule
 import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
@@ -9,7 +10,7 @@ import javax.inject.Singleton
 
 @Component(
     dependencies = [
-        ApplicationProvider::class
+        SecurityToolsProvider::class
     ],
     modules = [
         PreferencesModule::class,
@@ -22,7 +23,7 @@ interface PreferencesComponent : PreferencesToolsProvider {
     @Component.Builder
     interface Builder {
 
-        fun applicationProvider(applicationProvider: ApplicationProvider): Builder
+        fun securityToolsProvider(securityToolsProvider: SecurityToolsProvider): Builder
 
         fun build(): PreferencesToolsProvider
 

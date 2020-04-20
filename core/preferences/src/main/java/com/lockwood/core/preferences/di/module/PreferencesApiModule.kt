@@ -1,6 +1,7 @@
 package com.lockwood.core.preferences.di.module
 
 import android.content.SharedPreferences
+import com.lockwood.core.cryptographic.Cryptographer
 import com.lockwood.core.preferences.authentication.AuthenticationPreferences
 import com.lockwood.core.preferences.authentication.DefaultAuthenticationPreferences
 import com.lockwood.core.preferences.di.qualifier.EncryptedPreferences
@@ -18,8 +19,11 @@ class PreferencesApiModule {
 
     @Provides
     @Singleton
-    fun provideAuthenticationCache(@EncryptedPreferences sharedPreferences: SharedPreferences): AuthenticationPreferences {
-        return DefaultAuthenticationPreferences(sharedPreferences)
+    fun provideAuthenticationCache(
+        @EncryptedPreferences sharedPreferences: SharedPreferences,
+        cryptographer: Cryptographer
+    ): AuthenticationPreferences {
+        return DefaultAuthenticationPreferences(sharedPreferences, cryptographer)
     }
 
     @Provides

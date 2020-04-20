@@ -2,11 +2,11 @@ package com.lockwood.themoviedb
 
 import android.app.Application
 import android.content.Context
-import com.google.crypto.tink.Config
 import com.google.crypto.tink.config.TinkConfig
 import com.lockwood.core.di.DaggerApplication
 import com.lockwood.core.di.component.DaggerCoreComponent
 import com.lockwood.core.di.provider.AppToolsProvider
+import com.lockwood.core.di.provider.SecurityToolsProvider
 import com.lockwood.core.network.di.DaggerNetworkApplication
 import com.lockwood.core.network.di.component.DaggerNetworkComponent
 import com.lockwood.core.network.di.provider.NetworkToolsProvider
@@ -42,7 +42,7 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
 
     private val preferencesComponent: PreferencesToolsProvider by lazy {
         DaggerPreferencesComponent.builder()
-            .applicationProvider(coreComponent)
+            .securityToolsProvider(coreComponent)
             .build()
     }
 
@@ -64,6 +64,10 @@ class MovieApplication : Application(), DaggerApplication, DaggerNetworkApplicat
     }
 
     override fun getAppToolsProvider(): AppToolsProvider {
+        return coreComponent(this)
+    }
+
+    override fun getSecurityToolsProvider(): SecurityToolsProvider {
         return coreComponent(this)
     }
 
