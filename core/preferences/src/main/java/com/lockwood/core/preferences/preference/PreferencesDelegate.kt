@@ -2,6 +2,7 @@ package com.lockwood.core.preferences.preference
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -46,15 +47,17 @@ class PreferencesDelegate<T>(
     private fun SharedPreferences.putPreference(
         name: String,
         value: T
-    ) = with(edit()) {
-        when (value) {
-            is Long -> putLong(name, value)
-            is String -> putString(name, value)
-            is Int -> putInt(name, value)
-            is Boolean -> putBoolean(name, value)
-            is Float -> putFloat(name, value)
-            else -> throw IllegalArgumentException("Этот тип не может быть сохранен в Preferences")
-        }.apply()
+    ) {
+        edit {
+            when (value) {
+                is Long -> putLong(name, value)
+                is String -> putString(name, value)
+                is Int -> putInt(name, value)
+                is Boolean -> putBoolean(name, value)
+                is Float -> putFloat(name, value)
+                else -> throw IllegalArgumentException("Этот тип не может быть сохранен в Preferences")
+            }
+        }
     }
 
 }
