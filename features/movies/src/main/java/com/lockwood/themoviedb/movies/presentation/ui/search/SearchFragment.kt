@@ -160,29 +160,36 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     }
 
     private fun renderMovies(movies: List<MovieItem>, itemViewType: Int) {
-        with(binding.searchRecyclerViewMovies) {
-            val isTypeChanged = itemViewType != moviesAdapter.itemViewType
-            if (!isTypeChanged) {
-
-                // обновляем только отображаемые данные
-                moviesAdapter.setItems(movies)
-            } else {
-
-                // обновляем адаптер с отображаемыми данными
-                moviesAdapter = MoviesAdapter(movies, itemViewType).apply {
-                    listener = this@SearchFragment
-                }
-                adapter = moviesAdapter
-
-                // и кол-во столбцов для gridLayoutManager
-                val spanCount = if (itemViewType == MoviesItemViewType.ITEM_VIEW_TYPE_LIST) {
-                    1
-                } else {
-                    2
-                }
-                gridLayoutManager.spanCount = spanCount
-            }
+        val isTypeChanged = itemViewType != moviesAdapter.itemViewType
+        if (!isTypeChanged) {
+            // обновляем только отображаемые данные
+            setMovies(movies)
+        } else {
+            // обновляем адаптер с отображаемыми данными
+            updateAdapterWithMovies(movies, itemViewType)
         }
+    }
+
+    private fun setMovies(movies: List<MovieItem>) {
+        moviesAdapter.setItems(movies)
+    }
+
+    private fun updateAdapterWithMovies(
+        movies: List<MovieItem>,
+        itemViewType: Int
+    ) {
+        moviesAdapter = MoviesAdapter(movies, itemViewType).apply {
+            listener = this@SearchFragment
+        }
+        binding.searchRecyclerViewMovies.adapter = moviesAdapter
+
+        // обновляем кол-во столбцов в зависимости от типа
+        val spanCount = if (itemViewType == MoviesItemViewType.ITEM_VIEW_TYPE_LIST) {
+            1
+        } else {
+            2
+        }
+        gridLayoutManager.spanCount = spanCount
     }
 
     private fun inject() {
