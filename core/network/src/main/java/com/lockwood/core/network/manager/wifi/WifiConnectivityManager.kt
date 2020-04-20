@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import androidx.core.content.getSystemService
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 

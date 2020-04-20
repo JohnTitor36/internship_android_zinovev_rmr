@@ -1,6 +1,5 @@
 package com.lockwood.core.preferences.di.component
 
-import com.lockwood.core.di.provider.ApplicationProvider
 import com.lockwood.core.di.provider.SecurityToolsProvider
 import com.lockwood.core.preferences.di.module.PreferencesApiModule
 import com.lockwood.core.preferences.di.module.PreferencesModule

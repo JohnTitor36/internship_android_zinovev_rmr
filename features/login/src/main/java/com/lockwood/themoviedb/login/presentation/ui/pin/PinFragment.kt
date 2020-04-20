@@ -59,7 +59,7 @@ class PinFragment : BaseFragment() {
 
     override fun onOnEvent(event: Event) {
         super.onOnEvent(event)
-        when(event) {
+        when (event) {
             is KeyboardClearEvent -> {
                 binding.keyboard.resetEnteredDigits()
             }
@@ -69,7 +69,6 @@ class PinFragment : BaseFragment() {
     override fun setupViews() {
         setupAppBar()
     }
-
 
 
     private fun renderState(state: PinViewState) {

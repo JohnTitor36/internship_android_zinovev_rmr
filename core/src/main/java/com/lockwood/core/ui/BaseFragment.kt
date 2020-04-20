@@ -17,7 +17,6 @@ import com.lockwood.core.extensions.buildSnackbar
 import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.extensions.navOptionsFromAction
 import com.lockwood.core.message.MessageView
-import timber.log.Timber
 
 abstract class BaseFragment : Fragment(), MessageView {
 
@@ -72,8 +71,6 @@ abstract class BaseFragment : Fragment(), MessageView {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         val grantResultsNotEmpty = grantResults.isNotEmpty()
         val permissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED
-        Timber.d("grantResultsNotEmpty: $grantResultsNotEmpty")
-        Timber.d("permissionGranted: $permissionGranted")
         handlePermission(
             requestCode = requestCode,
             permissionGranted = grantResultsNotEmpty && permissionGranted

@@ -5,7 +5,6 @@ import com.lockwood.core.reader.ResourceReader
 import com.lockwood.pin.R
 import com.lockwood.pin.databinding.ItemIndiactorBinding
 import com.lockwood.pin.indicator.adapter.base.BaseViewHolder
-import timber.log.Timber
 
 internal class IndicatorViewHolder(
     itemBinding: ItemIndiactorBinding
@@ -29,7 +28,6 @@ internal class IndicatorViewHolder(
     )
 
     override fun onBind(position: Int, selectedItemsCount: Int, isShowError: Boolean) {
-        Timber.d("position: $position; selectedItemsCount $selectedItemsCount")
         with((itemBinding as ItemIndiactorBinding).indicatorImage) {
             if (!isShowError) {
                 isEnabled = position < selectedItemsCount

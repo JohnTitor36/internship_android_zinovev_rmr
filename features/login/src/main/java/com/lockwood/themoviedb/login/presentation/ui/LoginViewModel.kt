@@ -113,7 +113,7 @@ constructor(
         }
     }
 
-    fun showRequestLocationReasonMessage(){
+    fun showRequestLocationReasonMessage() {
         val message = resourceReader.string(R.string.untrusted_environment_reason)
         val rootEvent = MessageEvent(message)
         eventsQueue.offer(rootEvent)
