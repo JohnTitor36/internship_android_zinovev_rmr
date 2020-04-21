@@ -5,7 +5,7 @@ import com.lockwood.themoviedb.movies.data.model.SearchMoviesResponseEntity
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-interface FavoriteMoviesDataStore {
+interface FavoriteMoviesCache {
 
     fun markAsFavorite(
         accountId: String,

@@ -68,7 +68,6 @@ class FavoriteMoviesFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListen
     }
 
     override fun setupViews() {
-        binding.favoriteTitle.beginDelayedTransition()
         setupRecyclerViewMovies()
     }
 

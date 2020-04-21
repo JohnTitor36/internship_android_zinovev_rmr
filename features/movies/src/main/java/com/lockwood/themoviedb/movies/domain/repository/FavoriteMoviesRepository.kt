@@ -20,4 +20,6 @@ interface FavoriteMoviesRepository {
         language: String = String.DEFAULT_LOCALE
     ): Observable<SearchMoviesResponse>
 
+    fun saveMovies(list: List<SearchMoviesResponse>): Completable
+
 }
