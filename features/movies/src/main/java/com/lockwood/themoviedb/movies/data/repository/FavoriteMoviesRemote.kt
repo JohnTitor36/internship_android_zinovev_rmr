@@ -8,12 +8,12 @@ import io.reactivex.Observable
 interface FavoriteMoviesRemote {
 
     fun markAsFavorite(
-        accountId: Int,
+        accountId: String,
         markAsFavoriteBody: MarkAsFavoriteBodyEntity
     ): Completable
 
     fun loadFavoriteMovies(
-        accountId: Int,
+        accountId: String,
         page: Int = 1,
         language: String
     ): Observable<SearchMoviesResponseEntity>

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import com.lockwood.core.event.EventsQueue
-import com.lockwood.core.event.NavigationEvent
+import com.lockwood.core.event.NavigationDirectionEvent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
@@ -30,7 +30,7 @@ abstract class BaseViewModel : ViewModel() {
         direction: NavDirections,
         navOptions: NavOptions? = null
     ) {
-        val event = NavigationEvent(direction, navOptions)
+        val event = NavigationDirectionEvent(direction, navOptions)
         eventsQueue.offer(event)
     }
 

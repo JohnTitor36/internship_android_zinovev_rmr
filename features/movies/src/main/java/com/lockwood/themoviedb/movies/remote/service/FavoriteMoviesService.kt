@@ -8,15 +8,15 @@ import retrofit2.http.*
 
 interface FavoriteMoviesService {
 
-    @POST("account/{account_id}/favorite")
+    @POST("account/{accountId}/favorite")
     fun markAsFavorite(
-        @Path("accountId") accountId: Int,
+        @Path("accountId") accountId: String,
         @Body markAsFavoriteBody: MarkAsFavoriteBodyModel
     ): Completable
 
-    @GET("account/{account_id}/favorite/movies")
+    @GET("account/{accountId}/favorite/movies")
     fun loadFavoriteMovies(
-        @Path("accountId") accountId: Int,
+        @Path("accountId") accountId: String,
         @Query("page") page: Int,
         @Query("language") language: String
     ): Observable<SearchMoviesResponseModel>

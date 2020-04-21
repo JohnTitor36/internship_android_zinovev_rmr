@@ -6,6 +6,18 @@
 
     <fragment
         android:id="@+id/favorite_movies"
-        android:name="com.lockwood.themoviedb.movies.presentation.ui.favorite.FavoriteMoviesFragment" />
+        android:name="com.lockwood.themoviedb.movies.presentation.ui.favorite.FavoriteMoviesFragment">
+        <action
+            android:id="@+id/open_movie"
+            app:destination="@id/movie" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movie"
+        android:name="com.lockwood.themoviedb.movies.presentation.ui.MovieFragment">
+        <argument
+            android:name="movieIdArg"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

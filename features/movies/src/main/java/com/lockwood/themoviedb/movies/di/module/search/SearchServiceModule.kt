@@ -18,14 +18,9 @@ class SearchServiceModule {
     @Provides
     @FeatureScope
     fun provideMoviesSearchService(
-        @AuthRetrofit retrofit: Retrofit.Builder,
-        @AuthHttpClient okHttpClient: OkHttpClient,
-        @SessionInterceptor sessionInterceptor: Interceptor
+        @AuthRetrofit retrofit: Retrofit.Builder
     ): SearchMoviesService {
-        val client = okHttpClient.edit {
-            addInterceptor(sessionInterceptor)
-        }
-        return retrofit.client(client).build().create(SearchMoviesService::class.java)
+        return retrofit.build().create(SearchMoviesService::class.java)
     }
 
 }

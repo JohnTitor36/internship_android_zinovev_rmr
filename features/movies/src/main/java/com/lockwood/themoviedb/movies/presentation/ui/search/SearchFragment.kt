@@ -26,6 +26,7 @@ import com.lockwood.themoviedb.movies.di.component.search.DaggerSearchComponent
 import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType
+import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import javax.inject.Inject
 
 class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
@@ -45,7 +46,6 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
     private val binding: FragmentSearchBinding by viewBinding()
 
     private lateinit var moviesAdapter: MoviesAdapter
-
     private lateinit var gridLayoutManager: GridLayoutManager
 
     override fun onAttach(context: Context) {
@@ -184,7 +184,7 @@ class SearchFragment : BaseFragment(), MoviesAdapter.MoviesAdapterListener {
         binding.searchRecyclerViewMovies.adapter = moviesAdapter
 
         // обновляем кол-во столбцов в зависимости от типа
-        val spanCount = if (itemViewType == MoviesItemViewType.ITEM_VIEW_TYPE_LIST) {
+        val spanCount = if (itemViewType == ITEM_VIEW_TYPE_LIST) {
             1
         } else {
             2

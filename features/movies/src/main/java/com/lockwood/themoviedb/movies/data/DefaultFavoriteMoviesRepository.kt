@@ -19,7 +19,7 @@ class DefaultFavoriteMoviesRepository @Inject constructor(
 ) : FavoriteMoviesRepository {
 
     override fun markAsFavorite(
-        accountId: Int,
+        accountId: String,
         markAsFavoriteBody: MarkAsFavoriteBody
     ): Completable {
         val body = markAsFavoriteBodyMapper.mapToEntity(markAsFavoriteBody)
@@ -27,7 +27,7 @@ class DefaultFavoriteMoviesRepository @Inject constructor(
     }
 
     override fun loadFavoriteMovies(
-        accountId: Int,
+        accountId: String,
         page: Int,
         language: String
     ): Observable<SearchMoviesResponse> {

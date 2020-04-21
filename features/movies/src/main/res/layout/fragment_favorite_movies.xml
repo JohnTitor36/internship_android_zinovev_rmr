@@ -63,4 +63,19 @@
         app:layout_constraintTop_toBottomOf="@+id/favorite_title_search"
         tools:ignore="ContentDescription" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_recycler_view_movies"
+        style="@style/ScrollView.Clear"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/default_content_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/favorite_title"
+        app:layout_constraintStart_toStartOf="@+id/favorite_title"
+        app:layout_constraintTop_toBottomOf="@+id/favorite_title"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_movie_list"
+        tools:visibility="gone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

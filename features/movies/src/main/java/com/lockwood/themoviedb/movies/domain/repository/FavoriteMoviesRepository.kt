@@ -9,12 +9,13 @@ import io.reactivex.Observable
 interface FavoriteMoviesRepository {
 
     fun markAsFavorite(
-        accountId: Int,
+        accountId: String,
         markAsFavoriteBody: MarkAsFavoriteBody
     ): Completable
 
+    // TODO: добавить name
     fun loadFavoriteMovies(
-        accountId: Int,
+        accountId: String,
         page: Int = 1,
         language: String = String.DEFAULT_LOCALE
     ): Observable<SearchMoviesResponse>

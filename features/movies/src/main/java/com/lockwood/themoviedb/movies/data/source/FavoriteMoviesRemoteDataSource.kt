@@ -13,14 +13,14 @@ class FavoriteMoviesRemoteDataSource @Inject constructor(
 ) : FavoriteMoviesDataStore {
 
     override fun markAsFavorite(
-        accountId: Int,
+        accountId: String,
         markAsFavoriteBody: MarkAsFavoriteBodyEntity
     ): Completable {
         return moviesRemote.markAsFavorite(accountId, markAsFavoriteBody)
     }
 
     override fun loadFavoriteMovies(
-        accountId: Int,
+        accountId: String,
         page: Int,
         language: String
     ): Observable<SearchMoviesResponseEntity> {

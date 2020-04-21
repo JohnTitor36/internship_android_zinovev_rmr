@@ -19,7 +19,7 @@ class DefaultFavoriteMoviesRemote @Inject constructor(
 ) : FavoriteMoviesRemote {
 
     override fun markAsFavorite(
-        accountId: Int,
+        accountId: String,
         markAsFavoriteBody: MarkAsFavoriteBodyEntity
     ): Completable {
         val body = markAsFavoriteBodyMapper.mapToRemote(markAsFavoriteBody)
@@ -27,7 +27,7 @@ class DefaultFavoriteMoviesRemote @Inject constructor(
     }
 
     override fun loadFavoriteMovies(
-        accountId: Int,
+        accountId: String,
         page: Int,
         language: String
     ): Observable<SearchMoviesResponseEntity> {

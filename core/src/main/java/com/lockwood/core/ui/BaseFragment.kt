@@ -17,6 +17,7 @@ import com.lockwood.core.extensions.buildSnackbar
 import com.lockwood.core.extensions.launchActivity
 import com.lockwood.core.extensions.navOptionsFromAction
 import com.lockwood.core.message.MessageView
+import timber.log.Timber
 
 abstract class BaseFragment : Fragment(), MessageView {
 
@@ -79,6 +80,7 @@ abstract class BaseFragment : Fragment(), MessageView {
 
     @CallSuper
     protected open fun onOnEvent(event: Event) {
+        Timber.d("event: $event")
         when (event) {
             is MessageEvent -> {
                 showMessage(event.message)
@@ -86,7 +88,7 @@ abstract class BaseFragment : Fragment(), MessageView {
             is ErrorMessageEvent -> {
                 showError(event.errorMessage)
             }
-            is NavigationEvent -> {
+            is NavigationDirectionEvent -> {
                 navigateTo(event.direction, event.navOptions)
             }
             is BackPressEvent -> {
