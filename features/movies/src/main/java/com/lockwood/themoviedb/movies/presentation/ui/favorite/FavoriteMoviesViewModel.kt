@@ -9,6 +9,7 @@ import com.lockwood.core.preferences.di.qualifier.AccountId
 import com.lockwood.core.reader.ResourceReader
 import com.lockwood.core.schedulers.SchedulersProvider
 import com.lockwood.themoviedb.movies.domain.repository.FavoriteMoviesRepository
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -70,6 +71,7 @@ class FavoriteMoviesViewModel @Inject constructor(
                     } else {
                         emptyList()
                     }
+                    Timber.d("movies: ${it.results}")
                     val movies = startMovies + it.results
                     state = state.copy(
                         movies = movies,

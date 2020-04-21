@@ -10,7 +10,7 @@ class DateAdapter {
 
     companion object {
 
-        private const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd"
+        const val DEFAULT_DATE_FORMAT = "yyyy-MM-dd"
     }
 
     @ToJson

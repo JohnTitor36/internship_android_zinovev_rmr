@@ -6,6 +6,7 @@ import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.core.network.di.provider.NetworkToolsProvider
 import com.lockwood.core.preferences.di.provider.PreferencesToolsProvider
 import com.lockwood.themoviedb.movies.di.module.favorite.FavoriteMoviesModule
+import com.lockwood.themoviedb.movies.di.module.favorite.FavoriteMoviesRoomModule
 import com.lockwood.themoviedb.movies.di.module.favorite.FavoriteMoviesServiceModule
 import com.lockwood.themoviedb.movies.presentation.ui.favorite.FavoriteMoviesFragment
 import dagger.Component
@@ -18,7 +19,8 @@ import dagger.Component
     ],
     modules = [
         FavoriteMoviesModule::class,
-        FavoriteMoviesServiceModule::class
+        FavoriteMoviesServiceModule::class,
+        FavoriteMoviesRoomModule::class
     ]
 )
 @FeatureScope
