@@ -19,6 +19,9 @@ dependencies {
             deps.rxJava.rxAndroid,
             deps.network.retrofit2,
             deps.network.moshi,
+            deps.room.runtime,
+            deps.room.ktx,
+            deps.room.rx2,
             deps.glide.glide,
             deps.glide.transformations,
             deps.tools.timber,
@@ -27,6 +30,7 @@ dependencies {
 
     kapt(
             deps.dagger.compiler,
+            deps.room.compiler,
             deps.glide.compiler,
             deps.network.moshicodegen
     )
