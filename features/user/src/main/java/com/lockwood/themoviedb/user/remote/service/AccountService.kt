@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.user.remote
+package com.lockwood.themoviedb.user.remote.service
 
 import com.lockwood.themoviedb.user.remote.model.body.DeleteSessionBodyModel
 import com.lockwood.themoviedb.user.remote.model.response.AccountResponseModel

@@ -10,6 +10,7 @@ import com.lockwood.themoviedb.login.remote.mapper.CreateRequestTokenResponseEnt
 import com.lockwood.themoviedb.login.remote.mapper.CreateSessionBodyEntityMapper
 import com.lockwood.themoviedb.login.remote.mapper.CreateSessionResponseEntityMapper
 import com.lockwood.themoviedb.login.remote.mapper.ValidateWithLoginBodyEntityMapper
+import com.lockwood.themoviedb.login.remote.service.AuthenticationService
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject

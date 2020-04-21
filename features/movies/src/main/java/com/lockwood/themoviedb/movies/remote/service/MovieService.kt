@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.movies.remote
+package com.lockwood.themoviedb.movies.remote.service
 
 import com.lockwood.themoviedb.movies.remote.model.response.MovieResponseModel
 import io.reactivex.Single

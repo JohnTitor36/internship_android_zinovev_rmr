@@ -1,4 +1,4 @@
-package com.lockwood.themoviedb.login.remote
+package com.lockwood.themoviedb.login.remote.service
 
 import com.lockwood.themoviedb.login.remote.model.body.CreateSessionBodyModel
 import com.lockwood.themoviedb.login.remote.model.body.ValidateWithLoginBodyModel

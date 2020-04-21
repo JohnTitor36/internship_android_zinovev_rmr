@@ -1,7 +1,7 @@
 package com.lockwood.themoviedb.login.di.module
 
 import com.lockwood.core.di.scope.FeatureScope
-import com.lockwood.themoviedb.login.remote.AuthenticationService
+import com.lockwood.themoviedb.login.remote.service.AuthenticationService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

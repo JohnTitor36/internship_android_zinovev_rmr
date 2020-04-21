@@ -6,6 +6,7 @@ import com.lockwood.themoviedb.user.data.model.DeleteSessionBodyEntity
 import com.lockwood.themoviedb.user.data.repository.AccountRemote
 import com.lockwood.themoviedb.user.remote.mapper.AccountResponseMapper
 import com.lockwood.themoviedb.user.remote.mapper.DeleteSessionBodyMapper
+import com.lockwood.themoviedb.user.remote.service.AccountService
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject

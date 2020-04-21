@@ -1,8 +1,6 @@
-package com.lockwood.themoviedb.movies.remote
+package com.lockwood.themoviedb.movies.remote.service
 
-import com.lockwood.themoviedb.movies.remote.model.body.MarkAsFavoriteBody
 import com.lockwood.themoviedb.movies.remote.model.response.SearchMoviesResponseModel
-import io.reactivex.Completable
 import io.reactivex.Observable
 import retrofit2.http.*
 

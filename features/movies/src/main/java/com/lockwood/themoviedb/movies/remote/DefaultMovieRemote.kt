@@ -4,6 +4,7 @@ import com.lockwood.core.di.scope.FeatureScope
 import com.lockwood.themoviedb.movies.data.model.MovieResponseEntity
 import com.lockwood.themoviedb.movies.data.repository.MovieRemote
 import com.lockwood.themoviedb.movies.remote.mapper.MovieResponseMapper
+import com.lockwood.themoviedb.movies.remote.service.MovieService
 import io.reactivex.Single
 import javax.inject.Inject
 
