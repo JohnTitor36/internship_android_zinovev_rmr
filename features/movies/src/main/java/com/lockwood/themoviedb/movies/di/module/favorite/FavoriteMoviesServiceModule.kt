@@ -8,7 +8,7 @@ import dagger.Provides
 import retrofit2.Retrofit
 
 @Module
-class FavoriteServiceModule {
+class FavoriteMoviesServiceModule {
 
     @Provides
     @FeatureScope
