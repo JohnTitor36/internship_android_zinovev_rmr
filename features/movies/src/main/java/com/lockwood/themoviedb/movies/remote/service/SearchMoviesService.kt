@@ -2,7 +2,8 @@ package com.lockwood.themoviedb.movies.remote.service
 
 import com.lockwood.themoviedb.movies.remote.model.response.SearchMoviesResponseModel
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface SearchMoviesService {
 

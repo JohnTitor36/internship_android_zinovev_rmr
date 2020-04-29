@@ -25,7 +25,8 @@ class FavoriteMoviesRoomModule {
 //        migrations: Array<Migration>,
         context: Context
     ): FavoriteMoviesDatabase {
-        val db = Room.databaseBuilder(context, FavoriteMoviesDatabase::class.java,
+        val db = Room.databaseBuilder(
+            context, FavoriteMoviesDatabase::class.java,
             DB_NAME
         )
 //        migrations.forEach { db.addMigrations(it) }

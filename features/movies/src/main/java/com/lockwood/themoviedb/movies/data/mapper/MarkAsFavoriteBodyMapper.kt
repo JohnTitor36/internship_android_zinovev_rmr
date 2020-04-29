@@ -2,9 +2,7 @@ package com.lockwood.themoviedb.movies.data.mapper
 
 import com.lockwood.core.mapper.Mapper
 import com.lockwood.themoviedb.movies.data.model.MarkAsFavoriteBodyEntity
-import com.lockwood.themoviedb.movies.data.model.SearchMoviesResponseEntity
 import com.lockwood.themoviedb.movies.domain.model.MarkAsFavoriteBody
-import com.lockwood.themoviedb.movies.domain.model.SearchMoviesResponse
 import javax.inject.Inject
 
 class MarkAsFavoriteBodyMapper @Inject constructor() :

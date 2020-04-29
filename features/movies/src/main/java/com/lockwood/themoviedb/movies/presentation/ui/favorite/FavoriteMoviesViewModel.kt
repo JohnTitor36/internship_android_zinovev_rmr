@@ -71,7 +71,7 @@ class FavoriteMoviesViewModel @Inject constructor(
                     } else {
                         emptyList()
                     }
-                    Timber.d("movies: ${it.results}")
+                    // TODO: Исправить отображение списка фильмов
                     val movies = startMovies + it.results
                     state = state.copy(
                         movies = movies,

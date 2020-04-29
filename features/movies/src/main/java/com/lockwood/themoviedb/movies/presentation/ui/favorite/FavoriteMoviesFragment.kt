@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.lockwood.core.event.observe
 import com.lockwood.core.extensions.addOnLastItemListener
 import com.lockwood.core.extensions.appToolsProvider
-import com.lockwood.core.extensions.beginDelayedTransition
 import com.lockwood.core.livedata.observe
 import com.lockwood.core.network.extensions.networkToolsProvider
 import com.lockwood.core.preferences.extensions.preferencesToolsProvider
@@ -23,7 +22,6 @@ import com.lockwood.themoviedb.movies.databinding.FragmentFavoriteMoviesBinding
 import com.lockwood.themoviedb.movies.di.component.favorite.DaggerFavoriteMoviesComponent
 import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesAdapter
-import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType.ITEM_VIEW_TYPE_LIST
 import javax.inject.Inject
 

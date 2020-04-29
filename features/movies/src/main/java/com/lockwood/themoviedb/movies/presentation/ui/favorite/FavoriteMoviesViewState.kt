@@ -2,11 +2,8 @@ package com.lockwood.themoviedb.movies.presentation.ui.favorite
 
 import com.lockwood.core.extensions.EMPTY
 import com.lockwood.core.pagination.Pagination
-import com.lockwood.core.ui.BaseViewModel
 import com.lockwood.themoviedb.movies.domain.model.MovieItem
 import com.lockwood.themoviedb.movies.presentation.ui.adapter.MoviesItemViewType
-import com.lockwood.themoviedb.movies.presentation.ui.search.SearchViewState
-import javax.inject.Inject
 
 data class FavoriteMoviesViewState(
     val movieName: String,
