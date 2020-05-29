@@ -1,25 +1,20 @@
 # The Movie DB (RMR 2020)
 
-[**Дизайн приложения**](https://www.figma.com/file/xmtk3I0RTS0cFYr6hgmI8r/Movie_Android)
+[**API**](https://developers.themoviedb.org/3/getting-started/introduction)
 
-[**Документация и API**](https://developers.themoviedb.org/3/getting-started/introduction)
+## Download
 
-**Функционал**:
-* Авторизация пользователя по логину и паролю.
-* Создание PIN и последующий вход по нему.
-* Загрузка и отображение фильмов добавленных в избранное.
-* Поиск и отображение списка найденных фильмов.
-* Отображение детальной информации о фильме с возможностью добавить его в избранное.
-* Отображение профиля пользователя.
-* Разлогин пользователя.
+## Screenshots
 
-**Стек технологий**:
+**Features**:
+* Authorization by login and password.
+* Creation of a PIN and subsequent login by it.
+* Searching and displaying the list of found movies.
+* Displaying detailed information about the movie with the possibility to add it to favorites.
+* Display the user's profile.
+
+**Stack**:
 * Kotlin
-* Android X
-* RxJava 2 
+* RxJava 3 
 * Dagger 2
 * Glide
-
-**Подсмотрено**:
-* [plaid](https://github.com/android/plaid)
-* [Notepad](https://github.com/DEcSENT/Notepad)
